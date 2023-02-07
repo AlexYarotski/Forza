@@ -12,19 +12,20 @@ namespace Project.Dev.Scripts
         private RoadBounds _roadBounds = null;
 
         private Vector3 _turn = Vector3.zero;
+        private Vector3 _turningPosition = Vector3.zero;
 
         private void Awake()
         {
-            _turn = new Vector3(1, 0, 0) * _speedTurn;
+            _turn = Vector3.right * _speedTurn;
         }
 
         private void OnEnable()
         {
             SwipeController.Turn += SwipeController_Turn;
         }
-
+        
         private void OnDisable()
-        {
+        { 
             SwipeController.Turn -= SwipeController_Turn;
         }
         
@@ -35,22 +36,41 @@ namespace Project.Dev.Scripts
 
         private void Turn(float firstPoint, float secondPoint)
         {
-            if (_roadBounds.IsInBounds(transform))
+            if (_roadBounds.IsInBounds(transform.position))
             {
-                if (IsTurnLeft(firstPoint, secondPoint))
-                {
-                    transform.position += _turn;
-                }
-                else
-                {
-                    transform.position -= _turn; 
-                }
+                TurnWithin(firstPoint, secondPoint);
             }
+            else
+            {
+                TurnAtBorder(firstPoint, secondPoint);
+            }
+            
+            transform.position = _turningPosition;
         }
-
+            
         private bool IsTurnLeft(float firstPoint, float secondPoint)
         {
             return secondPoint < firstPoint;
+        }
+
+        private void TurnWithin(float firstPoint, float secondPoint)
+        {
+                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position += _turn :
+                    transform.position -= _turn;
+        }
+
+        private void TurnAtBorder(float firstPoint, float secondPoint)
+        {
+            if (_roadBounds.LeftBoundAxisX == transform.position.x)
+            {
+                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position :
+                    transform.position -= _turn;
+            }
+            else if (_roadBounds.RightBoundAxisX == transform.position.x)
+            {
+                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position += _turn :
+                    transform.position;
+            }
         }
     }
 }

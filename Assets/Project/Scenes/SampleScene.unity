@@ -134,14 +134,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4040130089760804061, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-      propertyPath: _leftBoundAxisX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4040130089760804061, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-      propertyPath: _rightBoundAxisX
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7983798142672010242, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
       propertyPath: m_Name
       value: Road

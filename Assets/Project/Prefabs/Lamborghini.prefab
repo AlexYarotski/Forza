@@ -109,3 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedTurn: 0.3
+  _roadBounds: {fileID: 0}

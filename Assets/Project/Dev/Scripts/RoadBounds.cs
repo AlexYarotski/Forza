@@ -9,25 +9,20 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         private float _rightBoundAxisX = 0;
-        
-        public bool IsInBounds(Transform transform)
+
+        public float LeftBoundAxisX => _leftBoundAxisX;
+        public float RightBoundAxisX => _rightBoundAxisX;
+
+        private void Awake()
         {
             CheckingBoundaries();
+        }
 
-            var position = transform.position;
+        public bool IsInBounds(Vector3 position)
+        {
             var positionAxisX = position.x;
 
-            if (positionAxisX < _leftBoundAxisX)
-            {
-                return false;
-            }
-
-            if (positionAxisX > _rightBoundAxisX)
-            {
-                return false;
-            }
-
-            return true;
+            return positionAxisX > _leftBoundAxisX && positionAxisX < _rightBoundAxisX;
         }
 
         private void CheckingBoundaries()
