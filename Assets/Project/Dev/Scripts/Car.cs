@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
@@ -55,20 +54,20 @@ namespace Project.Dev.Scripts
 
         private void TurnWithin(float firstPoint, float secondPoint)
         {
-                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position += _turn :
-                    transform.position -= _turn;
+                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position + _turn :
+                    transform.position - _turn;
         }
 
         private void TurnAtBorder(float firstPoint, float secondPoint)
         {
-            if (_roadBounds.LeftBoundAxisX == transform.position.x)
+            if (_roadBounds.LeftBoundAxisX <= transform.position.x)
             {
                 _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position :
-                    transform.position -= _turn;
+                    transform.position - _turn;
             }
-            else if (_roadBounds.RightBoundAxisX == transform.position.x)
+            else
             {
-                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position += _turn :
+                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position + _turn :
                     transform.position;
             }
         }

@@ -11,7 +11,6 @@ namespace Project.Dev.Scripts
         private float _rightBoundAxisX = 0;
 
         public float LeftBoundAxisX => _leftBoundAxisX;
-        public float RightBoundAxisX => _rightBoundAxisX;
 
         private void Awake()
         {
@@ -22,7 +21,7 @@ namespace Project.Dev.Scripts
         {
             var positionAxisX = position.x;
 
-            return positionAxisX > _leftBoundAxisX && positionAxisX < _rightBoundAxisX;
+            return positionAxisX >= _leftBoundAxisX && positionAxisX <= _rightBoundAxisX;
         }
 
         private void CheckingBoundaries()
