@@ -2,21 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SwipeController : MonoBehaviour, IPointerDownHandler, IDragHandler
+public class SwipeController : MonoBehaviour, IDragHandler
 {
-    public static event Action<float, float> Turn = delegate{  };
+    public static event Action<Vector2> Dragged = delegate{  };
 
-    private float _pointClickAxisX = 0;
-    private float _currentPositionAxisX = 0;
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _pointClickAxisX = eventData.position.x;
-    }
+    private Vector2 _dragPosition = Vector2.zero;
 
     public void OnDrag(PointerEventData eventData)
     {
-        _currentPositionAxisX = eventData.position.x;
-        Turn(_currentPositionAxisX, _pointClickAxisX);
+        _dragPosition = eventData.delta;
+
+        Dragged(_dragPosition);
     }
 }

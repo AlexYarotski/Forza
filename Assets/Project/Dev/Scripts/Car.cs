@@ -10,66 +10,70 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private RoadBounds _roadBounds = null;
 
-        private Vector3 _turn = Vector3.zero;
-        private Vector3 _turningPosition = Vector3.zero;
+        private Vector3 _turningPosition = Vector3.zero ;
 
         private void Awake()
         {
-            _turn = Vector3.right * _speedTurn;
+            _turningPosition = transform.position;
         }
 
         private void OnEnable()
         {
-            SwipeController.Turn += SwipeController_Turn;
+            SwipeController.Dragged += SwipeController_Dragged;
         }
         
         private void OnDisable()
         { 
-            SwipeController.Turn -= SwipeController_Turn;
+            SwipeController.Dragged -= SwipeController_Dragged;
         }
         
-        private void SwipeController_Turn(float firstPoint, float secondPoint)
+        private void SwipeController_Dragged(Vector2 dragPositionVector2)
         {
-            Turn(firstPoint, secondPoint);
+            Turn(dragPositionVector2);
         }
 
-        private void Turn(float firstPoint, float secondPoint)
+        private void Turn(Vector2 dragPositionVector2)
         {
-            if (_roadBounds.IsInBounds(transform.position))
+            var dragPosition = new Vector3(dragPositionVector2.x, 0, 0);
+            
+            if (_roadBounds.IsInBounds(_turningPosition))
             {
-                TurnWithin(firstPoint, secondPoint);
+                transform.position = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
             }
             else
             {
-                TurnAtBorder(firstPoint, secondPoint);
+                TurnToBorder(dragPosition);
             }
             
-            transform.position = _turningPosition;
-        }
-            
-        private bool IsTurnLeft(float firstPoint, float secondPoint)
-        {
-            return secondPoint < firstPoint;
+            _turningPosition = transform.position;
         }
 
-        private void TurnWithin(float firstPoint, float secondPoint)
+        private void TurnToBorder(Vector3 dragPosition)
         {
-                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position + _turn :
-                    transform.position - _turn;
-        }
-
-        private void TurnAtBorder(float firstPoint, float secondPoint)
-        {
-            if (_roadBounds.LeftBoundAxisX <= transform.position.x)
+            if (dragPosition.x > 0)
             {
-                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position :
-                    transform.position - _turn;
+                if (CanDragToRight())
+                {
+                    transform.position = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
+                }
             }
             else
             {
-                _turningPosition = IsTurnLeft(firstPoint, secondPoint) ? transform.position + _turn :
-                    transform.position;
+                if (CanDragToLeft())
+                {
+                    transform.position = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
+                }
             }
+        }
+
+        private bool CanDragToLeft()
+        {
+            return !_roadBounds.IsLeftBound;
+        }
+        
+        private bool CanDragToRight()
+        {
+            return !_roadBounds.IsRightBound;
         }
     }
 }
