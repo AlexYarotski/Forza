@@ -10,9 +10,6 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private float _rightBoundAxisX = 0;
 
-        public float LeftBoundAxisX => _leftBoundAxisX;
-        public float RightBoundAxisX => _rightBoundAxisX;
-
         private void Awake()
         {
             CheckingBoundaries();
@@ -25,6 +22,14 @@ namespace Project.Dev.Scripts
             return positionAxisX <= _rightBoundAxisX && positionAxisX >= _leftBoundAxisX;
         }
 
+        public Vector3 ClampPosition(float positionAxisX)
+        {
+            var nextPositionAxisX = Mathf.Clamp(positionAxisX, _leftBoundAxisX, 
+                _rightBoundAxisX);
+
+            return new Vector3(nextPositionAxisX, 0, 0);
+        }
+        
         private void CheckingBoundaries()
         {
             if (_leftBoundAxisX == _rightBoundAxisX)

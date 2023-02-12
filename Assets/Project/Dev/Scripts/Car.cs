@@ -11,7 +11,7 @@ namespace Project.Dev.Scripts
         private RoadBounds _roadBounds = null;
 
         private Vector3 _turningPosition = Vector3.zero;
-        private Vector3 _nextPosition = Vector3.zero;
+        private Vector3 _dragPosition = Vector3.zero;
 
         private void Awake()
         {
@@ -30,28 +30,30 @@ namespace Project.Dev.Scripts
 
         private void Update()
         {
-            var nextPositionAxisX = Mathf.Clamp(_nextPosition.x, _roadBounds.LeftBoundAxisX, 
-                _roadBounds.RightBoundAxisX);
-                
-            transform.position = new Vector3(nextPositionAxisX, 0, 0);
+            Turn();
         }
 
         private void SwipeController_Dragged(Vector2 dragPositionVector2)
         {
-            Turn(dragPositionVector2);
+            _dragPosition = new Vector3(dragPositionVector2.x, 0, 0);
         }
 
-        private void Turn(Vector2 dragPositionVector2)
+        private void Turn()
         {
-            var dragPosition = new Vector3(dragPositionVector2.x, 0, 0);
+            var nextPosition = _turningPosition + _dragPosition * (_speedTurn * Time.deltaTime);
             
-            _nextPosition = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
-
             if (_roadBounds.IsInBounds(_turningPosition))
             {
-                transform.position = _nextPosition;
+                transform.position = nextPosition;
+            }
+            else
+            {
+                var positionOnBorder = _roadBounds.ClampPosition(nextPosition.x);
+                
+                transform.position = positionOnBorder;
             }
             
+            _dragPosition = Vector3.zero;
             _turningPosition = transform.position;
         }
     }
