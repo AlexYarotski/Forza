@@ -28,7 +28,7 @@ namespace Project.Dev.Scripts
             SwipeController.Dragged -= SwipeController_Dragged;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Turn();
         }
@@ -42,15 +42,15 @@ namespace Project.Dev.Scripts
         {
             var nextPosition = _turningPosition + _dragPosition * (_speedTurn * Time.deltaTime);
             
-            if (_roadBounds.IsInBounds(_turningPosition))
-            {
-                transform.position = nextPosition;
-            }
-            else
+            if (!_roadBounds.IsInBounds(nextPosition))
             {
                 var positionOnBorder = _roadBounds.ClampPosition(nextPosition.x);
                 
                 transform.position = positionOnBorder;
+            }
+            else
+            {
+                transform.position = nextPosition;
             }
             
             _dragPosition = Vector3.zero;
