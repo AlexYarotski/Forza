@@ -10,12 +10,12 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private RoadBounds _roadBounds = null;
 
-        private Vector3 _turningPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
+        private Vector3 _nextPosition = Vector3.zero;
 
         private void Awake()
         {
-            _turningPosition = transform.position;
+            _dragPosition = transform.position;
         }
 
         private void OnEnable()
@@ -28,33 +28,23 @@ namespace Project.Dev.Scripts
             SwipeController.Dragged -= SwipeController_Dragged;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Turn();
         }
 
         private void SwipeController_Dragged(Vector2 dragPositionVector2)
         {
-            _dragPosition = new Vector3(dragPositionVector2.x, 0, 0);
+            var dragPositionVector3 = new Vector3(dragPositionVector2.x, 0, 0);
+            
+            _nextPosition = _dragPosition + dragPositionVector3 * (_speedTurn * Time.deltaTime);
         }
 
         private void Turn()
         {
-            var nextPosition = _turningPosition + _dragPosition * (_speedTurn * Time.deltaTime);
-            
-            if (!_roadBounds.IsInBounds(nextPosition))
-            {
-                var positionOnBorder = _roadBounds.ClampPosition(nextPosition.x);
-                
-                transform.position = positionOnBorder;
-            }
-            else
-            {
-                transform.position = nextPosition;
-            }
-            
-            _dragPosition = Vector3.zero;
-            _turningPosition = transform.position;
+            transform.position = _roadBounds.IsInBounds(_nextPosition) ? _nextPosition : _roadBounds.ClampPosition(_nextPosition.x);
+
+            _dragPosition = transform.position;
         }
     }
 }
