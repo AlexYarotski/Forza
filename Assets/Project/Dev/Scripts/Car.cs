@@ -10,7 +10,8 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private RoadBounds _roadBounds = null;
 
-        private Vector3 _turningPosition = Vector3.zero ;
+        private Vector3 _turningPosition = Vector3.zero;
+        private Vector3 _nextPosition = Vector3.zero;
 
         private void Awake()
         {
@@ -26,7 +27,15 @@ namespace Project.Dev.Scripts
         { 
             SwipeController.Dragged -= SwipeController_Dragged;
         }
-        
+
+        private void Update()
+        {
+            var nextPositionAxisX = Mathf.Clamp(_nextPosition.x, _roadBounds.LeftBoundAxisX, 
+                _roadBounds.RightBoundAxisX);
+                
+            transform.position = new Vector3(nextPositionAxisX, 0, 0);
+        }
+
         private void SwipeController_Dragged(Vector2 dragPositionVector2)
         {
             Turn(dragPositionVector2);
@@ -36,44 +45,14 @@ namespace Project.Dev.Scripts
         {
             var dragPosition = new Vector3(dragPositionVector2.x, 0, 0);
             
+            _nextPosition = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
+
             if (_roadBounds.IsInBounds(_turningPosition))
             {
-                transform.position = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
-            }
-            else
-            {
-                TurnToBorder(dragPosition);
+                transform.position = _nextPosition;
             }
             
             _turningPosition = transform.position;
-        }
-
-        private void TurnToBorder(Vector3 dragPosition)
-        {
-            if (dragPosition.x > 0)
-            {
-                if (CanDragToRight())
-                {
-                    transform.position = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
-                }
-            }
-            else
-            {
-                if (CanDragToLeft())
-                {
-                    transform.position = _turningPosition + dragPosition * _speedTurn * Time.deltaTime;
-                }
-            }
-        }
-
-        private bool CanDragToLeft()
-        {
-            return !_roadBounds.IsLeftBound;
-        }
-        
-        private bool CanDragToRight()
-        {
-            return !_roadBounds.IsRightBound;
         }
     }
 }

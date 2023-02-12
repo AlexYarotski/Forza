@@ -5,22 +5,13 @@ namespace Project.Dev.Scripts
     public class RoadBounds : MonoBehaviour
     {
         [SerializeField]
-        private float _leftBound = 0;
+        private float _leftBoundAxisX = 0;
 
         [SerializeField]
-        private float _rightBound = 0;
+        private float _rightBoundAxisX = 0;
 
-        public bool IsLeftBound
-        {
-            get;
-            private set;
-        }
-
-        public bool IsRightBound
-        {
-            get;
-            private set;
-        }
+        public float LeftBoundAxisX => _leftBoundAxisX;
+        public float RightBoundAxisX => _rightBoundAxisX;
 
         private void Awake()
         {
@@ -31,34 +22,17 @@ namespace Project.Dev.Scripts
         {
             var positionAxisX = position.x;
 
-            if (positionAxisX >= _rightBound)
-            {
-                IsRightBound = true;
-
-                return false;
-            }
-
-            if (positionAxisX <= _leftBound)
-            {
-                IsLeftBound = true;
-
-                return false;
-            }
-
-            IsRightBound = false;
-            IsLeftBound = false;
-
-            return true;
+            return positionAxisX <= _rightBoundAxisX && positionAxisX >= _leftBoundAxisX;
         }
 
         private void CheckingBoundaries()
         {
-            if (_leftBound == _rightBound)
+            if (_leftBoundAxisX == _rightBoundAxisX)
             {
                 Debug.LogError("The borders cannot be equal!");
             }
 
-            if (_leftBound > _rightBound)
+            if (_leftBoundAxisX > _rightBoundAxisX)
             {
                 Debug.LogError("The left border cannot be greater than the right!");
             }

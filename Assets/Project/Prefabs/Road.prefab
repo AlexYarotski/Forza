@@ -108,5 +108,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be72a8a324d04935ace3b93dcc750d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBound: -7
-  _rightBound: 7
+  _leftBoundAxisX: -7
+  _rightBoundAxisX: 7
