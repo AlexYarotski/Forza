@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1801307491889172760}
   - component: {fileID: 1064401999410550389}
   - component: {fileID: 4040130089760804061}
+  - component: {fileID: 4183878532081540418}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -110,3 +111,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftBoundAxisX: -7
   _rightBoundAxisX: 7
+--- !u!114 &4183878532081540418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983798142672010242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fe3cafa5f74a5d8761e42d2a47baa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
