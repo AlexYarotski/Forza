@@ -2,7 +2,7 @@
 
 namespace Project.Dev.Scripts
 {
-    public class Car : MonoBehaviour
+    public abstract class Car : MonoBehaviour
     {
         [SerializeField]
         private float _speed = 0;

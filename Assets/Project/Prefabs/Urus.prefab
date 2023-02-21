@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3209244623317845640}
+  - component: {fileID: 7882480381668691083}
+  - component: {fileID: 5257701512037704815}
   m_Layer: 0
   m_Name: Urus
   m_TagString: Untagged
@@ -31,6 +33,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7882480381668691083
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576637866465785176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5257701512037704815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576637866465785176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _speedTurn: 2
+  _roadBounds: {fileID: 4040130089760804061, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!1001 &559117641751581689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,41 +166,8 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 132ddc4bb14925248b6c85e75ebd880f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
---- !u!1 &793490438581186216 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
-  m_PrefabInstance: {fileID: 559117641751581689}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &20508044022297618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
   m_PrefabInstance: {fileID: 559117641751581689}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4172418741131084546
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793490438581186216}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9217583687286827250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793490438581186216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c4102d1fef644c1ac2049b76a256ae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
-  _speedTurn: 2
-  _roadBounds: {fileID: 4040130089760804061, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}

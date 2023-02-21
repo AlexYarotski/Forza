@@ -8,7 +8,7 @@ public class PoolManager : MonoBehaviour
 
     [SerializeField]
     private PoolConfig[] _poolConfigs = null;
-    
+
     private void Awake()
     {
         //var settings = SceneContext.Inctance.PoolManagerSetting;
@@ -38,7 +38,7 @@ public class PoolManager : MonoBehaviour
         
         freePoolObj.transform.position = position;
         freePoolObj.gameObject.SetActive(true);
-
+        
         return (T)freePoolObj;
     }
 
@@ -46,12 +46,7 @@ public class PoolManager : MonoBehaviour
     {
         var freePoolObj = poolBehaviour.FirstOrDefault(pb => pb.IsFree);
 
-        if (freePoolObj == null)
-        {
-            return null;
-        }
-        
-        return freePoolObj;
+        return freePoolObj == null ? null : freePoolObj;
     }
     
     private PooledBehaviour AddItemToPoolDictionary(List<PooledBehaviour> poolBehaviour, PooledType pooledType)
