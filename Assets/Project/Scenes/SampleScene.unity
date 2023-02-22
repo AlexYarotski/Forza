@@ -123,36 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &26947097
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 87158424}
-    m_Modifications:
-    - target: {fileID: 1403247697164113463, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1403247697164113463, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801307491889172760, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0ba7bcd0435f6dd439c77de25148e22c, type: 2}
-    - target: {fileID: 7983798142672010242, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-      propertyPath: m_Name
-      value: Road
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
---- !u!4 &26947098 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1403247697164113463, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  m_PrefabInstance: {fileID: 26947097}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &82391071
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +253,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1570703661}
-  - {fileID: 26947098}
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -313,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103901624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.46, y: 0, z: -11.13}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1829250614}
@@ -334,7 +303,7 @@ MonoBehaviour:
   _poolConfigs:
   - _count: 10
     _pooledType: 1
-    _pooledPrefab: {fileID: 1188635578}
+    _pooledPrefab: {fileID: 4183878532081540418, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!114 &125012749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -668,7 +637,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 87158424}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 38.352, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -683,17 +652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _car: {fileID: 125012749}
---- !u!114 &1188635578 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4183878532081540418, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  m_PrefabInstance: {fileID: 26947097}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3fe3cafa5f74a5d8761e42d2a47baa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1401048843
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,8 +697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 103901626}
   _car: {fileID: 125012749}
-  _quantityAtStart: 3
-  _distanceForSpawnChanks: 6
+  _quantityAtStart: 5
+  _distanceForSpawnChanks: 45
 --- !u!4 &1570703661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -887,10 +845,6 @@ PrefabInstance:
     - target: {fileID: 5043472202982387293, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: _roadBounds
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
-      propertyPath: _speed
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}

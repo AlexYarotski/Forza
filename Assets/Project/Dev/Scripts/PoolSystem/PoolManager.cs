@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    private readonly Dictionary<PooledType, List<PooledBehaviour>> PooledDictionary = new Dictionary<PooledType, List<PooledBehaviour>>();
+    private readonly Dictionary<PooledType, List<PooledBehaviour>> PooledDictionary =
+        new Dictionary<PooledType, List<PooledBehaviour>>();
 
     [SerializeField]
     private PoolConfig[] _poolConfigs = null;
@@ -18,6 +19,20 @@ public class PoolManager : MonoBehaviour
         PreparePoolDictionary();
     }
 
+    public T GetRandomObject<T>(PooledType pooledType, Vector3 position) where T : PooledBehaviour
+    {
+        var valueDictionary = PooledDictionary[pooledType];
+        
+        if (valueDictionary.Count == 0)
+        {
+            return GetObject<T>(pooledType, position);
+        }
+
+        var randomPoolObj = valueDictionary[Random.Range(0, valueDictionary.Count)];
+
+        return PreparationPoolObjBeforeDelivery<T>(randomPoolObj, position);
+    }
+    
     public T GetObject<T>(PooledType pooledType, Vector3 position) where T : PooledBehaviour
     {
         if (!PooledDictionary.TryGetValue(pooledType, out List<PooledBehaviour> poolBehaviour))
@@ -34,12 +49,8 @@ public class PoolManager : MonoBehaviour
             freePoolObj = AddItemToPoolDictionary(poolBehaviour, pooledType);
         }
 
-        freePoolObj.SpawnedFromPool();
         
-        freePoolObj.transform.position = position;
-        freePoolObj.gameObject.SetActive(true);
-        
-        return (T)freePoolObj;
+        return PreparationPoolObjBeforeDelivery<T>(freePoolObj, position);
     }
 
     private PooledBehaviour TryGetPooledBeh(List<PooledBehaviour> poolBehaviour)
@@ -89,5 +100,15 @@ public class PoolManager : MonoBehaviour
         }
 
         return poolList;
+    }
+
+    private T PreparationPoolObjBeforeDelivery<T>(PooledBehaviour poolObj, Vector3 position) where T : PooledBehaviour
+    {
+        poolObj.SpawnedFromPool();
+        
+        poolObj.transform.position = position;
+        poolObj.gameObject.SetActive(true);
+
+        return (T)poolObj;
     }
 }
