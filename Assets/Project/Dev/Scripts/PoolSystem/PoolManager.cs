@@ -29,7 +29,8 @@ public class PoolManager : MonoBehaviour
         }
 
         var randomPoolObj = valueDictionary[Random.Range(0, valueDictionary.Count)];
-
+        valueDictionary.Remove(randomPoolObj);
+        
         return PreparationPoolObjBeforeDelivery<T>(randomPoolObj, position);
     }
     
@@ -49,7 +50,6 @@ public class PoolManager : MonoBehaviour
             freePoolObj = AddItemToPoolDictionary(poolBehaviour, pooledType);
         }
 
-        
         return PreparationPoolObjBeforeDelivery<T>(freePoolObj, position);
     }
 
@@ -101,7 +101,7 @@ public class PoolManager : MonoBehaviour
 
         return poolList;
     }
-
+    
     private T PreparationPoolObjBeforeDelivery<T>(PooledBehaviour poolObj, Vector3 position) where T : PooledBehaviour
     {
         poolObj.SpawnedFromPool();

@@ -30,7 +30,7 @@ namespace Project.Dev.Scripts
         private void FixedUpdate()
         {
             var distance = _lastChunk.transform.position.z - _car.transform.position.z;
-
+            
             if (distance <= _distanceForSpawnChanks)
             {
                 SpawnChunk();
