@@ -11,13 +11,19 @@ namespace Project.Dev.Scripts
         private float _speedTurn = 0;
 
         [SerializeField]
+        private float _brake = 0;
+
+        [SerializeField]
         private RoadBounds _roadBounds = null;
 
         private Vector3 _dragPosition = Vector3.zero;
         private Vector3 _nextPosition = Vector3.zero;
 
+        private float _startSpeed = 0;
+        
         private void Awake()
         {
+            _startSpeed = _speed;
             _dragPosition = transform.position;
         }
 
@@ -53,10 +59,31 @@ namespace Project.Dev.Scripts
 
         private void Turn()
          {
-            transform.position = _roadBounds.IsInBounds(_nextPosition) ? _nextPosition : 
-                _roadBounds.ClampPosition(_nextPosition);
+            if ( _roadBounds.IsInBounds(_nextPosition))
+            {
+                transform.position = _nextPosition;
+                ReturnStartingSpeed();
+            }
+            else
+            {
+                transform.position = _roadBounds.ClampPosition(_nextPosition);
+                Brake();
+            }
 
             _dragPosition = transform.position;
+        }
+
+        private void ReturnStartingSpeed()
+        {
+            if(_speed < _startSpeed)
+            {
+                _speed += _brake * Time.deltaTime;
+            }
+        }
+        
+        private void Brake()
+        {
+            _speed -= _brake * Time.deltaTime;
         }
     }
 }

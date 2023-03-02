@@ -15,14 +15,14 @@ public class PoolManager : MonoBehaviour
         //var settings = SceneContext.Inctance.PoolManagerSetting;
 
         //_poolConfigs = settings.PoolConfigs;
-        
+
         PreparePoolDictionary();
     }
 
     public T GetRandomObject<T>(PooledType pooledType, Vector3 position) where T : PooledBehaviour
     {
         var valueDictionary = PooledDictionary[pooledType];
-        
+
         if (valueDictionary.Count == 0)
         {
             return GetObject<T>(pooledType, position);
@@ -30,19 +30,19 @@ public class PoolManager : MonoBehaviour
 
         var randomPoolObj = valueDictionary[Random.Range(0, valueDictionary.Count)];
         valueDictionary.Remove(randomPoolObj);
-        
+
         return PreparationPoolObjBeforeDelivery<T>(randomPoolObj, position);
     }
-    
+
     public T GetObject<T>(PooledType pooledType, Vector3 position) where T : PooledBehaviour
     {
         if (!PooledDictionary.TryGetValue(pooledType, out List<PooledBehaviour> poolBehaviour))
         {
             Debug.LogError("There is no such type!");
-            
+
             return null;
         }
-        
+
         var freePoolObj = TryGetPooledBeh(poolBehaviour);
 
         if (freePoolObj == null)
@@ -59,7 +59,7 @@ public class PoolManager : MonoBehaviour
 
         return freePoolObj == null ? null : freePoolObj;
     }
-    
+
     private PooledBehaviour AddItemToPoolDictionary(List<PooledBehaviour> poolBehaviour, PooledType pooledType)
     {
         var typePoolConfig = _poolConfigs.FirstOrDefault(pt => pt.PooledType == pooledType);
@@ -70,10 +70,10 @@ public class PoolManager : MonoBehaviour
 
             return null;
         }
-        
+
         var createObject = Instantiate(typePoolConfig.PooledPrefab, transform);
         poolBehaviour.Add(createObject);
-        
+
         return createObject;
     }
 
@@ -82,8 +82,8 @@ public class PoolManager : MonoBehaviour
         for (int i = 0; i < _poolConfigs.Length; i++)
         {
             var poolConfig = _poolConfigs[i];
-            
-            PooledDictionary.Add(poolConfig.PooledType,CreatePoolObjects(poolConfig));
+
+            PooledDictionary.Add(poolConfig.PooledType, CreatePoolObjects(poolConfig));
         }
     }
 
@@ -101,11 +101,11 @@ public class PoolManager : MonoBehaviour
 
         return poolList;
     }
-    
+
     private T PreparationPoolObjBeforeDelivery<T>(PooledBehaviour poolObj, Vector3 position) where T : PooledBehaviour
     {
         poolObj.SpawnedFromPool();
-        
+
         poolObj.transform.position = position;
         poolObj.gameObject.SetActive(true);
 
