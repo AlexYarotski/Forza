@@ -60,8 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _speedTurn: 3
+  _boost: 10
   _brake: 0.6
-  _roadBounds: {fileID: 4040130089760804061, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!1001 &559117641751581689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +129,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6599271472219001609, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a8ca1e8b7bec9b54396e9e168a335970, type: 2}
     - target: {fileID: -3114532629931349975, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

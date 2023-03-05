@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Project.Dev.Scripts.SceneContext;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour
@@ -7,14 +8,13 @@ public class PoolManager : MonoBehaviour
     private readonly Dictionary<PooledType, List<PooledBehaviour>> PooledDictionary =
         new Dictionary<PooledType, List<PooledBehaviour>>();
 
-    [SerializeField]
     private PoolConfig[] _poolConfigs = null;
 
     private void Awake()
     {
-        //var settings = SceneContext.Inctance.PoolManagerSetting;
+        var settings = SceneContext.Inctance.PoolManagerSetting;
 
-        //_poolConfigs = settings.PoolConfigs;
+        _poolConfigs = settings.PoolConfigs;
 
         PreparePoolDictionary();
     }

@@ -10,16 +10,20 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private TextMeshProUGUI _scoreTextMeshProUGUI = null;
         
-        [SerializeField]
         private Color _color = Color.white;
-
-        [SerializeField]
         private float _sizeOfIncreaseScore = 0;
-
-        [SerializeField]
         private int _timeDelayScore = 0;
 
-            private void OnEnable()
+        private void Awake()
+        {
+            var setting = SceneContext.SceneContext.Inctance.GameWindowSetting;
+
+            _color = setting.Color;
+            _sizeOfIncreaseScore = setting.SizeOfIncreaseScore;
+            _timeDelayScore = setting.TimeDelayScore;
+        }
+
+        private void OnEnable()
         {
             Urus.Drove += Urus_Drove;
             Score.Boost += Score_Boost;

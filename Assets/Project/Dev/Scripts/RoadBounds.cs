@@ -4,14 +4,16 @@ namespace Project.Dev.Scripts
 {
     public class RoadBounds : MonoBehaviour
     {
-        [SerializeField]
         private float _leftBoundAxisX = 0;
-
-        [SerializeField]
         private float _rightBoundAxisX = 0;
 
         private void Awake()
         {
+            var setting = SceneContext.SceneContext.Inctance.RoadBoundsSetting;
+
+            _leftBoundAxisX = setting.LeftBoundAxisX;
+            _rightBoundAxisX = setting.RightBoundAxisX;
+            
             CheckingBoundaries();
         }
 

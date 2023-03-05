@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Project.Dev.Scripts.PoolSystem;
+using Project.Dev.Scripts.SceneContext;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -9,21 +10,23 @@ namespace Project.Dev.Scripts
         private readonly List<Chunk> ChunkList = new List<Chunk>();
 
         [SerializeField]
-        private int _quantityAtStart = 0;
-
-        [SerializeField]
-        private int _distanceForSpawnChanks = 0;
-
-        [SerializeField]
         private PoolManager _poolManager = null;
 
         [SerializeField]
         private Car _car = null;
-
+        
+        private int _quantityAtStart = 0;
+        private int _distanceForSpawnChunks = 0;
+        
         private Chunk _lastChunk = null;
 
         private void Awake()
         {
+            var setting = SceneContext.SceneContext.Inctance.ChunkGeneratorSetting;
+
+            _quantityAtStart = setting.QuantityAtStart;
+            _distanceForSpawnChunks = setting.DistanceForSpawnChunks;
+            
             StartGenerator();
         }
 
@@ -31,7 +34,7 @@ namespace Project.Dev.Scripts
         {
             var distance = _lastChunk.transform.position.z - _car.transform.position.z;
 
-            if (distance <= _distanceForSpawnChanks)
+            if (distance <= _distanceForSpawnChunks)
             {
                 SpawnChunk();
             }
