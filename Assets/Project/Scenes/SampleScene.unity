@@ -253,8 +253,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1570703661}
   - {fileID: 963194228}
+  - {fileID: 1570703661}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -301,6 +301,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b5d055e31b8774388880578baff8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolConfigs:
+  - _count: 5
+    _pooledType: 0
+    _pooledPrefab: {fileID: 5191124323575278179, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+  - _count: 3
+    _pooledType: 0
+    _pooledPrefab: {fileID: 1757819737295449939, guid: 0697e132133fb54458ca35a5b18b0eb9, type: 3}
+  - _count: 3
+    _pooledType: 0
+    _pooledPrefab: {fileID: 5494955387163802381, guid: a52d64c173545744da9fbaec6156a8c4, type: 3}
+  - _count: 3
+    _pooledType: 0
+    _pooledPrefab: {fileID: 5335723657281049598, guid: 5ec133b1d74b326459ad90383cbd3324, type: 3}
+  - _count: 1
+    _pooledType: 0
+    _pooledPrefab: {fileID: 710800625553961993, guid: ee47a58fb1f853546bf42df0f4d1a545, type: 3}
+  - _count: 4
+    _pooledType: 0
+    _pooledPrefab: {fileID: 8863645648352699623, guid: c7215914fb880c54dbf58b051140ee44, type: 3}
 --- !u!114 &125012749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -416,6 +435,10 @@ PrefabInstance:
       value: GameWindow
       objectReference: {fileID: 0}
     - target: {fileID: 5209012542689402020, guid: 344a66237b9b84649bad7251afe9fa71, type: 3}
+      propertyPath: _color.g
+      value: 0.6868738
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209012542689402020, guid: 344a66237b9b84649bad7251afe9fa71, type: 3}
       propertyPath: _speedBoostScore
       value: 60
       objectReference: {fileID: 0}
@@ -499,7 +522,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542584201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.485113, y: 0.3183136, z: 6.0222015}
+  m_LocalPosition: {x: 0, y: 0.3183136, z: 11.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 705507995}
@@ -747,7 +770,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 87158424}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 38.352, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -812,6 +835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 103901626}
   _car: {fileID: 125012749}
+  _quantityAtStart: 5
+  _distanceForSpawnChunk: 50
+  _distanceForDeleteChunk: 20
 --- !u!4 &1570703661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -833,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1756149486
 Transform:
   m_ObjectHideFlags: 0
@@ -864,7 +890,7 @@ MonoBehaviour:
   <ChunkGeneratorSetting>k__BackingField: {fileID: 11400000, guid: 1da1f4c4d7091cf4eb7deabfc06bda17, type: 2}
   <GameWindowSetting>k__BackingField: {fileID: 11400000, guid: 478b949a53616e04b926797da1fd31d1, type: 2}
   <RoadBoundsSetting>k__BackingField: {fileID: 11400000, guid: 27451eddd0ff5374183a416da852b7b9, type: 2}
-  <ScoreSetting>k__BackingField: {fileID: 11400000, guid: 36285613e34a11f45b250c0bb72f38ce, type: 2}
+  <ScoreSetting>k__BackingField: {fileID: 11400000, guid: f77d83cc9e520954c8af7ebc8ea08c6a, type: 2}
   <PoolManagerSetting>k__BackingField: {fileID: 11400000, guid: ca083447987f26542b56b5bd680e99e8, type: 2}
 --- !u!1 &1829250613
 GameObject:
@@ -983,6 +1009,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}

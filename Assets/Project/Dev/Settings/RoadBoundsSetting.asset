@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05c7e83a4b6436e92d77c3eac6bf692, type: 3}
   m_Name: RoadBoundsSetting
   m_EditorClassIdentifier: 
-  _leftBoundAxisX: 7
+  _leftBoundAxisX: -7
   _rightBoundAxisX: 7

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _speedTurn: 3
-  _boost: 15
-  _brake: 7
+  _boost: 6
+  _brake: 5
   _roadBounds: {fileID: 4040130089760804061, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}

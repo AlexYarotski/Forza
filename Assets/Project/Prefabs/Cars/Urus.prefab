@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3209244623317845640}
-  - component: {fileID: 7882480381668691083}
   - component: {fileID: 5257701512037704815}
   m_Layer: 0
   m_Name: Urus
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7882480381668691083
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576637866465785176}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5257701512037704815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
-  _speedTurn: 3
+  _speed: 20
+  _maxSpeed: 60
+  _speedTurn: 2
   _boost: 10
   _brake: 0.6
+  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!1001 &559117641751581689
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 479982759149683325}
   - component: {fileID: 1801307491889172760}
   - component: {fileID: 1064401999410550389}
-  - component: {fileID: 4040130089760804061}
-  - component: {fileID: 4183878532081540418}
+  - component: {fileID: 5191124323575278179}
+  - component: {fileID: 4986745403747551136}
   m_Layer: 0
-  m_Name: Road
+  m_Name: Chunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7983798142672010242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.6, z: 0}
-  m_LocalScale: {x: 15, y: 0.1, z: 15}
+  m_LocalScale: {x: 12, y: 0.1, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,21 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4040130089760804061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7983798142672010242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be72a8a324d04935ace3b93dcc750d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _leftBoundAxisX: -6
-  _rightBoundAxisX: 6
---- !u!114 &4183878532081540418
+--- !u!114 &5191124323575278179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,3 +109,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fe3cafa5f74a5d8761e42d2a47baa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4986745403747551136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983798142672010242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be72a8a324d04935ace3b93dcc750d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftBoundAxisX: -4.5
+  _rightBoundAxisX: 4.5

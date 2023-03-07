@@ -1,8 +1,9 @@
+using Project.Dev.Scripts.SceneContext;
 using UnityEngine;
 
-namespace Project.Dev.Scripts.SceneContext
+namespace Project.Dev.Scripts.SceneContexts
 {
-    public class SceneContext : MonoBehaviour
+    public class SceneContexts : MonoBehaviour
     {
         [field: SerializeField]
         public UrusSetting UrusSetting
@@ -46,7 +47,7 @@ namespace Project.Dev.Scripts.SceneContext
             private set;
         }
     
-        public static SceneContext Inctance
+        public static SceneContexts Instance
         {
             get; 
             private set;
@@ -54,11 +55,11 @@ namespace Project.Dev.Scripts.SceneContext
     
         private void Awake()
         {
-            if (Inctance == null)
+            if (Instance == null)
             {
-                Inctance = this;
+                Instance = this;
             }
-            else if(Inctance == this)
+            else if(Instance == this)
             {
                 Destroy(gameObject);
             }

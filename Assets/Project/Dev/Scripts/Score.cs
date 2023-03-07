@@ -7,15 +7,16 @@ namespace Project.Dev.Scripts
     {
         public static event Action<float> Boost = delegate {};
         
+        [SerializeField]
         private float _speedBoostScore = 0;
         
         private float _score = 0;
 
         private void Awake()
         {
-            var setting = SceneContext.SceneContext.Inctance.ScoreSetting;
-
-            _speedBoostScore = setting.SpeedBoostScore;
+            // var setting = SceneContexts.SceneContexts.Instance.ScoreSetting;
+            //
+            // _speedBoostScore = setting.SpeedBoostScore;
         }
 
         private void OnEnable()

@@ -7,6 +7,7 @@ namespace Project.Dev.Scripts
     {
         public static event Action<float> Drove = delegate { };
 
+        [SerializeField]
         private RoadBounds _roadBounds = null;
         
         private Vector3 _dragPosition = Vector3.zero;
@@ -16,13 +17,13 @@ namespace Project.Dev.Scripts
 
         private void Awake()
         {
-            var setting = SceneContext.SceneContext.Inctance.UrusSetting;
-            
-            _speed = setting.Speed;
-            _speedTurn = setting.SpeedTurn;
-            _boost = setting.Boost;
-            _brake = setting.Brake;
-            _roadBounds = setting.RoadBounds;
+            // var setting = SceneContexts.SceneContexts.Instance.UrusSetting;
+            //
+            // _speed = setting.Speed;
+            // _speedTurn = setting.SpeedTurn;
+            // _boost = setting.Boost;
+            // _brake = setting.Brake;
+            // _roadBounds = setting.RoadBounds;
             
             _startSpeed = _speed;
             _dragPosition = transform.position;
@@ -93,8 +94,11 @@ namespace Project.Dev.Scripts
 
         private void Score_Boost(float boost)
         {
-            _speed += _boost;
-            _startSpeed += _boost;
+            if (_speed <= _maxSpeed)
+            {
+                //_speed += _boost;
+                _startSpeed += _boost;
+            }
         }
     }
 }

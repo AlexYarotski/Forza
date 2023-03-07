@@ -10,17 +10,22 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private TextMeshProUGUI _scoreTextMeshProUGUI = null;
         
+        [SerializeField]
         private Color _color = Color.white;
+        
+        [SerializeField]
         private float _sizeOfIncreaseScore = 0;
+        
+        [SerializeField]
         private int _timeDelayScore = 0;
 
         private void Awake()
         {
-            var setting = SceneContext.SceneContext.Inctance.GameWindowSetting;
-
-            _color = setting.Color;
-            _sizeOfIncreaseScore = setting.SizeOfIncreaseScore;
-            _timeDelayScore = setting.TimeDelayScore;
+            // var setting = SceneContexts.SceneContexts.Instance.GameWindowSetting;
+            //
+            // _color = setting.Color;
+            // _sizeOfIncreaseScore = setting.SizeOfIncreaseScore;
+            // _timeDelayScore = setting.TimeDelayScore;
         }
 
         private void OnEnable()

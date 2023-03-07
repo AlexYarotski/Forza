@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Project.Dev.Scripts.PoolSystem;
-using Project.Dev.Scripts.SceneContext;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -14,29 +13,42 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         private Car _car = null;
-        
+
+        [SerializeField]
         private int _quantityAtStart = 0;
-        private int _distanceForSpawnChunks = 0;
-        
+
+        [SerializeField]
+        private float _distanceForSpawnChunk = 0;
+
+        [SerializeField]
+        private float _distanceForDeleteChunk = 0;
+
+        private Chunk _firstChunk = null;
         private Chunk _lastChunk = null;
 
         private void Awake()
         {
-            var setting = SceneContext.SceneContext.Inctance.ChunkGeneratorSetting;
+            //     var setting = SceneContexts.SceneContexts.Instance.ChunkGeneratorSetting;
+            //
+            //     _quantityAtStart = setting.QuantityAtStart;
+            //     _distanceForSpawnChunk = setting.DistanceForSpawnChunks;
 
-            _quantityAtStart = setting.QuantityAtStart;
-            _distanceForSpawnChunks = setting.DistanceForSpawnChunks;
-            
             StartGenerator();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            var distance = _lastChunk.transform.position.z - _car.transform.position.z;
+            var distanceToLast = _lastChunk.transform.position.z - _car.transform.position.z;
+            var distanceToFirst = _car.transform.position.z - _firstChunk.transform.position.z;
 
-            if (distance <= _distanceForSpawnChunks)
+            if (distanceToLast <= _distanceForSpawnChunk)
             {
                 SpawnChunk();
+            }
+
+            if (distanceToFirst >= _distanceForDeleteChunk)
+            {
+                DeleteChunk();
             }
         }
 
@@ -44,7 +56,7 @@ namespace Project.Dev.Scripts
         {
             for (int i = 0; i < _quantityAtStart; i++)
             {
-                ChunkList.Add(_poolManager.GetRandomObject<Chunk>(PooledType.Road, Vector3.zero));
+                ChunkList.Add(_poolManager.GetObject<Chunk>(PooledType.Chunk, Vector3.zero));
                 ChunkList[i].transform.position = SetChunkPosition(ChunkList[i]);
 
                 _lastChunk = ChunkList[i];
@@ -55,6 +67,8 @@ namespace Project.Dev.Scripts
         {
             if (_lastChunk == null)
             {
+                _firstChunk = chunk;
+
                 return Vector3.zero;
             }
 
@@ -65,21 +79,20 @@ namespace Project.Dev.Scripts
 
         private void SpawnChunk()
         {
-            var createChunk = _poolManager.GetObject<Chunk>(PooledType.Road, Vector3.zero);
+            var createChunk = _poolManager.GetRandomObject<Chunk>(PooledType.Chunk, Vector3.zero);
 
             createChunk.transform.position = SetChunkPosition(createChunk);
 
-            _lastChunk = createChunk;
-
             ChunkList.Add(createChunk);
-
-            DeleteChunk();
+            _lastChunk = createChunk;
         }
 
         private void DeleteChunk()
         {
-            ChunkList[0].Free();
-            ChunkList.RemoveAt(0);
+            _firstChunk.Free();
+            ChunkList.Remove(_firstChunk);
+
+            _firstChunk = ChunkList[0];
         }
     }
 }

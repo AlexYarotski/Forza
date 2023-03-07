@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e090b545e244118cb9c7e79b6f0c52, type: 3}
   m_Name: GameWindowSetting
   m_EditorClassIdentifier: 
-  _color: {r: 0.8396226, g: 0.6450085, b: 0.051486313, a: 1}
+  _color: {r: 0.8207547, g: 0.49771047, b: 0, a: 1}
   _sizeOfIncreaseScore: 40
   _timeDelayScore: 2
