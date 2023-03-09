@@ -33,12 +33,15 @@ namespace Project.Dev.Scripts
         {
             SwipeController.Dragged += SwipeController_Dragged;
             Score.Boost += Score_Boost;
+            Barrier.Hit += Barrier_Hit;
         }
+        
 
         private void OnDisable()
         {
             SwipeController.Dragged -= SwipeController_Dragged;
             Score.Boost -= Score_Boost;
+            Barrier.Hit -= Barrier_Hit;
         }
 
         private void Update()
@@ -54,6 +57,20 @@ namespace Project.Dev.Scripts
             var dragPositionVector3 = new Vector3(dragPositionVector2.x, transform.position.y, transform.position.z);
 
             _nextPosition = _dragPosition + dragPositionVector3 * (_speedTurn * Time.deltaTime);
+        }
+
+        private void Score_Boost(float boost)
+        {
+            if (_speed <= _maxSpeed)
+            {
+                _startSpeed += _boost;
+            }
+        }
+        
+        private void Barrier_Hit(Vector3 position)
+        {
+            Brake();
+            _smoke.Play();
         }
 
         private void MovingForward()
@@ -90,15 +107,6 @@ namespace Project.Dev.Scripts
         private void Brake()
         {
             _speed -= _brake * Time.deltaTime;
-        }
-
-        private void Score_Boost(float boost)
-        {
-            if (_speed <= _maxSpeed)
-            {
-                //_speed += _boost;
-                _startSpeed += _boost;
-            }
         }
     }
 }

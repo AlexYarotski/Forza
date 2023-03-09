@@ -17,7 +17,7 @@ namespace Project.Dev.Scripts
         private float _sizeOfIncreaseScore = 0;
         
         [SerializeField]
-        private int _timeDelayScore = 0;
+        private float _timeDelayScore = 0;
 
         private void Awake()
         {

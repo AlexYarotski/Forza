@@ -18,5 +18,8 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         protected float _brake = 0;
+
+        [SerializeField]
+        protected ParticleSystem _smoke = null;
     }
 }

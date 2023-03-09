@@ -7,16 +7,16 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private Car _car = null;
 
-        private Vector3 deltaPos;
+        private float deltaPosAxisZ = 0;
 
         private void Start()
         {
-            deltaPos = transform.position - _car.transform.position;
+            deltaPosAxisZ = transform.position.z - _car.transform.position.z;
         }
 
         private void Update()
         {
-            transform.position = _car.transform.position + deltaPos;
+            transform.position = new Vector3(0, transform.position.y, deltaPosAxisZ + _car.transform.position.z);
         }
     }
 }
