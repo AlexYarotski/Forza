@@ -7,17 +7,16 @@ namespace Project.Dev.Scripts
     public class Urus : Car
     {
         public static event Action<float> Drove = delegate { };
-
+        public static event Action<float> Died = delegate { };
+        
         [SerializeField]
         private RoadBounds _roadBounds = null;
 
         private Vector3 _dragPosition = Vector3.zero;
         private Vector3 _nextPosition = Vector3.zero;
-
-        private float _startSpeed = 0;
+        
         private Renderer[] _renderer = null;
         
-
         private void Awake()
         {
             _renderer = GetComponentsInChildren<Renderer>();
@@ -41,7 +40,6 @@ namespace Project.Dev.Scripts
             Barrier.Hit += Barrier_Hit;
         }
         
-
         private void OnDisable()
         {
             SwipeController.Dragged -= SwipeController_Dragged;
@@ -76,9 +74,28 @@ namespace Project.Dev.Scripts
         {
             Brake();
             
-            _smoke.Play();
-
+            TakingHealth();
+            
             StartCoroutine(BecomeImmortality());
+        }
+
+        private void TakingHealth()
+        {
+            _health--;
+            
+            _smoke.Play();
+            
+            if (_health <= 0)
+            {
+                Dead();
+            }
+        }
+        
+        protected override void Dead()
+        {
+            base.Dead();
+
+            Died(transform.position.z);
         }
 
         private IEnumerator BecomeImmortality()
@@ -113,6 +130,12 @@ namespace Project.Dev.Scripts
 
         private void Turn()
         {
+            if (_health <= 0)
+            {
+                _speed = 0;
+                return;
+            }
+            
             if (_roadBounds.IsInBounds(_nextPosition))
             {
                 transform.position = _nextPosition;
@@ -125,19 +148,6 @@ namespace Project.Dev.Scripts
             }
 
             _dragPosition = transform.position;
-        }
-
-        private void ReturnStartingSpeed()
-        {
-            if (_speed < _startSpeed)
-            {
-                _speed += _brake * Time.deltaTime;
-            }
-        }
-
-        private void Brake()
-        {
-            _speed -= _brake * Time.deltaTime;
         }
     }
 }

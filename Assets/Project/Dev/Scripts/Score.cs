@@ -50,7 +50,7 @@ namespace Project.Dev.Scripts
         private void SpeedUp()
         {
             _speedBoostScore *= 2;
-            Boost(_speedBoostScore);
+            Boost(_score);
         }
     }
 }

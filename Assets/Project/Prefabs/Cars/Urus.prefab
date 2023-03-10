@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 1
   _speed: 10
   _maxSpeed: 60
   _speedTurn: 1
@@ -101,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493669416551784726, guid: f6daea399b18a2346b891ad251c87f97, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.51
+      value: 0.512
       objectReference: {fileID: 0}
     - target: {fileID: 4493669416551784726, guid: f6daea399b18a2346b891ad251c87f97, type: 3}
       propertyPath: m_LocalPosition.z
@@ -225,7 +226,7 @@ PrefabInstance:
     - target: {fileID: -6599271472219001609, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a8ca1e8b7bec9b54396e9e168a335970, type: 2}
+      objectReference: {fileID: 2100000, guid: a9c1299d54594ab4080673f87d018196, type: 2}
     - target: {fileID: -3114532629931349975, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

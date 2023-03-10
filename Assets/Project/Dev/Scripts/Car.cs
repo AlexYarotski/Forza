@@ -5,6 +5,9 @@ namespace Project.Dev.Scripts
     public abstract class Car : MonoBehaviour
     {
         [SerializeField]
+        protected int _health = 0;
+        
+        [SerializeField]
         protected float _speed = 0;
 
         [SerializeField]
@@ -24,5 +27,25 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         protected ParticleSystem _smoke = null;
+
+        protected float _startSpeed = 0;
+        
+        protected void ReturnStartingSpeed()
+        {
+            if (_speed < _startSpeed && _health <= 0)
+            {
+                _speed += _brake * Time.deltaTime;
+            }
+        }
+
+        protected void Brake()
+        {
+            _speed -= _brake * Time.deltaTime;
+        }
+        
+        protected virtual void Dead()
+        {
+            _smoke.Pause();
+        }
     }
 }
