@@ -6,12 +6,17 @@ namespace Project.Dev.Scripts
     {
         [SerializeField]
         private float _leftBoundAxisX = 0;
-
+        
         [SerializeField]
         private float _rightBoundAxisX = 0;
 
         private void Awake()
         {
+            // var setting = SceneContexts.SceneContexts.Instance.RoadBoundsSetting;
+            //
+            // _leftBoundAxisX = setting.LeftBoundAxisX;
+            // _rightBoundAxisX = setting.RightBoundAxisX;
+            
             CheckingBoundaries();
         }
 
@@ -22,12 +27,12 @@ namespace Project.Dev.Scripts
             return positionAxisX <= _rightBoundAxisX && positionAxisX >= _leftBoundAxisX;
         }
 
-        public Vector3 ClampPosition(float positionAxisX)
+        public Vector3 ClampPosition(Vector3 position)
         {
-            var nextPositionAxisX = Mathf.Clamp(positionAxisX, _leftBoundAxisX, 
+            var nextPositionAxisX = Mathf.Clamp(position.x, _leftBoundAxisX, 
                 _rightBoundAxisX);
 
-            return new Vector3(nextPositionAxisX, 0, 0);
+            return new Vector3(nextPositionAxisX, position.y, position.z);
         }
         
         private void CheckingBoundaries()

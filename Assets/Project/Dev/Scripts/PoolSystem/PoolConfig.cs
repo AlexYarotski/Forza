@@ -9,7 +9,7 @@ public class PoolConfig
     
     [SerializeField]
     private PooledType _pooledType = default;
-    
+
     [SerializeField]
     private PooledBehaviour _pooledPrefab = null;
 

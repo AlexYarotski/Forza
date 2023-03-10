@@ -2,49 +2,27 @@
 
 namespace Project.Dev.Scripts
 {
-    public class Car : MonoBehaviour
+    public abstract class Car : MonoBehaviour
     {
         [SerializeField]
-        private float _speedTurn = 0;
+        protected float _speed = 0;
 
         [SerializeField]
-        private RoadBounds _roadBounds = null;
+        protected float _maxSpeed = 0;
 
-        private Vector3 _dragPosition = Vector3.zero;
-        private Vector3 _nextPosition = Vector3.zero;
-
-        private void Awake()
-        {
-            _dragPosition = transform.position;
-        }
-
-        private void OnEnable()
-        {
-            SwipeController.Dragged += SwipeController_Dragged;
-        }
+        [SerializeField]
+        protected float _speedTurn = 0;
         
-        private void OnDisable()
-        { 
-            SwipeController.Dragged -= SwipeController_Dragged;
-        }
+        [SerializeField]
+        protected float _boost = 0;
+        
+        [SerializeField]
+        protected float _brake = 0;
+        
+        [SerializeField]
+        protected float _timeOfImmortality = 0;
 
-        private void Update()
-        {
-            Turn();
-        }
-
-        private void SwipeController_Dragged(Vector2 dragPositionVector2)
-        {
-            var dragPositionVector3 = new Vector3(dragPositionVector2.x, 0, 0);
-            
-            _nextPosition = _dragPosition + dragPositionVector3 * (_speedTurn * Time.deltaTime);
-        }
-
-        private void Turn()
-        {
-            transform.position = _roadBounds.IsInBounds(_nextPosition) ? _nextPosition : _roadBounds.ClampPosition(_nextPosition.x);
-
-            _dragPosition = transform.position;
-        }
+        [SerializeField]
+        protected ParticleSystem _smoke = null;
     }
 }
