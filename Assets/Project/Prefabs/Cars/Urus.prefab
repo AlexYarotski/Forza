@@ -52,6 +52,7 @@ MonoBehaviour:
   _speedTurn: 1
   _boost: 10
   _brake: 0.6
+  _timeOfImmortality: 2
   _smoke: {fileID: 4249100463677557241}
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!65 &8288766456121087326

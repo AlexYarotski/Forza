@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -9,14 +10,18 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         private RoadBounds _roadBounds = null;
-        
+
         private Vector3 _dragPosition = Vector3.zero;
         private Vector3 _nextPosition = Vector3.zero;
 
         private float _startSpeed = 0;
+        private Renderer[] _renderer = null;
+        
 
         private void Awake()
         {
+            _renderer = GetComponentsInChildren<Renderer>();
+        
             // var setting = SceneContexts.SceneContexts.Instance.UrusSetting;
             //
             // _speed = setting.Speed;
@@ -70,7 +75,33 @@ namespace Project.Dev.Scripts
         private void Barrier_Hit(Vector3 position)
         {
             Brake();
+            
             _smoke.Play();
+
+            StartCoroutine(BecomeImmortality());
+        }
+
+        private IEnumerator BecomeImmortality()
+        {
+            var timeImmortality = new WaitForSeconds(_timeOfImmortality);
+            var startColor = new Color[_renderer.Length];
+
+            GetComponent<BoxCollider>().enabled = false;
+            
+            for (int i = 0; i < _renderer.Length; i++)
+            {
+                startColor[i] = _renderer[i].material.color;
+                _renderer[i].material.color = Color.red;
+            }
+
+            yield return timeImmortality;
+
+            for (int i = 0; i < _renderer.Length; i++)
+            {
+                _renderer[i].material.color = startColor[i];
+            }
+            
+            GetComponent<BoxCollider>().enabled = true;
         }
 
         private void MovingForward()
