@@ -76,7 +76,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -218,7 +218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreTextMeshProUGUI: {fileID: 9222609477429034684}
-  _color: {r: 1, g: 0.6868738, b: 0, a: 1}
-  _animator: {fileID: 3812068383903245268}
+  _color: {r: 0.8679245, g: 0.6341072, b: 0.24154504, a: 1}
   _sizeOfIncreaseScore: 40
   _timeDelayScore: 1

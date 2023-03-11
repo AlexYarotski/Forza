@@ -31,7 +31,7 @@ public class MenuLossing : MonoBehaviour
 
     private void Awake()
     {
-        //SetChildrenActiveState(false);
+        SetChildrenActiveState(false);
         
         _menu.onClick.AddListener(Menu);
         _restart.onClick.AddListener(Restart);
