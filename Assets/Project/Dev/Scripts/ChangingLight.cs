@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ChangingLight : MonoBehaviour
@@ -32,7 +31,7 @@ public class ChangingLight : MonoBehaviour
             _timeOfDay -= 1;
         }
         
-        _sun.transform.localRotation = Quaternion.Euler(_timeOfDay * 360, 180, 0);
+        _sun.transform.localRotation = Quaternion.Euler(_timeOfDay * 360, 90, 0);
         _sun.intensity = _curve.Evaluate(_timeOfDay);
     }
 }

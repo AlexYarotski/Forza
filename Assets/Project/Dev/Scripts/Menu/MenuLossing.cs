@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class MenuLossing : MonoBehaviour
 {
+    private readonly string ScoreText = "Your Score \r\n {0}";
+    
     [SerializeField]
     private TextMeshProUGUI _score = null;
 
@@ -41,7 +43,9 @@ public class MenuLossing : MonoBehaviour
     {
         SetChildrenActiveState(true);
         
-        _score.text = Convert.ToString((int)score);
+        _score.color = Color.yellow;
+        
+        _score.text = string.Format(ScoreText, (int)score);
     }
     
     private void SetChildrenActiveState(bool active)
@@ -52,7 +56,7 @@ public class MenuLossing : MonoBehaviour
         }
     }
     
-    public void Restart()
+    private void Restart()
     {
         var nameScene = SceneManager.GetActiveScene().name;
 

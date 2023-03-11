@@ -44,29 +44,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeOfDay: 0
-  _dayDuration: 30
+  _dayDuration: 20
   _curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: -0.071678415
+      value: -0.0026681162
+      inSlope: 6.3700924
+      outSlope: 6.3700924
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.023686161
+    - serializedVersion: 3
+      time: 0.040268004
+      value: 0.9930018
+      inSlope: 0.06399834
+      outSlope: 0.06399834
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.121671185
+    - serializedVersion: 3
+      time: 0.4405385
+      value: 1.0050225
+      inSlope: 0.058598157
+      outSlope: 0.058598157
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16234052
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.621336
+      value: -0.012466967
+      inSlope: -0.014874247
+      outSlope: -0.014874247
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.27253515
+    - serializedVersion: 3
+      time: 0.9476714
+      value: -0.002138387
+      inSlope: 0.013608142
+      outSlope: 0.013608142
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      value: -0.0006532669
+      inSlope: 0.013658984
+      outSlope: 0.013658984
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.07519365
       outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PreInfinity: 1
+    m_PostInfinity: 1
     m_RotationOrder: 4
   _sun: {fileID: 0}
