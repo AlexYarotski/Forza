@@ -12,7 +12,7 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         private Color _color = Color.white;
-        
+
         [SerializeField]
         private float _sizeOfIncreaseScore = 0;
         
@@ -32,24 +32,32 @@ namespace Project.Dev.Scripts
         {
             Urus.Drove += Urus_Drove;
             Score.Boost += Score_Boost;
+            Urus.Died += Urus_Died;
         }
 
         private void OnDisable()
         {
             Urus.Drove -= Urus_Drove;
             Score.Boost -= Score_Boost;
+            Urus.Died -= Urus_Died;
         }
         
-        private void Urus_Drove(float drove)
+        private void Urus_Drove(Vector3 drove)
         {
-            _scoreTextMeshProUGUI.text = Convert.ToString((int)drove);
+            var droveZ = drove.z;
+            _scoreTextMeshProUGUI.text = Convert.ToString((int)droveZ);
         }
         
         private void Score_Boost(float obj)
         {
             StartCoroutine(StyleScore());
         }
-
+        
+        private void Urus_Died(float obj)
+        {
+            gameObject.SetActive(false);
+        }
+        
         private IEnumerator StyleScore()
         {
             var delay = new WaitForSeconds(_timeDelayScore);

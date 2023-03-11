@@ -6,7 +6,7 @@ namespace Project.Dev.Scripts
 {
     public class Urus : Car
     {
-        public static event Action<float> Drove = delegate { };
+        public static event Action<Vector3> Drove = delegate { };
         public static event Action<float> Died = delegate { };
         
         [SerializeField]
@@ -52,9 +52,51 @@ namespace Project.Dev.Scripts
             MovingForward();
             Turn();
 
-            Drove(transform.position.z);
+            Drove(transform.position);
         }
 
+        protected override void MovingForward()
+        {
+            base.MovingForward();
+            
+            var posAxisZ = transform.position.z + _speed * Time.deltaTime;
+
+            _nextPosition = new Vector3(_nextPosition.x, transform.position.y, posAxisZ);
+        }
+
+        protected override void Turn()
+        {
+            base.Turn();
+            
+            if (_health <= 0)
+            {
+                _speed = 0;
+                return;
+            }
+            
+            if (_roadBounds.IsInBounds(_nextPosition))
+            {
+                transform.position = _nextPosition;
+                ReturnStartingSpeed();
+            }
+            else
+            {
+                transform.position = _roadBounds.ClampPosition(_nextPosition);
+                Brake();
+            }
+
+            _dragPosition = transform.position;
+        }
+        
+        protected override void Dead()
+        {
+            StopAllCoroutines();
+            
+            Died(transform.position.z);
+            
+            base.Dead();
+        }
+        
         private void SwipeController_Dragged(Vector2 dragPositionVector2)
         {
             var dragPositionVector3 = new Vector3(dragPositionVector2.x, transform.position.y, transform.position.z);
@@ -74,36 +116,28 @@ namespace Project.Dev.Scripts
         {
             Brake();
             
-            TakingHealth();
-            
             StartCoroutine(BecomeImmortality());
+            
+            TakingHealth();
         }
 
         private void TakingHealth()
         {
             _health--;
-            
-            _smoke.Play();
-            
+
             if (_health <= 0)
             {
                 Dead();
             }
-        }
-        
-        protected override void Dead()
-        {
-            base.Dead();
-
-            Died(transform.position.z);
         }
 
         private IEnumerator BecomeImmortality()
         {
             var timeImmortality = new WaitForSeconds(_timeOfImmortality);
             var startColor = new Color[_renderer.Length];
-
-            GetComponent<BoxCollider>().enabled = false;
+            var boxCollider =  GetComponent<BoxCollider>();
+            
+            boxCollider.enabled = false;
             
             for (int i = 0; i < _renderer.Length; i++)
             {
@@ -118,36 +152,7 @@ namespace Project.Dev.Scripts
                 _renderer[i].material.color = startColor[i];
             }
             
-            GetComponent<BoxCollider>().enabled = true;
-        }
-
-        private void MovingForward()
-        {
-            var posAxisZ = transform.position.z + _speed * Time.deltaTime;
-
-            _nextPosition = new Vector3(_nextPosition.x, transform.position.y, posAxisZ);
-        }
-
-        private void Turn()
-        {
-            if (_health <= 0)
-            {
-                _speed = 0;
-                return;
-            }
-            
-            if (_roadBounds.IsInBounds(_nextPosition))
-            {
-                transform.position = _nextPosition;
-                ReturnStartingSpeed();
-            }
-            else
-            {
-                transform.position = _roadBounds.ClampPosition(_nextPosition);
-                Brake();
-            }
-
-            _dragPosition = transform.position;
+            boxCollider.enabled = true;
         }
     }
 }

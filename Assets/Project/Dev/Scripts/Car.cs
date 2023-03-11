@@ -25,10 +25,17 @@ namespace Project.Dev.Scripts
         [SerializeField]
         protected float _timeOfImmortality = 0;
 
-        [SerializeField]
-        protected ParticleSystem _smoke = null;
-
         protected float _startSpeed = 0;
+
+        protected virtual void MovingForward()
+        {
+            
+        }
+
+        protected virtual void Turn()
+        {
+            
+        }
         
         protected void ReturnStartingSpeed()
         {
@@ -45,7 +52,7 @@ namespace Project.Dev.Scripts
         
         protected virtual void Dead()
         {
-            _smoke.Pause();
+            gameObject.SetActive(false);
         }
     }
 }

@@ -31,19 +31,27 @@ public class MenuLossing : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        //SetChildrenActiveState(false);
         
         _menu.onClick.AddListener(Menu);
         _restart.onClick.AddListener(Restart);
     }
-
+    
     private void Urus_Died(float score)
     {
-        gameObject.SetActive(true);
+        SetChildrenActiveState(true);
         
         _score.text = Convert.ToString((int)score);
     }
-
+    
+    private void SetChildrenActiveState(bool active)
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(active);
+        }
+    }
+    
     public void Restart()
     {
         var nameScene = SceneManager.GetActiveScene().name;
@@ -51,7 +59,7 @@ public class MenuLossing : MonoBehaviour
         SceneManager.LoadScene(nameScene);
     }
 
-    public void Menu()
+    private void Menu()
     {
         SceneManager.LoadScene(0);
     }

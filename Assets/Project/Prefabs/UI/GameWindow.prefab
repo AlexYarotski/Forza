@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5290328743593194493}
   - component: {fileID: 9222609477429034684}
   - component: {fileID: 1804585246162762335}
+  - component: {fileID: 3812068383903245268}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -148,6 +149,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedBoostScore: 50
+--- !u!95 &3812068383903245268
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942697453091812944}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b079a5d020078ad498c4f9dc2b34d0b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3530906901002433801
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,5 +219,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreTextMeshProUGUI: {fileID: 9222609477429034684}
   _color: {r: 1, g: 0.6868738, b: 0, a: 1}
+  _animator: {fileID: 3812068383903245268}
   _sizeOfIncreaseScore: 40
   _timeDelayScore: 1
