@@ -8,8 +8,8 @@ namespace Project.Dev.Scripts
     public class GameWindow : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI _scoreTextMeshProUGUI = null;
-        
+        private TextMeshProUGUI _scoreTMPUGUI = null;
+
         [SerializeField]
         private Color _color = Color.white;
 
@@ -45,7 +45,7 @@ namespace Project.Dev.Scripts
         private void Urus_Drove(Vector3 drove)
         {
             var droveZ = drove.z;
-            _scoreTextMeshProUGUI.text = Convert.ToString((int)droveZ);
+            _scoreTMPUGUI.text = Convert.ToString((int)droveZ);
         }
         
         private void Score_Boost(float obj)
@@ -61,14 +61,14 @@ namespace Project.Dev.Scripts
         private IEnumerator StyleScore()
         {
             var delay = new WaitForSeconds(_timeDelayScore);
-            
-            _scoreTextMeshProUGUI.color = _color;
-            _scoreTextMeshProUGUI.fontSize += _sizeOfIncreaseScore;
+
+            _scoreTMPUGUI.color = _color;
+            _scoreTMPUGUI.fontSize += _sizeOfIncreaseScore;
             
             yield return delay;
             
-            _scoreTextMeshProUGUI.color = Color.white;
-            _scoreTextMeshProUGUI.fontSize -= _sizeOfIncreaseScore;
+            _scoreTMPUGUI.color = Color.white;
+            _scoreTMPUGUI.fontSize -= _sizeOfIncreaseScore;
         }
     }
 }

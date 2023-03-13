@@ -87,7 +87,7 @@ namespace Project.Dev.Scripts
 
             _dragPosition = transform.position;
         }
-        
+
         protected override void Dead()
         {
             StopAllCoroutines();

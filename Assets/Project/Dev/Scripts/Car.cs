@@ -24,6 +24,12 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         protected float _timeOfImmortality = 0;
+        
+        [SerializeField]
+        protected float _distanceToDangerousOvertaking = 0;
+
+        [SerializeField]
+        protected Barrier _barrier = null;
 
         protected float _startSpeed = 0;
 
@@ -39,7 +45,7 @@ namespace Project.Dev.Scripts
         
         protected void ReturnStartingSpeed()
         {
-            if (_speed < _startSpeed && _health <= 0)
+            if (_speed < _startSpeed && _health >= 0)
             {
                 _speed += _brake * Time.deltaTime;
             }

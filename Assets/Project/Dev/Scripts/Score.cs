@@ -9,12 +9,12 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         private float _speedBoostScore = 0;
-        
+
         private float _score = 0;
 
         private void Awake()
         {
-            // var setting = SceneContexts.SceneContexts.Instance.ScoreSetting;
+            // var setting = SceneContexts.Instance.ScoreSetting;
             //
             // _speedBoostScore = setting.SpeedBoostScore;
         }

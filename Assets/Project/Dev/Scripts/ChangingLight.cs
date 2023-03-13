@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class ChangingLight : MonoBehaviour
 {
+    public static event Action<float> Nightfall = delegate {  };
+    public static event Action<float> OnsetOfDay = delegate {  };
+    
     [SerializeField]
     [Range(0, 1)]
     private float _timeOfDay = 0;
@@ -15,23 +19,28 @@ public class ChangingLight : MonoBehaviour
     [SerializeField]
     private Light _sun = null;
 
-    private float _sunIntensity = 0;
-
-    private void Awake()
-    {
-        _sunIntensity = _sun.intensity;
-    }
-
     private void FixedUpdate()
     {
         _timeOfDay += Time.deltaTime / _dayDuration;
 
-        if (_timeOfDay >= 1)
-        {
-            _timeOfDay -= 1;
-        }
+        CheckOfDay();
         
         _sun.transform.localRotation = Quaternion.Euler(_timeOfDay * 360, 90, 0);
         _sun.intensity = _curve.Evaluate(_timeOfDay);
+    }
+
+    private void CheckOfDay()
+    {
+        if (_timeOfDay >= 1)
+        {
+            _timeOfDay -= 1;
+
+            OnsetOfDay(_timeOfDay);
+        }
+        
+        else if (_timeOfDay >= 0.5f)
+        {
+            Nightfall(_timeOfDay);
+        }
     }
 }
