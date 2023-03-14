@@ -30,14 +30,14 @@ namespace Project.Dev.Scripts.Menu
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(active);
+                IsActive = active;
             }
-
-            IsActive = active;
         }
 
         private void Cancel()
         {
             SetChildrenActiveState(false);
+            Time.timeScale = 1;
         }
     }
 }

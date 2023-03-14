@@ -7,7 +7,6 @@ namespace Project.Dev.Scripts
     public class Urus : Car
     {
         public static event Action<Vector3> Drove = delegate { };
-        public static event Action<float> Died = delegate { };
         
         [SerializeField]
         private RoadBounds _roadBounds = null;
@@ -92,7 +91,7 @@ namespace Project.Dev.Scripts
         {
             StopAllCoroutines();
             
-            Died(transform.position.z);
+            //Died(transform.position.z);
             
             base.Dead();
         }

@@ -21,14 +21,14 @@ public class ParticleManager : MonoBehaviour
     {
         Barrier.Hit += Barrier_Hit;
         Urus.Drove += Urus_Drove;
-        Urus.Died += Urus_Died;
+        Car.Died += Urus_Died;
     }
     
     private void OnDisable()
     {
         Barrier.Hit -= Barrier_Hit;
         Urus.Drove -= Urus_Drove;
-        Urus.Died -= Urus_Died;
+        Car.Died -= Urus_Died;
     }
 
     private void Barrier_Hit(Vector3 obj)

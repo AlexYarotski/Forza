@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
     public abstract class Car : MonoBehaviour
     {
+        public static event Action<float> Died = delegate { };
+        
         [SerializeField]
         protected int _health = 0;
         
@@ -31,6 +34,9 @@ namespace Project.Dev.Scripts
         [SerializeField]
         protected Barrier _barrier = null;
 
+        public float Speed => _speed;
+        public float MaxSpeed => _maxSpeed;
+        
         protected float _startSpeed = 0;
 
         protected virtual void MovingForward()
@@ -59,6 +65,7 @@ namespace Project.Dev.Scripts
         protected virtual void Dead()
         {
             gameObject.SetActive(false);
+            Died(transform.position.z);
         }
     }
 }

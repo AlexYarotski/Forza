@@ -22,12 +22,12 @@ public class MenuLossing : MonoBehaviour
 
     private void OnEnable()
     {
-        Urus.Died += Urus_Died;
+        Car.Died += Urus_Died;
     }
 
     private void OnDisable()
     {
-        Urus.Died -= Urus_Died;
+        Car.Died -= Urus_Died;
     }
 
     private void Awake()

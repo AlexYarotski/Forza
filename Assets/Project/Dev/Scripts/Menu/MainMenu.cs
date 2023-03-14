@@ -1,10 +1,11 @@
 using System;
+using Project.Dev.Scripts.Interface;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour, IEnableButtons
 {
     [SerializeField]
     private Button _garageButton = null;
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour
         _setting.SetChildrenActiveState(false);
         
         _playButton.onClick.AddListener(PlayGame);
+        _garageButton.onClick.AddListener(Cancel);
         _settingButton.onClick.AddListener(Setting);
     }
 
@@ -42,13 +44,18 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    private void Cancel()
+    {
+        SceneManager.LoadScene("Garage");
+    }
+
     private void Setting()
     {
         EnableButtons(false);
         _setting.SetChildrenActiveState(true);
     }
 
-    private void EnableButtons(bool enable)
+    public void EnableButtons(bool enable)
     {
         _garageButton.gameObject.SetActive(enable);
         _playButton.gameObject.SetActive(enable);
