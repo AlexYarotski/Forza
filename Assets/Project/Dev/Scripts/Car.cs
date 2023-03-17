@@ -18,6 +18,15 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         protected float _speedTurn = 0;
+
+        [SerializeField]
+        protected float _speedRotation = 0;
+
+        [SerializeField]
+        protected float _speedReturnPosition = 0;
+        
+        [SerializeField]
+        protected float _rotationAngel = 0;
         
         [SerializeField]
         protected float _boost = 0;
@@ -27,12 +36,6 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         protected float _timeOfImmortality = 0;
-        
-        [SerializeField]
-        protected float _distanceToDangerousOvertaking = 0;
-
-        [SerializeField]
-        protected Barrier _barrier = null;
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
@@ -49,21 +52,39 @@ namespace Project.Dev.Scripts
             
         }
         
-        protected void ReturnStartingSpeed()
+        protected virtual void Brake()
+        {
+            _speed -= _brake * Time.deltaTime;
+        }
+        
+        protected virtual void ReturnStartingSpeed()
         {
             if (_speed < _startSpeed && _health >= 0)
             {
                 _speed += _brake * Time.deltaTime;
             }
         }
-
-        protected void Brake()
+        
+        protected virtual void ReturnStartRotation()
         {
-            _speed -= _brake * Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity,
+                _speedReturnPosition * Time.deltaTime);
+        }
+        
+        protected virtual void TakingHealth()
+        {
+            _health--;
+
+            if (_health <= 0)
+            {
+                Dead();
+            }
         }
         
         protected virtual void Dead()
         {
+            StopAllCoroutines();
+            
             gameObject.SetActive(false);
             Died(transform.position.z);
         }

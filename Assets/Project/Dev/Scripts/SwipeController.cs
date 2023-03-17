@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class SwipeController : MonoBehaviour, IDragHandler
 {
-    public static event Action<Vector2> Dragged = delegate{  };
+    public static event Action<Vector3> Dragged = delegate{  };
 
     public void OnDrag(PointerEventData eventData)
     {

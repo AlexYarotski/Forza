@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Specifications : MonoBehaviour
+public class CarSpecifications : MonoBehaviour
 {
     [SerializeField]
     private Car _car = null;

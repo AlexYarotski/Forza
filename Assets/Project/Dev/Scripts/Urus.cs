@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -15,7 +16,8 @@ namespace Project.Dev.Scripts
         private Vector3 _nextPosition = Vector3.zero;
         
         private Renderer[] _renderer = null;
-        
+        private bool _isTurn = false;
+
         private void Awake()
         {
             _renderer = GetComponentsInChildren<Renderer>();
@@ -49,58 +51,66 @@ namespace Project.Dev.Scripts
         private void Update()
         {
             MovingForward();
-            Turn();
 
+            if (_isTurn)
+            {
+                Turn();
+            }
+            else
+            {
+                ReturnStartRotation();
+            }
+            
+            ReturnStartingSpeed();
+            
             Drove(transform.position);
         }
 
         protected override void MovingForward()
         {
             base.MovingForward();
-            
+
             var posAxisZ = transform.position.z + _speed * Time.deltaTime;
 
             _nextPosition = new Vector3(_nextPosition.x, transform.position.y, posAxisZ);
+
+            transform.position = new Vector3(transform.position.x, transform.position.y, _nextPosition.z);
         }
 
         protected override void Turn()
         {
             base.Turn();
-            
-            if (_health <= 0)
-            {
-                _speed = 0;
-                return;
-            }
-            
+
             if (_roadBounds.IsInBounds(_nextPosition))
             {
-                transform.position = _nextPosition;
-                ReturnStartingSpeed();
+                Rotation();
+                
+                transform.position = Vector3.Lerp(transform.position ,_nextPosition, 1);
+                
+                ReturnStartRotation();
             }
             else
             {
-                transform.position = _roadBounds.ClampPosition(_nextPosition);
+                ReturnStartRotation();
+
+                _nextPosition = _roadBounds.ClampPosition(_nextPosition);
+                
+                transform.position = Vector3.Lerp(transform.position, _nextPosition, 1);
+                
                 Brake();
             }
 
+            _isTurn = false;
             _dragPosition = transform.position;
         }
 
-        protected override void Dead()
+        private void SwipeController_Dragged(Vector3 dragPositionVector2)
         {
-            StopAllCoroutines();
-            
-            //Died(transform.position.z);
-            
-            base.Dead();
-        }
-        
-        private void SwipeController_Dragged(Vector2 dragPositionVector2)
-        {
-            var dragPositionVector3 = new Vector3(dragPositionVector2.x, transform.position.y, transform.position.z);
+            var dragPositionVector3 = new Vector3(dragPositionVector2.x, 0, transform.position.z);
 
-            _nextPosition = _dragPosition + dragPositionVector3 * (_speedTurn * Time.deltaTime);
+            _nextPosition.x =  _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
+
+            _isTurn = true;
         }
 
         private void Score_Boost(float boost)
@@ -120,21 +130,29 @@ namespace Project.Dev.Scripts
             TakingHealth();
         }
 
-        private void TakingHealth()
+        private void Rotation()
         {
-            _health--;
+            var nextRotation = Quaternion.identity;
 
-            if (_health <= 0)
+            if (_nextPosition.x < transform.position.x)
             {
-                Dead();
+                nextRotation.eulerAngles = new Vector3(transform.rotation.x, -_rotationAngel,
+                    transform.rotation.z);
             }
+            else if (_nextPosition.x > transform.position.x)
+            {
+                nextRotation.eulerAngles = new Vector3(transform.rotation.x, _rotationAngel,
+                    transform.rotation.z);
+            }
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, _speedRotation * Time.deltaTime);
         }
 
         private IEnumerator BecomeImmortality()
         {
             var timeImmortality = new WaitForSeconds(_timeOfImmortality);
-            var startColor = new Color[_renderer.Length];
             var boxCollider =  GetComponent<BoxCollider>();
+            var startColor = new Color[_renderer.Length];
             
             boxCollider.enabled = false;
             

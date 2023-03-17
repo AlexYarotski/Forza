@@ -18,8 +18,8 @@ public class ChangingLight : MonoBehaviour
     
     [SerializeField]
     private Light _sun = null;
-
-    private void FixedUpdate()
+    
+    private void Update()
     {
         _timeOfDay += Time.deltaTime / _dayDuration;
 
