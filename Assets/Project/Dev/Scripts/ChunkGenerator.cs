@@ -28,11 +28,6 @@ namespace Project.Dev.Scripts
 
         private void Awake()
         {
-            //     var setting = SceneContexts.SceneContexts.Instance.ChunkGeneratorSetting;
-            //
-            //     _quantityAtStart = setting.QuantityAtStart;
-            //     _distanceForSpawnChunk = setting.DistanceForSpawnChunks;
-
             StartGenerator();
         }
 
@@ -79,7 +74,9 @@ namespace Project.Dev.Scripts
 
         private void SpawnChunk()
         {
-            var createChunk = _poolManager.GetRandomObject<Chunk>(PooledType.Chunk, Vector3.zero);
+            PooledType[] randomRangeTypes = { PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
+                PooledType.Chunk3, PooledType.Chunk4 };
+            var createChunk = _poolManager.GetObject<Chunk>(randomRangeTypes[Random.Range(0,randomRangeTypes.Length)], Vector3.zero);
 
             createChunk.transform.position = SetChunkPosition(createChunk);
 

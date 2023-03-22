@@ -30,12 +30,6 @@ namespace Project.Dev.Scripts
 
         private void Awake()
         {
-            // var setting = SceneContexts.SceneContexts.Instance.GameWindowSetting;
-            //
-            // _color = setting.Color;
-            // _sizeOfIncreaseScore = setting.SizeOfIncreaseScore;
-            // _timeDelayScore = setting.TimeDelayScore;
-            
             _settingButton.onClick.AddListener(Setting);
             _setting.SetChildrenActiveState(false);
         }

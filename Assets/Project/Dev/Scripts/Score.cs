@@ -12,13 +12,6 @@ namespace Project.Dev.Scripts
 
         private float _score = 0;
 
-        private void Awake()
-        {
-            // var setting = SceneContexts.Instance.ScoreSetting;
-            //
-            // _speedBoostScore = setting.SpeedBoostScore;
-        }
-
         private void OnEnable()
         {
             Urus.Drove += Urus_Drove;

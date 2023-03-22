@@ -1,4 +1,4 @@
-using System;
+using System.Threading.Tasks;
 using Project.Dev.Scripts.Interface;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
@@ -39,14 +39,24 @@ public class MainMenu : MonoBehaviour, IEnableButtons
         }
     }
 
-    private void PlayGame()
+    private async void PlayGame()
     {
-        SceneManager.LoadScene("Game");
+        var loadSceneAsync = SceneManager.LoadSceneAsync("Game");
+
+        while (!loadSceneAsync.isDone)
+        {
+            await Task.Yield();
+        }
     }
 
-    private void Cancel()
+    private async void Cancel()
     {
-        SceneManager.LoadScene("Garage");
+        var loadSceneAsync = SceneManager.LoadSceneAsync("Garage");
+
+        while (!loadSceneAsync.isDone)
+        {
+            await Task.Yield();
+        }
     }
 
     private void Setting()

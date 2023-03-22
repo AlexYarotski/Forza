@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -8,7 +7,9 @@ namespace Project.Dev.Scripts
     public class Urus : Car
     {
         public static event Action<Vector3> Drove = delegate { };
+        private readonly Vector3 DistanceToHood = new Vector3(0, 0.7f, 0.7f);
         
+        [Header("Other")]
         [SerializeField]
         private RoadBounds _roadBounds = null;
 
@@ -16,22 +17,17 @@ namespace Project.Dev.Scripts
         private Vector3 _nextPosition = Vector3.zero;
         
         private Renderer[] _renderer = null;
-        private bool _isTurn = false;
+        
+        private ParticleManager _particleManager = null;
+        private ParticleSystem _particleSmoke = null; 
 
         private void Awake()
         {
             _renderer = GetComponentsInChildren<Renderer>();
-        
-            // var setting = SceneContexts.SceneContexts.Instance.UrusSetting;
-            //
-            // _speed = setting.Speed;
-            // _speedTurn = setting.SpeedTurn;
-            // _boost = setting.Boost;
-            // _brake = setting.Brake;
-            // _roadBounds = setting.RoadBounds;
-            
+
             _startSpeed = _speed;
             _dragPosition = transform.position;
+            
         }
 
         private void OnEnable()
@@ -52,17 +48,8 @@ namespace Project.Dev.Scripts
         {
             MovingForward();
 
-            if (_isTurn)
-            {
-                Turn();
-            }
-            else
-            {
-                ReturnStartRotation();
-            }
-            
-            ReturnStartingSpeed();
-            
+            SetTurn();
+
             Drove(transform.position);
         }
 
@@ -72,26 +59,31 @@ namespace Project.Dev.Scripts
 
             var posAxisZ = transform.position.z + _speed * Time.deltaTime;
 
-            _nextPosition = new Vector3(_nextPosition.x, transform.position.y, posAxisZ);
+            _nextPosition = new Vector3(_nextPosition.x, 0, posAxisZ);
 
-            transform.position = new Vector3(transform.position.x, transform.position.y, _nextPosition.z);
+            if (_particleSmoke != null)
+            {
+                _particleSmoke.transform.position = _nextPosition + DistanceToHood;
+            }
         }
 
-        protected override void Turn()
+        protected override void SetTurn()
         {
-            base.Turn();
+            base.SetTurn();
 
             if (_roadBounds.IsInBounds(_nextPosition))
             {
-                Rotation();
+                SetRotation();
                 
                 transform.position = Vector3.Lerp(transform.position ,_nextPosition, 1);
                 
-                ReturnStartRotation();
+                SetStartingSpeed();
+                
+                SetStartRotation();
             }
             else
             {
-                ReturnStartRotation();
+                SetStartRotation();
 
                 _nextPosition = _roadBounds.ClampPosition(_nextPosition);
                 
@@ -99,8 +91,7 @@ namespace Project.Dev.Scripts
                 
                 Brake();
             }
-
-            _isTurn = false;
+            
             _dragPosition = transform.position;
         }
 
@@ -109,8 +100,6 @@ namespace Project.Dev.Scripts
             var dragPositionVector3 = new Vector3(dragPositionVector2.x, 0, transform.position.z);
 
             _nextPosition.x =  _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
-
-            _isTurn = true;
         }
 
         private void Score_Boost(float boost)
@@ -124,31 +113,36 @@ namespace Project.Dev.Scripts
         private void Barrier_Hit(Vector3 position)
         {
             Brake();
+
+            StartCoroutine(MakeImmortal());
             
-            StartCoroutine(BecomeImmortality());
+            PlaySmoke();
             
             TakingHealth();
         }
 
-        private void Rotation()
+        private void SetRotation()
         {
             var nextRotation = Quaternion.identity;
+            var delta = _nextPosition.x - transform.position.x;
 
-            if (_nextPosition.x < transform.position.x)
+            if (AlmostEquals(delta, 0))
             {
-                nextRotation.eulerAngles = new Vector3(transform.rotation.x, -_rotationAngel,
-                    transform.rotation.z);
+                return;
             }
-            else if (_nextPosition.x > transform.position.x)
-            {
-                nextRotation.eulerAngles = new Vector3(transform.rotation.x, _rotationAngel,
-                    transform.rotation.z);
-            }
+
+            nextRotation.eulerAngles = new Vector3(transform.rotation.x, _rotationAngel * delta,
+                transform.rotation.z);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, _speedRotation * Time.deltaTime);
         }
 
-        private IEnumerator BecomeImmortality()
+        private void PlaySmoke()
+        {
+            _particleSmoke = ParticleManager.Instance.Emit(ParticleType.CarSmoke, transform.position);
+        }
+        
+        private IEnumerator MakeImmortal()
         {
             var timeImmortality = new WaitForSeconds(_timeOfImmortality);
             var boxCollider =  GetComponent<BoxCollider>();
@@ -170,6 +164,11 @@ namespace Project.Dev.Scripts
             }
             
             boxCollider.enabled = true;
+        }
+        
+        private bool AlmostEquals(float target, float value)
+        {
+            return Mathf.Abs(target - value) < Mathf.Epsilon;
         }
     }
 }

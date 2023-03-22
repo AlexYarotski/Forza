@@ -1,11 +1,7 @@
-using System;
 using UnityEngine;
 
 public class ChangingLight : MonoBehaviour
 {
-    public static event Action<float> Nightfall = delegate {  };
-    public static event Action<float> OnsetOfDay = delegate {  };
-    
     [SerializeField]
     [Range(0, 1)]
     private float _timeOfDay = 0;
@@ -18,6 +14,10 @@ public class ChangingLight : MonoBehaviour
     
     [SerializeField]
     private Light _sun = null;
+
+    private bool _isNight = false;
+
+    public bool IsNight => _isNight;
     
     private void Update()
     {
@@ -35,12 +35,12 @@ public class ChangingLight : MonoBehaviour
         {
             _timeOfDay -= 1;
 
-            OnsetOfDay(_timeOfDay);
+            _isNight = false;
         }
         
         else if (_timeOfDay >= 0.5f)
         {
-            Nightfall(_timeOfDay);
+            _isNight = true;
         }
     }
 }

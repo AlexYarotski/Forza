@@ -12,11 +12,6 @@ namespace Project.Dev.Scripts
 
         private void Awake()
         {
-            // var setting = SceneContexts.SceneContexts.Instance.RoadBoundsSetting;
-            //
-            // _leftBoundAxisX = setting.LeftBoundAxisX;
-            // _rightBoundAxisX = setting.RightBoundAxisX;
-            
             CheckingBoundaries();
         }
 

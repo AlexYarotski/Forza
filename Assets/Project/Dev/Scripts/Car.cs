@@ -7,9 +7,14 @@ namespace Project.Dev.Scripts
     {
         public static event Action<float> Died = delegate { };
         
+        [Header("Health")]
         [SerializeField]
         protected int _health = 0;
         
+        [SerializeField]
+        protected float _timeOfImmortality = 0;
+        
+        [Header("Speed")]
         [SerializeField]
         protected float _speed = 0;
 
@@ -20,22 +25,20 @@ namespace Project.Dev.Scripts
         protected float _speedTurn = 0;
 
         [SerializeField]
-        protected float _speedRotation = 0;
-
-        [SerializeField]
-        protected float _speedReturnPosition = 0;
-        
-        [SerializeField]
-        protected float _rotationAngel = 0;
-        
-        [SerializeField]
-        protected float _boost = 0;
-        
-        [SerializeField]
         protected float _brake = 0;
         
         [SerializeField]
-        protected float _timeOfImmortality = 0;
+        protected float _boost = 0;
+
+        [Header("Rotation")]
+        [SerializeField]
+        protected float _speedRotation = 0;
+
+        [SerializeField]
+        protected float _speedReturnRotartion = 0;
+        
+        [SerializeField]
+        protected float _rotationAngel = 0;
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
@@ -47,7 +50,7 @@ namespace Project.Dev.Scripts
             
         }
 
-        protected virtual void Turn()
+        protected virtual void SetTurn()
         {
             
         }
@@ -57,7 +60,7 @@ namespace Project.Dev.Scripts
             _speed -= _brake * Time.deltaTime;
         }
         
-        protected virtual void ReturnStartingSpeed()
+        protected virtual void SetStartingSpeed()
         {
             if (_speed < _startSpeed && _health >= 0)
             {
@@ -65,10 +68,10 @@ namespace Project.Dev.Scripts
             }
         }
         
-        protected virtual void ReturnStartRotation()
+        protected virtual void SetStartRotation()
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity,
-                _speedReturnPosition * Time.deltaTime);
+                _speedReturnRotartion * Time.deltaTime);
         }
         
         protected virtual void TakingHealth()
@@ -77,11 +80,11 @@ namespace Project.Dev.Scripts
 
             if (_health <= 0)
             {
-                Dead();
+                OnDie();
             }
         }
         
-        protected virtual void Dead()
+        protected virtual void OnDie()
         {
             StopAllCoroutines();
             

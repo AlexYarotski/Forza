@@ -10,8 +10,6 @@ public class PoolManager : MonoBehaviour
     [SerializeField]
     private PoolConfig[] _poolConfigs = null;
 
-    private List<PooledBehaviour> valueDictionary = new List<PooledBehaviour>();
-
     private void Awake()
     {
         // var settings = SceneContexts.Instance.PoolManagerSetting;
@@ -19,30 +17,6 @@ public class PoolManager : MonoBehaviour
         // _poolConfigs = settings.PoolConfigs;
 
         PreparePoolDictionary();
-    }
-
-    public T GetRandomObject<T>(PooledType pooledType, Vector3 position) where T : PooledBehaviour
-    {
-        if (valueDictionary.Count == 0)
-        {
-            valueDictionary.Add(GetObject<T>(pooledType, position));
-            
-            return (T)valueDictionary[valueDictionary.Count];
-        }
-
-        var freePooledBehaviours = new List<PooledBehaviour>();
-
-        for (int i = 0; i < valueDictionary.Count; i++)
-        {
-            if (valueDictionary[i].IsFree)
-            {
-                freePooledBehaviours.Add(valueDictionary[i]);
-            }
-        }
-        
-        var randomPoolObj = freePooledBehaviours[Random.Range(0, freePooledBehaviours.Count)];
-
-        return PreparationPoolObjBeforeDelivery<T>(randomPoolObj, position);
     }
 
     public T GetObject<T>(PooledType pooledType, Vector3 position) where T : PooledBehaviour
@@ -62,8 +36,6 @@ public class PoolManager : MonoBehaviour
             
             poolBehaviour.Add(freePoolObj);
         }
-
-        valueDictionary = poolBehaviour;
         
         return PreparationPoolObjBeforeDelivery<T>(freePoolObj, position);
     }
@@ -130,8 +102,6 @@ public class PoolManager : MonoBehaviour
 
         poolObj.transform.position = position;
         poolObj.gameObject.SetActive(true);
-        
-        //valueDictionary.Add(poolObj);
 
         return (T)poolObj;
     }
