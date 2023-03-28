@@ -4,5 +4,6 @@ public enum PooledType
     Chunk1 = 1,
     Chunk2 = 2,
     Chunk3 = 3,
-    Chunk4 = 4
+    Chunk4 = 4,
+    Chunk5 = 5
 }

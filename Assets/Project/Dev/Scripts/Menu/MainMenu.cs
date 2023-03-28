@@ -1,12 +1,14 @@
 using System.Threading.Tasks;
-using Project.Dev.Scripts.Interface;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour, IEnableButtons
+public class MainMenu : UIWindow
 {
+    private const string Game = "Game";
+    private const string Garage = "Garage";
+    
     [SerializeField]
     private Button _garageButton = null;
     
@@ -15,60 +17,39 @@ public class MainMenu : MonoBehaviour, IEnableButtons
     
     [SerializeField]
     private Button _settingButton = null;
-    
-    [SerializeField]
-    private Image _background = null;
 
     [SerializeField]
     private Setting _setting = null;
     
     private void Awake()
     {
-        _setting.SetChildrenActiveState(false);
-        
         _playButton.onClick.AddListener(PlayGame);
         _garageButton.onClick.AddListener(Cancel);
         _settingButton.onClick.AddListener(Setting);
     }
 
-    private void FixedUpdate()
+    private void PlayGame()
     {
-        if (!_setting.IsActive)
-        {
-            EnableButtons(true);
-        }
+        UploadSceneAsync(Game);
     }
 
-    private async void PlayGame()
+    private void Cancel()
     {
-        var loadSceneAsync = SceneManager.LoadSceneAsync("Game");
-
-        while (!loadSceneAsync.isDone)
-        {
-            await Task.Yield();
-        }
-    }
-
-    private async void Cancel()
-    {
-        var loadSceneAsync = SceneManager.LoadSceneAsync("Garage");
-
-        while (!loadSceneAsync.isDone)
-        {
-            await Task.Yield();
-        }
+        UploadSceneAsync(Garage);
     }
 
     private void Setting()
     {
-        EnableButtons(false);
-        _setting.SetChildrenActiveState(true);
+        _setting.gameObject.SetActive(true);
     }
-
-    public void EnableButtons(bool enable)
+    
+    private async void UploadSceneAsync(string sceneName)
     {
-        _garageButton.gameObject.SetActive(enable);
-        _playButton.gameObject.SetActive(enable);
-        _settingButton.gameObject.SetActive(enable);
+        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!loadSceneAsync.isDone)
+        {
+            await Task.Yield();
+        }
     }
 }

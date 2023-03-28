@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Project.Dev.Scripts.Interface;
 using Project.Dev.Scripts.Menu;
 using TMPro;
 using UnityEngine;
@@ -8,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts
 {
-    public class GameWindow : MonoBehaviour, IEnableButtons
+    public class GameWindow : UIWindow
     {
         [SerializeField]
         private TextMeshProUGUI _scoreTMPUGUI = null;
@@ -31,7 +30,8 @@ namespace Project.Dev.Scripts
         private void Awake()
         {
             _settingButton.onClick.AddListener(Setting);
-            _setting.SetChildrenActiveState(false);
+            
+            _setting.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -48,23 +48,9 @@ namespace Project.Dev.Scripts
             Car.Died -= Urus_Died;
         }
 
-        private void FixedUpdate()
-        {
-            if (!_setting.IsActive)
-            {
-                EnableButtons(true);
-            }
-        }
-
-        public void EnableButtons(bool enable)
-        {
-            _settingButton.gameObject.SetActive(enable);
-        }
-        
         private void Urus_Drove(Vector3 drove)
         {
-            var droveZ = drove.z;
-            _scoreTMPUGUI.text = Convert.ToString((int)droveZ);
+            _scoreTMPUGUI.text = Convert.ToString((int)drove.z);
         }
         
         private void Score_Boost(float obj)
@@ -94,8 +80,7 @@ namespace Project.Dev.Scripts
         {
             Time.timeScale = 0;
 
-            EnableButtons(false);
-            _setting.SetChildrenActiveState(true);
+            _setting.gameObject.SetActive(true);
         }
     }
 }

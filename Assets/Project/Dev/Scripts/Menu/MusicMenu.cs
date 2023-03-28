@@ -4,15 +4,12 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class MusicMenu : MonoBehaviour
+    public class MusicMenu : UIWindow
     {
         private readonly string MusicProcent = "{0}%";
         
         [SerializeField]
         private AudioSource _audioSource = null;
-
-        [SerializeField]
-        private TextMeshProUGUI _musicTMP = null;
 
         [SerializeField]
         private Slider _musicSlider = null;

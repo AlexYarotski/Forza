@@ -67,14 +67,14 @@ namespace Project.Dev.Scripts
                 _speed += _brake * Time.deltaTime;
             }
         }
-        
+
         protected virtual void SetStartRotation()
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity,
                 _speedReturnRotartion * Time.deltaTime);
         }
-        
-        protected virtual void TakingHealth()
+
+        protected virtual void TakeHealth()
         {
             _health--;
 
@@ -89,6 +89,7 @@ namespace Project.Dev.Scripts
             StopAllCoroutines();
             
             gameObject.SetActive(false);
+            
             Died(transform.position.z);
         }
     }

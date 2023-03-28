@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836214121857390238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.38, y: 0.67, z: -0.63}
+  m_LocalPosition: {x: 0.45, y: 0.6, z: -1.435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3609503041897159081}
@@ -38,15 +38,15 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836214121857390238}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100
+  m_Intensity: 200
   m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 29.42218
+  m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -82,7 +82,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -102,9 +102,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3209244623317845640}
-  - component: {fileID: 5257701512037704815}
   - component: {fileID: 8288766456121087326}
   - component: {fileID: -8110155627684819}
+  - component: {fileID: 5257701512037704815}
+  - component: {fileID: 11304128807730517}
   m_Layer: 6
   m_Name: Urus
   m_TagString: Untagged
@@ -127,30 +128,7 @@ Transform:
   - {fileID: 3609503041897159081}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5257701512037704815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576637866465785176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 2
-  _timeOfImmortality: 1
-  _speed: 10
-  _maxSpeed: 60
-  _speedTurn: 1.4
-  _brake: 0.6
-  _boost: 10
-  _speedRotation: 10
-  _speedReturnRotartion: 10
-  _rotationAngel: 200
-  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &8288766456121087326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -180,6 +158,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5257701512037704815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576637866465785176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 2
+  _timeOfImmortality: 1
+  _speed: 10
+  _maxSpeed: 60
+  _speedTurn: 1.4
+  _brake: 0.6
+  _boost: 10
+  _speedRotation: 10
+  _speedReturnRotartion: 10
+  _rotationAngel: 200
+  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+  _spring: {fileID: 11304128807730517}
+--- !u!114 &11304128807730517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576637866465785176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc1e6da7c0c4cb19e9af2e6dc13a33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _angularFrequency: 0
+  _dampingRatio: 0
 --- !u!1 &5291569891212827530
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291569891212827530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.31, y: 0.6700001, z: -0.63}
+  m_LocalPosition: {x: -0.45, y: 0.6, z: -1.435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3609503041897159081}
@@ -223,10 +239,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100
+  m_Intensity: 200
   m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 29.42218
+  m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -262,7 +278,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -320,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftHeadlight: {fileID: 6616089205942057519}
   _rightHeadlight: {fileID: 1903135532902008602}
+  _changingLight: {fileID: 0}
 --- !u!1001 &559117641751581689
 PrefabInstance:
   m_ObjectHideFlags: 0

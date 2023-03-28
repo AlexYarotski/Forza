@@ -17,9 +17,7 @@ namespace Project.Dev.Scripts
 
         public bool IsInBounds(Vector3 position)
         {
-            var positionAxisX = position.x;
-
-            return positionAxisX <= _rightBoundAxisX && positionAxisX >= _leftBoundAxisX;
+            return position.x <= _rightBoundAxisX && position.x >= _leftBoundAxisX;
         }
 
         public Vector3 ClampPosition(Vector3 position)

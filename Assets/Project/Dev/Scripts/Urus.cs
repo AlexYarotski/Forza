@@ -7,11 +7,15 @@ namespace Project.Dev.Scripts
     public class Urus : Car
     {
         public static event Action<Vector3> Drove = delegate { };
+        
         private readonly Vector3 DistanceToHood = new Vector3(0, 0.7f, 0.7f);
         
         [Header("Other")]
         [SerializeField]
         private RoadBounds _roadBounds = null;
+
+        [SerializeField]
+        private Spring _spring = null;
 
         private Vector3 _dragPosition = Vector3.zero;
         private Vector3 _nextPosition = Vector3.zero;
@@ -19,7 +23,7 @@ namespace Project.Dev.Scripts
         private Renderer[] _renderer = null;
         
         private ParticleManager _particleManager = null;
-        private ParticleSystem _particleSmoke = null; 
+        private ParticleSystem _particleSmoke = null;
 
         private void Awake()
         {
@@ -27,7 +31,6 @@ namespace Project.Dev.Scripts
 
             _startSpeed = _speed;
             _dragPosition = transform.position;
-            
         }
 
         private void OnEnable()
@@ -47,7 +50,7 @@ namespace Project.Dev.Scripts
         private void Update()
         {
             MovingForward();
-
+            
             SetTurn();
 
             Drove(transform.position);
@@ -59,7 +62,9 @@ namespace Project.Dev.Scripts
 
             var posAxisZ = transform.position.z + _speed * Time.deltaTime;
 
-            _nextPosition = new Vector3(_nextPosition.x, 0, posAxisZ);
+            transform.position = new Vector3(transform.position.x, 0, posAxisZ);
+            
+            _nextPosition = new Vector3(_nextPosition.x, transform.position.y, posAxisZ);
 
             if (_particleSmoke != null)
             {
@@ -70,21 +75,21 @@ namespace Project.Dev.Scripts
         protected override void SetTurn()
         {
             base.SetTurn();
-
+            
             if (_roadBounds.IsInBounds(_nextPosition))
             {
                 SetRotation();
                 
                 transform.position = Vector3.Lerp(transform.position ,_nextPosition, 1);
                 
-                SetStartingSpeed();
-                
                 SetStartRotation();
+                
+                SetStartingSpeed();
             }
             else
             {
                 SetStartRotation();
-
+                
                 _nextPosition = _roadBounds.ClampPosition(_nextPosition);
                 
                 transform.position = Vector3.Lerp(transform.position, _nextPosition, 1);
@@ -95,11 +100,9 @@ namespace Project.Dev.Scripts
             _dragPosition = transform.position;
         }
 
-        private void SwipeController_Dragged(Vector3 dragPositionVector2)
+        private void SwipeController_Dragged(Vector3 dragPositionVector3)
         {
-            var dragPositionVector3 = new Vector3(dragPositionVector2.x, 0, transform.position.z);
-
-            _nextPosition.x =  _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
+            _nextPosition.x = _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
         }
 
         private void Score_Boost(float boost)
@@ -118,21 +121,20 @@ namespace Project.Dev.Scripts
             
             PlaySmoke();
             
-            TakingHealth();
+            TakeHealth();
         }
 
         private void SetRotation()
         {
             var nextRotation = Quaternion.identity;
             var delta = _nextPosition.x - transform.position.x;
-
-            if (AlmostEquals(delta, 0))
+            
+            if (delta.AlmostEquals(delta, 0))
             {
                 return;
             }
 
-            nextRotation.eulerAngles = new Vector3(transform.rotation.x, _rotationAngel * delta,
-                transform.rotation.z);
+            nextRotation.eulerAngles = new Vector3(0, _rotationAngel * delta, 0);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, _speedRotation * Time.deltaTime);
         }
@@ -164,11 +166,6 @@ namespace Project.Dev.Scripts
             }
             
             boxCollider.enabled = true;
-        }
-        
-        private bool AlmostEquals(float target, float value)
-        {
-            return Mathf.Abs(target - value) < Mathf.Epsilon;
         }
     }
 }

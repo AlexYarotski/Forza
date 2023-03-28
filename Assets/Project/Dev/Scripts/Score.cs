@@ -32,8 +32,7 @@ namespace Project.Dev.Scripts
         
         private void Urus_Drove(Vector3 drove)
         {
-            var droveZ = drove.z;
-            _score = droveZ;
+            _score = drove.z;
         }
 
         private bool CanIncreaseSpeed()

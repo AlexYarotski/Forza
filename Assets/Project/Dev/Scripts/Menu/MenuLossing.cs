@@ -1,11 +1,16 @@
+using System.Threading.Tasks;
 using Project.Dev.Scripts;
+using Project.Dev.Scripts.Menu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuLossing : MonoBehaviour
+public class MenuLossing : UIWindow
 {
+    private const string MainMenu = "Menu";
+    private const string GarageScene = "Garage";
+    
     private readonly string ScoreText = "Your Score \r\n {0}";
     
     [SerializeField]
@@ -20,6 +25,22 @@ public class MenuLossing : MonoBehaviour
     [SerializeField]
     private Button _restart = null;
 
+    [SerializeField]
+    private Image _frame = null;
+    
+    private void Awake()
+    {
+        _menu.onClick.AddListener(Menu);
+        _garage.onClick.AddListener(Garage);
+        _restart.onClick.AddListener(Restart);
+        
+        _score.gameObject.SetActive(false);
+        _menu.gameObject.SetActive(false);
+        _garage.gameObject.SetActive(false);
+        _restart.gameObject.SetActive(false);
+        _frame.gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
         Car.Died += Urus_Died;
@@ -29,30 +50,26 @@ public class MenuLossing : MonoBehaviour
     {
         Car.Died -= Urus_Died;
     }
-
-    private void Awake()
-    {
-        SetChildrenActiveState(false);
-        
-        _menu.onClick.AddListener(Menu);
-        _restart.onClick.AddListener(Restart);
-    }
     
     private void Urus_Died(float score)
     {
-        SetChildrenActiveState(true);
-        
-        _score.color = Color.yellow;
+        _score.gameObject.SetActive(true);
+        _menu.gameObject.SetActive(true);
+        _garage.gameObject.SetActive(true);
+        _restart.gameObject.SetActive(true);
+        _frame.gameObject.SetActive(true);
         
         _score.text = string.Format(ScoreText, (int)score);
     }
     
-    private void SetChildrenActiveState(bool active)
+    private void Menu()
     {
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(active);
-        }
+        UploadSceneAsync(MainMenu);
+    }
+
+    private void Garage()
+    {
+        UploadSceneAsync(GarageScene);
     }
     
     private void Restart()
@@ -61,9 +78,14 @@ public class MenuLossing : MonoBehaviour
 
         SceneManager.LoadScene(nameScene);
     }
-
-    private void Menu()
+    
+    private async void UploadSceneAsync(string sceneName)
     {
-        SceneManager.LoadScene(0);
+        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!loadSceneAsync.isDone)
+        {
+            await Task.Yield();
+        }
     }
 }

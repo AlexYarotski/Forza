@@ -53,7 +53,7 @@ namespace Project.Dev.Scripts
             {
                 ChunkList.Add(_poolManager.GetObject<Chunk>(PooledType.Chunk, Vector3.zero));
                 ChunkList[i].transform.position = SetChunkPosition(ChunkList[i]);
-
+                
                 _lastChunk = ChunkList[i];
             }
         }
@@ -74,8 +74,8 @@ namespace Project.Dev.Scripts
 
         private void SpawnChunk()
         {
-            PooledType[] randomRangeTypes = { PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
-                PooledType.Chunk3, PooledType.Chunk4 };
+            PooledType[] randomRangeTypes = {PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
+                PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5};
             var createChunk = _poolManager.GetObject<Chunk>(randomRangeTypes[Random.Range(0,randomRangeTypes.Length)], Vector3.zero);
 
             createChunk.transform.position = SetChunkPosition(createChunk);
@@ -87,7 +87,7 @@ namespace Project.Dev.Scripts
         private void DeleteChunk()
         {
             _firstChunk.Free();
-            ChunkList.Remove(_firstChunk);
+            ChunkList.RemoveAt(0);
 
             _firstChunk = ChunkList[0];
         }
