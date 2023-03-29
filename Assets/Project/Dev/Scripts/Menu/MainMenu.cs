@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : UIWindow
+public class MainMenu : MonoBehaviour
 {
     private const string Game = "Game";
     private const string Garage = "Garage";

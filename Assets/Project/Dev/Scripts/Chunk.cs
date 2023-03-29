@@ -1,4 +1,4 @@
-﻿namespace Project.Dev.Scripts.PoolSystem
+﻿namespace Project.Dev.Scripts
 {
     public class Chunk : PooledBehaviour
     {

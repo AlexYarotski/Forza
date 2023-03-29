@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class Setting : UIWindow
+    public class Setting : MonoBehaviour
     {
         [SerializeField]
         private Button _cancel = null;

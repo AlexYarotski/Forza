@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts
 {
-    public class GameWindow : UIWindow
+    public class GameWindow : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI _scoreTMPUGUI = null;
@@ -58,7 +58,7 @@ namespace Project.Dev.Scripts
             StartCoroutine(StyleScore());
         }
         
-        private void Urus_Died(float obj)
+        private void Urus_Died(Vector3 obj)
         {
             gameObject.SetActive(false);
         }

@@ -1,7 +1,6 @@
-using Project.Dev.Scripts.Menu;
 using UnityEngine;
 
-public class RotationModel : UIWindow
+public class RotationModel : MonoBehaviour
 {
     [SerializeField]
     private float _startSpeedRotation = 0;

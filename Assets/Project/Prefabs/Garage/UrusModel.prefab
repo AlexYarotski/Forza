@@ -209,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftHeadlight: {fileID: 2845555635696545542}
   _rightHeadlight: {fileID: 7405369681398796851}
+  _changingLight: {fileID: 0}
 --- !u!1 &3873954491700203171
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +400,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
-  _timeOfImmortality: 1
   _speed: 10
   _maxSpeed: 60
   _speedTurn: 1.4
@@ -409,6 +409,8 @@ MonoBehaviour:
   _speedReturnRotartion: 0
   _rotationAngel: 36
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+  _immortal: {fileID: 0}
+  _spring: {fileID: 0}
 --- !u!1 &4952339067093204081
 GameObject:
   m_ObjectHideFlags: 0

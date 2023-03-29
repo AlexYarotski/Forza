@@ -304,16 +304,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolConfigs:
-  - _count: 5
+  - _count: 3
     _pooledType: 0
     _pooledPrefab: {fileID: 5191124323575278179, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  - _count: 3
+  - _count: 5
     _pooledType: 1
     _pooledPrefab: {fileID: 1177079528815887964, guid: 93523de767a60c74bb79afc450d593eb, type: 3}
-  - _count: 3
+  - _count: 6
     _pooledType: 2
     _pooledPrefab: {fileID: 2001624283210091270, guid: b93c71e7aed4afd49aa96dd7c2af8de4, type: 3}
-  - _count: 2
+  - _count: 4
     _pooledType: 3
     _pooledPrefab: {fileID: 3288810430890123774, guid: b4ac5b3dcbc73104da63011492382fd9, type: 3}
   - _count: 3
@@ -322,6 +322,9 @@ MonoBehaviour:
   - _count: 4
     _pooledType: 5
     _pooledPrefab: {fileID: 6005526627405694179, guid: 728d13dcd97993545b5e052d82eafc38, type: 3}
+  - _count: 4
+    _pooledType: 6
+    _pooledPrefab: {fileID: 8654123456342009375, guid: bc08bf983ba33a54f974056b54377c98, type: 3}
 --- !u!114 &125012749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -796,6 +799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _car: {fileID: 125012749}
+  _distanceToStop: 8
+  _timeSilding: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 103901626}
   _car: {fileID: 125012749}
-  _quantityAtStart: 5
+  _quantityAtStart: 4
   _distanceForSpawnChunk: 100
   _distanceForDeleteChunk: 20
 --- !u!4 &1570703661 stripped
@@ -1356,6 +1361,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+      propertyPath: _spring
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5291569891212827530, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1421,6 +1430,7 @@ PrefabInstance:
     - {fileID: 6278830124626790679, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
     - {fileID: 4719200334399115334, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
     - {fileID: 4712194780713204655, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+    - {fileID: 11304128807730517, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
 --- !u!1001 &1633112147823182210
 PrefabInstance:

@@ -1,13 +1,12 @@
 using System;
 using System.Threading.Tasks;
 using Project.Dev.Scripts;
-using Project.Dev.Scripts.Menu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CarSpecifications : UIWindow
+public class CarSpecifications : MonoBehaviour
 {
     private const string MainMenu = "Menu";
     private const string Game = "Game";

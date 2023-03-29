@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Project.Dev.Scripts.PoolSystem;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -25,6 +24,8 @@ namespace Project.Dev.Scripts
 
         private Chunk _firstChunk = null;
         private Chunk _lastChunk = null;
+        
+        private PooledType _pooledType = default;
 
         private void Awake()
         {
@@ -74,12 +75,22 @@ namespace Project.Dev.Scripts
 
         private void SpawnChunk()
         {
-            PooledType[] randomRangeTypes = {PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
-                PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5};
-            var createChunk = _poolManager.GetObject<Chunk>(randomRangeTypes[Random.Range(0,randomRangeTypes.Length)], Vector3.zero);
+            PooledType[] pooledTypes = {PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
+                PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5, PooledType.Chunk6};
+            
+            var randomType = Random.Range(0, pooledTypes.Length);
+
+            while (_pooledType == pooledTypes[randomType])
+            {
+                randomType = Random.Range(0, pooledTypes.Length);
+            }
+
+            _pooledType = pooledTypes[randomType];
+            
+            var createChunk = _poolManager.GetObject<Chunk>(pooledTypes[randomType], Vector3.zero);
 
             createChunk.transform.position = SetChunkPosition(createChunk);
-
+            
             ChunkList.Add(createChunk);
             _lastChunk = createChunk;
         }

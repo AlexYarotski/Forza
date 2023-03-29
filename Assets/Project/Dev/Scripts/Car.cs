@@ -5,14 +5,11 @@ namespace Project.Dev.Scripts
 {
     public abstract class Car : MonoBehaviour
     {
-        public static event Action<float> Died = delegate { };
+        public static event Action<Vector3> Died = delegate { };
         
         [Header("Health")]
         [SerializeField]
         protected int _health = 0;
-        
-        [SerializeField]
-        protected float _timeOfImmortality = 0;
         
         [Header("Speed")]
         [SerializeField]
@@ -39,42 +36,99 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         protected float _rotationAngel = 0;
+        
+        [Header("Other")]
+        [SerializeField]
+        protected RoadBounds _roadBounds = null;
+
+        [SerializeField]
+        protected Immortal _immortal = null;
+        
+        [SerializeField]
+        protected Spring _spring = null;
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
         
         protected float _startSpeed = 0;
+        
+        protected Vector3 _nextPosition = Vector3.zero;
+        protected Vector3 _dragPosition = Vector3.zero;
 
-        protected virtual void MovingForward()
+        protected void MoveForward()
         {
+            var posAxisZ = transform.position.z + _speed * Time.deltaTime;
+
+            transform.position = new Vector3(transform.position.x, 0, posAxisZ);
             
+            _nextPosition = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
         }
 
-        protected virtual void SetTurn()
+        protected void SetTurn()
         {
+            if (_roadBounds.IsInBounds(_nextPosition))
+            {
+                SetRotation();
+                
+                var nextPositionX = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
+                
+                transform.position = nextPositionX;
+                
+                SetStartRotation();
+                
+                SetStartSpeed();
+            }
+            else
+            {
+                SetStartRotation();
+                
+                _nextPosition = _roadBounds.ClampPosition(_nextPosition);
+                
+                var nextPositionX = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
+                
+                transform.position = nextPositionX;
+                
+                Brake();
+            }
             
+            _dragPosition = transform.position;
         }
         
-        protected virtual void Brake()
+        protected void Brake()
         {
             _speed -= _brake * Time.deltaTime;
         }
         
-        protected virtual void SetStartingSpeed()
+        private void SetStartSpeed()
         {
             if (_speed < _startSpeed && _health >= 0)
             {
                 _speed += _brake * Time.deltaTime;
             }
         }
+        
+        private void SetRotation()
+        {
+            var nextRotation = Quaternion.identity;
+            var delta = _nextPosition.x - transform.position.x;
+            
+            if (delta.AlmostEquals(delta, 0))
+            {
+                return;
+            }
 
-        protected virtual void SetStartRotation()
+            nextRotation.eulerAngles = new Vector3(0, _rotationAngel * delta, 0);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, _speedRotation * Time.deltaTime);
+        }
+
+        private void SetStartRotation()
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity,
                 _speedReturnRotartion * Time.deltaTime);
         }
 
-        protected virtual void TakeHealth()
+        protected void GetDamage()
         {
             _health--;
 
@@ -84,13 +138,9 @@ namespace Project.Dev.Scripts
             }
         }
         
-        protected virtual void OnDie()
+        private void OnDie()
         {
-            StopAllCoroutines();
-            
-            gameObject.SetActive(false);
-            
-            Died(transform.position.z);
+            Died(transform.position);
         }
     }
 }

@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 using Project.Dev.Scripts;
-using Project.Dev.Scripts.Menu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuLossing : UIWindow
+public class MenuLossing : MonoBehaviour
 {
     private const string MainMenu = "Menu";
     private const string GarageScene = "Garage";
+    private const string Game = "Game";
     
     private readonly string ScoreText = "Your Score \r\n {0}";
     
@@ -51,7 +51,7 @@ public class MenuLossing : UIWindow
         Car.Died -= Urus_Died;
     }
     
-    private void Urus_Died(float score)
+    private void Urus_Died(Vector3 position)
     {
         _score.gameObject.SetActive(true);
         _menu.gameObject.SetActive(true);
@@ -59,7 +59,7 @@ public class MenuLossing : UIWindow
         _restart.gameObject.SetActive(true);
         _frame.gameObject.SetActive(true);
         
-        _score.text = string.Format(ScoreText, (int)score);
+        _score.text = string.Format(ScoreText, (int)position.z);
     }
     
     private void Menu()
@@ -74,9 +74,7 @@ public class MenuLossing : UIWindow
     
     private void Restart()
     {
-        var nameScene = SceneManager.GetActiveScene().name;
-
-        SceneManager.LoadScene(nameScene);
+        UploadSceneAsync(Game);
     }
     
     private async void UploadSceneAsync(string sceneName)

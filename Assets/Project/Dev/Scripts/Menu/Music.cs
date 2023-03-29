@@ -17,7 +17,7 @@ namespace Project.Dev.Scripts.Menu
             Car.Died -= Urus_Died;
         }
 
-        private void Urus_Died(float obj)
+        private void Urus_Died(Vector3 obj)
         {
             _music.Stop();
         }

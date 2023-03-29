@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class MusicMenu : UIWindow
+    public class MusicMenu : MonoBehaviour
     {
         private readonly string MusicProcent = "{0}%";
         
