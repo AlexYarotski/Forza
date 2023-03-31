@@ -1,9 +1,10 @@
 ﻿using System;
+using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
-    public abstract class Car : MonoBehaviour
+    public abstract class Car : MonoBehaviour, IDamageable
     {
         public static event Action<Vector3> Died = delegate { };
         
@@ -14,54 +15,73 @@ namespace Project.Dev.Scripts
         [Header("Speed")]
         [SerializeField]
         protected float _speed = 0;
-
         [SerializeField]
         protected float _maxSpeed = 0;
-
         [SerializeField]
         protected float _speedTurn = 0;
-
         [SerializeField]
         protected float _brake = 0;
-        
         [SerializeField]
         protected float _boost = 0;
 
         [Header("Rotation")]
         [SerializeField]
         protected float _speedRotation = 0;
-
         [SerializeField]
         protected float _speedReturnRotartion = 0;
-        
         [SerializeField]
         protected float _rotationAngel = 0;
         
         [Header("Other")]
         [SerializeField]
         protected RoadBounds _roadBounds = null;
-
-        [SerializeField]
-        protected Immortal _immortal = null;
-        
         [SerializeField]
         protected Spring _spring = null;
-
-        public float Speed => _speed;
-        public float MaxSpeed => _maxSpeed;
         
         protected float _startSpeed = 0;
         
-        protected Vector3 _nextPosition = Vector3.zero;
-        protected Vector3 _dragPosition = Vector3.zero;
+        private Vector3 _nextPosition = Vector3.zero;
+        private Vector3 _dragPosition = Vector3.zero;
+        
+        public float Speed => _speed;
+        public float MaxSpeed => _maxSpeed;
 
+        private void Awake()
+        {
+            _startSpeed = _speed;
+            _dragPosition = transform.position;
+        }
+
+        protected void OnEnable()
+        {
+            SwipeController.Dragged +=  SwipeController_Dragged;
+        }
+
+        protected void OnDisable()
+        {
+            SwipeController.Dragged += SwipeController_Dragged;
+        }
+
+        public virtual void GetDamage()
+        {
+            _health--;
+
+            if (_health <= 0)
+            {
+                OnDie();
+            }
+        }
+        
         protected void MoveForward()
         {
-            var posAxisZ = transform.position.z + _speed * Time.deltaTime;
-
-            transform.position = new Vector3(transform.position.x, 0, posAxisZ);
+            var position = transform.position;
+            var posAxisZ = position.z + _speed * Time.deltaTime;
             
-            _nextPosition = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
+            
+            position = new Vector3(position.x, 0, posAxisZ);
+            transform.position = position;
+
+            _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
         }
 
         protected void SetTurn()
@@ -69,11 +89,13 @@ namespace Project.Dev.Scripts
             if (_roadBounds.IsInBounds(_nextPosition))
             {
                 SetRotation();
+
+                var position = transform.position;
+                var nextPositionX = new Vector3(_nextPosition.x, position.y, position.z);
                 
-                var nextPositionX = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
-                
-                transform.position = nextPositionX;
-                
+                position =  nextPositionX;
+                transform.position = position;
+
                 SetStartRotation();
                 
                 SetStartSpeed();
@@ -83,11 +105,13 @@ namespace Project.Dev.Scripts
                 SetStartRotation();
                 
                 _nextPosition = _roadBounds.ClampPosition(_nextPosition);
+
+                var position = transform.position;
+                var nextPositionX = new Vector3(_nextPosition.x, position.y, position.z);
                 
-                var nextPositionX = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
-                
-                transform.position = nextPositionX;
-                
+                position = nextPositionX;
+                transform.position = position;
+
                 Brake();
             }
             
@@ -97,6 +121,11 @@ namespace Project.Dev.Scripts
         protected void Brake()
         {
             _speed -= _brake * Time.deltaTime;
+        }
+
+        private void SwipeController_Dragged(Vector3 dragPositionVector3)
+        {
+            _nextPosition.x = _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
         }
         
         private void SetStartSpeed()
@@ -118,7 +147,6 @@ namespace Project.Dev.Scripts
             }
 
             nextRotation.eulerAngles = new Vector3(0, _rotationAngel * delta, 0);
-
             transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, _speedRotation * Time.deltaTime);
         }
 
@@ -128,16 +156,6 @@ namespace Project.Dev.Scripts
                 _speedReturnRotartion * Time.deltaTime);
         }
 
-        protected void GetDamage()
-        {
-            _health--;
-
-            if (_health <= 0)
-            {
-                OnDie();
-            }
-        }
-        
         private void OnDie()
         {
             Died(transform.position);

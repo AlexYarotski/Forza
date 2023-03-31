@@ -7,31 +7,21 @@ namespace Project.Dev.Scripts
     {
         public static event Action<Vector3> Drove = delegate { };
 
-        private Renderer[] _renderer = null;
-        
-        private ParticleManager _particleManager = null;
-        private ParticleSystem _particleSmoke = null;
+        [SerializeField]
+        protected float _timeOfImmortality = 0;
 
-        private void Awake()
+        private new void OnEnable()
         {
-            _renderer = GetComponentsInChildren<Renderer>();
-
-            _startSpeed = _speed;
-            _dragPosition = transform.position;
-        }
-
-        private void OnEnable()
-        {
-            SwipeController.Dragged += SwipeController_Dragged;
+            base.OnEnable();
+            
             Score.Boost += Score_Boost;
-            Barrier.Hit += Barrier_Hit;
         }
         
-        private void OnDisable()
+        private new void OnDisable()
         {
-            SwipeController.Dragged -= SwipeController_Dragged;
+            base.OnDisable();
+            
             Score.Boost -= Score_Boost;
-            Barrier.Hit -= Barrier_Hit;
         }
 
         private void Update()
@@ -45,10 +35,20 @@ namespace Project.Dev.Scripts
                 Drove(transform.position);
             }
         }
-
-        private void SwipeController_Dragged(Vector3 dragPositionVector3)
+        
+        public override void GetDamage()
         {
-            _nextPosition.x = _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
+            base.GetDamage();
+        
+            if (_health <= 0)
+            {
+                return;   
+            }
+
+            PlaySmoke();
+            Brake();
+            
+            StartCoroutine(Immortal.MakeImmortal(this, _timeOfImmortality));
         }
 
         private void Score_Boost(float boost)
@@ -58,19 +58,10 @@ namespace Project.Dev.Scripts
                 _startSpeed += _boost;
             }
         }
-        
-        private void Barrier_Hit(Vector3 position)
+
+        private void PlaySmoke()
         {
-            GetDamage();
-            
-            if (_health <= 0)
-            {
-              return;   
-            }
-            
-            Brake();
-            
-            StartCoroutine(_immortal.MakeImmortal(_renderer));
+            ParticleManager.Instance.Play(ParticleType.CarSmoke);
         }
     }
 }

@@ -9,9 +9,10 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         private float _distanceToStop = 0;
-
         [SerializeField]
         private float _timeSilding = 0;
+        
+        private Vector3 _finalPosition = Vector3.zero;
         
         private float deltaPosAxisZ = 0;
 
@@ -34,20 +35,16 @@ namespace Project.Dev.Scripts
 
         private void Update()
         {
-            if (!_isCarDied)
-            {
-                transform.position = new Vector3(0, transform.position.y, deltaPosAxisZ + _car.transform.position.z);
-            }
+            transform.position = !_isCarDied ? new Vector3(0, transform.position.y, deltaPosAxisZ + _car.transform.position.z)
+                : Vector3.Lerp(transform.position, _finalPosition, _timeSilding * Time.deltaTime);
         }
         
         private void Car_Died(Vector3 position)
         {
             _isCarDied = true;
             
-            var finalPosition = new Vector3(transform.position.x, transform.position.y,
-                deltaPosAxisZ + _car.transform.position.z + _distanceToStop);
-
-            transform.position = Vector3.Lerp(transform.position, finalPosition, _timeSilding * Time.deltaTime);
+            _finalPosition = new Vector3(transform.position.x, transform.position.y,
+                position.z + _distanceToStop);
         }
     }
 }

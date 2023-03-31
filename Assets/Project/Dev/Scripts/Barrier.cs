@@ -1,16 +1,13 @@
-using System;
-using Project.Dev.Scripts;
+using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    public static event Action<Vector3> Hit = delegate {  };
-    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Car car))
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            Hit(car.transform.position);
+            damageable.GetDamage();
         }
     }
 }

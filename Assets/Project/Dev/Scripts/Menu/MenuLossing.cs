@@ -34,11 +34,7 @@ public class MenuLossing : MonoBehaviour
         _garage.onClick.AddListener(Garage);
         _restart.onClick.AddListener(Restart);
         
-        _score.gameObject.SetActive(false);
-        _menu.gameObject.SetActive(false);
-        _garage.gameObject.SetActive(false);
-        _restart.gameObject.SetActive(false);
-        _frame.gameObject.SetActive(false);
+        OnObject(false);
     }
 
     private void OnEnable()
@@ -53,13 +49,19 @@ public class MenuLossing : MonoBehaviour
     
     private void Urus_Died(Vector3 position)
     {
-        _score.gameObject.SetActive(true);
-        _menu.gameObject.SetActive(true);
-        _garage.gameObject.SetActive(true);
-        _restart.gameObject.SetActive(true);
-        _frame.gameObject.SetActive(true);
+        OnObject(true);
         
         _score.text = string.Format(ScoreText, (int)position.z);
+    }
+    
+    private async void UploadSceneAsync(string sceneName)
+    {
+        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!loadSceneAsync.isDone)
+        {
+            await Task.Yield();
+        }
     }
     
     private void Menu()
@@ -76,14 +78,13 @@ public class MenuLossing : MonoBehaviour
     {
         UploadSceneAsync(Game);
     }
-    
-    private async void UploadSceneAsync(string sceneName)
-    {
-        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!loadSceneAsync.isDone)
-        {
-            await Task.Yield();
-        }
+    private void OnObject(bool isActive)
+    {
+        _score.gameObject.SetActive(isActive);
+        _menu.gameObject.SetActive(isActive);
+        _garage.gameObject.SetActive(isActive);
+        _restart.gameObject.SetActive(isActive);
+        _frame.gameObject.SetActive(isActive);
     }
 }

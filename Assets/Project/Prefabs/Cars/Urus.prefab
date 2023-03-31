@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 8288766456121087326}
   - component: {fileID: -8110155627684819}
   - component: {fileID: 5257701512037704815}
-  - component: {fileID: 2148020511754954273}
   - component: {fileID: 2152542876069850716}
   m_Layer: 6
   m_Name: Urus
@@ -181,21 +180,8 @@ MonoBehaviour:
   _speedReturnRotartion: 10
   _rotationAngel: 200
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  _immortal: {fileID: 2148020511754954273}
+  _timeOfImmortality: 0
   _spring: {fileID: 2152542876069850716}
---- !u!114 &2148020511754954273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576637866465785176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 429a5f08257d4d8ea76630555d91f45a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeOfImmortality: 1
 --- !u!114 &2152542876069850716
 MonoBehaviour:
   m_ObjectHideFlags: 0

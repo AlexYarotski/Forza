@@ -30,8 +30,6 @@ namespace Project.Dev.Scripts
         private void Awake()
         {
             _settingButton.onClick.AddListener(Setting);
-            
-            _setting.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -78,9 +76,9 @@ namespace Project.Dev.Scripts
 
         private void Setting()
         {
-            Time.timeScale = 0;
-
             _setting.gameObject.SetActive(true);
+            
+            Time.timeScale = 0;
         }
     }
 }

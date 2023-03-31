@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
@@ -11,10 +12,8 @@ public class MainMenu : MonoBehaviour
     
     [SerializeField]
     private Button _garageButton = null;
-    
     [SerializeField]
     private Button _playButton = null;
-    
     [SerializeField]
     private Button _settingButton = null;
 

@@ -24,7 +24,7 @@ namespace Project.Dev.Scripts
 
         private void FixedUpdate()
         {
-            if (CanIncreaseSpeed())
+            if (_speedBoostScore <= _score)
             {
                 SpeedUp();
             }
@@ -34,15 +34,11 @@ namespace Project.Dev.Scripts
         {
             _score = drove.z;
         }
-
-        private bool CanIncreaseSpeed()
-        {
-            return _speedBoostScore <= _score;
-        }
-
+        
         private void SpeedUp()
         {
             _speedBoostScore *= 2;
+            
             Boost(_score);
         }
     }

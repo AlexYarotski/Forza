@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Project.Dev.Scripts;
 using UnityEngine;
 
@@ -5,35 +6,52 @@ public class ParticleManager : MonoBehaviour
 {
     private readonly Vector3 DistanceToHood = new Vector3(0, 0.7f, 0.7f);
 
+    private readonly Dictionary<ParticleType, ParticleSystem> ParticleDictionary = new Dictionary<ParticleType, ParticleSystem>();
+
     [SerializeField]
     private ParticleSystem _onCarHitParticlePrefab = null;
-
-    private ParticleSystem _onCarHit = null;
+    
+    public static ParticleManager Instance
+    {
+        get; 
+        private set;
+    }
 
     private void Awake()
     {
-        _onCarHit = Instantiate(_onCarHitParticlePrefab, transform);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance == this)
+        {
+            Destroy(gameObject);
+        }
+        
+        _onCarHitParticlePrefab = Instantiate(_onCarHitParticlePrefab, transform);
+        
+        ParticleDictionary.Add(ParticleType.CarSmoke, _onCarHitParticlePrefab);
     }
-    
+
     private void OnEnable()
     {
-        Barrier.Hit += Barrier_Hit;
         Urus.Drove += Urus_Drove;
     }
 
     private void OnDisable()
     {
-        Barrier.Hit -= Barrier_Hit;
         Urus.Drove -= Urus_Drove;
     }
 
-    private void Barrier_Hit(Vector3 obj)
+    public void Play(ParticleType type)
     {
-        _onCarHit.Play();
+        var particle = ParticleDictionary[type];
+        
+        particle.Play();
     }
-
+    
     private void Urus_Drove(Vector3 position)
     {
-        _onCarHit.transform.position = position + DistanceToHood;
+        _onCarHitParticlePrefab.transform.position = position + DistanceToHood;
     }
 }

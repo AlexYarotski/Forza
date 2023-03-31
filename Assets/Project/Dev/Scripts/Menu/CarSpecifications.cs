@@ -21,6 +21,8 @@ public class CarSpecifications : MonoBehaviour
     private TextMeshProUGUI _startSpeed = null;
     [SerializeField]
     private TextMeshProUGUI _maxSpeed = null;
+    [SerializeField]
+    private float _speedDivider = 0;
     
     [Header("Slider")]
     [SerializeField]
@@ -37,7 +39,7 @@ public class CarSpecifications : MonoBehaviour
     private void Awake()
     {
         _game.onClick.AddListener(StartGame);
-        _mainMenu.onClick.AddListener(Mainmenu);
+        _mainMenu.onClick.AddListener(Menu);
 
         SetSliderValue();
         
@@ -46,7 +48,7 @@ public class CarSpecifications : MonoBehaviour
         _maxSpeed.text = Convert.ToString(_car.MaxSpeed);
     }
 
-    private void Mainmenu()
+    private void Menu()
     {
        UploadSceneAsync(MainMenu);
     }
@@ -58,8 +60,8 @@ public class CarSpecifications : MonoBehaviour
 
     private void SetSliderValue()
     {
-        var startSpeed = _car.Speed / 100;
-        var maxSpeed = _car.MaxSpeed / 100;
+        var startSpeed = _car.Speed / _speedDivider;
+        var maxSpeed = _car.MaxSpeed / _speedDivider;
         
         _sliderStartSpeed.value = startSpeed;
         _sliderMaxSpeed.value = maxSpeed;

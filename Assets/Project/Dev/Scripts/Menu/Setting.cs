@@ -11,7 +11,6 @@ namespace Project.Dev.Scripts.Menu
         private void Awake()
         {
             gameObject.SetActive(false);
-            
             _cancel.onClick.AddListener(Cancel);
         }
 

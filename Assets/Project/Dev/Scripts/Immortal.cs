@@ -3,15 +3,13 @@ using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
-    public class Immortal : MonoBehaviour
+    public class Immortal 
     {
-        [SerializeField]
-        protected float _timeOfImmortality = 0;
-
-        public IEnumerator MakeImmortal(Renderer[] renderers)
+        public static IEnumerator MakeImmortal(Car car, float timeOfImmortality)
         {
-            var timeImmortality = new WaitForSeconds(_timeOfImmortality);
-            var boxCollider =  GetComponent<BoxCollider>();
+            var timeImmortality = new WaitForSeconds(timeOfImmortality);
+            var boxCollider =  car.GetComponent<BoxCollider>();
+            var renderers = car.GetComponentsInChildren<Renderer>();
             var startColor = new Color[renderers.Length];
             
             boxCollider.enabled = false;

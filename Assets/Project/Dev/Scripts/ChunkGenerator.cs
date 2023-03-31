@@ -77,17 +77,8 @@ namespace Project.Dev.Scripts
         {
             PooledType[] pooledTypes = {PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
                 PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5, PooledType.Chunk6};
-            
-            var randomType = Random.Range(0, pooledTypes.Length);
 
-            while (_pooledType == pooledTypes[randomType])
-            {
-                randomType = Random.Range(0, pooledTypes.Length);
-            }
-
-            _pooledType = pooledTypes[randomType];
-            
-            var createChunk = _poolManager.GetObject<Chunk>(pooledTypes[randomType], Vector3.zero);
+            var createChunk = _poolManager.GetObject<Chunk>(RandomTypeChunk(pooledTypes), Vector3.zero);
 
             createChunk.transform.position = SetChunkPosition(createChunk);
             
@@ -101,6 +92,20 @@ namespace Project.Dev.Scripts
             ChunkList.RemoveAt(0);
 
             _firstChunk = ChunkList[0];
+        }
+
+        private PooledType RandomTypeChunk(PooledType[] pooledTypes)
+        {
+            var randomType = Random.Range(0, pooledTypes.Length);
+
+            while (_pooledType == pooledTypes[randomType])
+            {
+                randomType = Random.Range(0, pooledTypes.Length);
+            }
+
+            _pooledType = pooledTypes[randomType];
+
+            return pooledTypes[randomType];
         }
     }
 }
