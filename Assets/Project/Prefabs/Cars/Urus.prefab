@@ -180,8 +180,8 @@ MonoBehaviour:
   _speedReturnRotartion: 10
   _rotationAngel: 200
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  _timeOfImmortality: 0
   _spring: {fileID: 2152542876069850716}
+  _timeOfImmortality: 1
 --- !u!114 &2152542876069850716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f58138200ef3ba4ab36c92d289fa189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _angularFrequency: 0
-  _dampingRatio: 0
+  _angularFrequency: 0.5
+  _dampingRatio: 0.5
 --- !u!1 &5291569891212827530
 GameObject:
   m_ObjectHideFlags: 0

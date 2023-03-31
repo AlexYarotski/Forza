@@ -10,14 +10,14 @@ namespace Project.Dev.Scripts
         [SerializeField]
         protected float _timeOfImmortality = 0;
 
-        private new void OnEnable()
+        protected override void OnEnable()
         {
             base.OnEnable();
             
             Score.Boost += Score_Boost;
         }
         
-        private new void OnDisable()
+        protected override void OnDisable()
         {
             base.OnDisable();
             

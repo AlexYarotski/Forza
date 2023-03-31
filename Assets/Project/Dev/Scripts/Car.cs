@@ -52,12 +52,12 @@ namespace Project.Dev.Scripts
             _dragPosition = transform.position;
         }
 
-        protected void OnEnable()
+        protected virtual void OnEnable()
         {
             SwipeController.Dragged +=  SwipeController_Dragged;
         }
 
-        protected void OnDisable()
+        protected virtual void OnDisable()
         {
             SwipeController.Dragged += SwipeController_Dragged;
         }
@@ -65,11 +65,18 @@ namespace Project.Dev.Scripts
         public virtual void GetDamage()
         {
             _health--;
+            
+            Vibration.Play();
 
             if (_health <= 0)
             {
                 OnDie();
             }
+        }
+        
+        public void OnDie()
+        {
+            Died(transform.position);
         }
         
         protected void MoveForward()
@@ -97,7 +104,7 @@ namespace Project.Dev.Scripts
                 transform.position = position;
 
                 SetStartRotation();
-                
+
                 SetStartSpeed();
             }
             else
@@ -154,11 +161,8 @@ namespace Project.Dev.Scripts
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity,
                 _speedReturnRotartion * Time.deltaTime);
-        }
-
-        private void OnDie()
-        {
-            Died(transform.position);
+            
+            _spring.Position();
         }
     }
 }

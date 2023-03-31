@@ -1365,10 +1365,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
-      propertyPath: _timeOfImmortality
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5291569891212827530, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: m_IsActive
       value: 1
