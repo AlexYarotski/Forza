@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    private readonly Vector3 DistanceToHood = new Vector3(0, 0.7f, 0.7f);
+    private readonly Vector3 DistanceToHood = new Vector3(0, 0.7f, 1f);
 
     private readonly Dictionary<ParticleType, ParticleSystem> ParticleDictionary = new Dictionary<ParticleType, ParticleSystem>();
 

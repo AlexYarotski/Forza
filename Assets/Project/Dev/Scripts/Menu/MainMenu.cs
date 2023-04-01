@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Project.Dev.Scripts.Menu;
@@ -27,6 +28,14 @@ public class MainMenu : MonoBehaviour
         _settingButton.onClick.AddListener(Setting);
     }
 
+    private void FixedUpdate()
+    {
+        if (!_setting.gameObject.activeSelf)
+        {
+            SetComponentsActive(true);
+        }
+    }
+
     private void PlayGame()
     {
         UploadSceneAsync(Game);
@@ -40,6 +49,8 @@ public class MainMenu : MonoBehaviour
     private void Setting()
     {
         _setting.gameObject.SetActive(true);
+
+        SetComponentsActive(false);
     }
     
     private async void UploadSceneAsync(string sceneName)
@@ -50,5 +61,12 @@ public class MainMenu : MonoBehaviour
         {
             await Task.Yield();
         }
+    }
+
+    private void SetComponentsActive(bool isActive)
+    {
+        _playButton.gameObject.SetActive(isActive);
+        _garageButton.gameObject.SetActive(isActive);
+        _settingButton.gameObject.SetActive(isActive);
     }
 }

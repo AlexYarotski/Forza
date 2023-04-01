@@ -35,7 +35,7 @@ namespace Project.Dev.Scripts
 
         private void Update()
         {
-            transform.position = !_isCarDied ? new Vector3(0, transform.position.y, deltaPosAxisZ + _car.transform.position.z)
+            transform.position = !_isCarDied ? new Vector3(transform.position.x, transform.position.y, deltaPosAxisZ + _car.transform.position.z)
                 : Vector3.Lerp(transform.position, _finalPosition, _timeSilding * Time.deltaTime);
         }
         

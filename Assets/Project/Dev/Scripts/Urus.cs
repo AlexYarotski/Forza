@@ -29,13 +29,13 @@ namespace Project.Dev.Scripts
             if (_health > 0)
             {
                 MoveForward();
-            
+
                 SetTurn();
 
                 Drove(transform.position);
             }
         }
-        
+
         public override void GetDamage()
         {
             base.GetDamage();

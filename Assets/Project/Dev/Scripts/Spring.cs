@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Project.Dev.Scripts;
+using TMPro;
 using UnityEngine;
 
 public class Spring : MonoBehaviour
@@ -13,6 +14,8 @@ public class Spring : MonoBehaviour
 
     private float _startDamping = 0;
 
+    private bool _isCoroutineEnd = false;
+    
     private Vector3 _position = Vector3.zero;
     
     private void Awake()
@@ -30,36 +33,40 @@ public class Spring : MonoBehaviour
         Urus.Drove -= Urus_Drove;
     }
 
-    
+    private void FixedUpdate()
+    {
+        if (_isCoroutineEnd)
+        {
+            StopCoroutine(SpringPosition());
+        }
+    }
+
     private void Urus_Drove(Vector3 position)
     {
         _position = position;
     }
 
-    
-    public void Position()
+    public IEnumerator SpringPosition()
     {
-        StartCoroutine(SpringPosition());
+        _isCoroutineEnd = false;
         
-         _dampingRatio = _startDamping;
-    }
-    
-    private IEnumerator SpringPosition()
-    {
         var delay = new WaitForSeconds(_angularFrequency);
 
         while (_dampingRatio >= 0)
         {
-            var rightPosition = new Vector3(_position.x + _dampingRatio, _position.y, _position.z);
-            var leftPosition = new Vector3(_position.x - _dampingRatio, _position.y, _position.z);
-        
-            transform.position = rightPosition;
+            var rightPosition = new Vector3(transform.position.x + _dampingRatio, transform.position.y, _position.z);
+            var leftPosition = new Vector3(transform.position.x - _dampingRatio, transform.position.y, _position.z);
+
+            transform.position = Vector3.Lerp(transform.position, rightPosition, 0.5f);
 
             yield return delay;
             
-            transform.position = leftPosition;
+            transform.position = Vector3.Lerp(transform.position, leftPosition, 0.5f);
         
             _dampingRatio -= 0.1f;
         }
+                
+        _dampingRatio = _startDamping;
+        _isCoroutineEnd = true;
     }
 }

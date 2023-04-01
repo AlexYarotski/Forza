@@ -34,7 +34,7 @@ public class MenuLossing : MonoBehaviour
         _garage.onClick.AddListener(Garage);
         _restart.onClick.AddListener(Restart);
         
-        OnObject(false);
+        SetComponentsActive(false);
     }
 
     private void OnEnable()
@@ -49,7 +49,7 @@ public class MenuLossing : MonoBehaviour
     
     private void Urus_Died(Vector3 position)
     {
-        OnObject(true);
+        SetComponentsActive(true);
         
         _score.text = string.Format(ScoreText, (int)position.z);
     }
@@ -79,7 +79,7 @@ public class MenuLossing : MonoBehaviour
         UploadSceneAsync(Game);
     }
 
-    private void OnObject(bool isActive)
+    private void SetComponentsActive(bool isActive)
     {
         _score.gameObject.SetActive(isActive);
         _menu.gameObject.SetActive(isActive);
