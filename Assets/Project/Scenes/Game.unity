@@ -1369,6 +1369,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+      propertyPath: _speedSpring
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+      propertyPath: _dampingRatio
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+      propertyPath: _angularFrequency
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5291569891212827530, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1436,6 +1448,7 @@ PrefabInstance:
     - {fileID: 4712194780713204655, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
     - {fileID: 11304128807730517, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
     - {fileID: 2148020511754954273, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
+    - {fileID: 2152542876069850716, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
 --- !u!1001 &1633112147823182210
 PrefabInstance:

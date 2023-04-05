@@ -3,13 +3,23 @@ using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
-    public class Immortal 
+    public class Immortal
     {
-        public static IEnumerator MakeImmortal(Car car, float timeOfImmortality)
+        private Car Car
+        {
+            get;
+        }
+
+        public Immortal(Car car)
+        {
+            Car = car;
+        }
+        
+        public IEnumerator MakeImmortal(float timeOfImmortality)
         {
             var timeImmortality = new WaitForSeconds(timeOfImmortality);
-            var boxCollider =  car.GetComponent<BoxCollider>();
-            var renderers = car.GetComponentsInChildren<Renderer>();
+            var boxCollider =  Car.GetComponent<BoxCollider>();
+            var renderers = Car.GetComponentsInChildren<Renderer>();
             var startColor = new Color[renderers.Length];
             
             boxCollider.enabled = false;

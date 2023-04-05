@@ -1,72 +1,98 @@
-using System;
-using System.Collections;
-using Project.Dev.Scripts;
-using TMPro;
 using UnityEngine;
 
-public class Spring : MonoBehaviour
+public class Spring
 {
-    [SerializeField]
-    private float _angularFrequency = 0;
-
-    [SerializeField]
-    private float _dampingRatio = 0;
-
-    private float _startDamping = 0;
-
-    private bool _isCoroutineEnd = false;
+    // public class tDampedSpringMotionParams
+    // {
+    //     // newPos = posPosCoef * oldPos + posVelCoef * oldVel
+    //     public float m_posPosCoef, m_posVelCoef;
+    //     
+    //     // newVel = velPosCoef * oldPos + velVelCoef * oldVel
+    //     public float m_velPosCoef, m_velVelCoef;
+    // }
     
-    private Vector3 _position = Vector3.zero;
-    
-    private void Awake()
+    public static void CalcDampedSpringMotionParams(ref Vector3 position, float velocity, float angularFrequency, float dampingRatio)
     {
-        _startDamping = _dampingRatio;
-    }
+        const float epsilon = 0.0001f;
+                                                            
+        if (dampingRatio < 0.0f) dampingRatio = 0.0f;   
+        if (angularFrequency < 0.0f) angularFrequency = 0.0f;
 
-    private void OnEnable()
-    {
-        Urus.Drove += Urus_Drove;
-    }
-
-    private void OnDisable()
-    {
-        Urus.Drove -= Urus_Drove;
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isCoroutineEnd)
+        if (angularFrequency < epsilon)
         {
-            StopCoroutine(SpringPosition());
+            position.x = 1.0f; velocity = 0.0f;
+            return;
         }
-    }
 
-    private void Urus_Drove(Vector3 position)
-    {
-        _position = position;
-    }
-
-    public IEnumerator SpringPosition()
-    {
-        _isCoroutineEnd = false;
-        
-        var delay = new WaitForSeconds(_angularFrequency);
-
-        while (_dampingRatio >= 0)
+        if (dampingRatio > 1.0f + epsilon)
         {
-            var rightPosition = new Vector3(transform.position.x + _dampingRatio, transform.position.y, _position.z);
-            var leftPosition = new Vector3(transform.position.x - _dampingRatio, transform.position.y, _position.z);
+            var za = -angularFrequency * dampingRatio;
+            var zb = angularFrequency * Mathf.Sqrt(dampingRatio * dampingRatio - 1.0f);
+            var z1 = za - zb;
+            var z2 = za + zb;
 
-            transform.position = Vector3.Lerp(transform.position, rightPosition, 0.5f);
+            var e1 = Mathf.Exp(z1 * Time.deltaTime);
+            var e2 = Mathf.Exp(z2 * Time.deltaTime);
 
-            yield return delay;
-            
-            transform.position = Vector3.Lerp(transform.position, leftPosition, 0.5f);
-        
-            _dampingRatio -= 0.1f;
-        }
+            var invTwoZb = 1.0f / (2.0f * zb);
                 
-        _dampingRatio = _startDamping;
-        _isCoroutineEnd = true;
+            var e1_Over_TwoZb = e1 * invTwoZb;
+            var e2_Over_TwoZb = e2 * invTwoZb;
+
+            var z1e1_Over_TwoZb = z1 * e1_Over_TwoZb;
+            var z2e2_Over_TwoZb = z2 * e2_Over_TwoZb;
+
+            position.x =  e1_Over_TwoZb * z2 - z2e2_Over_TwoZb + e2;
+            velocity = -e1_Over_TwoZb + e2_Over_TwoZb;
+
+            // pOutParams.m_velPosCoef = (z1e1_Over_TwoZb - z2e2_Over_TwoZb + e2) * z2;
+            // pOutParams.m_velVelCoef = -z1e1_Over_TwoZb + z2e2_Over_TwoZb;
+        }
+        else if (dampingRatio < 1.0f - epsilon)
+        {
+            var omegaZeta = angularFrequency * dampingRatio;
+            var alpha = angularFrequency * Mathf.Sqrt(1.0f - dampingRatio * dampingRatio);
+
+            var expTerm = Mathf.Exp(-omegaZeta * Time.deltaTime);
+            var cosTerm = Mathf.Cos(alpha * Time.deltaTime);
+            var sinTerm = Mathf.Sin(alpha * Time.deltaTime);
+                
+            var invAlpha = 1.0f / alpha;
+
+            var expSin = expTerm * sinTerm;
+            var expCos = expTerm * cosTerm;
+            var expOmegaZetaSin_Over_Alpha = expTerm*omegaZeta * sinTerm * invAlpha;
+
+            position.x = expCos + expOmegaZetaSin_Over_Alpha;
+            velocity = expSin * invAlpha;
+            
+            // pOutParams.m_velPosCoef = -expSin * alpha - omegaZeta*expOmegaZetaSin_Over_Alpha;
+            // pOutParams.m_velVelCoef =  expCos - expOmegaZetaSin_Over_Alpha;
+        }
+        else
+        {
+            var expTerm = Mathf.Exp(-angularFrequency * Time.deltaTime);
+            var timeExp = Time.deltaTime * expTerm;
+            var timeExpFreq = timeExp * angularFrequency;
+
+            position.x = timeExpFreq + expTerm;
+            velocity = timeExp;
+
+            // pOutParams.m_velPosCoef = -angularFrequency * timeExpFreq;
+            // pOutParams.m_velVelCoef = -timeExpFreq + expTerm;
+        }
     }
+    
+    // public static void UpdateDampedSpringMotion
+    //     (ref float pPos,                                // position value to update
+    //     ref float pVel,                                 // velocity value to update
+    //     float equilibriumPos,                           // position to approach
+    //     in tDampedSpringMotionParams springParams)      // motion parameters to use
+    // {		
+    //     var oldPos = pPos - equilibriumPos;
+    //     var oldVel = pVel;
+    //
+    //     pPos = oldPos * springParams.m_posPosCoef + oldVel * springParams.m_posVelCoef + equilibriumPos;
+    //     // pVel = oldPos * springParams.m_velPosCoef + oldVel*springParams.m_velVelCoef;
+    // }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using Project.Dev.Scripts.Interface;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
@@ -8,6 +7,7 @@ namespace Project.Dev.Scripts
     public abstract class Car : MonoBehaviour, IDamageable
     {
         public static event Action<Vector3> Died = delegate { };
+        public static event Action<Vector3> Drove = delegate { };
 
         [Header("Health")]
         [SerializeField]
@@ -33,18 +33,20 @@ namespace Project.Dev.Scripts
         [SerializeField]
         protected float _rotationAngel = 0;
 
+        [Header("Spring")]
+        [SerializeField]
+        protected float _angularFrequency = 0;
+        [SerializeField]
+        protected float _dampingRatio = 0;
+
         [Header("Other")]
         [SerializeField]
         protected RoadBounds _roadBounds = null;
-        [SerializeField]
-        protected Spring _spring = null;
 
         protected float _startSpeed = 0;
 
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
-
-        private bool _isTurn = false;
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
@@ -63,6 +65,18 @@ namespace Project.Dev.Scripts
         protected virtual void OnDisable()
         {
             SwipeController.Dragged += SwipeController_Dragged;
+        }
+
+        protected void Update()
+        {
+            if (_health > 0)
+            {
+                MoveForward();
+
+                SetTurn();
+
+                Drove(transform.position);
+            }
         }
 
         public virtual void GetDamage()
@@ -89,8 +103,6 @@ namespace Project.Dev.Scripts
 
             position = new Vector3(position.x, 0, posAxisZ);
             transform.position = position;
-
-            _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
         }
 
         protected void SetTurn()
@@ -100,19 +112,10 @@ namespace Project.Dev.Scripts
                 SetRotation();
 
                 var position = transform.position;
-                var nextPositionX = new Vector3(_nextPosition.x, position.y, position.z);
+
+                _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
                 
-                if (_isTurn)
-                {
-                    var delta = position.x - nextPositionX.x;
-                    
-                    if (delta.AlmostEquals(delta, 0))
-                    {
-                        StartCoroutine(_spring.SpringPosition());
-                    }
-                }
-                
-                position = nextPositionX;
+                position = _nextPosition;
                 transform.position = position;
 
                 SetStartRotation();
@@ -126,15 +129,14 @@ namespace Project.Dev.Scripts
                 _nextPosition = _roadBounds.ClampPosition(_nextPosition);
 
                 var position = transform.position;
-                var nextPositionX = new Vector3(_nextPosition.x, position.y, position.z);
+                 _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
 
-                position = nextPositionX;
+                position = _nextPosition;
                 transform.position = position;
 
                 Brake();
             }
-
-            _isTurn = false;
+            
             _dragPosition = transform.position;
         }
 
@@ -146,7 +148,9 @@ namespace Project.Dev.Scripts
         private void SwipeController_Dragged(Vector3 dragPositionVector3)
         {
             _nextPosition.x = _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
-            _isTurn = true;
+            
+            Spring.CalcDampedSpringMotionParams(ref _nextPosition, _speedTurn,
+                _angularFrequency, _dampingRatio);
         }
 
         private void SetStartSpeed()

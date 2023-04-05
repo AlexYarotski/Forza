@@ -1,12 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
     public class Urus : Car
     {
-        public static event Action<Vector3> Drove = delegate { };
-
         [SerializeField]
         protected float _timeOfImmortality = 0;
 
@@ -26,14 +23,7 @@ namespace Project.Dev.Scripts
 
         private void Update()
         {
-            if (_health > 0)
-            {
-                MoveForward();
-
-                SetTurn();
-
-                Drove(transform.position);
-            }
+            base.Update();
         }
 
         public override void GetDamage()
@@ -47,8 +37,9 @@ namespace Project.Dev.Scripts
 
             PlaySmoke();
             Brake();
-            
-            StartCoroutine(Immortal.MakeImmortal(this, _timeOfImmortality));
+
+            var immortal = new Immortal(this);
+            StartCoroutine(immortal.MakeImmortal(_timeOfImmortality));
         }
 
         private void Score_Boost(float boost)
