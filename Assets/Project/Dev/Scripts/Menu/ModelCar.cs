@@ -4,7 +4,6 @@ public class ModelCar : MonoBehaviour
 {
     [SerializeField]
     private float _startSpeedRotation = 0;
-    
     [SerializeField]
     private float _speedRotation = 0;
 

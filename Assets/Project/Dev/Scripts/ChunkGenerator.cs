@@ -76,7 +76,8 @@ namespace Project.Dev.Scripts
         private void SpawnChunk()
         {
             PooledType[] pooledTypes = {PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
-                PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5, PooledType.Chunk6};
+                PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5, PooledType.Chunk6, PooledType.Chunk7, 
+                PooledType.Chunk8, PooledType.Chunk9,PooledType.Chunk10};
 
             var createChunk = _poolManager.GetObject<Chunk>(RandomTypeChunk(pooledTypes), Vector3.zero);
 

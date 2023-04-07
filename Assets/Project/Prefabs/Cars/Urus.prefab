@@ -178,6 +178,8 @@ MonoBehaviour:
   _speedRotation: 10
   _speedReturnRotartion: 10
   _rotationAngel: 200
+  _angularFrequency: 0.3
+  _dampingRatio: 10
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
   _timeOfImmortality: 1
 --- !u!1 &5291569891212827530
@@ -358,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -423,6 +425,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_Name
       value: UrusModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4723848031168869204, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
       propertyPath: m_Name

@@ -47,6 +47,8 @@ namespace Project.Dev.Scripts
 
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
+        
+        private Spring.DampedSpringMotionParams _springMotionParams = new Spring.DampedSpringMotionParams();
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
@@ -55,6 +57,8 @@ namespace Project.Dev.Scripts
         {
             _startSpeed = _speed;
             _dragPosition = transform.position;
+            
+            Spring.CalcDampedSpringMotionParams(ref _springMotionParams, _angularFrequency, _dampingRatio);
         }
 
         protected virtual void OnEnable()
@@ -96,7 +100,7 @@ namespace Project.Dev.Scripts
             Died(transform.position);
         }
 
-        protected void MoveForward()
+        private void MoveForward()
         {
             var position = transform.position;
             var posAxisZ = position.z + _speed * Time.deltaTime;
@@ -105,21 +109,23 @@ namespace Project.Dev.Scripts
             transform.position = position;
         }
 
-        protected void SetTurn()
+        private void SetTurn()
         {
             if (_roadBounds.IsInBounds(_nextPosition))
             {
                 SetRotation();
 
                 var position = transform.position;
-
+                
                 _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
+
+                //Spring.UpdateDampedSpringMotion(ref position.x,  ref _angularFrequency, _nextPosition.x, _springMotionParams);
                 
                 position = _nextPosition;
+                
                 transform.position = position;
 
                 SetStartRotation();
-
                 SetStartSpeed();
             }
             else
@@ -148,9 +154,6 @@ namespace Project.Dev.Scripts
         private void SwipeController_Dragged(Vector3 dragPositionVector3)
         {
             _nextPosition.x = _dragPosition.x + dragPositionVector3.x * (_speedTurn * Time.deltaTime);
-            
-            Spring.CalcDampedSpringMotionParams(ref _nextPosition, _speedTurn,
-                _angularFrequency, _dampingRatio);
         }
 
         private void SetStartSpeed()

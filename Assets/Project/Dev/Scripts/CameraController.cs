@@ -10,7 +10,8 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private float _distanceToStop = 0;
         [SerializeField]
-        private float _timeSilding = 0;
+        //NOTE: INCORRECT NAMING 
+        private float _speedSilding = 0;
         
         private Vector3 _finalPosition = Vector3.zero;
         
@@ -36,7 +37,7 @@ namespace Project.Dev.Scripts
         private void Update()
         {
             transform.position = !_isCarDied ? new Vector3(transform.position.x, transform.position.y, deltaPosAxisZ + _car.transform.position.z)
-                : Vector3.Lerp(transform.position, _finalPosition, _timeSilding * Time.deltaTime);
+                : Vector3.Lerp(transform.position, _finalPosition, _car.Speed /_speedSilding * Time.deltaTime);
         }
         
         private void Car_Died(Vector3 position)

@@ -2,25 +2,24 @@ using UnityEngine;
 
 public class Spring
 {
-    // public class tDampedSpringMotionParams
-    // {
-    //     // newPos = posPosCoef * oldPos + posVelCoef * oldVel
-    //     public float m_posPosCoef, m_posVelCoef;
-    //     
-    //     // newVel = velPosCoef * oldPos + velVelCoef * oldVel
-    //     public float m_velPosCoef, m_velVelCoef;
-    // }
+    public class DampedSpringMotionParams
+    {
+        public float PosPosCoef, PosVelCoef;
+        
+        public float VelPosCoef, VelVelCoef;
+    }
     
-    public static void CalcDampedSpringMotionParams(ref Vector3 position, float velocity, float angularFrequency, float dampingRatio)
+    public static void CalcDampedSpringMotionParams(ref DampedSpringMotionParams outParams, float angularFrequency, float dampingRatio)
     {
         const float epsilon = 0.0001f;
                                                             
-        if (dampingRatio < 0.0f) dampingRatio = 0.0f;   
+        if (dampingRatio < 0.0f) dampingRatio = 0.0f;
         if (angularFrequency < 0.0f) angularFrequency = 0.0f;
 
-        if (angularFrequency < epsilon)
+        if ( angularFrequency < epsilon )
         {
-            position.x = 1.0f; velocity = 0.0f;
+            outParams.PosPosCoef = 1.0f; outParams.PosVelCoef = 0.0f;
+            outParams.VelPosCoef = 0.0f; outParams.VelVelCoef = 1.0f;
             return;
         }
 
@@ -36,17 +35,17 @@ public class Spring
 
             var invTwoZb = 1.0f / (2.0f * zb);
                 
-            var e1_Over_TwoZb = e1 * invTwoZb;
-            var e2_Over_TwoZb = e2 * invTwoZb;
+            var e1OverTwoZb = e1 * invTwoZb;
+            var e2OverTwoZb = e2 * invTwoZb;
 
-            var z1e1_Over_TwoZb = z1 * e1_Over_TwoZb;
-            var z2e2_Over_TwoZb = z2 * e2_Over_TwoZb;
+            var z1e1OverTwoZb = z1 * e1OverTwoZb;
+            var z2e2OverTwoZb = z2 * e2OverTwoZb;
 
-            position.x =  e1_Over_TwoZb * z2 - z2e2_Over_TwoZb + e2;
-            velocity = -e1_Over_TwoZb + e2_Over_TwoZb;
+            outParams.PosPosCoef =  e1OverTwoZb * z2 - z2e2OverTwoZb + e2;
+            outParams.PosVelCoef = -e1OverTwoZb + e2OverTwoZb;
 
-            // pOutParams.m_velPosCoef = (z1e1_Over_TwoZb - z2e2_Over_TwoZb + e2) * z2;
-            // pOutParams.m_velVelCoef = -z1e1_Over_TwoZb + z2e2_Over_TwoZb;
+            outParams.VelPosCoef = (z1e1OverTwoZb - z2e2OverTwoZb + e2) * z2;
+            outParams.VelVelCoef = -z1e1OverTwoZb + z2e2OverTwoZb;
         }
         else if (dampingRatio < 1.0f - epsilon)
         {
@@ -61,13 +60,13 @@ public class Spring
 
             var expSin = expTerm * sinTerm;
             var expCos = expTerm * cosTerm;
-            var expOmegaZetaSin_Over_Alpha = expTerm*omegaZeta * sinTerm * invAlpha;
+            var expOmegaZetaSinOverAlpha = expTerm*omegaZeta * sinTerm * invAlpha;
 
-            position.x = expCos + expOmegaZetaSin_Over_Alpha;
-            velocity = expSin * invAlpha;
+            outParams.PosPosCoef = expCos + expOmegaZetaSinOverAlpha;
+            outParams.PosVelCoef = expSin * invAlpha;
             
-            // pOutParams.m_velPosCoef = -expSin * alpha - omegaZeta*expOmegaZetaSin_Over_Alpha;
-            // pOutParams.m_velVelCoef =  expCos - expOmegaZetaSin_Over_Alpha;
+            outParams.VelPosCoef = -expSin * alpha - omegaZeta*expOmegaZetaSinOverAlpha;
+            outParams.VelVelCoef =  expCos - expOmegaZetaSinOverAlpha;
         }
         else
         {
@@ -75,24 +74,20 @@ public class Spring
             var timeExp = Time.deltaTime * expTerm;
             var timeExpFreq = timeExp * angularFrequency;
 
-            position.x = timeExpFreq + expTerm;
-            velocity = timeExp;
+            outParams.PosPosCoef = timeExpFreq + expTerm;
+            outParams.PosVelCoef = timeExp;
 
-            // pOutParams.m_velPosCoef = -angularFrequency * timeExpFreq;
-            // pOutParams.m_velVelCoef = -timeExpFreq + expTerm;
+            outParams.VelPosCoef = -angularFrequency * timeExpFreq;
+            outParams.VelVelCoef = -timeExpFreq + expTerm;
         }
     }
     
-    // public static void UpdateDampedSpringMotion
-    //     (ref float pPos,                                // position value to update
-    //     ref float pVel,                                 // velocity value to update
-    //     float equilibriumPos,                           // position to approach
-    //     in tDampedSpringMotionParams springParams)      // motion parameters to use
-    // {		
-    //     var oldPos = pPos - equilibriumPos;
-    //     var oldVel = pVel;
-    //
-    //     pPos = oldPos * springParams.m_posPosCoef + oldVel * springParams.m_posVelCoef + equilibriumPos;
-    //     // pVel = oldPos * springParams.m_velPosCoef + oldVel*springParams.m_velVelCoef;
-    // }
+    public static void UpdateDampedSpringMotion(ref float position, ref float velocity, float equilibriumPos, in DampedSpringMotionParams springParams)
+    {		
+        var oldPos = position - equilibriumPos;
+        var oldVel = velocity;
+    
+        position = oldPos * springParams.PosPosCoef + oldVel * springParams.PosVelCoef + equilibriumPos;
+        velocity = oldPos * springParams.VelPosCoef + oldVel * springParams.VelVelCoef;
+    }
 }

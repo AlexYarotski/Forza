@@ -325,6 +325,18 @@ MonoBehaviour:
   - _count: 4
     _pooledType: 6
     _pooledPrefab: {fileID: 8654123456342009375, guid: bc08bf983ba33a54f974056b54377c98, type: 3}
+  - _count: 2
+    _pooledType: 7
+    _pooledPrefab: {fileID: 2196631975716094213, guid: 067135dd1f33fe243a02f6375544b84e, type: 3}
+  - _count: 5
+    _pooledType: 8
+    _pooledPrefab: {fileID: 8473866806618811927, guid: 6be65060527ec1049a69751ed0129d85, type: 3}
+  - _count: 3
+    _pooledType: 9
+    _pooledPrefab: {fileID: 1883289841914709397, guid: 590c1ca0df548124aa18534c964ec3d0, type: 3}
+  - _count: 2
+    _pooledType: 10
+    _pooledPrefab: {fileID: 5507464805236036264, guid: 9ef513b2917d00549a8837ee9be5528c, type: 3}
 --- !u!114 &125012749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -804,7 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _car: {fileID: 125012749}
   _distanceToStop: 4
-  _timeSilding: 1.1
+  _speedSilding: 5
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,15 +1309,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 87158424}
     m_Modifications:
-    - target: {fileID: 20508044022297618, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.28
-      objectReference: {fileID: 0}
     - target: {fileID: 511126990873131152, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 793490438581186216, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
@@ -1372,14 +1376,6 @@ PrefabInstance:
     - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: _speedSpring
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
-      propertyPath: _dampingRatio
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
-      propertyPath: _angularFrequency
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5291569891212827530, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
       propertyPath: m_IsActive
