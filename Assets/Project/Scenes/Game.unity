@@ -816,7 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _car: {fileID: 125012749}
   _distanceToStop: 4
-  _speedSilding: 5
+  _speedSilding: 4
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0

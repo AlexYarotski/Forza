@@ -47,8 +47,6 @@ namespace Project.Dev.Scripts
 
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
-        
-        private Spring.DampedSpringMotionParams _springMotionParams = new Spring.DampedSpringMotionParams();
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
@@ -57,8 +55,6 @@ namespace Project.Dev.Scripts
         {
             _startSpeed = _speed;
             _dragPosition = transform.position;
-            
-            Spring.CalcDampedSpringMotionParams(ref _springMotionParams, _angularFrequency, _dampingRatio);
         }
 
         protected virtual void OnEnable()
@@ -76,10 +72,13 @@ namespace Project.Dev.Scripts
             if (_health > 0)
             {
                 MoveForward();
-
                 SetTurn();
 
                 Drove(transform.position);
+            }
+            else
+            {
+                OnDie();
             }
         }
 
@@ -88,11 +87,6 @@ namespace Project.Dev.Scripts
             _health--;
 
             Vibration.Play();
-
-            if (_health <= 0)
-            {
-                OnDie();
-            }
         }
 
         public void OnDie()
@@ -115,35 +109,22 @@ namespace Project.Dev.Scripts
             {
                 SetRotation();
 
-                var position = transform.position;
-                
-                _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
+                _nextPosition = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
 
-                //Spring.UpdateDampedSpringMotion(ref position.x,  ref _angularFrequency, _nextPosition.x, _springMotionParams);
-                
-                position = _nextPosition;
-                
-                transform.position = position;
-
-                SetStartRotation();
                 SetStartSpeed();
             }
             else
             {
-                SetStartRotation();
-
                 _nextPosition = _roadBounds.ClampPosition(_nextPosition);
+                _nextPosition = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
 
-                var position = transform.position;
-                 _nextPosition = new Vector3(_nextPosition.x, position.y, position.z);
-
-                position = _nextPosition;
-                transform.position = position;
-
-                Brake();
+                 Brake();
             }
             
+            transform.position = _nextPosition;
             _dragPosition = transform.position;
+            
+            SetStartRotation();
         }
 
         protected void Brake()
@@ -158,7 +139,7 @@ namespace Project.Dev.Scripts
 
         private void SetStartSpeed()
         {
-            if (_speed < _startSpeed && _health >= 0)
+            if (_speed < _startSpeed)
             {
                 _speed += _brake * Time.deltaTime;
             }
