@@ -1,14 +1,15 @@
 ﻿using System;
 using Project.Dev.Scripts.Interface;
+using Project.Dev.Scripts.Menu;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
-    public abstract class Car : MonoBehaviour, IDamageable
+    public abstract class Car : MonoBehaviour, IDamageable, IColorable
     {
         public static event Action<Vector3> Died = delegate { };
         public static event Action<Vector3> Drove = delegate { };
-
+        
         [Header("Health")]
         [SerializeField]
         protected int _health = 0;
@@ -33,53 +34,53 @@ namespace Project.Dev.Scripts
         [SerializeField]
         protected float _rotationAngel = 0;
 
-        [Header("Spring")]
+        [Header("Paint")]
         [SerializeField]
-        protected float _angularFrequency = 0;
+        private ColorSetting _config = null;
         [SerializeField]
-        protected float _dampingRatio = 0;
+        protected Renderer[] _painElements = null;
 
         [Header("Other")]
         [SerializeField]
         protected RoadBounds _roadBounds = null;
 
-        protected float _startSpeed = 0;
-
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
+        
+        private float _startSpeed = 0;
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
 
         private void Awake()
         {
+            var numberColor = PlayerPrefs.GetInt("color");
+            var color = (Colors)numberColor;
+            
+            SetColor(color);
+            
             _startSpeed = _speed;
             _dragPosition = transform.position;
         }
 
-        protected virtual void OnEnable()
+        protected void OnEnable()
         {
             SwipeController.Dragged += SwipeController_Dragged;
+            Score.Boost += Score_Boost;
         }
 
-        protected virtual void OnDisable()
+        protected void OnDisable()
         {
             SwipeController.Dragged += SwipeController_Dragged;
+            Score.Boost -= Score_Boost;
         }
 
         protected void Update()
         {
-            if (_health > 0)
-            {
-                MoveForward();
-                SetTurn();
+            MoveForward();
+            SetTurn();
 
-                Drove(transform.position);
-            }
-            else
-            {
-                OnDie();
-            }
+            Drove(transform.position);
         }
 
         public virtual void GetDamage()
@@ -87,13 +88,38 @@ namespace Project.Dev.Scripts
             _health--;
 
             Vibration.Play();
+            
+            if (_health <= 0)
+            {
+                OnDie();
+            }
         }
 
         public void OnDie()
         {
+            _speed = 0;
+            _startSpeed = 0;
+            _speedTurn = 0;
+            
             Died(transform.position);
         }
-
+        
+        public void SetColor(Colors color)
+        {
+            var colorConfigs = _config.ColorConfigs;
+            
+            for (int i = 0; i < colorConfigs.Length; i++)
+            {
+                if (colorConfigs[i].Colors == color)
+                {
+                    for (int j = 0; j < _painElements.Length; j++)
+                    {
+                        _painElements[j].sharedMaterial = colorConfigs[i].Material;
+                    }
+                }
+            }
+        }
+        
         private void MoveForward()
         {
             var position = transform.position;
@@ -105,7 +131,7 @@ namespace Project.Dev.Scripts
 
         private void SetTurn()
         {
-            if (_roadBounds.IsInBounds(_nextPosition))
+            if (_roadBounds.IsInBounds(_nextPosition.x))
             {
                 SetRotation();
 
@@ -161,8 +187,16 @@ namespace Project.Dev.Scripts
 
         private void SetStartRotation()
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity,
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, 
                 _speedReturnRotartion * Time.deltaTime);
+        }
+        
+        private void Score_Boost(float boost)
+        {
+            if (_speed <= _maxSpeed)
+            {
+                _startSpeed += _boost;
+            }
         }
     }
 }

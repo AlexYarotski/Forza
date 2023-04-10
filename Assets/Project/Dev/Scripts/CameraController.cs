@@ -10,7 +10,6 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private float _distanceToStop = 0;
         [SerializeField]
-        //NOTE: INCORRECT NAMING 
         private float _speedSilding = 0;
         
         private Vector3 _finalPosition = Vector3.zero;

@@ -242,6 +242,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302063753}
   m_CullTransparentMesh: 1
+--- !u!114 &431518738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4606638052748183412, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
+  m_PrefabInstance: {fileID: 6867036291092741137}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7133e22f7745da87b7ee0114f2dc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &703788129
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,9 +856,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 4606638052748183412, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
+      propertyPath: _modelElements
+      value: 
+      objectReference: {fileID: 8983665111225604982}
+    - target: {fileID: 4606638052748183412, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
+      propertyPath: _modelElements.Array.data[0]
+      value: 
+      objectReference: {fileID: 8983665111225604982}
     - target: {fileID: 4820015344272285878, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426040515290187359, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
+      propertyPath: m_Name
+      value: Purple
       objectReference: {fileID: 0}
     - target: {fileID: 6459649754090495195, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
       propertyPath: _car
@@ -949,7 +972,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6459649754090495195, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
 --- !u!1001 &8983665111225604981
 PrefabInstance:
@@ -966,6 +990,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1160943825188641504, guid: f04ab0a834a4c804aaf60b8b741596fa, type: 3}
+      propertyPath: _paint
+      value: 
+      objectReference: {fileID: 431518738}
     - target: {fileID: 1685980682903410023, guid: f04ab0a834a4c804aaf60b8b741596fa, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1065,3 +1093,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5646689050897613838, guid: f04ab0a834a4c804aaf60b8b741596fa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f04ab0a834a4c804aaf60b8b741596fa, type: 3}
+--- !u!23 &8983665111225604982 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3530976477898110158, guid: f04ab0a834a4c804aaf60b8b741596fa, type: 3}
+  m_PrefabInstance: {fileID: 8983665111225604981}
+  m_PrefabAsset: {fileID: 0}

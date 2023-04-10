@@ -178,8 +178,10 @@ MonoBehaviour:
   _speedRotation: 10
   _speedReturnRotartion: 10
   _rotationAngel: 200
-  _angularFrequency: 0.3
-  _dampingRatio: 10
+  _config: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
+  _painElements:
+  - {fileID: 6057164961329186892}
+  _paint: {fileID: 3735747329723331852, guid: 2876de5c160983941a55f619119773e6, type: 3}
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
   _timeOfImmortality: 1
 --- !u!1 &5291569891212827530
@@ -467,5 +469,10 @@ PrefabInstance:
 --- !u!4 &20508044022297618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
+  m_PrefabInstance: {fileID: 559117641751581689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6057164961329186892 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6038550813985070005, guid: 569081978bcd51a4cb8e440bfdf14fe7, type: 3}
   m_PrefabInstance: {fileID: 559117641751581689}
   m_PrefabAsset: {fileID: 0}

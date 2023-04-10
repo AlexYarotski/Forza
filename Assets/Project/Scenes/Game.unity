@@ -1099,6 +1099,7 @@ MonoBehaviour:
   <RoadBoundsSetting>k__BackingField: {fileID: 11400000, guid: 27451eddd0ff5374183a416da852b7b9, type: 2}
   <ScoreSetting>k__BackingField: {fileID: 11400000, guid: f77d83cc9e520954c8af7ebc8ea08c6a, type: 2}
   <PoolManagerSetting>k__BackingField: {fileID: 11400000, guid: ca083447987f26542b56b5bd680e99e8, type: 2}
+  <ColorSetting>k__BackingField: {fileID: 0}
 --- !u!1 &1798692608
 GameObject:
   m_ObjectHideFlags: 0

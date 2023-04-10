@@ -15,9 +15,9 @@ namespace Project.Dev.Scripts
             CheckingBoundaries();
         }
 
-        public bool IsInBounds(Vector3 position)
+        public bool IsInBounds(float positionX)
         {
-            return position.x <= _rightBoundAxisX && position.x >= _leftBoundAxisX;
+            return positionX <= _rightBoundAxisX && positionX >= _leftBoundAxisX;
         }
 
         public Vector3 ClampPosition(Vector3 position)

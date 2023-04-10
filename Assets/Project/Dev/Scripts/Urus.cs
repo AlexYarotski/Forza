@@ -7,18 +7,14 @@ namespace Project.Dev.Scripts
         [SerializeField]
         protected float _timeOfImmortality = 0;
 
-        protected override void OnEnable()
+        protected void OnEnable() 
         {
             base.OnEnable();
-            
-            Score.Boost += Score_Boost;
         }
         
-        protected override void OnDisable()
+        protected void OnDisable()
         {
             base.OnDisable();
-            
-            Score.Boost -= Score_Boost;
         }
 
         private void Update()
@@ -40,14 +36,6 @@ namespace Project.Dev.Scripts
 
             var immortal = new Immortal(this);
             StartCoroutine(immortal.MakeImmortal(_timeOfImmortality));
-        }
-
-        private void Score_Boost(float boost)
-        {
-            if (_speed <= _maxSpeed)
-            {
-                _startSpeed += _boost;
-            }
         }
 
         private void PlaySmoke()

@@ -46,7 +46,14 @@ namespace Project.Dev.Scripts.SceneContexts
             get;
             private set;
         }
-    
+
+        [field: SerializeField]
+        public ColorSetting ColorSetting
+        {
+            get;
+            private set;
+        }
+        
         public static SceneContexts Instance
         {
             get; 

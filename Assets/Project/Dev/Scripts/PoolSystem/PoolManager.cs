@@ -12,10 +12,6 @@ public class PoolManager : MonoBehaviour
 
     private void Awake()
     {
-        // var settings = SceneContexts.Instance.PoolManagerSetting;
-        //
-        // _poolConfigs = settings.PoolConfigs;
-
         PreparePoolDictionary();
     }
 
