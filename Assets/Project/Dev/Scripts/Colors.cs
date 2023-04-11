@@ -6,6 +6,6 @@
         Green = 1, 
         Purple = 2, 
         Red = 3, 
-        White = 4
+        White = 4,
     }
 }

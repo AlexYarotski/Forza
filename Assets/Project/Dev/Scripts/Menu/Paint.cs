@@ -1,81 +1,47 @@
-﻿using Project.Dev.Scripts.Interface;
+﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class Paint : MonoBehaviour, IColorable
+    public class Paint : MonoBehaviour
     {
-        [Header("Button")]
+        private const string KeyColor = "color";
+        
         [SerializeField]
-        private Button _yellow = null;
-        [SerializeField]
-        private Button _green = null;
-        [SerializeField]
-        private Button _purple = null;
-        [SerializeField]
-        private Button _red = null;
-        [SerializeField]
-        private Button _white = null;
+        private ColorButton _buttonPrefab = null;
 
-        [Space]
         [SerializeField]
         private ColorSetting _config = null;
-        
-        [Header("PaintElements")]
+
         [SerializeField]
         private Renderer[] _modelElements = null;
-        
+
         private void Awake()
         {
-            _yellow.onClick.AddListener(Yellow);
-            _green.onClick.AddListener(Green);
-            _purple.onClick.AddListener(Purple);
-            _red.onClick.AddListener(Red);
-            _white.onClick.AddListener(White);
+            AddButton();
         }
 
-        public void SetColor(Colors color)
+        private void AddButton()
         {
-            var colorConfigs = _config.ColorConfigs;
-            
-            for (int i = 0; i < colorConfigs.Length; i++)
+            var paintColors = (Colors[])Enum.GetValues(typeof(Colors));
+
+            for (var i = 0; i < paintColors.Length; i++)
             {
-                if (colorConfigs[i].Colors == color)
-                {
-                    for (int j = 0; j < _modelElements.Length; j++)
-                    {
-                        _modelElements[j].sharedMaterial = colorConfigs[i].Material;
-                    }
-                }
+                var colorButton = Instantiate(_buttonPrefab, transform);
+
+                colorButton.image.color = _config.ColorConfigs[i].Color;
+                colorButton.Setup(paintColors[i], SetColor);
+            }
+        }
+        
+        private void SetColor(Colors colors)
+        {
+            for (int i = 0; i < _modelElements.Length; i++)
+            {
+                _modelElements[i].sharedMaterial = _config.SelectMaterial(colors);
             }
             
-            PlayerPrefs.SetInt("color", (int)color);
-        }
-        
-        private void Yellow()
-        {
-            SetColor(Colors.Yellow);
-        }
-        
-        private void Green()
-        {
-            SetColor(Colors.Green);
-        }
-        
-        private void Purple()
-        {
-            SetColor(Colors.Purple);
-        }
-        
-        private void Red()
-        {
-            SetColor(Colors.Red);
-        }
-        
-        private void White()
-        {
-            SetColor(Colors.White);
+            PlayerPrefs.SetInt(KeyColor, (int)colors);
         }
     }
 }

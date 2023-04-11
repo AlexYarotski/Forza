@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836214121857390238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 0.6, z: -1.435}
+  m_LocalPosition: {x: 0.45, y: 0.43, z: 0.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3609503041897159081}
@@ -38,7 +38,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836214121857390238}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -174,14 +174,13 @@ MonoBehaviour:
   _maxSpeed: 60
   _speedTurn: 1.4
   _brake: 0.6
-  _boost: 10
+  _boost: 7
   _speedRotation: 10
   _speedReturnRotartion: 10
   _rotationAngel: 200
   _config: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
   _painElements:
   - {fileID: 6057164961329186892}
-  _paint: {fileID: 3735747329723331852, guid: 2876de5c160983941a55f619119773e6, type: 3}
   _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
   _timeOfImmortality: 1
 --- !u!1 &5291569891212827530
@@ -209,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291569891212827530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 0.6, z: -1.435}
+  m_LocalPosition: {x: -0.45, y: 0.43, z: 0.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3609503041897159081}
@@ -222,7 +221,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291569891212827530}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0

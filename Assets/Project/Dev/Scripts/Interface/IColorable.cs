@@ -1,7 +1,9 @@
-﻿namespace Project.Dev.Scripts.Interface
+﻿using UnityEngine;
+
+namespace Project.Dev.Scripts.Interface
 {
     public interface IColorable
     {
-        void SetColor(Colors color);
+        Material SelectMaterial(Colors color);
     }
 }

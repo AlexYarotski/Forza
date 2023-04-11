@@ -1,12 +1,13 @@
 ﻿using System;
 using Project.Dev.Scripts.Interface;
-using Project.Dev.Scripts.Menu;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
-    public abstract class Car : MonoBehaviour, IDamageable, IColorable
+    public abstract class Car : MonoBehaviour, IDamageable
     {
+        private const string KeyColor = "color";
+        
         public static event Action<Vector3> Died = delegate { };
         public static event Action<Vector3> Drove = delegate { };
         
@@ -54,10 +55,7 @@ namespace Project.Dev.Scripts
 
         private void Awake()
         {
-            var numberColor = PlayerPrefs.GetInt("color");
-            var color = (Colors)numberColor;
-            
-            SetColor(color);
+            SetColor(); 
             
             _startSpeed = _speed;
             _dragPosition = transform.position;
@@ -102,22 +100,6 @@ namespace Project.Dev.Scripts
             _speedTurn = 0;
             
             Died(transform.position);
-        }
-        
-        public void SetColor(Colors color)
-        {
-            var colorConfigs = _config.ColorConfigs;
-            
-            for (int i = 0; i < colorConfigs.Length; i++)
-            {
-                if (colorConfigs[i].Colors == color)
-                {
-                    for (int j = 0; j < _painElements.Length; j++)
-                    {
-                        _painElements[j].sharedMaterial = colorConfigs[i].Material;
-                    }
-                }
-            }
         }
         
         private void MoveForward()
@@ -196,6 +178,17 @@ namespace Project.Dev.Scripts
             if (_speed <= _maxSpeed)
             {
                 _startSpeed += _boost;
+            }
+        }
+
+        private void SetColor()
+        {
+            var numberColor = PlayerPrefs.GetInt(KeyColor);
+            var newMaterial = _config.SelectMaterial((Colors)numberColor);
+
+            for (var i = 0; i < _painElements.Length; i++)
+            {
+                _painElements[i].sharedMaterial = newMaterial;
             }
         }
     }
