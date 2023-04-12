@@ -13,22 +13,16 @@ namespace Project.Dev.Scripts
 
         [SerializeField]
         private PoolManager _poolManager = null;
-
         [SerializeField]
         private Car _car = null;
-
+        
+        [Space]
         [SerializeField]
         private ChunkType _chunkType = default;
 
         [Space]
         [SerializeField]
         private int _quantityAtStart = 0;
-
-        [Space]
-        [SerializeField]
-        private Vector3 _startPosition = Vector3.zero;
-        
-        [Space]
         [SerializeField]
         private float _distanceForSpawnChunk = 0;
         [SerializeField]
@@ -62,66 +56,7 @@ namespace Project.Dev.Scripts
                 DeleteChunk();
             }
         }
-
-        private void StartGenerator()
-        {
-            for (int i = 0; i < _quantityAtStart; i++)
-            {
-                ChunkList.Add(_poolManager.GetObject<Chunk>(_startChunk, Vector3.zero));
-                ChunkList[i].transform.position = SetChunkPosition(ChunkList[i]);
-                
-                _lastChunk = ChunkList[i];
-            }
-        }
-
-        private Vector3 SetChunkPosition(Chunk chunk)
-        {
-            if (_lastChunk == null)
-            {
-                _firstChunk = chunk;
-
-                return _startPosition;
-            }
-
-            var posAxisZ = (_lastChunk.transform.localScale.z + chunk.transform.localScale.z) / 2;
-
-            return new Vector3(_lastChunk.transform.position.x, _lastChunk.transform.position.y, posAxisZ + _lastChunk.transform.position.z);
-        }
-
-        private void SpawnChunk()
-        {
-            PooledType[] pooledTypes = ChunkDictionary[_chunkType].ToArray();
-
-            var createChunk = _poolManager.GetObject<Chunk>(RandomTypeChunk(pooledTypes), Vector3.zero);
-
-            createChunk.transform.position = SetChunkPosition(createChunk);
-            
-            ChunkList.Add(createChunk);
-            _lastChunk = createChunk;
-        }
-
-        private void DeleteChunk()
-        {
-            _firstChunk.Free();
-            ChunkList.RemoveAt(0);
-
-            _firstChunk = ChunkList[0];
-        }
-
-        private PooledType RandomTypeChunk(PooledType[] pooledTypes)
-        {
-            var randomType = Random.Range(0, pooledTypes.Length);
-
-            while (_pooledType == pooledTypes[randomType])
-            {
-                randomType = Random.Range(0, pooledTypes.Length);
-            }
-
-            _pooledType = pooledTypes[randomType];
-
-            return pooledTypes[randomType];
-        }
-
+        
         private void ChooseChunk()
         {
             switch (_chunkType)
@@ -137,7 +72,6 @@ namespace Project.Dev.Scripts
                     break;
                 
                 case ChunkType.Environment:
-                    
                     _startChunk = PooledType.Environment;
                     ChunkDictionary[ChunkType.Environment] = new List<PooledType>()
                     {
@@ -147,10 +81,69 @@ namespace Project.Dev.Scripts
                     break;
                 
                 default:
-                    _startChunk = default;
-                    Debug.Log("Alesha chto za h...!");
+                    _startChunk = default; 
+                    Debug.LogError("The selected type does not exist!");
                     break;
             }
+        }
+
+        private void StartGenerator()
+        {
+            for (int i = 0; i < _quantityAtStart; i++)
+            {
+                ChunkList.Add(_poolManager.GetObject<Chunk>(_startChunk, Vector3.zero));
+                ChunkList[i].transform.position = SetChunkPosition(ChunkList[i]);
+                
+                _lastChunk = ChunkList[i];
+            }
+        }
+        
+        private void SpawnChunk()
+        {
+            PooledType[] pooledTypes = ChunkDictionary[_chunkType].ToArray();
+
+            var createChunk = _poolManager.GetObject<Chunk>(RandomTypeChunk(pooledTypes), Vector3.zero);
+
+            createChunk.transform.position = SetChunkPosition(createChunk);
+            
+            ChunkList.Add(createChunk);
+            _lastChunk = createChunk;
+        }
+        
+        private Vector3 SetChunkPosition(Chunk chunk)
+        {
+            if (_lastChunk == null)
+            {
+                _firstChunk = chunk;
+
+                return Vector3.zero;
+            }
+
+            var posAxisZ = (_lastChunk.transform.localScale.z + chunk.transform.localScale.z) / 2;
+
+            return new Vector3(_lastChunk.transform.position.x, _lastChunk.transform.position.y, posAxisZ + _lastChunk.transform.position.z);
+        }
+        
+        private PooledType RandomTypeChunk(PooledType[] pooledTypes)
+        {
+            var randomType = Random.Range(0, pooledTypes.Length);
+
+            while (_pooledType == pooledTypes[randomType])
+            {
+                randomType = Random.Range(0, pooledTypes.Length);
+            }
+
+            _pooledType = pooledTypes[randomType];
+
+            return pooledTypes[randomType];
+        }
+        
+        private void DeleteChunk()
+        {
+            _firstChunk.Free();
+            ChunkList.RemoveAt(0);
+
+            _firstChunk = ChunkList[0];
         }
     }
 }
