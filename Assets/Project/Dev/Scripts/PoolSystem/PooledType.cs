@@ -10,5 +10,6 @@ public enum PooledType
     Chunk7 = 7,
     Chunk8 = 8,
     Chunk9 = 9,
-    Chunk10 = 10
+    Chunk10 = 10,
+    Environment = 20
 }

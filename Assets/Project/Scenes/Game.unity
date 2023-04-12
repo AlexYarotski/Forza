@@ -337,6 +337,9 @@ MonoBehaviour:
   - _count: 2
     _pooledType: 10
     _pooledPrefab: {fileID: 5507464805236036264, guid: 9ef513b2917d00549a8837ee9be5528c, type: 3}
+  - _count: 5
+    _pooledType: 20
+    _pooledPrefab: {fileID: 7685788950193474402, guid: aa10e389e8922b246b90324530a01789, type: 3}
 --- !u!114 &125012749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5257701512037704815, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -359,6 +362,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8932f544785d411468e21303682ecf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &264715933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264715934}
+  - component: {fileID: 264715935}
+  m_Layer: 0
+  m_Name: EnvGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &264715934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264715933}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1829250614}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &264715935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264715933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f773703b92f0c7b4d8af222ee77955dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolManager: {fileID: 103901626}
+  _car: {fileID: 125012749}
+  _chunkType: 1
+  _quantityAtStart: 5
+  _startPosition: {x: 0, y: 0, z: 0}
+  _distanceForSpawnChunk: 45
+  _distanceForDeleteChunk: 5
 --- !u!1001 &344572834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,7 +920,7 @@ GameObject:
   - component: {fileID: 1401048844}
   - component: {fileID: 1401048845}
   m_Layer: 0
-  m_Name: ChankGenerator
+  m_Name: ChunkGenerator
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -896,14 +949,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1401048843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1cc3e793eb472bae1d03d24bc9930a, type: 3}
+  m_Script: {fileID: 11500000, guid: f773703b92f0c7b4d8af222ee77955dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 103901626}
   _car: {fileID: 125012749}
-  _quantityAtStart: 4
-  _distanceForSpawnChunk: 100
-  _distanceForDeleteChunk: 20
+  _chunkType: 0
+  _quantityAtStart: 5
+  _startPosition: {x: 0, y: 0, z: 0}
+  _distanceForSpawnChunk: 45
+  _distanceForDeleteChunk: 5
 --- !u!4 &1570703661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3209244623317845640, guid: 597fbf6499f271e4a8e6577c60b29786, type: 3}
@@ -1050,56 +1105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _music: {fileID: 1755804020}
---- !u!1 &1756149485
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1756149486}
-  - component: {fileID: 1756149487}
-  m_Layer: 0
-  m_Name: SceneContext
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1756149486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756149485}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1829250614}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1756149487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756149485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12a5aaf11f68b3d46879b54c31a41b4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <UrusSetting>k__BackingField: {fileID: 11400000, guid: 7a89bc868891d354db1bd970907d80ca, type: 2}
-  <ChunkGeneratorSetting>k__BackingField: {fileID: 11400000, guid: 1da1f4c4d7091cf4eb7deabfc06bda17, type: 2}
-  <GameWindowSetting>k__BackingField: {fileID: 11400000, guid: 478b949a53616e04b926797da1fd31d1, type: 2}
-  <RoadBoundsSetting>k__BackingField: {fileID: 11400000, guid: 27451eddd0ff5374183a416da852b7b9, type: 2}
-  <ScoreSetting>k__BackingField: {fileID: 11400000, guid: f77d83cc9e520954c8af7ebc8ea08c6a, type: 2}
-  <PoolManagerSetting>k__BackingField: {fileID: 11400000, guid: ca083447987f26542b56b5bd680e99e8, type: 2}
-  <ColorSetting>k__BackingField: {fileID: 0}
 --- !u!1 &1798692608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1179,7 @@ Transform:
   - {fileID: 82391075}
   - {fileID: 103901625}
   - {fileID: 1401048844}
-  - {fileID: 1756149486}
+  - {fileID: 264715934}
   - {fileID: 1798692609}
   m_Father: {fileID: 0}
   m_RootOrder: 2
