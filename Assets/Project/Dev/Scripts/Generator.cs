@@ -145,6 +145,11 @@ namespace Project.Dev.Scripts
                         PooledType.Environment4
                     };
                     break;
+                
+                default:
+                    _startChunk = default;
+                    Debug.Log("Alesha chto za h...!");
+                    break;
             }
         }
     }
