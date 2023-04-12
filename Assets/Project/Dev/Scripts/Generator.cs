@@ -141,7 +141,8 @@ namespace Project.Dev.Scripts
                     _startChunk = PooledType.Environment;
                     ChunkDictionary[ChunkType.Environment] = new List<PooledType>()
                     {
-                        PooledType.Environment
+                        PooledType.Environment,PooledType.Environment1,PooledType.Environment2,PooledType.Environment3,
+                        PooledType.Environment4
                     };
                     break;
             }
