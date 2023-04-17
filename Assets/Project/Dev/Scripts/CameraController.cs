@@ -5,7 +5,7 @@ namespace Project.Dev.Scripts
     public class CameraController : MonoBehaviour
     {
         [SerializeField]
-        private Car _car = null;
+        private Car[] _cars = null;
 
         [SerializeField]
         private float _distanceToStop = 0;
@@ -17,6 +17,8 @@ namespace Project.Dev.Scripts
         private float deltaPosAxisZ = 0;
 
         private bool _isCarDied = false;
+
+        private Car _car = null;
         
         private void OnEnable()
         {
@@ -30,6 +32,7 @@ namespace Project.Dev.Scripts
 
         private void Start()
         {
+            _car = Search.ActiveCar(_cars);
             deltaPosAxisZ = transform.position.z - _car.transform.position.z;
         }
 

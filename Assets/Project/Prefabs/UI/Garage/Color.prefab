@@ -50,8 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonPrefab: {fileID: 8835744864853134280, guid: 252a0c931c0ad6a42a8951215fbd507e, type: 3}
-  _config: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
-  _modelElements:
+  _urusElements: []
+  _ladaElements: []
+  _cars:
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &3004469065240659543
 MonoBehaviour:
@@ -66,11 +68,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 200
+    m_Left: 264
     m_Right: 0
     m_Top: 0
-    m_Bottom: 250
-  m_ChildAlignment: 7
+    m_Bottom: 401
+  m_ChildAlignment: 6
   m_Spacing: -100
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1

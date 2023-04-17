@@ -10,9 +10,10 @@ public class CarSpecifications : MonoBehaviour
 {
     private const string MainMenu = "Menu";
     private const string Game = "Game";
-    
+    private const string KeyCar = "Car";
+
     [SerializeField]
-    private Car _car = null;
+    private Car[] _cars = null;
 
     [Header("TMP")]
     [SerializeField]
@@ -35,27 +36,73 @@ public class CarSpecifications : MonoBehaviour
     private Button _game = null;
     [SerializeField]
     private Button _mainMenu = null;
+    [SerializeField]
+    private Button _previous = null;
+    [SerializeField]
+    private Button _next = null;
 
+    private Car _car = null;
+    
     private void Awake()
     {
+        _car = Search.ActiveCar(_cars);
+        
         _game.onClick.AddListener(StartGame);
         _mainMenu.onClick.AddListener(Menu);
-
-        SetSliderValue();
+        _previous.onClick.AddListener(PreviousCar);
+        _next.onClick.AddListener(NextCar);
         
-        _name.text = _car.name;
-        _startSpeed.text = Convert.ToString(_car.Speed);
-        _maxSpeed.text = Convert.ToString(_car.MaxSpeed);
+        SetProperty();
     }
 
+    private async void UploadSceneAsync(string sceneName)
+    {
+        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!loadSceneAsync.isDone)
+        {
+            await Task.Yield();
+        }
+    }
+    
     private void Menu()
     {
-       UploadSceneAsync(MainMenu);
+        UploadSceneAsync(MainMenu);
     }
     
     private void StartGame()
     {
         UploadSceneAsync(Game);
+    }
+
+    private void PreviousCar()
+    {
+        var indexCar = Array.IndexOf(_cars ,_car);
+
+        _car.gameObject.SetActive(false);
+        
+        _car = indexCar == 0 ? _cars[_cars.Length - 1] : _cars[indexCar - 1];
+        
+        _car.gameObject.SetActive(true);
+        
+        SetProperty();
+        
+        PlayerPrefs.GetString(KeyCar, $"{_car.GetType()}");
+    }
+
+    private void NextCar()
+    {
+        var indexCar = Array.IndexOf(_cars ,_car);
+
+        _car.gameObject.SetActive(false);
+        
+        _car = indexCar == _cars.Length - 1 ? _cars[0] : _cars[indexCar + 1];
+        
+        _car.gameObject.SetActive(true);
+        
+        SetProperty();
+        
+        PlayerPrefs.GetString(KeyCar, $"{_car.GetType()}");
     }
 
     private void SetSliderValue()
@@ -66,14 +113,13 @@ public class CarSpecifications : MonoBehaviour
         _sliderStartSpeed.value = startSpeed;
         _sliderMaxSpeed.value = maxSpeed;
     }
-    
-    private async void UploadSceneAsync(string sceneName)
-    {
-        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!loadSceneAsync.isDone)
-        {
-            await Task.Yield();
-        }
+    private void SetProperty()
+    {
+        SetSliderValue();
+        
+        _name.text = _car.name;
+        _startSpeed.text = Convert.ToString(_car.Speed);
+        _maxSpeed.text = Convert.ToString(_car.MaxSpeed);
     }
 }

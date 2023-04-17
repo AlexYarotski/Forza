@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        if (collider.gameObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.GetDamage();
         }

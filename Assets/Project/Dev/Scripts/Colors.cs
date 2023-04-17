@@ -7,5 +7,6 @@
         Purple = 2, 
         Red = 3, 
         White = 4,
+        Blue = 5,
     }
 }

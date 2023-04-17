@@ -77,7 +77,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -103,8 +103,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3209244623317845640}
   - component: {fileID: 8288766456121087326}
-  - component: {fileID: -8110155627684819}
   - component: {fileID: 5257701512037704815}
+  - component: {fileID: 1188174743745335538}
   m_Layer: 6
   m_Name: Urus
   m_TagString: Untagged
@@ -141,7 +141,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.35, y: 1.1, z: 3.3}
   m_Center: {x: 0, y: 0.6, z: 0}
---- !u!54 &-8110155627684819
+--- !u!114 &5257701512037704815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576637866465785176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 2
+  _speed: 7
+  _maxSpeed: 40
+  _speedTurn: 1.2
+  _brake: 0.6
+  _boost: 7
+  _speedRotation: 10
+  _speedReturnRotartion: 10
+  _rotationAngel: 200
+  _colorSetting: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
+  _painElements:
+  - {fileID: 6057164961329186892}
+  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+  _timeOfImmortality: 1
+--- !u!54 &1188174743745335538
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,32 +183,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5257701512037704815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576637866465785176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 2
-  _speed: 10
-  _maxSpeed: 60
-  _speedTurn: 1.4
-  _brake: 0.6
-  _boost: 7
-  _speedRotation: 10
-  _speedReturnRotartion: 10
-  _rotationAngel: 200
-  _config: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
-  _painElements:
-  - {fileID: 6057164961329186892}
-  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  _timeOfImmortality: 1
 --- !u!1 &5291569891212827530
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

@@ -7,14 +7,30 @@ namespace Project.Dev.Scripts
     public class Generator : MonoBehaviour
     {
         private readonly List<Chunk> ChunkList = new List<Chunk>();
-        
-        private readonly Dictionary<ChunkType, List<PooledType>> ChunkDictionary =
-            new Dictionary<ChunkType, List<PooledType>>();
+
+        private readonly Dictionary<ChunkType, List<PooledType>> ChunkDictionary = new Dictionary<ChunkType, List<PooledType>>()
+        {
+            {
+                ChunkType.Chunk, new List<PooledType>()
+                {
+                    PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2, PooledType.Chunk3, PooledType.Chunk4,
+                    PooledType.Chunk5, PooledType.Chunk6, PooledType.Chunk7, PooledType.Chunk8, PooledType.Chunk9,
+                    PooledType.Chunk10
+                }
+            },
+            {
+                ChunkType.Environment, new List<PooledType>()
+                {
+                    PooledType.Environment,PooledType.Environment1,PooledType.Environment2,PooledType.Environment3,
+                    PooledType.Environment4
+                }
+            }
+        };
 
         [SerializeField]
         private PoolManager _poolManager = null;
         [SerializeField]
-        private Car _car = null;
+        private Car[] _cars = null;
         
         [Space]
         [SerializeField]
@@ -34,10 +50,13 @@ namespace Project.Dev.Scripts
         private PooledType _pooledType = default;
         private PooledType _startChunk = default;
 
+        private Car _car = null;
+        
         private void Awake()
         {
-            ChooseChunk();
+            _car = Search.ActiveCar(_cars);
             
+            ChooseChunk();
             StartGenerator();
         }
 
@@ -63,21 +82,10 @@ namespace Project.Dev.Scripts
             {
                 case ChunkType.Chunk:
                     _startChunk = PooledType.Chunk;
-                    ChunkDictionary[ChunkType.Chunk] = new List<PooledType>()
-                    {
-                        PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2,
-                        PooledType.Chunk3, PooledType.Chunk4, PooledType.Chunk5, PooledType.Chunk6, PooledType.Chunk7,
-                        PooledType.Chunk8, PooledType.Chunk9, PooledType.Chunk10
-                    };
                     break;
                 
                 case ChunkType.Environment:
                     _startChunk = PooledType.Environment;
-                    ChunkDictionary[ChunkType.Environment] = new List<PooledType>()
-                    {
-                        PooledType.Environment,PooledType.Environment1,PooledType.Environment2,PooledType.Environment3,
-                        PooledType.Environment4
-                    };
                     break;
                 
                 default:

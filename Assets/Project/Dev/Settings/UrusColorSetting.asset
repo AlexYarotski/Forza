@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2be952f3e20ca0448b0a6200d73d5cf, type: 3}
+  m_Name: UrusColorSetting
+  m_EditorClassIdentifier: 
+  _colorConfigs:
+  - _colors: 0
+    _color: {r: 0.9411765, g: 0.8784314, b: 0.21960784, a: 1}
+    _material: {fileID: 2100000, guid: 22d71d8f5910fa2469c75d000ee015d0, type: 2}
+  - _colors: 1
+    _color: {r: 0.17254902, g: 0.7882353, b: 0.19215687, a: 1}
+    _material: {fileID: 2100000, guid: 575d124e0d740da46a889603ca344901, type: 2}
+  - _colors: 2
+    _color: {r: 0.3529412, g: 0.27058825, b: 0.54901963, a: 1}
+    _material: {fileID: 2100000, guid: e9a4cdeef607eb24c9399ed969ee6182, type: 2}
+  - _colors: 3
+    _color: {r: 0.49019608, g: 0.06666667, b: 0.13725491, a: 1}
+    _material: {fileID: 2100000, guid: 26261877045ca9144bf066d95aac2e44, type: 2}
+  - _colors: 4
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _material: {fileID: 2100000, guid: 34d15552839f37e4c8a78f27a5eb6ee8, type: 2}
