@@ -32,19 +32,19 @@ namespace Project.Dev.Scripts.Menu
             _activeCar = Search.ActiveCar(_cars);
             _colorSetting = _activeCar.ColorSetting;
             
-            SetActiveButton(ButtonDictionary[_activeCar], true);
+            SetActiveButton(true);
         }
 
         private void FixedUpdate()
         {
             if (_activeCar != Search.ActiveCar(_cars))
             {
-                SetActiveButton(ButtonDictionary[_activeCar], false);
+                SetActiveButton(false);
                 
                 _activeCar = Search.ActiveCar(_cars);
                 _colorSetting = _activeCar.ColorSetting;
 
-                SetActiveButton(ButtonDictionary[_activeCar], true);
+                SetActiveButton(true);
             }
         }
 
@@ -56,11 +56,13 @@ namespace Project.Dev.Scripts.Menu
             }
         }
 
-        private void SetActiveButton(List<Button> buttons, bool active)
+        private void SetActiveButton(bool active)
         {
-            for (int i = 0; i < buttons.Count; i++)
+            var buttonList = ButtonDictionary[_activeCar];
+            
+            for (int i = 0; i < buttonList.Count; i++)
             {
-                buttons[i].gameObject.SetActive(active);
+                buttonList[i].gameObject.SetActive(active);
             }
         }
 
@@ -82,24 +84,30 @@ namespace Project.Dev.Scripts.Menu
 
             return listButton;
         }
-        
+
         private void SetColor(Colors colors)
         {
-            for (int i = 0; i < _urusElements.Length; i++)
+            var countElement = _urusElements.Length + _ladaElements.Length;
+            
+            for (int i = 0; i < countElement; i++)
             {
                 if ((int)colors < 5)
                 {
-                    _urusElements[i].sharedMaterial = _colorSetting.SelectMaterial(colors);
-                    PlayerPrefs.SetInt(KeyUrusColor, (int)colors);
+                    for (int j = 0; j < _urusElements.Length; j++)
+                    {
+                        _urusElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
+                        PlayerPrefs.SetInt(KeyUrusColor, (int)colors);
+                    }
                 }
                 else if ((int)colors >= 5)
                 {
-                    _ladaElements[i].sharedMaterial = _colorSetting.SelectMaterial(colors);
-                    PlayerPrefs.SetInt(KeyLadaColor, (int)colors);
+                    for (int j = 0; j < _urusElements.Length; j++)
+                    {
+                        _ladaElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
+                        PlayerPrefs.SetInt(KeyLadaColor, (int)colors);
+                    }
                 }
             }
-            
-            
         }
     }
 }

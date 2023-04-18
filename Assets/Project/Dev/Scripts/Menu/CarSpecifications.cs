@@ -52,7 +52,7 @@ public class CarSpecifications : MonoBehaviour
         _previous.onClick.AddListener(PreviousCar);
         _next.onClick.AddListener(NextCar);
         
-        SetProperty();
+        SetValue();
     }
 
     private async void UploadSceneAsync(string sceneName)
@@ -67,11 +67,15 @@ public class CarSpecifications : MonoBehaviour
     
     private void Menu()
     {
+        PlayerPrefs.SetString(KeyCar, $"{_car.GetType()}");
+        
         UploadSceneAsync(MainMenu);
     }
     
     private void StartGame()
     {
+        PlayerPrefs.SetString(KeyCar, $"{_car.GetType()}");
+        
         UploadSceneAsync(Game);
     }
 
@@ -85,9 +89,7 @@ public class CarSpecifications : MonoBehaviour
         
         _car.gameObject.SetActive(true);
         
-        SetProperty();
-        
-        PlayerPrefs.GetString(KeyCar, $"{_car.GetType()}");
+        SetValue();
     }
 
     private void NextCar()
@@ -100,23 +102,16 @@ public class CarSpecifications : MonoBehaviour
         
         _car.gameObject.SetActive(true);
         
-        SetProperty();
-        
-        PlayerPrefs.GetString(KeyCar, $"{_car.GetType()}");
+        SetValue();
     }
 
-    private void SetSliderValue()
+    private void SetValue()
     {
         var startSpeed = _car.Speed / _speedDivider;
         var maxSpeed = _car.MaxSpeed / _speedDivider;
         
         _sliderStartSpeed.value = startSpeed;
         _sliderMaxSpeed.value = maxSpeed;
-    }
-
-    private void SetProperty()
-    {
-        SetSliderValue();
         
         _name.text = _car.name;
         _startSpeed.text = Convert.ToString(_car.Speed);

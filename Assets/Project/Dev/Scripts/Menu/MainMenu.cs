@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Project.Dev.Scripts;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +8,6 @@ public class MainMenu : MonoBehaviour
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
-    private const string KeyCar = "Car";
     
     [SerializeField]
     private Button _garageButton = null;
@@ -23,8 +21,6 @@ public class MainMenu : MonoBehaviour
     
     private void Awake()
     {
-        PlayerPrefs.SetString(KeyCar, $"{typeof(Urus)}");
-        
         _playButton.onClick.AddListener(PlayGame);
         _garageButton.onClick.AddListener(Cancel);
         _settingButton.onClick.AddListener(Setting);

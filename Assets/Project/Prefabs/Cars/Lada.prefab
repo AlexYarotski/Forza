@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1550254843591308995}
   - component: {fileID: 6748314715061254740}
   - component: {fileID: 7064039627637747416}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 1, z: 2.9}
+  m_Size: {x: 1, y: 1, z: 3}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &2381867757728512970
 GameObject:
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 1838311211306835539}
   - component: {fileID: 1850479771396918545}
   - component: {fileID: 3483028626059102475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sedan_Tire_FrontR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 1273922776400841962}
   - component: {fileID: 7262914711785208505}
   - component: {fileID: 6568845292754464750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blue Sedan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 6225277801212297530}
   - component: {fileID: 7296824773077339109}
   - component: {fileID: 8652890910004988889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sedan_Tire_BackL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 1098925746288858502}
   - component: {fileID: 2623530093068253636}
   - component: {fileID: 4104588194697770890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sedan_Tire_FrontL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 8374655640111324850}
   - component: {fileID: 341132114815161922}
   - component: {fileID: 8035700141004059384}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sedan_Tire_BackR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659991671092258899}
   - component: {fileID: 471516914401213405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftHeadlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6071774627180332655}
   - component: {fileID: 7026509601668534268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightHeadlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

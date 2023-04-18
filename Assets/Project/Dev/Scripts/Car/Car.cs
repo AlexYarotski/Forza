@@ -6,8 +6,6 @@ namespace Project.Dev.Scripts
 {
     public abstract class Car : MonoBehaviour, IDamageable
     {
-        private const string KeyCar = "Car";
-        
         public static event Action<Vector3> Died = delegate { };
         public static event Action<Vector3> Drove = delegate { };
         
@@ -52,6 +50,7 @@ namespace Project.Dev.Scripts
 
         public float Speed => _speed;
         public float MaxSpeed => _maxSpeed;
+        public int Health => _health;
         public ColorSetting ColorSetting => _colorSetting;
 
         protected void Awake()
@@ -99,6 +98,17 @@ namespace Project.Dev.Scripts
             _speedTurn = 0;
             
             Died(transform.position);
+        }
+        
+        protected void SetColor(string key)
+        {
+            var numberColor = PlayerPrefs.GetInt(key);
+            var newMaterial = _colorSetting.SelectMaterial((Colors)numberColor);
+
+            for (var i = 0; i < _painElements.Length; i++)
+            {
+                _painElements[i].sharedMaterial = newMaterial;
+            }
         }
         
         private void MoveForward()
@@ -177,31 +187,6 @@ namespace Project.Dev.Scripts
             if (_speed <= _maxSpeed)
             {
                 _startSpeed += _boost;
-            }
-        }
-
-        protected void SetColor(string key)
-        {
-            var numberColor = PlayerPrefs.GetInt(key);
-            var newMaterial = _colorSetting.SelectMaterial((Colors)numberColor);
-
-            for (var i = 0; i < _painElements.Length; i++)
-            {
-                _painElements[i].sharedMaterial = newMaterial;
-            }
-        }
-
-        protected void PrepareActive()
-        {
-            var type = PlayerPrefs.GetString(KeyCar);
-
-            if (GetType().ToString() == type)
-            {
-                gameObject.SetActive(true);
-            }
-            else
-            {
-                gameObject.SetActive(false);
             }
         }
     }

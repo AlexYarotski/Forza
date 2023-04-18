@@ -15,5 +15,6 @@ public enum PooledType
     Environment1 = 21,
     Environment2 = 22,
     Environment3 = 23,
-    Environment4 = 24
+    Environment4 = 24,
+    Environment5 = 25
 }

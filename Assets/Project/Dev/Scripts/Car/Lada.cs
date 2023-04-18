@@ -11,7 +11,6 @@ namespace Project.Dev.Scripts
 
         protected void Awake()
         {
-            PrepareActive();
             SetColor(KeyColor);
             
             base.Awake();

@@ -22,7 +22,7 @@ namespace Project.Dev.Scripts
                 ChunkType.Environment, new List<PooledType>()
                 {
                     PooledType.Environment,PooledType.Environment1,PooledType.Environment2,PooledType.Environment3,
-                    PooledType.Environment4
+                    PooledType.Environment4, PooledType.Environment5
                 }
             }
         };
@@ -52,7 +52,7 @@ namespace Project.Dev.Scripts
 
         private Car _car = null;
         
-        private void Awake()
+        private void Start()
         {
             _car = Search.ActiveCar(_cars);
             
