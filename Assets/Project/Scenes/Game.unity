@@ -2081,58 +2081,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 276059381}
     m_Modifications:
-    - target: {fileID: 471516914401213405, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_Range
-      value: 5.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 471516914401213405, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_SpotAngle
-      value: 29.422174
-      objectReference: {fileID: 0}
-    - target: {fileID: 471516914401213405, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 909521731444144842, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
       propertyPath: m_Name
       value: Lada
       objectReference: {fileID: 0}
     - target: {fileID: 909521731444144842, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1659991671092258899, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.358
-      objectReference: {fileID: 0}
-    - target: {fileID: 1659991671092258899, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.546
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2539512010278028401, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
       propertyPath: _changingLight
       value: 
       objectReference: {fileID: 2037099936}
-    - target: {fileID: 6071774627180332655, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.428
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071774627180332655, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.546
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026509601668534268, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_Range
-      value: 5.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026509601668534268, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_SpotAngle
-      value: 29.422174
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026509601668534268, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7774669817476573204, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
       propertyPath: m_RootOrder
       value: 1

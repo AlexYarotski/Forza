@@ -18,16 +18,8 @@ namespace Project.Dev.Scripts
         {
             for (int i = 0; i < _cars.Length; i++)
             {
-                if (_cars[i].GetType().ToString() == PlayerPrefs.GetString(KeyCar))
-                {
-                    _cars[i].gameObject.SetActive(true);
-                }
-                else
-                {
-                    _cars[i].gameObject.SetActive(false);
-                }
+                _cars[i].gameObject.SetActive(_cars[i].GetType().ToString() == PlayerPrefs.GetString(KeyCar));
             }
         }
-        
     }
 }

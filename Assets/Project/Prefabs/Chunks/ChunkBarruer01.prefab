@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chunk
       objectReference: {fileID: 0}
+    - target: {fileID: 7983798142672010242, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!4 &228704744073946197 stripped

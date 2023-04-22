@@ -5,6 +5,8 @@ namespace Project.Dev.Scripts
 {
     public class Score : MonoBehaviour
     {
+        private const string KeyScore = "Score";
+        
         public static event Action<float> Boost = delegate {};
         
         [SerializeField]
@@ -15,11 +17,13 @@ namespace Project.Dev.Scripts
         private void OnEnable()
         {
             Urus.Drove += Urus_Drove;
+            Car.Died += Car_Died;
         }
-
+        
         private void OnDisable()
         {
             Urus.Drove -= Urus_Drove;
+            Car.Died -= Car_Died;
         }
 
         private void FixedUpdate()
@@ -40,6 +44,16 @@ namespace Project.Dev.Scripts
             _speedBoostScore *= 2;
             
             Boost(_score);
+        }
+
+        private void Car_Died(Vector3 position)
+        {
+            var bestScore = PlayerPrefs.GetInt(KeyScore);
+
+            if (_score > bestScore)
+            {
+                PlayerPrefs.SetInt(KeyScore, (int)_score);
+            }
         }
     }
 }

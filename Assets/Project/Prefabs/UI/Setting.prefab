@@ -254,14 +254,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4216299934860598400}
     m_Modifications:
-    - target: {fileID: 2287046157310324895, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2287046157310324895, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2639858253585558849, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
       propertyPath: m_Volume
       value: 0.5
@@ -362,36 +354,12 @@ PrefabInstance:
       propertyPath: _startValue
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5470342832172791091, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845427514870165765, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845427514870165765, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845427514870165765, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6686366779909033161, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_Value
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7058185528119094277, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7058185528119094277, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7505024622689785185, guid: 44f1ed9ee2106814f9ba7df4d9f24c10, type: 3}
-      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
