@@ -71,12 +71,15 @@ namespace Project.Dev.Scripts
             Score.Boost -= Score_Boost;
         }
 
+        protected void FixedUpdate()
+        {
+            Drove(transform.position);
+        }
+        
         protected void Update()
         {
             MoveForward();
             SetTurn();
-
-            Drove(transform.position);
         }
 
         public virtual void GetDamage()
@@ -93,9 +96,7 @@ namespace Project.Dev.Scripts
 
         public void OnDie()
         {
-            _speed = 0;
-            _startSpeed = 0;
-            _speedTurn = 0;
+            gameObject.SetActive(false);
             
             Died(transform.position);
         }
@@ -156,7 +157,7 @@ namespace Project.Dev.Scripts
 
         private void SetStartSpeed()
         {
-            if (_speed < _startSpeed)
+            if (_speed < _startSpeed && _speed <= _maxSpeed)
             {
                 _speed += _brake * Time.deltaTime;
             }

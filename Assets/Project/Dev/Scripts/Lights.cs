@@ -3,25 +3,28 @@ using UnityEngine;
 public class Lights : MonoBehaviour
 {
     [SerializeField]
-    private Light _leftHeadlight = null;
-    
-    [SerializeField]
-    private Light _rightHeadlight = null;
+    private Light[] _headLights = null;
 
-    [SerializeField]
-    private ChangingLight _changingLight = null;
-
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        if (_changingLight.IsNight)
+        ChangingLight.NightCome += ChangingLightNightCome;
+    }
+    
+    private void OnDisable()
+    {
+        ChangingLight.NightCome -= ChangingLightNightCome;
+    }
+
+    private void ChangingLightNightCome(bool isNight)
+    {
+        OnHeadlights(isNight);
+    }
+    
+    private void OnHeadlights(bool on)
+    {
+        for (int i = 0; i < _headLights.Length; i++)
         {
-            _leftHeadlight.GetComponent<Light>().enabled = true;
-            _rightHeadlight.GetComponent<Light>().enabled = true;
-        }
-        else
-        {
-            _leftHeadlight.GetComponent<Light>().enabled = false;
-            _rightHeadlight.GetComponent<Light>().enabled = false;
+            _headLights[i].gameObject.SetActive(on);
         }
     }
 }

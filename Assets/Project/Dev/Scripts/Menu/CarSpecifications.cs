@@ -12,6 +12,7 @@ public class CarSpecifications : MonoBehaviour
     private const string MainMenu = "Menu";
     private const string Game = "Game";
     private const string KeyCar = "Car";
+    
     private const string KeyScore = "Score";
 
     [SerializeField]
@@ -102,13 +103,7 @@ public class CarSpecifications : MonoBehaviour
         var indexCar = Array.IndexOf(_cars ,_car);
         var prevCar = indexCar == 0 ? _cars[_cars.Length - 1] : _cars[indexCar - 1];
         
-        _car.gameObject.SetActive(false);
-
-        _car = CheckNewCar(prevCar);
-        
-        _car.gameObject.SetActive(true);
-        
-        SetValue();
+        SetCar(prevCar);
     }
 
     private void NextCar()
@@ -116,9 +111,14 @@ public class CarSpecifications : MonoBehaviour
         var indexCar = Array.IndexOf(_cars ,_car);
         var nextCar = indexCar == _cars.Length - 1 ? _cars[0] : _cars[indexCar + 1];
         
+        SetCar(nextCar);
+    }
+
+    private void SetCar(Car car)
+    {
         _car.gameObject.SetActive(false);
         
-        _car = CheckNewCar(nextCar);
+        _car = CheckNewCar(car);
         
         _car.gameObject.SetActive(true);
         
@@ -142,6 +142,7 @@ public class CarSpecifications : MonoBehaviour
         }
 
         _lock.gameObject.SetActive(false);
+        
         return newCar;
     }
 

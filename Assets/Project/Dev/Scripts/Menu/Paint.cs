@@ -6,8 +6,8 @@ namespace Project.Dev.Scripts.Menu
 {
     public class Paint : MonoBehaviour
     {
-        private const string KeyUrusColor = "Uruscolor";
-        private const string KeyLadaColor = "Ladacolor";
+        private const string KeyUrusColor = "UrusColor";
+        private const string KeyLadaColor = "LadaColor";
         
         private readonly Dictionary<Car, List<Button>> ButtonDictionary = new Dictionary<Car, List<Button>>();
 

@@ -11,9 +11,9 @@ namespace Project.Dev.Scripts.Menu
         [SerializeField]
         private TextMeshProUGUI _text = null;
 
-        public void Score(int str)
+        public void Score(int score)
         {
-            _text.text = String.Format(score, str);
+            _text.text = String.Format(Lock.score, score);
         }
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &640412172690649310
 Transform:
   m_ObjectHideFlags: 0
@@ -38,7 +38,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836214121857390238}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8749463906230616250
 Transform:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291569891212827530}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681704ddcca1c34448a4666630215f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftHeadlight: {fileID: 6616089205942057519}
-  _rightHeadlight: {fileID: 1903135532902008602}
-  _changingLight: {fileID: 0}
+  _headLights:
+  - {fileID: 1903135532902008602}
+  - {fileID: 6616089205942057519}
 --- !u!1001 &559117641751581689
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,13 +16,13 @@ namespace Project.Dev.Scripts
 
         private void OnEnable()
         {
-            Urus.Drove += Urus_Drove;
+            Car.Drove += Car_Drove;
             Car.Died += Car_Died;
         }
         
         private void OnDisable()
         {
-            Urus.Drove -= Urus_Drove;
+            Car.Drove -= Car_Drove;
             Car.Died -= Car_Died;
         }
 
@@ -34,7 +34,7 @@ namespace Project.Dev.Scripts
             }
         }
         
-        private void Urus_Drove(Vector3 drove)
+        private void Car_Drove(Vector3 drove)
         {
             _score = drove.z;
         }

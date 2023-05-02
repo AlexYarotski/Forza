@@ -9,15 +9,15 @@ namespace Project.Dev.Scripts.Menu
 
         private void OnEnable()
         {
-            Car.Died += Urus_Died;
+            Car.Died += Car_Died;
         }
 
         private void OnDisable()
         {
-            Car.Died -= Urus_Died;
+            Car.Died -= Car_Died;
         }
 
-        private void Urus_Died(Vector3 obj)
+        private void Car_Died(Vector3 obj)
         {
             _music.Stop();
         }

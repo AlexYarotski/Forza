@@ -35,12 +35,12 @@ public class ParticleManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Urus.Drove += Urus_Drove;
+        Car.Drove += Car_Drove;
     }
 
     private void OnDisable()
     {
-        Urus.Drove -= Urus_Drove;
+        Car.Drove -= Car_Drove;
     }
 
     public void Play(ParticleType type)
@@ -50,7 +50,7 @@ public class ParticleManager : MonoBehaviour
         particle.Play();
     }
     
-    private void Urus_Drove(Vector3 position)
+    private void Car_Drove(Vector3 position)
     {
         _onCarHitParticlePrefab.transform.position = position + DistanceToHood;
     }

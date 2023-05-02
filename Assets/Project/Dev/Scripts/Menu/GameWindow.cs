@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Project.Dev.Scripts.Menu;
 using TMPro;
 using UnityEngine;
@@ -34,21 +33,21 @@ namespace Project.Dev.Scripts
 
         private void OnEnable()
         {
-            Urus.Drove += Urus_Drove;
+            Car.Drove += Car_Drove;
             Score.Boost += Score_Boost;
-            Car.Died += Urus_Died;
+            Car.Died += Car_Died;
         }
 
         private void OnDisable()
         {
-            Urus.Drove -= Urus_Drove;
+            Car.Drove -= Car_Drove;
             Score.Boost -= Score_Boost;
-            Car.Died -= Urus_Died;
+            Car.Died -= Car_Died;
         }
 
-        private void Urus_Drove(Vector3 drove)
+        private void Car_Drove(Vector3 drove)
         {
-            _scoreTMPUGUI.text = Convert.ToString((int)drove.z);
+            _scoreTMPUGUI.text = $"{(int)drove.z}";
         }
         
         private void Score_Boost(float obj)
@@ -56,7 +55,7 @@ namespace Project.Dev.Scripts
             StartCoroutine(StyleScore());
         }
         
-        private void Urus_Died(Vector3 obj)
+        private void Car_Died(Vector3 obj)
         {
             gameObject.SetActive(false);
         }

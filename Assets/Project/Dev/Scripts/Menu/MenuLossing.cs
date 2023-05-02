@@ -39,15 +39,15 @@ public class MenuLossing : MonoBehaviour
 
     private void OnEnable()
     {
-        Car.Died += Urus_Died;
+        Car.Died += Car_Died;
     }
 
     private void OnDisable()
     {
-        Car.Died -= Urus_Died;
+        Car.Died -= Car_Died;
     }
     
-    private void Urus_Died(Vector3 position)
+    private void Car_Died(Vector3 position)
     {
         SetComponentsActive(true);
         

@@ -4,7 +4,7 @@ namespace Project.Dev.Scripts
 {
     public class Urus : Car
     {
-        private const string KeyColor = "Uruscolor";
+        private const string KeyColor = "UrusColor";
         
         [SerializeField]
         protected float _timeOfImmortality = 0;
@@ -25,6 +25,11 @@ namespace Project.Dev.Scripts
         {
             base.OnDisable();
         }
+        
+        private void FixedUpdate()
+        {
+            base.FixedUpdate();
+        }
 
         private void Update()
         {
@@ -35,11 +40,6 @@ namespace Project.Dev.Scripts
         {
             base.GetDamage();
         
-            if (_health <= 0)
-            {
-                return;   
-            }
-
             PlaySmoke();
             Brake();
 
