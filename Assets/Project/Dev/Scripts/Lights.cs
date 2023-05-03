@@ -7,17 +7,17 @@ public class Lights : MonoBehaviour
 
     private void OnEnable()
     {
-        ChangingLight.NightCome += ChangingLightNightCome;
+        ChangingLight.NightCome += ChangingLight_NightCome;
     }
     
     private void OnDisable()
     {
-        ChangingLight.NightCome -= ChangingLightNightCome;
+        ChangingLight.NightCome -= ChangingLight_NightCome;
     }
 
-    private void ChangingLightNightCome(bool isNight)
+    private void ChangingLight_NightCome(bool on)
     {
-        OnHeadlights(isNight);
+        OnHeadlights(on);
     }
     
     private void OnHeadlights(bool on)

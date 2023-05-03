@@ -36,7 +36,6 @@ public class ChangingLight : MonoBehaviour
 
             NightCome(false);
         }
-        
         else if (_timeOfDay >= 0.5f)
         {
             NightCome(true);

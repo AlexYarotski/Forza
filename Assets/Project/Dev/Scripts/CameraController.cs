@@ -4,18 +4,18 @@ namespace Project.Dev.Scripts
 {
     public class CameraController : MonoBehaviour
     {
+        private const string KeyCar = "Car";
+        
         [SerializeField]
         private Car[] _cars = null;
-
+        
         [SerializeField]
         private float _distanceToStop = 0;
         [SerializeField]
         private float _speedSilding = 0;
         
         private Vector3 _finalPosition = Vector3.zero;
-        
         private float deltaPosAxisZ = 0;
-
         private bool _isCarDied = false;
 
         private Car _car = null;
@@ -32,7 +32,8 @@ namespace Project.Dev.Scripts
 
         private void Start()
         {
-            _car = Search.ActiveCar(_cars);
+            _car = SetCar();
+            
             deltaPosAxisZ = transform.position.z - _car.transform.position.z;
         }
 
@@ -50,6 +51,24 @@ namespace Project.Dev.Scripts
             
             _finalPosition = new Vector3(transform.position.x, transform.position.y,
                 position.z + _distanceToStop);
+        }
+
+        private Car SetCar()
+        {
+            for (int i = 0; i < _cars.Length; i++)
+            {
+                if (_cars[i].GetType().ToString() == PlayerPrefs.GetString(KeyCar))
+                {
+                    _cars[i].gameObject.SetActive(true);
+                    return _cars[i];
+                }
+
+                _cars[i].gameObject.SetActive(false);
+            }
+            
+            _cars[0].gameObject.SetActive(true);
+            
+            return _cars[0];
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Project.Dev.Scripts
         
         [SerializeField]
         private Car[] _cars = null;
-
+        
         private void Awake()
         {
-            ChooseCar();
+            Preparation();
         }
 
-        private  void ChooseCar()
+        private void Preparation()
         {
             for (int i = 0; i < _cars.Length; i++)
             {

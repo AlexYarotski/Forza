@@ -6,6 +6,8 @@ namespace Project.Dev.Scripts
 {
     public class Generator : MonoBehaviour
     {
+        private const string KeyCar = "Car";
+        
         private readonly List<Chunk> ChunkList = new List<Chunk>();
 
         private readonly Dictionary<ChunkType, List<PooledType>> ChunkDictionary = new Dictionary<ChunkType, List<PooledType>>()
@@ -51,10 +53,10 @@ namespace Project.Dev.Scripts
         private PooledType _startChunk = default;
 
         private Car _car = null;
-        
+
         private void Start()
         {
-            _car = Search.ActiveCar(_cars);
+            _car = SetCar();
             
             ChooseChunk();
             StartGenerator();
@@ -76,6 +78,24 @@ namespace Project.Dev.Scripts
             }
         }
         
+        private Car SetCar()
+        {
+            for (int i = 0; i < _cars.Length; i++)
+            {
+                if (_cars[i].GetType().ToString() == PlayerPrefs.GetString(KeyCar))
+                {
+                    _cars[i].gameObject.SetActive(true);
+                    return _cars[i];
+                }
+
+                _cars[i].gameObject.SetActive(false);
+            }
+            
+            _cars[0].gameObject.SetActive(true);
+            
+            return _cars[0];
+        }
+
         private void ChooseChunk()
         {
             switch (_chunkType)
