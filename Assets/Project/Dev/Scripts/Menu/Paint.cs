@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +8,7 @@ namespace Project.Dev.Scripts.Menu
 {
     public class Paint : MonoBehaviour
     {
-        private const string KeyUrusColor = "UrusColor";
+        private const string KeyAudiColor = "AudiColor";
         private const string KeyLadaColor = "LadaColor";
         
         private readonly Dictionary<Car, List<Button>> ButtonDictionary = new Dictionary<Car, List<Button>>();
@@ -15,7 +17,7 @@ namespace Project.Dev.Scripts.Menu
         private ColorButton _buttonPrefab = null;
 
         [SerializeField]
-        private Renderer[] _urusElements = null;
+        private Renderer[] _audiElements = null;
         [SerializeField]
         private Renderer[] _ladaElements = null;
         
@@ -95,21 +97,21 @@ namespace Project.Dev.Scripts.Menu
 
         private void SetColor(Colors colors)
         {
-            if ((int)colors < 5)
+            if (_activeCar.GetType() == typeof(Audi))
             {
-                for (int i = 0; i < _urusElements.Length; i++)
+                for (int j = 0; j < _audiElements.Length; j++)
                 {
-                    _urusElements[i].sharedMaterial = _colorSetting.SelectMaterial(colors);
-                    
-                    PlayerPrefs.SetInt(KeyUrusColor, (int)colors);
+                    _audiElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
+
+                    PlayerPrefs.SetInt(KeyAudiColor, (int)colors);
                 }
             }
-            else if ((int)colors >= 5)
+            else if (_activeCar.GetType() == typeof(Lada))
             {
-                for (int i = 0; i < _ladaElements.Length; i++)
+                for (int j = 0; j < _ladaElements.Length; j++)
                 {
-                    _ladaElements[i].sharedMaterial = _colorSetting.SelectMaterial(colors);
-                    
+                    _ladaElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
+
                     PlayerPrefs.SetInt(KeyLadaColor, (int)colors);
                 }
             }

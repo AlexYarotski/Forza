@@ -25,11 +25,6 @@ namespace Project.Dev.Scripts
         {
             base.OnDisable();
         }
-
-        private void FixedUpdate()
-        {
-            base.FixedUpdate();
-        }
         
         private void Update()
         {

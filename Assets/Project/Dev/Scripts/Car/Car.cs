@@ -71,15 +71,12 @@ namespace Project.Dev.Scripts
             Score.Boost -= Score_Boost;
         }
 
-        protected void FixedUpdate()
-        {
-            Drove(transform.position);
-        }
-        
         protected void Update()
         {
             MoveForward();
             SetTurn();
+            
+            Drove(transform.position);
         }
 
         public virtual void GetDamage()
@@ -97,6 +94,8 @@ namespace Project.Dev.Scripts
         public void OnDie()
         {
             gameObject.SetActive(false);
+            
+            StopAllCoroutines();
             
             Died(transform.position);
         }

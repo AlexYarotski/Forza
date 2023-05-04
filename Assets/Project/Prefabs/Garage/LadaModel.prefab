@@ -73,6 +73,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6568845292754464750, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7064039627637747416, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
       propertyPath: m_Enabled
       value: 1

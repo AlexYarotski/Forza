@@ -6,7 +6,7 @@ namespace Project.Dev.Scripts.SceneContexts
     public class SceneContexts : MonoBehaviour
     {
         [field: SerializeField]
-        public UrusSetting UrusSetting
+        public AudiSetting AudiSetting
         {
             get;
             private set;
