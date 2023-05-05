@@ -19,36 +19,40 @@ namespace Project.Dev.Scripts.Menu
 
         private void OnEnable()
         {
-            CarSpecifications.PreviousCar += CarSpecifications_PreviousCar;
-            CarSpecifications.NextCar += CarSpecifications_NextCar;
+            PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
+            PodiumInputManager.NextCar += CarSpecifications_NextCar;
         }
 
         private void OnDisable()
         {
-            CarSpecifications.PreviousCar -= CarSpecifications_PreviousCar;
-            CarSpecifications.NextCar -= CarSpecifications_NextCar;
+            PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
+            PodiumInputManager.NextCar -= CarSpecifications_NextCar;
         }
 
         private void CarSpecifications_PreviousCar()
         {
-            _car.gameObject.SetActive(false);
-
-            var index = Array.IndexOf(_cars, _car);
-            
-            _car = index == 0 ? _cars[_cars.Length - 1] : _cars[index - 1];
-            
-            _car.gameObject.SetActive(true);
-            
-            PickedCar(_car);
+            SetNewCar(false);
         }
 
         private void CarSpecifications_NextCar()
+        {
+            SetNewCar(true);
+        }
+
+        private void SetNewCar(bool next)
         {
             _car.gameObject.SetActive(false);
 
             var index = Array.IndexOf(_cars, _car);
             
-            _car = index == _cars.Length - 1 ? _cars[0] : _cars[index +1];
+            if (next)
+            {
+                _car = index == _cars.Length - 1 ? _cars[0] : _cars[index +1];
+            }
+            else
+            {
+                _car = index == 0 ? _cars[_cars.Length - 1] : _cars[index - 1];
+            }
             
             _car.gameObject.SetActive(true);
 

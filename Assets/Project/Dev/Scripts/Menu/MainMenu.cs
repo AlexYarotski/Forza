@@ -1,13 +1,14 @@
-using System.Threading.Tasks;
+using System;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
+    
+    public static event Action<string> PickedScene = delegate {  }; 
     
     [SerializeField]
     private Button _garageButton = null;
@@ -26,45 +27,18 @@ public class MainMenu : MonoBehaviour
         _settingButton.onClick.AddListener(Setting);
     }
 
-    private void FixedUpdate()
-    {
-        if (!_setting.gameObject.activeSelf)
-        {
-            SetComponentsActive(true);
-        }
-    }
-
     private void PlayGame()
     {
-        UploadSceneAsync(Game);
+        PickedScene(Game);
     }
 
     private void Cancel()
     {
-        UploadSceneAsync(Garage);
+        PickedScene(Garage);
     }
 
     private void Setting()
     {
         _setting.gameObject.SetActive(true);
-
-        SetComponentsActive(false);
-    }
-    
-    private async void UploadSceneAsync(string sceneName)
-    {
-        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
-
-        while (!loadSceneAsync.isDone)
-        {
-            await Task.Yield();
-        }
-    }
-
-    private void SetComponentsActive(bool isActive)
-    {
-        _playButton.gameObject.SetActive(isActive);
-        _garageButton.gameObject.SetActive(isActive);
-        _settingButton.gameObject.SetActive(isActive);
     }
 }

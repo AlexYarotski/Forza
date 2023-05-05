@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Project.Dev.Scripts
         [Header("Health")]
         [SerializeField]
         protected int _health = 0;
+        [SerializeField]
+        protected float _timeOfImmortality = 0;
 
         [Header("Speed")]
         [SerializeField]
@@ -45,7 +48,6 @@ namespace Project.Dev.Scripts
 
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
-        
         private float _startSpeed = 0;
 
         public float Speed => _speed;
@@ -79,7 +81,7 @@ namespace Project.Dev.Scripts
             Drove(transform.position);
         }
 
-        public virtual void GetDamage()
+        public void GetDamage()
         {
             _health--;
 
@@ -89,6 +91,18 @@ namespace Project.Dev.Scripts
             {
                 OnDie();
             }
+            else if (_health == 1)
+            {
+                PlaySmoke();    
+            }
+            
+            if (_health >= 1)
+            {
+                var immortal = new Immortal(this).MakeImmortal(_timeOfImmortality);
+                StartCoroutine(immortal);
+            }
+            
+            Brake();
         }
 
         public void OnDie()
@@ -144,7 +158,7 @@ namespace Project.Dev.Scripts
             SetStartRotation();
         }
 
-        protected void Brake()
+        private void Brake()
         {
             _speed -= _brake * Time.deltaTime;
         }
@@ -188,6 +202,11 @@ namespace Project.Dev.Scripts
             {
                 _startSpeed += _boost;
             }
+        }
+        
+        private void PlaySmoke()
+        {
+            ParticleManager.Instance.Play(ParticleType.CarSmoke);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Project.Dev.Scripts
             for (int i = 0; i < renderers.Length; i++)
             {
                 startColor[i] = renderers[i].material.color;
-                renderers[i].material.color = Color.red;
+                renderers[i].material.color = Color.magenta;
             }
         
             yield return timeImmortality;

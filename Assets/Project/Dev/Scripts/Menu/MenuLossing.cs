@@ -1,8 +1,7 @@
-using System.Threading.Tasks;
+using System;
 using Project.Dev.Scripts;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuLossing : MonoBehaviour
@@ -11,6 +10,8 @@ public class MenuLossing : MonoBehaviour
     private const string GarageScene = "Garage";
     private const string Game = "Game";
     
+    public static event Action<string> PickedScene = delegate {  }; 
+
     private readonly string ScoreText = "Your Score \r\n {0}";
     
     [SerializeField]
@@ -53,30 +54,20 @@ public class MenuLossing : MonoBehaviour
         
         _score.text = string.Format(ScoreText, (int)position.z);
     }
-    
-    private async void UploadSceneAsync(string sceneName)
-    {
-        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!loadSceneAsync.isDone)
-        {
-            await Task.Yield();
-        }
-    }
-    
     private void Menu()
     {
-        UploadSceneAsync(MainMenu);
+        PickedScene(MainMenu);
     }
 
     private void Garage()
     {
-        UploadSceneAsync(GarageScene);
+        PickedScene(GarageScene);
     }
     
     private void Restart()
     {
-        UploadSceneAsync(Game);
+        PickedScene(Game);
     }
 
     private void SetComponentsActive(bool isActive)

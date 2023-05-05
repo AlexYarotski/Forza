@@ -32,7 +32,7 @@ namespace Project.Dev.Scripts
 
         private void Start()
         {
-            _car = SetCar();
+            SetCar();
             
             deltaPosAxisZ = transform.position.z - _car.transform.position.z;
         }
@@ -53,14 +53,14 @@ namespace Project.Dev.Scripts
                 position.z + _distanceToStop);
         }
 
-        private Car SetCar()
+        private void SetCar()
         {
             for (int i = 0; i < _cars.Length; i++)
             {
                 if (_cars[i].GetType().ToString() == PlayerPrefs.GetString(KeyCar))
                 {
                     _cars[i].gameObject.SetActive(true);
-                    return _cars[i];
+                    _car = _cars[i];
                 }
 
                 _cars[i].gameObject.SetActive(false);
@@ -68,7 +68,7 @@ namespace Project.Dev.Scripts
             
             _cars[0].gameObject.SetActive(true);
             
-            return _cars[0];
+            _car = _cars[0];
         }
     }
 }
