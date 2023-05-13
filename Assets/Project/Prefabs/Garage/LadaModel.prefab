@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8627728236445211269}
-  - component: {fileID: 7517265377910034200}
+  - component: {fileID: 6963341975584546265}
+  - component: {fileID: 2548724297425717696}
   m_Layer: 6
   m_Name: LadaModel
   m_TagString: Untagged
@@ -32,32 +33,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &7517265377910034200
+--- !u!114 &6963341975584546265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7255620065638656341}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425c7273d32547869e1c86f02419db61, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a50b6b1801542299fd536e0d0711401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
-  _speed: 10
-  _maxSpeed: 50
-  _speedTurn: 1.4
-  _brake: 0.6
-  _boost: 7
-  _speedRotation: 10
-  _speedReturnRotartion: 10
-  _rotationAngel: 200
-  _colorSetting: {fileID: 11400000, guid: 2bb1c8b36b337ed4da1b4ac6232d6580, type: 2}
-  _painElements:
+  paintElements:
   - {fileID: 3229923469490285788}
-  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  _timeOfImmortality: 1
+--- !u!114 &2548724297425717696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255620065638656341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30aa3833739c4d259faf33759f34406c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _carViewConfigs:
+  - <CarModelType>k__BackingField: 1
+    <CarPaintElements>k__BackingField: {fileID: 6963341975584546265}
 --- !u!1001 &8645723493252072242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71,10 +75,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1550254843591308995, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
       propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6568845292754464750, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7064039627637747416, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
@@ -129,6 +129,7 @@ PrefabInstance:
     - {fileID: 7064039627637747416, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
     - {fileID: 6748314715061254740, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
     - {fileID: 1550254843591308995, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
+    - {fileID: 2788302466812042564, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
 --- !u!4 &2026314941265242918 stripped
 Transform:

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de35efb563a45da90d3671b9844ed47, type: 3}
+  m_Name: CarDataSettings
+  m_EditorClassIdentifier: 
+  _carsData:
+  - <CarModelType>k__BackingField: 0
+    <Health>k__BackingField: 2
+    <TimeOfImmortality>k__BackingField: 1
+    <Speed>k__BackingField: 7
+    <MaxSpeed>k__BackingField: 30
+    <SpeedTurn>k__BackingField: 1.2
+    <Brake>k__BackingField: 0.6
+    <Boost>k__BackingField: 7
+    <SpeedRotation>k__BackingField: 10
+    <SpeedReturnRotation>k__BackingField: 10
+    <RotationAngel>k__BackingField: 200
+    <ColorSetting>k__BackingField: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
+    <RoadBounds>k__BackingField: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
+  - <CarModelType>k__BackingField: 1
+    <Health>k__BackingField: 2
+    <TimeOfImmortality>k__BackingField: 1
+    <Speed>k__BackingField: 7
+    <MaxSpeed>k__BackingField: 30
+    <SpeedTurn>k__BackingField: 1.2
+    <Brake>k__BackingField: 0.6
+    <Boost>k__BackingField: 7
+    <SpeedRotation>k__BackingField: 10
+    <SpeedReturnRotation>k__BackingField: 10
+    <RotationAngel>k__BackingField: 200
+    <ColorSetting>k__BackingField: {fileID: 11400000, guid: 2bb1c8b36b337ed4da1b4ac6232d6580, type: 2}
+    <RoadBounds>k__BackingField: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}

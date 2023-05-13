@@ -36,12 +36,12 @@ namespace Project.Dev.Scripts.Menu
 
         private void OnEnable()
         {
-            Podium.PickedCar += Podium_PickedCar;
+            ModelCar.PickedCar += Podium_PickedCar;
         }
 
         private void OnDisable()
         {
-            Podium.PickedCar -= Podium_PickedCar;
+            ModelCar.PickedCar -= Podium_PickedCar;
         }
 
         private void Start()

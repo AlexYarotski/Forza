@@ -532,9 +532,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5144755251539798727}
-  - component: {fileID: 6809243713997965075}
   - component: {fileID: 4899898346806354765}
   - component: {fileID: 1667927531545136360}
+  - component: {fileID: 7073124226849083059}
   m_Layer: 6
   m_Name: Audi
   m_TagString: Untagged
@@ -558,32 +558,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &6809243713997965075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5144755251539965607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 2
-  _timeOfImmortality: 1
-  _speed: 7
-  _maxSpeed: 30
-  _speedTurn: 1.2
-  _brake: 0.6
-  _boost: 7
-  _speedRotation: 10
-  _speedReturnRotartion: 10
-  _rotationAngel: 200
-  _colorSetting: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
-  _painElements:
-  - {fileID: 5144755251542222853}
-  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
 --- !u!65 &4899898346806354765
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -613,6 +587,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7073124226849083059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144755251539965607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4102d1fef644c1ac2049b76a256ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5144755251539965609
 GameObject:
   m_ObjectHideFlags: 0

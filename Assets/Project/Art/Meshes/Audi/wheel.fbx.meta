@@ -1,37 +1,89 @@
 fileFormatVersion: 2
 guid: 7fc5e78f5bf33a04e9490bb5454fc968
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: caliper-fl
-    100002: disk-fl
-    100004: rim-fl
-    100006: tire1-fl
-    100008: //RootNode
-    400000: caliper-fl
-    400002: disk-fl
-    400004: rim-fl
-    400006: tire1-fl
-    400008: //RootNode
-    2100000: tire-brakes
-    2100002: rim
-    2300000: caliper-fl
-    2300002: disk-fl
-    2300004: rim-fl
-    2300006: tire1-fl
-    3300000: caliper-fl
-    3300002: disk-fl
-    3300004: rim-fl
-    3300006: tire1-fl
-    4300000: disk-fl
-    4300002: caliper-fl
-    4300004: tire1-fl
-    4300006: rim-fl
-    7400000: Take 001
-    9500000: //RootNode
+  serializedVersion: 20300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: caliper-fl
+  - first:
+      1: 100002
+    second: disk-fl
+  - first:
+      1: 100004
+    second: rim-fl
+  - first:
+      1: 100006
+    second: tire1-fl
+  - first:
+      1: 100008
+    second: //RootNode
+  - first:
+      4: 400000
+    second: caliper-fl
+  - first:
+      4: 400002
+    second: disk-fl
+  - first:
+      4: 400004
+    second: rim-fl
+  - first:
+      4: 400006
+    second: tire1-fl
+  - first:
+      4: 400008
+    second: //RootNode
+  - first:
+      21: 2100000
+    second: tire-brakes
+  - first:
+      21: 2100002
+    second: rim
+  - first:
+      23: 2300000
+    second: caliper-fl
+  - first:
+      23: 2300002
+    second: disk-fl
+  - first:
+      23: 2300004
+    second: rim-fl
+  - first:
+      23: 2300006
+    second: tire1-fl
+  - first:
+      33: 3300000
+    second: caliper-fl
+  - first:
+      33: 3300002
+    second: disk-fl
+  - first:
+      33: 3300004
+    second: rim-fl
+  - first:
+      33: 3300006
+    second: tire1-fl
+  - first:
+      43: 4300000
+    second: disk-fl
+  - first:
+      43: 4300002
+    second: caliper-fl
+  - first:
+      43: 4300004
+    second: tire1-fl
+  - first:
+      43: 4300006
+    second: rim-fl
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -64,25 +116,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -91,10 +150,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  importAnimation: 1
-  copyAvatar: 0
+  referencedClips: []
+  importAnimation: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -104,13 +163,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

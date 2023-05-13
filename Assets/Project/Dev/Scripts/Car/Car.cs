@@ -1,50 +1,27 @@
 ﻿using System;
-using System.Collections;
 using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
 namespace Project.Dev.Scripts
 {
-    public abstract class Car : MonoBehaviour, IDamageable
+    public class Car : MonoBehaviour, IDamageable
     {
         public static event Action<Vector3> Died = delegate { };
         public static event Action<Vector3> Drove = delegate { };
         
-        [Header("Health")]
-        [SerializeField]
-        protected int _health = 0;
-        [SerializeField]
-        protected float _timeOfImmortality = 0;
-
-        [Header("Speed")]
-        [SerializeField]
-        protected float _speed = 0;
-        [SerializeField]
-        protected float _maxSpeed = 0;
-        [SerializeField]
-        protected float _speedTurn = 0;
-        [SerializeField]
-        protected float _brake = 0;
-        [SerializeField]
-        protected float _boost = 0;
-
-        [Header("Rotation")]
-        [SerializeField]
-        protected float _speedRotation = 0;
-        [SerializeField]
-        protected float _speedReturnRotartion = 0;
-        [SerializeField]
-        protected float _rotationAngel = 0;
-
-        [Header("Paint")]
-        [SerializeField]
+        private int _health = 0;
+        private float _timeOfImmortality = 0;
+        private float _speed = 0;
+        private float _maxSpeed = 0;
+        private float _speedTurn = 0;
+        private float _brake = 0;
+        private float _boost = 0;
+        private float _speedRotation = 0;
+        private float _speedReturnRotation = 0;
+        private float _rotationAngel = 0;
         private ColorSetting _colorSetting = null;
-        [SerializeField]
-        protected Renderer[] _painElements = null;
-
-        [Header("Other")]
-        [SerializeField]
-        protected RoadBounds _roadBounds = null;
+        private Renderer[] _painElements = null;
+        private RoadBounds _roadBounds = null;
 
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
@@ -55,25 +32,54 @@ namespace Project.Dev.Scripts
         public int Health => _health;
         public ColorSetting ColorSetting => _colorSetting;
 
-        protected void Awake()
+        public CarDataSettings CarDataSettings
         {
+            get;
+            private set;
+        }
+
+        public CarViewDataSettings CarViewDataSettings
+        {
+            get;
+            private set;
+        }
+
+        private void Awake()
+        {
+            var carType = (CarModelType)PlayerPrefs.GetInt("Car");
+            var carData = SceneContexts.Instance.CarDataSettings.GetCarData(carType);
+
+            _health = carData.Health;
+            _timeOfImmortality = carData.TimeOfImmortality;
+            _speed = carData.Speed;
+            _maxSpeed = carData.MaxSpeed;
+            _speedTurn = carData.SpeedTurn;
+            _brake = carData.Brake;
+            _boost = carData.Boost;
+            _speedRotation = carData.SpeedRotation;
+            _speedReturnRotation = carData.SpeedReturnRotation;
+            _rotationAngel =carData.RotationAngel;
+            _colorSetting = carData.ColorSetting;
+            _painElements = carData.PainElements;
+            _roadBounds = carData.RoadBounds;
+                
             _startSpeed = _speed;
             _dragPosition = transform.position;
         }
 
-        protected void OnEnable()
+        private void OnEnable()
         {
             SwipeController.Dragged += SwipeController_Dragged;
             Score.Boost += Score_Boost;
         }
 
-        protected void OnDisable()
+        private void OnDisable()
         {
             SwipeController.Dragged += SwipeController_Dragged;
             Score.Boost -= Score_Boost;
         }
 
-        protected void Update()
+        private void Update()
         {
             MoveForward();
             SetTurn();
@@ -114,7 +120,7 @@ namespace Project.Dev.Scripts
             Died(transform.position);
         }
         
-        protected void SetColor(string key)
+        private void SetColor(string key)
         {
             var numberColor = PlayerPrefs.GetInt(key);
             var newMaterial = _colorSetting.SelectMaterial((Colors)numberColor);
@@ -193,7 +199,7 @@ namespace Project.Dev.Scripts
         private void SetStartRotation()
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, 
-                _speedReturnRotartion * Time.deltaTime);
+                _speedReturnRotation * Time.deltaTime);
         }
         
         private void Score_Boost(float boost)

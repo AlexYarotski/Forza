@@ -1702,7 +1702,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3664350744422040329}
-  - component: {fileID: 3152800279779684061}
+  - component: {fileID: 4202501069257049433}
+  - component: {fileID: -1660238448669526805}
   m_Layer: 0
   m_Name: AudiModel
   m_TagString: Untagged
@@ -1717,7 +1718,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3664350744421687145}
-  m_LocalRotation: {x: -0, y: 0.4539906, z: -0, w: 0.8910065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1725,33 +1726,36 @@ Transform:
   - {fileID: 4913522662518811192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &3152800279779684061
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4202501069257049433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3664350744421687145}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a50b6b1801542299fd536e0d0711401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 2
-  _speed: 7
-  _maxSpeed: 30
-  _speedTurn: 1.2
-  _brake: 0.6
-  _boost: 7
-  _speedRotation: 10
-  _speedReturnRotartion: 10
-  _rotationAngel: 200
-  _colorSetting: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
-  _painElements:
+  paintElements:
   - {fileID: 3664350744419746251}
-  _roadBounds: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
-  _timeOfImmortality: 1
+--- !u!114 &-1660238448669526805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3664350744421687145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30aa3833739c4d259faf33759f34406c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _carViewConfigs:
+  - <CarModelType>k__BackingField: 0
+    <CarPaintElements>k__BackingField: {fileID: 4202501069257049433}
 --- !u!1 &3664350744421687147
 GameObject:
   m_ObjectHideFlags: 0

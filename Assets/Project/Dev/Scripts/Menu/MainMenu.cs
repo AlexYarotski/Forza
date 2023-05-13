@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
-    
+    private const string KeyCar = "Car";
     public static event Action<string> PickedScene = delegate {  }; 
     
     [SerializeField]
@@ -25,6 +25,11 @@ public class MainMenu : MonoBehaviour
         _playButton.onClick.AddListener(PlayGame);
         _garageButton.onClick.AddListener(Cancel);
         _settingButton.onClick.AddListener(Setting);
+
+        if (!PlayerPrefs.HasKey(KeyCar))
+        {
+            PlayerPrefs.SetInt(KeyCar, 0);
+        }
     }
 
     private void PlayGame()

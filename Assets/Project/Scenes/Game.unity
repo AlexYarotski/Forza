@@ -411,8 +411,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 103901626}
   _cars:
-  - {fileID: 535102684}
-  - {fileID: 466101792}
+  - {fileID: 0}
+  - {fileID: 0}
   _chunkType: 1
   _quantityAtStart: 3
   _distanceForSpawnChunk: 50
@@ -459,12 +459,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 276059380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b5edce29024206a4004a01c2b77d01, type: 3}
+  m_Script: {fileID: 11500000, guid: 30aa3833739c4d259faf33759f34406c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cars:
-  - {fileID: 535102684}
-  - {fileID: 466101792}
+  _carViewConfigs:
+  - <CarModelType>k__BackingField: 0
+    <CarView>k__BackingField: {fileID: 535102684}
+  - <CarModelType>k__BackingField: 1
+    <CarView>k__BackingField: {fileID: 5432734786422043470}
 --- !u!1001 &344572834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -632,17 +634,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3582357500286365436, guid: fa57fa91d8e611c4a9fb6afa225fd268, type: 3}
   m_PrefabInstance: {fileID: 456857045}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &466101792 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1550254843591308995, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
-  m_PrefabInstance: {fileID: 5432734786422043469}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425c7273d32547869e1c86f02419db61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &466101793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7774669817476573204, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
@@ -839,19 +830,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6809243713997965075, guid: 5e1f1e4eda7b3f84a95afae22bd7c87e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e1f1e4eda7b3f84a95afae22bd7c87e, type: 3}
---- !u!114 &535102684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6809243713997965075, guid: 5e1f1e4eda7b3f84a95afae22bd7c87e, type: 3}
+--- !u!1 &535102684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5144755251539965607, guid: 5e1f1e4eda7b3f84a95afae22bd7c87e, type: 3}
   m_PrefabInstance: {fileID: 535102683}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7932d4fa0b414cbea2a171192306b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &542584201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,8 +1127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cars:
-  - {fileID: 535102684}
-  - {fileID: 466101792}
+  - {fileID: 0}
+  - {fileID: 0}
   _distanceToStop: 4
   _speedSilding: 4
 --- !u!114 &963194230
@@ -1234,8 +1220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolManager: {fileID: 103901626}
   _cars:
-  - {fileID: 535102684}
-  - {fileID: 466101792}
+  - {fileID: 0}
+  - {fileID: 0}
   _chunkType: 0
   _quantityAtStart: 3
   _distanceForSpawnChunk: 50
@@ -1755,7 +1741,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3432960555825875856, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
+    - {fileID: 1550254843591308995, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
+--- !u!1 &5432734786422043470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 909521731444144842, guid: f2e71a7f7b25132449133d0f95482df9, type: 3}
+  m_PrefabInstance: {fileID: 5432734786422043469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7128823608249785752
 PrefabInstance:
   m_ObjectHideFlags: 0

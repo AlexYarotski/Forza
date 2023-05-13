@@ -37,7 +37,7 @@ namespace Project.Dev.Scripts
             deltaPosAxisZ = transform.position.z - _car.transform.position.z;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             var position = transform.position;
             

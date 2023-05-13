@@ -1,62 +1,58 @@
-﻿using System;
 using UnityEngine;
 
-namespace Project.Dev.Scripts.Menu
+public class Podium : MonoBehaviour
 {
-    public class Podium : MonoBehaviour
+    [SerializeField]
+    private float _startSpeedRotation = 0;
+    [SerializeField]
+    private float _speedRotation = 0;
+
+    private bool _endSwiped = false;
+    
+    private Quaternion _nextRotation = Quaternion.identity;
+    private Quaternion _dragRotation = Quaternion.identity;
+
+    private void Awake()
     {
-        public static event Action<Car> PickedCar = delegate{  };
-        
-        [SerializeField]
-        private Car[] _cars = null;
+        _endSwiped = true;
+        _dragRotation = transform.rotation;
+    }
 
-        private Car _car = null;
+    private void OnEnable()
+    {
+        SwipeController.Dragged += SwipeController_Dragged;
+        SwipeController.EndDragged += SwipeController_EndDragged;
+    }
 
-        private void Awake()
+    private void OnDisable()
+    {
+        SwipeController.Dragged -= SwipeController_Dragged;
+        SwipeController.EndDragged -= SwipeController_EndDragged;
+    }
+
+    private void Update()
+    {
+        if (_endSwiped)
         {
-            _car = _cars[0];
+            transform.Rotate(0, _startSpeedRotation * Time.deltaTime, 0);
         }
-
-        private void OnEnable()
+        else
         {
-            PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
-            PodiumInputManager.NextCar += CarSpecifications_NextCar;
+            transform.rotation = _nextRotation;
+            _dragRotation = transform.rotation;
         }
+    }
 
-        private void OnDisable()
-        {
-            PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
-            PodiumInputManager.NextCar -= CarSpecifications_NextCar;
-        }
+    private void SwipeController_Dragged(Vector3 dragPositionVector3)
+    {
+        var newDragPosition = new Vector3(0, -dragPositionVector3.x, 0);
 
-        private void CarSpecifications_PreviousCar()
-        {
-            SetNewCar(false);
-        }
+        _nextRotation.eulerAngles = _dragRotation.eulerAngles + newDragPosition * (_speedRotation * Time.deltaTime);
+        _endSwiped = false;
+    }
 
-        private void CarSpecifications_NextCar()
-        {
-            SetNewCar(true);
-        }
-
-        private void SetNewCar(bool next)
-        {
-            _car.gameObject.SetActive(false);
-
-            var index = Array.IndexOf(_cars, _car);
-            
-            if (next)
-            {
-                _car = index == _cars.Length - 1 ? _cars[0] : _cars[index +1];
-            }
-            else
-            {
-                _car = index == 0 ? _cars[_cars.Length - 1] : _cars[index - 1];
-            }
-            
-            _car.gameObject.SetActive(true);
-
-            PickedCar(_car);
-        }
+    private void SwipeController_EndDragged(Vector3 dragPositionVector3)
+    {
+        _endSwiped = true;
     }
 }

@@ -1,58 +1,92 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class ModelCar : MonoBehaviour
+namespace Project.Dev.Scripts.Menu
 {
-    [SerializeField]
-    private float _startSpeedRotation = 0;
-    [SerializeField]
-    private float _speedRotation = 0;
-
-    private bool _endSwiped = false;
-    
-    private Quaternion _nextRotation = Quaternion.identity;
-    private Quaternion _dragRotation = Quaternion.identity;
-
-    private void Awake()
+    public class ModelCar : MonoBehaviour
     {
-        _endSwiped = true;
-        _dragRotation = transform.rotation;
-    }
+        private const string KeyCar = "Car";
+        
+        public static event Action<Car> PickedCar = delegate{  };
+        
+        [SerializeField]
+        private Car _car = null;
+        
+        private CarModelType _carModelType = default;
+        private List<CarViewDataSettings.CarViewData> _сarViewDataList = new List<CarViewDataSettings.CarViewData>();
+        private CarViewDataSettings.CarViewData _currentCar = null;
 
-    private void OnEnable()
-    {
-        SwipeController.Dragged += SwipeController_Dragged;
-        SwipeController.EndDragged += SwipeController_EndDragged;
-    }
-
-    private void OnDisable()
-    {
-        SwipeController.Dragged -= SwipeController_Dragged;
-        SwipeController.EndDragged -= SwipeController_EndDragged;
-    }
-
-    private void Update()
-    {
-        if (_endSwiped)
+        private void Awake()
         {
-            transform.Rotate(0, _startSpeedRotation * Time.deltaTime, 0);
+            _carModelType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+            
+            CreateCarView();
         }
-        else
+
+        private void OnEnable()
         {
-            transform.rotation = _nextRotation;
-            _dragRotation = transform.rotation;
+            PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
+            PodiumInputManager.NextCar += CarSpecifications_NextCar;
         }
-    }
 
-    private void SwipeController_Dragged(Vector3 dragPositionVector3)
-    {
-        var newDragPosition = new Vector3(0, -dragPositionVector3.x, 0);
+        private void OnDisable()
+        {
+            PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
+            PodiumInputManager.NextCar -= CarSpecifications_NextCar;
+        }
 
-        _nextRotation.eulerAngles = _dragRotation.eulerAngles + newDragPosition * (_speedRotation * Time.deltaTime);
-        _endSwiped = false;
-    }
+        private void CarSpecifications_PreviousCar()
+        {
+            SetNewCar(false);
+        }
 
-    private void SwipeController_EndDragged(Vector3 dragPositionVector3)
-    {
-        _endSwiped = true;
+        private void CarSpecifications_NextCar()
+        {
+            SetNewCar(true);
+        }
+
+        private void CreateCarView()
+        {
+            for (int i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
+            {
+                _сarViewDataList.Add(SceneContexts.Instance.CarViewDataSettings.GetCarViewData((CarModelType)i)); 
+                Instantiate(_сarViewDataList[i].CarView, transform);
+            }
+
+            _currentCar = _сarViewDataList.FirstOrDefault(cd => cd.CarModelType == _carModelType);
+        }
+        
+        private void SetNewCar(bool next)
+        {
+            if (next)
+            {
+                if (_сarViewDataList.IndexOf(_currentCar) == _сarViewDataList.Count - 1)
+                {
+                    
+                    _currentCar = _сarViewDataList[0];
+                }
+                else
+                {
+                    _currentCar = _сarViewDataList[_сarViewDataList.IndexOf(_currentCar) + 1];
+                }
+            }
+            else
+            {
+                if (_сarViewDataList.IndexOf(_currentCar) == 0)
+                {
+                    _carModelType = (CarModelType)Enum.GetNames(typeof(CarModelType)).Length - 1;
+                }
+                else
+                {
+                    _carModelType = (CarModelType)(int)_carModelType - 1;
+                }
+            }
+            
+            PlayerPrefs.SetInt(KeyCar,(int)_carModelType);
+
+            PickedCar(_car);
+        }
     }
 }

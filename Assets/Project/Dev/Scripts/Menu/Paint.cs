@@ -28,12 +28,12 @@ namespace Project.Dev.Scripts.Menu
 
         private void OnEnable()
         {
-            Podium.PickedCar += Podium_PickedCar;
+            ModelCar.PickedCar += Podium_PickedCar;
         }
         
         private void OnDisable()
         {
-            Podium.PickedCar -= Podium_PickedCar;
+            ModelCar.PickedCar -= Podium_PickedCar;
         }
 
         private void Start()
@@ -84,7 +84,7 @@ namespace Project.Dev.Scripts.Menu
                 var colorButton = Instantiate(_buttonPrefab, transform);
                 
                 colorButton.image.color = colorConfigs[i].Color;
-                colorButton.Setup(colorConfigs[i].Colors, SetColor);
+                //colorButton.Setup(colorConfigs[i].Colors, SetColor);
                 colorButton.gameObject.SetActive(false);
                 
                 listButton.Add(colorButton);
@@ -93,26 +93,26 @@ namespace Project.Dev.Scripts.Menu
             return listButton;
         }
 
-        private void SetColor(Colors colors)
-        {
-            if (_activeCar.GetType() == typeof(Audi))
-            {
-                for (int j = 0; j < _audiElements.Length; j++)
-                {
-                    _audiElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
-
-                    PlayerPrefs.SetInt(KeyAudiColor, (int)colors);
-                }
-            }
-            else if (_activeCar.GetType() == typeof(Lada))
-            {
-                for (int j = 0; j < _ladaElements.Length; j++)
-                {
-                    _ladaElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
-
-                    PlayerPrefs.SetInt(KeyLadaColor, (int)colors);
-                }
-            }
-        }
+        // private void SetColor(Colors colors)
+        // {
+        //     if (_activeCar.GetType() == typeof(Audi))
+        //     {
+        //         for (int j = 0; j < _audiElements.Length; j++)
+        //         {
+        //             _audiElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
+        //
+        //             PlayerPrefs.SetInt(KeyAudiColor, (int)colors);
+        //         }
+        //     }
+        //     else if (_activeCar.GetType() == typeof(Lada))
+        //     {
+        //         for (int j = 0; j < _ladaElements.Length; j++)
+        //         {
+        //             _ladaElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
+        //
+        //             PlayerPrefs.SetInt(KeyLadaColor, (int)colors);
+        //         }
+        //     }
+        // }
     }
 }
