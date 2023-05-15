@@ -35,4 +35,20 @@ public class CarView : MonoBehaviour
             _carViewConfigs[i].CarPaintElements.gameObject.SetActive((int)_carViewConfigs[i].CarModelType == PlayerPrefs.GetInt(KeyCar));
         }
     }
+
+    public void OnActive()
+    {
+        for (int i = 0; i < _carViewConfigs.Length; i++)
+        {
+            _carViewConfigs[i].CarPaintElements.gameObject.SetActive(true);
+        }
+    }
+
+    public void OffActive()
+    {
+        for (int i = 0; i < _carViewConfigs.Length; i++)
+        {
+            _carViewConfigs[i].CarPaintElements.gameObject.SetActive(false);
+        }
+    }
 }

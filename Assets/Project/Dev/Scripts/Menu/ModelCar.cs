@@ -8,12 +8,7 @@ namespace Project.Dev.Scripts.Menu
     public class ModelCar : MonoBehaviour
     {
         private const string KeyCar = "Car";
-        
-        public static event Action<Car> PickedCar = delegate{  };
-        
-        [SerializeField]
-        private Car _car = null;
-        
+
         private CarModelType _carModelType = default;
         private List<CarViewDataSettings.CarViewData> _сarViewDataList = new List<CarViewDataSettings.CarViewData>();
         private CarViewDataSettings.CarViewData _currentCar = null;
@@ -51,8 +46,11 @@ namespace Project.Dev.Scripts.Menu
         {
             for (int i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
             {
-                _сarViewDataList.Add(SceneContexts.Instance.CarViewDataSettings.GetCarViewData((CarModelType)i)); 
-                Instantiate(_сarViewDataList[i].CarView, transform);
+                var newCarViewData = SceneContexts.Instance.CarViewDataSettings.GetCarViewData((CarModelType)i);
+                
+                Instantiate(newCarViewData.CarView, transform);
+                
+                _сarViewDataList.Add(newCarViewData); 
             }
 
             _currentCar = _сarViewDataList.FirstOrDefault(cd => cd.CarModelType == _carModelType);
@@ -60,11 +58,12 @@ namespace Project.Dev.Scripts.Menu
         
         private void SetNewCar(bool next)
         {
+            _currentCar.CarView.OffActive();
+            
             if (next)
             {
                 if (_сarViewDataList.IndexOf(_currentCar) == _сarViewDataList.Count - 1)
                 {
-                    
                     _currentCar = _сarViewDataList[0];
                 }
                 else
@@ -76,17 +75,17 @@ namespace Project.Dev.Scripts.Menu
             {
                 if (_сarViewDataList.IndexOf(_currentCar) == 0)
                 {
-                    _carModelType = (CarModelType)Enum.GetNames(typeof(CarModelType)).Length - 1;
+                    _currentCar = _сarViewDataList[_сarViewDataList.Count - 1];
                 }
                 else
                 {
-                    _carModelType = (CarModelType)(int)_carModelType - 1;
+                    _currentCar = _сarViewDataList[_сarViewDataList.IndexOf(_currentCar) - 1];
                 }
             }
             
-            PlayerPrefs.SetInt(KeyCar,(int)_carModelType);
-
-            PickedCar(_car);
+            _currentCar.CarView.OnActive();
+              
+            PlayerPrefs.SetInt(KeyCar,(int)_currentCar.CarModelType);
         }
     }
 }
