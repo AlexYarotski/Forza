@@ -2,7 +2,6 @@
 using Project.Dev.Scripts;
 using UnityEngine;
 
-[Serializable]
 public class CarView : MonoBehaviour
 {
     private const string KeyCar = "Car";
@@ -18,37 +17,43 @@ public class CarView : MonoBehaviour
         }
 
         [field: SerializeField]
-        public CarPaintElements CarPaintElements
+        public PaintElement PaintElement
         {
             get;
             private set;
         }
     }
     
-    [field: SerializeField]
+    [SerializeField]
     private CarViewConfigs[] _carViewConfigs = null;
 
     private void Start()
     {
         for (var i = 0; i < _carViewConfigs.Length; i++)
         {
-            _carViewConfigs[i].CarPaintElements.gameObject.SetActive((int)_carViewConfigs[i].CarModelType == PlayerPrefs.GetInt(KeyCar));
+            if ((int)_carViewConfigs[i].CarModelType == PlayerPrefs.GetInt(KeyCar))
+            {
+                _carViewConfigs[i].PaintElement.Enable();
+            }
+            else
+            {
+                _carViewConfigs[i].PaintElement.Disable();
+            }
         }
     }
 
-    public void OnActive()
+    public PaintElement GetPaintElements(CarModelType carModelType)
     {
         for (int i = 0; i < _carViewConfigs.Length; i++)
         {
-            _carViewConfigs[i].CarPaintElements.gameObject.SetActive(true);
+            if (_carViewConfigs[i].CarModelType == carModelType)
+            {
+                return _carViewConfigs[i].PaintElement;
+            }
         }
-    }
-
-    public void OffActive()
-    {
-        for (int i = 0; i < _carViewConfigs.Length; i++)
-        {
-            _carViewConfigs[i].CarPaintElements.gameObject.SetActive(false);
-        }
+        
+        Debug.LogError("The are no elements of this type!");
+        
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Project.Dev.Scripts
 {
-    public enum Colors
+    public enum ColorName
     {
         WhiteAudi = 0,
         BlueAudi = 1,

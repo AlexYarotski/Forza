@@ -25,17 +25,19 @@ MonoBehaviour:
     <SpeedReturnRotation>k__BackingField: 10
     <RotationAngel>k__BackingField: 200
     <ColorSetting>k__BackingField: {fileID: 11400000, guid: 99e34ad5f177b68469feb9e4bf1d9781, type: 2}
+    <PainElements>k__BackingField: []
     <RoadBounds>k__BackingField: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}
   - <CarModelType>k__BackingField: 1
-    <Health>k__BackingField: 2
+    <Health>k__BackingField: 3
     <TimeOfImmortality>k__BackingField: 1
-    <Speed>k__BackingField: 7
-    <MaxSpeed>k__BackingField: 30
-    <SpeedTurn>k__BackingField: 1.2
+    <Speed>k__BackingField: 10
+    <MaxSpeed>k__BackingField: 50
+    <SpeedTurn>k__BackingField: 1.4
     <Brake>k__BackingField: 0.6
     <Boost>k__BackingField: 7
     <SpeedRotation>k__BackingField: 10
     <SpeedReturnRotation>k__BackingField: 10
     <RotationAngel>k__BackingField: 200
     <ColorSetting>k__BackingField: {fileID: 11400000, guid: 2bb1c8b36b337ed4da1b4ac6232d6580, type: 2}
+    <PainElements>k__BackingField: []
     <RoadBounds>k__BackingField: {fileID: 4986745403747551136, guid: 41768472602b6f24c902c81f1ccbf9f4, type: 3}

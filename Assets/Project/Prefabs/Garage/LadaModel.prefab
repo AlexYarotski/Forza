@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a50b6b1801542299fd536e0d0711401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintElements:
+  _elements:
   - {fileID: 3229923469490285788}
 --- !u!114 &2548724297425717696
 MonoBehaviour:
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carViewConfigs:
   - <CarModelType>k__BackingField: 1
-    <CarPaintElements>k__BackingField: {fileID: 6963341975584546265}
+    <PaintElement>k__BackingField: {fileID: 6963341975584546265}
 --- !u!1001 &8645723493252072242
 PrefabInstance:
   m_ObjectHideFlags: 0

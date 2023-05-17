@@ -4,6 +4,6 @@ namespace Project.Dev.Scripts.Interface
 {
     public interface IColorable
     {
-        Material SelectMaterial(Colors color);
+        Material SelectMaterial(ColorName colorName);
     }
 }

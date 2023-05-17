@@ -1704,7 +1704,7 @@ GameObject:
   - component: {fileID: 3664350744422040329}
   - component: {fileID: 4202501069257049433}
   - component: {fileID: -1660238448669526805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AudiModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a50b6b1801542299fd536e0d0711401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintElements:
+  _elements:
   - {fileID: 3664350744419746251}
 --- !u!114 &-1660238448669526805
 MonoBehaviour:
@@ -1755,7 +1755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carViewConfigs:
   - <CarModelType>k__BackingField: 0
-    <CarPaintElements>k__BackingField: {fileID: 4202501069257049433}
+    <PaintElement>k__BackingField: {fileID: 4202501069257049433}
 --- !u!1 &3664350744421687147
 GameObject:
   m_ObjectHideFlags: 0

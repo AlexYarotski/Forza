@@ -11,7 +11,7 @@ namespace Project.Dev.Scripts
         public class CarData
         {
             #region Property
-
+            
             [field: SerializeField]
             public CarModelType CarModelType
             {

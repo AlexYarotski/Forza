@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,67 +7,60 @@ namespace Project.Dev.Scripts.Menu
 {
     public class Paint : MonoBehaviour
     {
-        private const string KeyAudiColor = "AudiColor";
-        private const string KeyLadaColor = "LadaColor";
+        private const string KeyCar = "Car";
         
-        private readonly Dictionary<Car, List<Button>> ButtonDictionary = new Dictionary<Car, List<Button>>();
+        private readonly Dictionary<CarModelType, List<Button>> ButtonDictionary = new Dictionary<CarModelType, List<Button>>();
 
+        [SerializeField]
+        private CarView _carView = null;
+        
         [SerializeField]
         private ColorButton _buttonPrefab = null;
 
-        [SerializeField]
-        private Renderer[] _audiElements = null;
-        [SerializeField]
-        private Renderer[] _ladaElements = null;
+        private CarModelType _modelCar = default;
+        private CarDataSettings _carDataSettings = null;
         
-        [SerializeField]
-        private Car[] _cars = null;
-
-        private ColorSetting _colorSetting = null;
-        private Car _activeCar = null;
-        
-
         private void OnEnable()
         {
-            //ModelCar.PickedCar += Podium_PickedCar;
+            CarElements.ChangedCar += ModelCar_ChangedCar;
         }
         
         private void OnDisable()
         {
-            //ModelCar.PickedCar -= Podium_PickedCar;
+            CarElements.ChangedCar -= ModelCar_ChangedCar;
         }
 
         private void Start()
         {
+            _carDataSettings = SceneContexts.Instance.CarDataSettings;
+            _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+            
             SetDictionary();
-            
-            _activeCar = _cars[0];
-            _colorSetting = _activeCar.ColorSetting;
-            
             SetActiveButton(true);
         }
         
-        private void Podium_PickedCar(Car car)
+        private void ModelCar_ChangedCar(CarModelType modelType)
         {
             SetActiveButton(false);
-            
-            _activeCar = car;
-            _colorSetting = _activeCar.ColorSetting;
+
+            _modelCar = modelType;
             
             SetActiveButton(true);
         }
         
         private void SetDictionary()
         {
-            for (int i = 0; i < _cars.Length; i++)
+            for (int i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
             {
-                ButtonDictionary.Add(_cars[i], AddButton(_cars[i]));
+                var currentModelType = (CarModelType)i;
+                
+                ButtonDictionary.Add(currentModelType, AddButton(currentModelType));
             }
         }
 
         private void SetActiveButton(bool active)
         {
-            var buttonList = ButtonDictionary[_activeCar];
+            var buttonList = ButtonDictionary[_modelCar];
             
             for (int i = 0; i < buttonList.Count; i++)
             {
@@ -74,9 +68,9 @@ namespace Project.Dev.Scripts.Menu
             }
         }
 
-        private List<Button> AddButton(Car car)
+        private List<Button> AddButton(CarModelType carModelType)
         {
-            var colorConfigs = car.ColorSetting.ColorConfigs;
+            var colorConfigs = _carDataSettings.GetCarData(carModelType).ColorSetting.ColorConfigs;
             var listButton = new List<Button>();
             
             for (var i = 0; i < colorConfigs.Length; i++)
@@ -84,7 +78,7 @@ namespace Project.Dev.Scripts.Menu
                 var colorButton = Instantiate(_buttonPrefab, transform);
                 
                 colorButton.image.color = colorConfigs[i].Color;
-                //colorButton.Setup(colorConfigs[i].Colors, SetColor);
+                colorButton.Setup(colorConfigs[i].ColorName, SetColor);
                 colorButton.gameObject.SetActive(false);
                 
                 listButton.Add(colorButton);
@@ -93,26 +87,17 @@ namespace Project.Dev.Scripts.Menu
             return listButton;
         }
 
-        // private void SetColor(Colors colors)
-        // {
-        //     if (_activeCar.GetType() == typeof(Audi))
-        //     {
-        //         for (int j = 0; j < _audiElements.Length; j++)
-        //         {
-        //             _audiElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
-        //
-        //             PlayerPrefs.SetInt(KeyAudiColor, (int)colors);
-        //         }
-        //     }
-        //     else if (_activeCar.GetType() == typeof(Lada))
-        //     {
-        //         for (int j = 0; j < _ladaElements.Length; j++)
-        //         {
-        //             _ladaElements[j].sharedMaterial = _colorSetting.SelectMaterial(colors);
-        //
-        //             PlayerPrefs.SetInt(KeyLadaColor, (int)colors);
-        //         }
-        //     }
-        // }
+        private void SetColor(ColorName colorName)
+        {
+            var paintElements = _carView.GetPaintElements(_modelCar).Elements;
+            var carData = _carDataSettings.GetCarData(_modelCar);
+            
+            for (int i = 0; i < paintElements.Length; i++)
+            {
+                paintElements[i].sharedMaterial = carData.ColorSetting.SelectMaterial(colorName);
+            }
+            
+            PlayerPrefs.SetInt(_modelCar.ToString(), (int)colorName);
+        }
     }
 }

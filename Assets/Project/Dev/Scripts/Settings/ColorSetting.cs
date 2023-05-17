@@ -10,11 +10,11 @@ public class ColorSetting : ScriptableObject, IColorable
 
     public ColorConfig[] ColorConfigs => _colorConfigs;
     
-    public Material SelectMaterial(Colors color)
+    public Material SelectMaterial(ColorName colorName)
     {
         for (int i = 0; i < ColorConfigs.Length; i++)
         {
-            if (ColorConfigs[i].Colors == color)
+            if (ColorConfigs[i].ColorName == colorName)
             {
                 return ColorConfigs[i].Material;
             }

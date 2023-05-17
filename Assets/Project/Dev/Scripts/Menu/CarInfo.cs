@@ -8,10 +8,7 @@ namespace Project.Dev.Scripts.Menu
     public class CarInfo : MonoBehaviour
     {
         private const string KeyCar = "Car";
-        
-        [SerializeField]
-        private Car _startCar = null;
-        
+
         [Header("TMP")]
         [SerializeField]
         private TextMeshProUGUI _name = null;
@@ -34,42 +31,49 @@ namespace Project.Dev.Scripts.Menu
         [SerializeField]
         private Slider _sliderHealth = null;
 
+        private CarModelType _modelCar = default;
+        private CarDataSettings _carDataSettings = null;
+        
         private void OnEnable()
         {
-            //ModelCar.PickedCar += Podium_PickedCar;
+            CarElements.ChangedCar += ModelCar_ChangedCar;
         }
 
         private void OnDisable()
         {
-           // ModelCar.PickedCar -= Podium_PickedCar;
+            CarElements.ChangedCar -= ModelCar_ChangedCar;
         }
 
         private void Start()
         {
-            Podium_PickedCar(_startCar);
+            _carDataSettings = SceneContexts.Instance.CarDataSettings;
+            _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+            
+            ModelCar_ChangedCar(_modelCar);
         }
 
-        private void SetValue(Car car)
+        private void SetValue(CarDataSettings.CarData car)
         {
-            var startSpeed = (int)car.Speed + 80;
-            var maxSpeed = (int)car.MaxSpeed + 80;
+            var startSpeed = (int)car.Speed + 50;
+            var maxSpeed = (int)car.MaxSpeed + 50;
             var health = (float)car.Health / 10;
         
             _sliderStartSpeed.value = startSpeed / _speedDivider;
             _sliderMaxSpeed.value = maxSpeed / _speedDivider;
             _sliderHealth.value = health;
         
-            _name.text = car.name;
+            _name.text = _modelCar.ToString();
             _startSpeed.text = Convert.ToString(startSpeed);
             _maxSpeed.text = Convert.ToString(maxSpeed);
             _health.text = Convert.ToString(car.Health);
         }
     
-        private void Podium_PickedCar(Car car)
+        private void ModelCar_ChangedCar(CarModelType carModelType)
         {
-            SetValue(car);
-
-            PlayerPrefs.SetString(KeyCar, $"{car.GetType()}");
+            var carData = _carDataSettings.GetCarData(carModelType);
+            _modelCar = carModelType;
+            
+            SetValue(carData);
         }
     }
 }

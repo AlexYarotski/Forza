@@ -32,8 +32,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -49,12 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7133e22f7745da87b7ee0114f2dc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _carView: {fileID: 0}
   _buttonPrefab: {fileID: 8835744864853134280, guid: 252a0c931c0ad6a42a8951215fbd507e, type: 3}
-  _urusElements: []
-  _ladaElements: []
-  _cars:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &3004469065240659543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,12 +64,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 264
+    m_Left: -250
     m_Right: 0
     m_Top: 0
-    m_Bottom: 380
-  m_ChildAlignment: 6
-  m_Spacing: -100
+    m_Bottom: 300
+  m_ChildAlignment: 7
+  m_Spacing: 55
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

@@ -10,13 +10,6 @@ namespace Project.Dev.Scripts
             get;
             private set;
         }
-        [field: SerializeField]
-        public CarViewDataSettings CarViewDataSettings
-        {
-            get;
-            private set;
-        }
-        
         public static SceneContexts Instance
         {
             get; 

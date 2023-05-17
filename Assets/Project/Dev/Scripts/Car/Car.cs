@@ -19,30 +19,11 @@ namespace Project.Dev.Scripts
         private float _speedRotation = 0;
         private float _speedReturnRotation = 0;
         private float _rotationAngel = 0;
-        private ColorSetting _colorSetting = null;
-        private Renderer[] _painElements = null;
         private RoadBounds _roadBounds = null;
 
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
         private float _startSpeed = 0;
-
-        public float Speed => _speed;
-        public float MaxSpeed => _maxSpeed;
-        public int Health => _health;
-        public ColorSetting ColorSetting => _colorSetting;
-
-        public CarDataSettings CarDataSettings
-        {
-            get;
-            private set;
-        }
-
-        public CarViewDataSettings CarViewDataSettings
-        {
-            get;
-            private set;
-        }
 
         private void Awake()
         {
@@ -59,8 +40,6 @@ namespace Project.Dev.Scripts
             _speedRotation = carData.SpeedRotation;
             _speedReturnRotation = carData.SpeedReturnRotation;
             _rotationAngel =carData.RotationAngel;
-            _colorSetting = carData.ColorSetting;
-            _painElements = carData.PainElements;
             _roadBounds = carData.RoadBounds;
                 
             _startSpeed = _speed;
@@ -118,17 +97,6 @@ namespace Project.Dev.Scripts
             StopAllCoroutines();
             
             Died(transform.position);
-        }
-        
-        private void SetColor(string key)
-        {
-            var numberColor = PlayerPrefs.GetInt(key);
-            var newMaterial = _colorSetting.SelectMaterial((Colors)numberColor);
-
-            for (var i = 0; i < _painElements.Length; i++)
-            {
-                _painElements[i].sharedMaterial = newMaterial;
-            }
         }
         
         private void MoveForward()

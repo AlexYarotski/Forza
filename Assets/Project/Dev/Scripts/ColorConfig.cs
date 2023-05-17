@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System;
 using Project.Dev.Scripts;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class ColorConfig
 {
+    [FormerlySerializedAs("_colors")]
     [SerializeField]
-    private Colors _colors = default;
+    private ColorName colorName = default;
 
     [SerializeField]
     private Color _color = default;
@@ -14,7 +16,7 @@ public class ColorConfig
     [SerializeField]
     private Material _material = null;
 
-    public Colors Colors => _colors;
+    public ColorName ColorName => colorName;
     public Material Material=> _material;
     public Color Color => _color;
 }

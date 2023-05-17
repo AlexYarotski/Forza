@@ -6,9 +6,9 @@ namespace Project.Dev.Scripts.Menu
 {
     public class ColorButton : Button
     {
-        private Action<Colors> _callback = null;
+        private Action<ColorName> _callback = null;
 
-        public Colors Color
+        public ColorName ColorName
         {
             get;
             internal set;
@@ -18,12 +18,12 @@ namespace Project.Dev.Scripts.Menu
         {
             base.OnPointerClick(eventData);
             
-            _callback.Invoke(Color);
+            _callback.Invoke(ColorName);
         }
 
-        public void Setup(Colors color, Action<Colors> callback)
+        public void Setup(ColorName colorName, Action<ColorName> callback)
         {
-            Color = color;
+            ColorName = colorName;
             _callback = callback;
         }
     }
