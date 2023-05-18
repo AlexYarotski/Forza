@@ -1,9 +1,10 @@
 using System;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenuWindow : MonoBehaviour
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
@@ -17,8 +18,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private Button _settingButton = null;
 
+    [FormerlySerializedAs("_setting")]
     [SerializeField]
-    private Setting _setting = null;
+    private UISetting uiSetting = null;
     
     private void Awake()
     {
@@ -44,6 +46,6 @@ public class MainMenu : MonoBehaviour
 
     private void Setting()
     {
-        _setting.gameObject.SetActive(true);
+        uiSetting.gameObject.SetActive(true);
     }
 }

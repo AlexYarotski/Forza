@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8627728236445211269}
   - component: {fileID: 6963341975584546265}
-  - component: {fileID: 2548724297425717696}
   m_Layer: 6
   m_Name: LadaModel
   m_TagString: Untagged
@@ -47,21 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _elements:
   - {fileID: 3229923469490285788}
---- !u!114 &2548724297425717696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7255620065638656341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30aa3833739c4d259faf33759f34406c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carViewConfigs:
-  - <CarModelType>k__BackingField: 1
-    <PaintElement>k__BackingField: {fileID: 6963341975584546265}
 --- !u!1001 &8645723493252072242
 PrefabInstance:
   m_ObjectHideFlags: 0

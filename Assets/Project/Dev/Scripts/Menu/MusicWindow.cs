@@ -2,7 +2,7 @@
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class Music : MonoBehaviour
+    public class MusicWindow : MonoBehaviour
     {
         [SerializeField]
         private AudioSource _music = null;

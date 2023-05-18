@@ -92,12 +92,6 @@ namespace Project.Dev.Scripts
                 get;
                 private set;
             }
-            [field: SerializeField]
-            public Renderer[] PainElements 
-            {
-                get;
-                private set;
-            }
 
             [field: Header("Other")]
             [field: SerializeField]

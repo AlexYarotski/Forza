@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class CarInfo : MonoBehaviour
+    public class UICarInfo : MonoBehaviour
     {
         private const string KeyCar = "Car";
 
@@ -36,12 +36,12 @@ namespace Project.Dev.Scripts.Menu
         
         private void OnEnable()
         {
-            CarElements.ChangedCar += ModelCar_ChangedCar;
+            CarViewPlaceholder.ChangedCar += ModelCar_ChangedCar;
         }
 
         private void OnDisable()
         {
-            CarElements.ChangedCar -= ModelCar_ChangedCar;
+            CarViewPlaceholder.ChangedCar -= ModelCar_ChangedCar;
         }
 
         private void Start()
@@ -71,7 +71,7 @@ namespace Project.Dev.Scripts.Menu
         private void ModelCar_ChangedCar(CarModelType carModelType)
         {
             var carData = _carDataSettings.GetCarData(carModelType);
-            _modelCar = carModelType;
+            _modelCar = carData.CarModelType;
             
             SetValue(carData);
         }

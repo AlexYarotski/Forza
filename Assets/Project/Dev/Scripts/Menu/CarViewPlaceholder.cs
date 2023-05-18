@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Dev.Scripts.Menu
 {
-    public class CarElements : MonoBehaviour
+    public class CarViewPlaceholder : MonoBehaviour
     {
         public static event Action<CarModelType> ChangedCar = delegate {  };
         

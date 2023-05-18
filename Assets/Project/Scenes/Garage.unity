@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 1407169832}
   - component: {fileID: 1407169833}
   m_Layer: 6
-  m_Name: CarsView
+  m_Name: CarView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

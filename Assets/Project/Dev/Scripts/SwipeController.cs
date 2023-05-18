@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class SwipeController : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public static event Action<Vector3> Dragged = delegate{  };
-    public static event Action<Vector3> EndDragged = delegate{  };
+    public static event Action EndDragged = delegate{  };
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -14,6 +14,6 @@ public class SwipeController : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        EndDragged(eventData.delta);
+        EndDragged();
     }
 }

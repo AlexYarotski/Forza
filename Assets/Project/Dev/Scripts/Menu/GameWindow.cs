@@ -2,6 +2,7 @@
 using Project.Dev.Scripts.Menu;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Project.Dev.Scripts
@@ -23,8 +24,9 @@ namespace Project.Dev.Scripts
         [SerializeField]
         private Button _settingButton = null;
 
+        [FormerlySerializedAs("_setting")]
         [SerializeField]
-        private Setting _setting = null;
+        private UISetting uiSetting = null;
 
         private void Awake()
         {
@@ -75,7 +77,7 @@ namespace Project.Dev.Scripts
 
         private void Setting()
         {
-            _setting.gameObject.SetActive(true);
+            uiSetting.gameObject.SetActive(true);
             
             Time.timeScale = 0;
         }

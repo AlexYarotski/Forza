@@ -8,16 +8,16 @@ namespace Project.Dev.Scripts
     {
         private void OnEnable()
         {
-            MainMenu.PickedScene += MainMenu_PickedScene;
+            MainMenuWindow.PickedScene += MainMenu_PickedScene;
             PodiumInputManager.PickedScene += MainMenu_PickedScene;
-            MenuLossing.PickedScene += MainMenu_PickedScene;
+            LossingWindow.PickedScene += MainMenu_PickedScene;
         }
         
         private void OnDisable()
         {
-            MainMenu.PickedScene -= MainMenu_PickedScene;
+            MainMenuWindow.PickedScene -= MainMenu_PickedScene;
             PodiumInputManager.PickedScene -= MainMenu_PickedScene;
-            MenuLossing.PickedScene -= MainMenu_PickedScene;
+            LossingWindow.PickedScene -= MainMenu_PickedScene;
         }
 
         private void MainMenu_PickedScene(string scene)

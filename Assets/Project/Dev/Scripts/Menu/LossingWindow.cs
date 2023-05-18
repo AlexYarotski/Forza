@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuLossing : MonoBehaviour
+public class LossingWindow : MonoBehaviour
 {
     private const string MainMenu = "Menu";
     private const string GarageScene = "Garage";

@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 [Serializable]
 public class ColorConfig
 {
-    [FormerlySerializedAs("_colors")]
     [SerializeField]
     private ColorName colorName = default;
 

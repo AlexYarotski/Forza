@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: AudiColorSetting
   m_EditorClassIdentifier: 
   _colorConfigs:
-  - _colors: 0
+  - colorName: 0
     _color: {r: 1, g: 1, b: 1, a: 1}
     _material: {fileID: 2100000, guid: 0600b60f2501f9f4680e105c3725b63b, type: 2}
-  - _colors: 1
+  - colorName: 1
     _color: {r: 0.29803923, g: 0.62352943, b: 0.78431374, a: 1}
     _material: {fileID: 2100000, guid: 5f9670f6ab4f54b40a32cecd3494e554, type: 2}
-  - _colors: 2
+  - colorName: 2
     _color: {r: 0.36862746, g: 0.7372549, b: 0.34901962, a: 1}
     _material: {fileID: 2100000, guid: a1b8f931a6871384c84f461af8697040, type: 2}
-  - _colors: 3
+  - colorName: 3
     _color: {r: 0.13333334, g: 0.1254902, b: 0.1254902, a: 1}
     _material: {fileID: 2100000, guid: 48380b88f8ef70748986c28d349606f9, type: 2}
-  - _colors: 4
+  - colorName: 4
     _color: {r: 0.8784314, g: 0.0627451, b: 0.0627451, a: 1}
     _material: {fileID: 2100000, guid: e9cc33faedd4f1b4da637c2b8fb318a0, type: 2}

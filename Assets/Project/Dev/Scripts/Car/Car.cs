@@ -6,9 +6,14 @@ namespace Project.Dev.Scripts
 {
     public class Car : MonoBehaviour, IDamageable
     {
+        private const string KeyCar = "Car";
+
+        [SerializeField]
+        private CarView _carView = null;
+        
         public static event Action<Vector3> Died = delegate { };
         public static event Action<Vector3> Drove = delegate { };
-        
+
         private int _health = 0;
         private float _timeOfImmortality = 0;
         private float _speed = 0;
@@ -24,23 +29,28 @@ namespace Project.Dev.Scripts
         private Vector3 _nextPosition = Vector3.zero;
         private Vector3 _dragPosition = Vector3.zero;
         private float _startSpeed = 0;
+        private CarDataSettings.CarData _carData = null;
 
         private void Awake()
         {
-            var carType = (CarModelType)PlayerPrefs.GetInt("Car");
-            var carData = SceneContexts.Instance.CarDataSettings.GetCarData(carType);
+            var carType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+            var colorIndex = PlayerPrefs.GetInt(carType.ToString());
+            
+            _carData = SceneContexts.Instance.CarDataSettings.GetCarData(carType);
+            
+            SetColor(colorIndex, carType);
 
-            _health = carData.Health;
-            _timeOfImmortality = carData.TimeOfImmortality;
-            _speed = carData.Speed;
-            _maxSpeed = carData.MaxSpeed;
-            _speedTurn = carData.SpeedTurn;
-            _brake = carData.Brake;
-            _boost = carData.Boost;
-            _speedRotation = carData.SpeedRotation;
-            _speedReturnRotation = carData.SpeedReturnRotation;
-            _rotationAngel =carData.RotationAngel;
-            _roadBounds = carData.RoadBounds;
+            _health = _carData.Health;
+            _timeOfImmortality = _carData.TimeOfImmortality;
+            _speed = _carData.Speed;
+            _maxSpeed = _carData.MaxSpeed;
+            _speedTurn = _carData.SpeedTurn;
+            _brake = _carData.Brake;
+            _boost = _carData.Boost;
+            _speedRotation = _carData.SpeedRotation;
+            _speedReturnRotation = _carData.SpeedReturnRotation;
+            _rotationAngel =_carData.RotationAngel;
+            _roadBounds = _carData.RoadBounds;
                 
             _startSpeed = _speed;
             _dragPosition = transform.position;
@@ -71,23 +81,22 @@ namespace Project.Dev.Scripts
             _health--;
 
             Vibration.Play();
-            
-            if (_health <= 0)
+
+            if (_health > 1)
             {
-                OnDie();
+                PlaySmoke();
             }
             else if (_health == 1)
             {
-                PlaySmoke();    
-            }
-            
-            if (_health >= 1)
-            {
                 var immortal = new Immortal(this).MakeImmortal(_timeOfImmortality);
                 StartCoroutine(immortal);
-            }
             
-            Brake();
+                Brake();
+            }
+            else
+            {
+                OnDie();
+            }
         }
 
         public void OnDie()
@@ -181,6 +190,16 @@ namespace Project.Dev.Scripts
         private void PlaySmoke()
         {
             ParticleManager.Instance.Play(ParticleType.CarSmoke);
+        }
+        
+        private void SetColor(int colorIndex, CarModelType model)
+        {
+            var paintElements = _carView.GetPaintElements(model).Elements;
+            
+            for (int i = 0; i < paintElements.Length; i++)
+            {
+                paintElements[i].sharedMaterial = _carData.ColorSetting.SelectMaterial((ColorName)colorIndex);
+            }
         }
     }
 }

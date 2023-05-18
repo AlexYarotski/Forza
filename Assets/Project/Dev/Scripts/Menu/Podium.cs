@@ -51,7 +51,7 @@ public class Podium : MonoBehaviour
         _endSwiped = false;
     }
 
-    private void SwipeController_EndDragged(Vector3 dragPositionVector3)
+    private void SwipeController_EndDragged()
     {
         _endSwiped = true;
     }
