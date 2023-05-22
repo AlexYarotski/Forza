@@ -5,7 +5,7 @@ namespace Project.Dev.Scripts.Menu
 {
     public class CarViewPlaceholder : MonoBehaviour
     {
-        public static event Action<CarModelType> ChangedCar = delegate {  };
+        public static event Action<CarModelType> CarChanged = delegate {  };
         
         private const string KeyCar = "Car";
 
@@ -17,8 +17,7 @@ namespace Project.Dev.Scripts.Menu
 
         private void Awake()
         {
-            _modelType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
-            _currentElement = _carView.GetPaintElements(_modelType);
+            ChangeCar(PlayerPrefs.GetInt(KeyCar));
         }
 
         private void OnEnable()
@@ -38,7 +37,7 @@ namespace Project.Dev.Scripts.Menu
             var newIndex = (int)_modelType - 1 < 0 ? Enum.GetValues(typeof(CarModelType)).Length - 1 : 
                 (int)_modelType - 1;
             
-            SetNewCarElements(newIndex);
+            ChangeCar(newIndex);
         }
         
         private void CarSpecifications_NextCar()
@@ -46,20 +45,24 @@ namespace Project.Dev.Scripts.Menu
             var newIndex = (int)_modelType + 1 > Enum.GetValues(typeof(CarModelType)).Length - 1 ? 0 :
                 (int)_modelType + 1;
             
-            SetNewCarElements(newIndex);
+            ChangeCar(newIndex);
         }
 
-        private void SetNewCarElements(int newIndex)
+        private void ChangeCar(int newIndex)
         {
             var newElements = _carView.GetPaintElements((CarModelType)newIndex);
             _modelType = (CarModelType)newIndex;
+
+            if (_currentElement != null)
+            {
+                _currentElement.Disable(); 
+            }
             
-            _currentElement.Disable();
             newElements.Enable();
         
             _currentElement = newElements;
 
-            ChangedCar(_modelType);
+            CarChanged(_modelType);
         }
     }
 }

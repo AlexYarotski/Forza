@@ -36,12 +36,12 @@ namespace Project.Dev.Scripts.Menu
         
         private void OnEnable()
         {
-            CarViewPlaceholder.ChangedCar += ModelCar_ChangedCar;
+            CarViewPlaceholder.CarChanged += ModelCarChanged;
         }
 
         private void OnDisable()
         {
-            CarViewPlaceholder.ChangedCar -= ModelCar_ChangedCar;
+            CarViewPlaceholder.CarChanged -= ModelCarChanged;
         }
 
         private void Start()
@@ -49,7 +49,7 @@ namespace Project.Dev.Scripts.Menu
             _carDataSettings = SceneContexts.Instance.CarDataSettings;
             _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
             
-            ModelCar_ChangedCar(_modelCar);
+            ModelCarChanged(_modelCar);
         }
 
         private void SetValue(CarDataSettings.CarData car)
@@ -68,7 +68,7 @@ namespace Project.Dev.Scripts.Menu
             _health.text = Convert.ToString(car.Health);
         }
     
-        private void ModelCar_ChangedCar(CarModelType carModelType)
+        private void ModelCarChanged(CarModelType carModelType)
         {
             var carData = _carDataSettings.GetCarData(carModelType);
             _modelCar = carData.CarModelType;

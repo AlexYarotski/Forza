@@ -22,12 +22,12 @@ namespace Project.Dev.Scripts.Menu
         
         private void OnEnable()
         {
-            CarViewPlaceholder.ChangedCar += ModelCar_ChangedCar;
+            CarViewPlaceholder.CarChanged += ModelCarChanged;
         }
         
         private void OnDisable()
         {
-            CarViewPlaceholder.ChangedCar -= ModelCar_ChangedCar;
+            CarViewPlaceholder.CarChanged -= ModelCarChanged;
         }
 
         private void Start()
@@ -39,7 +39,7 @@ namespace Project.Dev.Scripts.Menu
             SetActiveButton(true);
         }
         
-        private void ModelCar_ChangedCar(CarModelType modelType)
+        private void ModelCarChanged(CarModelType modelType)
         {
             SetActiveButton(false);
 
