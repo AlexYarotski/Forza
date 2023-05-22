@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CarView : MonoBehaviour
 {
-    private const string KeyCar = "Car";
-    
     [Serializable]
     public class CarViewConfigs
     {
@@ -27,11 +25,6 @@ public class CarView : MonoBehaviour
     [SerializeField]
     private CarViewConfigs[] _carViewConfigs = null;
 
-    private void Start()
-    {
-        ActiveCar();
-    }
-
     public PaintElement GetPaintElements(CarModelType carModelType)
     {
         for (int i = 0; i < _carViewConfigs.Length; i++)
@@ -47,18 +40,14 @@ public class CarView : MonoBehaviour
         return null;
     }
 
-    private void ActiveCar()
+    public void PaintElement(CarModelType carModelType, ColorName colorName)
     {
-        for (var i = 0; i < _carViewConfigs.Length; i++)
+        var paintElements = GetPaintElements(carModelType).Elements;
+        var carData = SceneContexts.Instance.CarDataSettings.GetCarData(carModelType);
+        
+        for (int i = 0; i < paintElements.Length; i++)
         {
-            if ((int)_carViewConfigs[i].CarModelType == PlayerPrefs.GetInt(KeyCar))
-            {
-                _carViewConfigs[i].PaintElement.Enable();
-            }
-            else
-            {
-                _carViewConfigs[i].PaintElement.Disable();
-            }
+            paintElements[i].sharedMaterial = carData.ColorSetting.SelectMaterial(colorName);
         }
     }
 }

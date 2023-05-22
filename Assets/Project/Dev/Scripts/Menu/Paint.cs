@@ -8,6 +8,7 @@ namespace Project.Dev.Scripts.Menu
     public class Paint : MonoBehaviour
     {
         private const string KeyCar = "Car";
+
         
         private readonly Dictionary<CarModelType, List<Button>> ButtonDictionary = new Dictionary<CarModelType, List<Button>>();
 
@@ -22,12 +23,12 @@ namespace Project.Dev.Scripts.Menu
         
         private void OnEnable()
         {
-            CarViewPlaceholder.CarChanged += ModelCarChanged;
+            CarViewPlaceholder.CarChanged += CarViewPlaceholder_CarChanged;
         }
         
         private void OnDisable()
         {
-            CarViewPlaceholder.CarChanged -= ModelCarChanged;
+            CarViewPlaceholder.CarChanged -= CarViewPlaceholder_CarChanged;
         }
 
         private void Start()
@@ -36,16 +37,11 @@ namespace Project.Dev.Scripts.Menu
             _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
             
             SetDictionary();
-            SetActiveButton(true);
         }
         
-        private void ModelCarChanged(CarModelType modelType)
+        private void CarViewPlaceholder_CarChanged(CarModelType carModelType)
         {
-            SetActiveButton(false);
-
-            _modelCar = modelType;
-            
-            SetActiveButton(true);
+            SetButton(carModelType);
         }
         
         private void SetDictionary()
@@ -55,16 +51,6 @@ namespace Project.Dev.Scripts.Menu
                 var currentModelType = (CarModelType)i;
                 
                 ButtonDictionary.Add(currentModelType, AddButton(currentModelType));
-            }
-        }
-
-        private void SetActiveButton(bool active)
-        {
-            var buttonList = ButtonDictionary[_modelCar];
-            
-            for (int i = 0; i < buttonList.Count; i++)
-            {
-                buttonList[i].gameObject.SetActive(active);
             }
         }
 
@@ -79,23 +65,30 @@ namespace Project.Dev.Scripts.Menu
                 
                 colorButton.image.color = colorConfigs[i].Color;
                 colorButton.Setup(colorConfigs[i].ColorName, SetColor);
-                colorButton.gameObject.SetActive(false);
+                colorButton.gameObject.SetActive(carModelType == _modelCar);
                 
                 listButton.Add(colorButton);
             }
 
             return listButton;
         }
+        
+        private void SetButton(CarModelType carModelType)
+        {
+            foreach (var pair in ButtonDictionary)
+            {
+                for (int j = 0; j < pair.Value.Count; j++)
+                {
+                    pair.Value[j].gameObject.SetActive(pair.Key == carModelType);
+                }
+            }
+            
+            _modelCar = carModelType;
+        }
 
         private void SetColor(ColorName colorName)
         {
-            var paintElements = _carView.GetPaintElements(_modelCar).Elements;
-            var carData = _carDataSettings.GetCarData(_modelCar);
-            
-            for (int i = 0; i < paintElements.Length; i++)
-            {
-                paintElements[i].sharedMaterial = carData.ColorSetting.SelectMaterial(colorName);
-            }
+            _carView.PaintElement(_modelCar, colorName);
             
             PlayerPrefs.SetInt(_modelCar.ToString(), (int)colorName);
         }

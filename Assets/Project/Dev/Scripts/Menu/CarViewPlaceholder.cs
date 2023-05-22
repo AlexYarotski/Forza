@@ -17,7 +17,9 @@ namespace Project.Dev.Scripts.Menu
 
         private void Awake()
         {
-            ChangeCar(PlayerPrefs.GetInt(KeyCar));
+            _modelType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+            
+            ActiveElement();
         }
 
         private void OnEnable()
@@ -63,6 +65,28 @@ namespace Project.Dev.Scripts.Menu
             _currentElement = newElements;
 
             CarChanged(_modelType);
+            
+            PlayerPrefs.SetInt(KeyCar, (int)_modelType);
+        }
+        
+        private void ActiveElement()
+        {
+            for (var i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
+            {
+                var currentType = (CarModelType)i;
+                
+                if (i == PlayerPrefs.GetInt(KeyCar))
+                {
+                    _carView.GetPaintElements(currentType).Enable();
+                    _currentElement = _carView.GetPaintElements(currentType);
+                    
+                    PlayerPrefs.SetInt(KeyCar, i);
+                }
+                else
+                {
+                    _carView.GetPaintElements(currentType).Disable();
+                }
+            }
         }
     }
 }
