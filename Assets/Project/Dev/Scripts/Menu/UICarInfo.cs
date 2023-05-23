@@ -49,7 +49,7 @@ namespace Project.Dev.Scripts.Menu
             _carDataSettings = SceneContexts.Instance.CarDataSettings;
             _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
             
-            CarViewPlaceholder_CarChanged(_modelCar);
+            SetValue(_carDataSettings.GetCarData(_modelCar));
         }
 
         private void SetValue(CarDataSettings.CarData car)

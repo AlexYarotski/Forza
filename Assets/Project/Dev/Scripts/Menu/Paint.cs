@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Project.Dev.Scripts.Menu
 {
@@ -10,7 +9,7 @@ namespace Project.Dev.Scripts.Menu
         private const string KeyCar = "Car";
 
         
-        private readonly Dictionary<CarModelType, List<Button>> ButtonDictionary = new Dictionary<CarModelType, List<Button>>();
+        private readonly Dictionary<CarModelType, List<ColorButton>> ButtonDictionary = new Dictionary<CarModelType, List<ColorButton>>();
 
         [SerializeField]
         private CarView _carView = null;
@@ -41,7 +40,7 @@ namespace Project.Dev.Scripts.Menu
         
         private void CarViewPlaceholder_CarChanged(CarModelType carModelType)
         {
-            SetButton(carModelType);
+            EnableButtons(carModelType);
         }
         
         private void SetDictionary()
@@ -50,14 +49,14 @@ namespace Project.Dev.Scripts.Menu
             {
                 var currentModelType = (CarModelType)i;
                 
-                ButtonDictionary.Add(currentModelType, AddButton(currentModelType));
+                ButtonDictionary.Add(currentModelType, InitColorButtons(currentModelType));
             }
         }
 
-        private List<Button> AddButton(CarModelType carModelType)
+        private List<ColorButton> InitColorButtons(CarModelType carModelType)
         {
             var colorConfigs = _carDataSettings.GetCarData(carModelType).ColorSetting.ColorConfigs;
-            var listButton = new List<Button>();
+            var listButton = new List<ColorButton>();
             
             for (var i = 0; i < colorConfigs.Length; i++)
             {
@@ -65,7 +64,8 @@ namespace Project.Dev.Scripts.Menu
                 
                 colorButton.image.color = colorConfigs[i].Color;
                 colorButton.Setup(colorConfigs[i].ColorName, SetColor);
-                colorButton.gameObject.SetActive(carModelType == _modelCar);
+                colorButton.SetActive(carModelType == _modelCar);
+                colorButton.Disable();
                 
                 listButton.Add(colorButton);
             }
@@ -73,13 +73,13 @@ namespace Project.Dev.Scripts.Menu
             return listButton;
         }
         
-        private void SetButton(CarModelType carModelType)
+        private void EnableButtons(CarModelType carModelType)
         {
             foreach (var pair in ButtonDictionary)
             {
                 for (int j = 0; j < pair.Value.Count; j++)
                 {
-                    pair.Value[j].gameObject.SetActive(pair.Key == carModelType);
+                    pair.Value[j].SetActive(pair.Key == carModelType);
                 }
             }
             

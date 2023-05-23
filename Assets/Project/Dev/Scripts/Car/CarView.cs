@@ -39,6 +39,23 @@ public class CarView : MonoBehaviour
         
         return null;
     }
+    
+    public void EnableCarView(CarModelType carModelType)
+    {
+        for (var i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
+        {
+            var currentType = (CarModelType)i;
+
+            if (currentType == carModelType)
+            {
+                GetPaintElements(currentType).Enable();
+            }
+            else
+            {
+                GetPaintElements(currentType).Disable();
+            }
+        }
+    }
 
     public void PaintElement(CarModelType carModelType, ColorName colorName)
     {

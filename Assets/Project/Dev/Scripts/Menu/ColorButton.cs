@@ -26,5 +26,20 @@ namespace Project.Dev.Scripts.Menu
             ColorName = colorName;
             _callback = callback;
         }
+
+        public void SetActive(bool active)
+        {
+            gameObject.SetActive(active);
+        }
+
+        public void Enable()
+        {
+            gameObject.SetActive(true);
+        }
+        
+        public void Disable()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

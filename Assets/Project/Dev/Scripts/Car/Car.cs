@@ -29,7 +29,8 @@ namespace Project.Dev.Scripts
             var carType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
             _carData = SceneContexts.Instance.CarDataSettings.GetCarData(carType);
 
-            SetActiveElement();
+            _carView.EnableCarView(carType);
+            SetColor(carType);
 
             _health = _carData.Health;
             _speed = _carData.Speed;
@@ -46,7 +47,7 @@ namespace Project.Dev.Scripts
 
         private void OnDisable()
         {
-            SwipeController.Dragged += SwipeController_Dragged;
+            SwipeController.Dragged -= SwipeController_Dragged;
             Score.Boost -= Score_Boost;
         }
 
@@ -68,8 +69,7 @@ namespace Project.Dev.Scripts
 
             if (_health >= 1)
             {
-                var immortal = new Immortal(this).MakeImmortal(_carData.TimeOfImmortality);
-                StartCoroutine(immortal);
+                StartCoroutine(new Immortal(this).MakeImmortal(_carData.TimeOfImmortality));
 
                 Brake();
             }
@@ -179,25 +179,7 @@ namespace Project.Dev.Scripts
         }
 
         #endregion
-
-        private void SetActiveElement()
-        {
-            for (var i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
-            {
-                var currentType = (CarModelType)i;
-
-                if (i == PlayerPrefs.GetInt(KeyCar))
-                {
-                    _carView.GetPaintElements(currentType).Enable();
-
-                    SetColor(currentType);
-                }
-                else
-                {
-                    _carView.GetPaintElements(currentType).Disable();
-                }
-            }
-        }
+        
 
         private void SetColor(CarModelType model)
         {
