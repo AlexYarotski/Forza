@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace Project.Dev.Scripts
 {
+    
     public class GameWindow : MonoBehaviour
     {
         [SerializeField]

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carView: {fileID: 0}
   _buttonPrefab: {fileID: 8835744864853134280, guid: 252a0c931c0ad6a42a8951215fbd507e, type: 3}
+  _colorButtonSetting: {fileID: 11400000, guid: d34cc22cd8f242945a96185e1eb68f76, type: 2}
 --- !u!114 &3004469065240659543
 MonoBehaviour:
   m_ObjectHideFlags: 0

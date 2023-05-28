@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
 using UnityEngine.Serialization;

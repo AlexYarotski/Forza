@@ -2,11 +2,10 @@
 {
     public enum ColorName
     {
-        WhiteAudi = 0,
-        BlueAudi = 1,
-        GreenAudi = 2,
-        BlackAudi = 3,
-        RedAudi = 4,
-        BlueLada = 5
+        White = 0,
+        Blue = 1,
+        Green = 2,
+        Black = 3,
+        Red = 4,
     }
 }

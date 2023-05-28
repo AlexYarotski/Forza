@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: LadaColorSetting
   m_EditorClassIdentifier: 
   _colorConfigs:
-  - colorName: 5
-    _color: {r: 0.08627451, g: 0.5824111, b: 0.92941177, a: 1}
+  - _colorName: 1
     _material: {fileID: 2100000, guid: c8205ead17538f24da1f3be824da3d0d, type: 2}

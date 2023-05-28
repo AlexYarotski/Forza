@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Project.Dev.Scripts.Menu
 {
@@ -8,14 +10,16 @@ namespace Project.Dev.Scripts.Menu
     {
         private const string KeyCar = "Car";
 
+        private List<ColorButton> ButtonList = new List<ColorButton>();
         
-        private readonly Dictionary<CarModelType, List<ColorButton>> ButtonDictionary = new Dictionary<CarModelType, List<ColorButton>>();
-
         [SerializeField]
         private CarView _carView = null;
-        
+
         [SerializeField]
         private ColorButton _buttonPrefab = null;
+
+        [SerializeField]
+        private ColorButtonSetting _colorButtonSetting = null;
 
         private CarModelType _modelCar = default;
         private CarDataSettings _carDataSettings = null;
@@ -35,7 +39,8 @@ namespace Project.Dev.Scripts.Menu
             _carDataSettings = SceneContexts.Instance.CarDataSettings;
             _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
             
-            SetDictionary();
+            InitColorButtons();
+            EnableButtons(_modelCar);
         }
         
         private void CarViewPlaceholder_CarChanged(CarModelType carModelType)
@@ -43,46 +48,36 @@ namespace Project.Dev.Scripts.Menu
             EnableButtons(carModelType);
         }
         
-        private void SetDictionary()
+        private void InitColorButtons()
         {
-            for (int i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
-            {
-                var currentModelType = (CarModelType)i;
-                
-                ButtonDictionary.Add(currentModelType, InitColorButtons(currentModelType));
-            }
-        }
-
-        private List<ColorButton> InitColorButtons(CarModelType carModelType)
-        {
-            var colorConfigs = _carDataSettings.GetCarData(carModelType).ColorSetting.ColorConfigs;
-            var listButton = new List<ColorButton>();
-            
-            for (var i = 0; i < colorConfigs.Length; i++)
+            foreach (ColorName colorName in Enum.GetValues(typeof(ColorName)))
             {
                 var colorButton = Instantiate(_buttonPrefab, transform);
                 
-                colorButton.image.color = colorConfigs[i].Color;
-                colorButton.Setup(colorConfigs[i].ColorName, SetColor);
-                colorButton.SetActive(carModelType == _modelCar);
+                colorButton.Setup(colorName, SetColor);
+                colorButton.image.color = _colorButtonSetting.GetButtonColor(colorName);
                 colorButton.Disable();
                 
-                listButton.Add(colorButton);
+                ButtonList.Add(colorButton);
             }
-
-            return listButton;
         }
-        
+
         private void EnableButtons(CarModelType carModelType)
         {
-            foreach (var pair in ButtonDictionary)
+            var colorConfigs = _carDataSettings.GetCarData(carModelType).ColorSetting.ColorConfigs;
+
+            for (int i = 0; i < ButtonList.Count; i++)
             {
-                for (int j = 0; j < pair.Value.Count; j++)
+                if (colorConfigs.Any(сс => сс.ColorName == ButtonList[i].ColorName))
                 {
-                    pair.Value[j].SetActive(pair.Key == carModelType);
+                    ButtonList[i].Enable();
+                }
+                else
+                {
+                    ButtonList[i].Disable();
                 }
             }
-            
+
             _modelCar = carModelType;
         }
 
