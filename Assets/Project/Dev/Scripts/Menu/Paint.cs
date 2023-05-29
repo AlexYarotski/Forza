@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Project.Dev.Scripts.Menu
 {
     public class Paint : MonoBehaviour
     {
+        public static event Action<ColorName> ClickedButton = delegate {  };
+        
         private const string KeyCar = "Car";
 
         private List<ColorButton> ButtonList = new List<ColorButton>();
         
-        [SerializeField]
-        private CarView _carView = null;
-
         [SerializeField]
         private ColorButton _buttonPrefab = null;
 
@@ -28,7 +26,7 @@ namespace Project.Dev.Scripts.Menu
         {
             CarViewPlaceholder.CarChanged += CarViewPlaceholder_CarChanged;
         }
-        
+
         private void OnDisable()
         {
             CarViewPlaceholder.CarChanged -= CarViewPlaceholder_CarChanged;
@@ -83,9 +81,7 @@ namespace Project.Dev.Scripts.Menu
 
         private void SetColor(ColorName colorName)
         {
-            _carView.PaintElement(_modelCar, colorName);
-            
-            PlayerPrefs.SetInt(_modelCar.ToString(), (int)colorName);
+            ClickedButton(colorName);
         }
     }
 }

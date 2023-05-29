@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace Project.Dev.Scripts.Menu
@@ -26,12 +27,14 @@ namespace Project.Dev.Scripts.Menu
         {
             PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
             PodiumInputManager.NextCar += CarSpecifications_NextCar;
+            Paint.ClickedButton += Paint_ClickedButton;
         }
 
         private void OnDisable()
         {
             PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
             PodiumInputManager.NextCar -= CarSpecifications_NextCar;
+            Paint.ClickedButton -= Paint_ClickedButton;
         }
 
         private void CarSpecifications_PreviousCar()
@@ -50,6 +53,13 @@ namespace Project.Dev.Scripts.Menu
             ChangeCar(newIndex);
         }
 
+        private void Paint_ClickedButton(ColorName colorName)
+        {
+            _carView.PaintElement(_modelType, colorName);
+
+            PlayerPrefs.SetInt(_modelType.ToString(), (int)colorName);
+        }
+        
         private void ChangeCar(int newIndex)
         {
             var newElements = _carView.GetPaintElements((CarModelType)newIndex);
