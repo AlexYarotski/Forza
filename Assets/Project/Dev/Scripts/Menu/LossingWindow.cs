@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Project.Dev.Scripts;
 using TMPro;
 using UnityEngine;
@@ -31,9 +32,9 @@ public class LossingWindow : MonoBehaviour
     
     private void Awake()
     {
-        _menu.onClick.AddListener(Menu);
-        _garage.onClick.AddListener(Garage);
-        _restart.onClick.AddListener(Restart);
+        _menu.AddListener(Menu);
+        _garage.AddListener(Garage);
+        _restart.AddListener(Restart);
         
         SetComponentsActive(false);
     }
@@ -57,16 +58,19 @@ public class LossingWindow : MonoBehaviour
 
     private void Menu()
     {
+        DOTween.PauseAll();
         PickedScene(MainMenu);
     }
 
     private void Garage()
     {
+        DOTween.PauseAll();
         PickedScene(GarageScene);
     }
     
     private void Restart()
     {
+        DOTween.PauseAll();
         PickedScene(Game);
     }
 

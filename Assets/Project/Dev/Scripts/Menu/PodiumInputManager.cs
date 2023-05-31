@@ -1,5 +1,8 @@
 using System;
+using DG.Tweening;
+using Project.Dev.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PodiumInputManager : MonoBehaviour
@@ -11,22 +14,26 @@ public class PodiumInputManager : MonoBehaviour
     public static event Action NextCar = delegate { };
     public static event Action PreviousCar = delegate {  };
 
+    [FormerlySerializedAs("_game")]
     [Header("Button")]
     [SerializeField]
-    private Button _game = null;
+    private Button _gameButton = null;
+    [FormerlySerializedAs("_mainMenu")]
     [SerializeField]
-    private Button _mainMenu = null;
+    private Button _mainMenuButton = null;
+    [FormerlySerializedAs("_previous")]
     [SerializeField]
-    private Button _previous = null;
+    private Button _previousButton = null;
+    [FormerlySerializedAs("_next")]
     [SerializeField]
-    private Button _next = null;
+    private Button _nextButton = null;
 
     private void Start()
     {
-        _game.onClick.AddListener(StartGame);
-        _mainMenu.onClick.AddListener(Menu);
-        _previous.onClick.AddListener(Previous);
-        _next.onClick.AddListener(Next);
+        _gameButton.AddListener(StartGame);
+        _mainMenuButton.AddListener(Menu);
+        _previousButton.AddListener(Previous);
+        _nextButton.AddListener(Next);
     }
 
     private void Menu()

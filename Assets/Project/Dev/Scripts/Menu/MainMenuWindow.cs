@@ -1,8 +1,8 @@
 using System;
 using DG.Tweening;
+using Project.Dev.Scripts;
 using Project.Dev.Scripts.Menu;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainMenuWindow : MonoBehaviour
@@ -10,6 +10,7 @@ public class MainMenuWindow : MonoBehaviour
     private const string Game = "Game";
     private const string Garage = "Garage";
     private const string KeyCar = "Car";
+    
     public static event Action<string> PickedScene = delegate {  }; 
     
     [SerializeField]
@@ -18,17 +19,18 @@ public class MainMenuWindow : MonoBehaviour
     private Button _playButton = null;
     [SerializeField]
     private Button _settingButton = null;
-
-    [FormerlySerializedAs("_setting")]
     [SerializeField]
-    private UISetting uiSetting = null;
+    private UISetting _uiSetting = null;
+
     
     private void Awake()
     {
-        _playButton.onClick.AddListener(PlayGame);
-        _garageButton.onClick.AddListener(Cancel);
-        _settingButton.onClick.AddListener(Setting);
+        _playButton.AddListener(PlayGame);
+        _garageButton.AddListener(OpenGarage);
+        _settingButton.AddListener(OpenSetting);
 
+        _uiSetting.transform.localScale = Vector3.zero;
+        
         if (!PlayerPrefs.HasKey(KeyCar))
         {
             PlayerPrefs.SetInt(KeyCar, 0);
@@ -37,16 +39,19 @@ public class MainMenuWindow : MonoBehaviour
 
     private void PlayGame()
     {
+        DOTween.PauseAll();
         PickedScene(Game);
     }
 
-    private void Cancel()
+    private void OpenGarage()
     {
+        DOTween.PauseAll();
         PickedScene(Garage);
     }
 
-    private void Setting()
+    private void OpenSetting()
     {
-        uiSetting.gameObject.SetActive(true);
+        _uiSetting.gameObject.SetActive(true);
+        _uiSetting.transform.DOScale(new Vector3(1, 1), 0.5f);
     }
 }
