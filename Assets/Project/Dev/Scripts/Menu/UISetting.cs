@@ -1,23 +1,27 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Dev.Scripts.Menu
+public class UISetting : MonoBehaviour
 {
-    public class UISetting : MonoBehaviour
+    private const float Duration = 0.2f;
+
+    [SerializeField]
+    private Button _cancel = null;
+
+    private void Awake()
     {
-        [SerializeField]
-        private Button _cancel = null;
+        gameObject.SetActive(false);
 
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-            _cancel.AddListener(Cancel);
-        }
+        transform.localScale = Vector3.zero;
+        _cancel.AddListener(Cancel);
+    }
 
-        private void Cancel()
-        {
-            gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
+    private void Cancel()
+    {
+        transform.DOScale(Vector3.zero, Duration)
+            .OnComplete(() => gameObject.SetActive(false));
+
+        Time.timeScale = 1;
     }
 }

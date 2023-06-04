@@ -1,6 +1,5 @@
 using System;
 using DG.Tweening;
-using Project.Dev.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +10,19 @@ public class LossingWindow : MonoBehaviour
     private const string GarageScene = "Garage";
     private const string Game = "Game";
     
-    public static event Action<string> PickedScene = delegate {  }; 
+    public static event Action<string> PickedScene = delegate {  };
 
-    private readonly string ScoreText = "Your Score \r\n {0}";
+    private const float DurationScore = 1f;
+    private const float DurationLose = 1f;
     
+    private readonly Vector2 LosePosition = new Vector2(0, -600);
+    private readonly string ScoreText = "Your Score \r\n {0}";
+
     [SerializeField]
     private TextMeshProUGUI _score = null;
+
+    [SerializeField]
+    private TextMeshProUGUI _lose = null;
 
     [SerializeField]
     private Button _menu = null;
@@ -52,6 +58,9 @@ public class LossingWindow : MonoBehaviour
     private void Car_Died(Vector3 position)
     {
         SetComponentsActive(true);
+
+        _frame.rectTransform.DOAnchorPos(Vector3.zero, DurationScore).SetEase(Ease.Linear);
+        _lose.rectTransform.DOAnchorPos(LosePosition, DurationLose).SetEase(Ease.Linear);
         
         _score.text = string.Format(ScoreText, (int)position.z);
     }
@@ -76,10 +85,8 @@ public class LossingWindow : MonoBehaviour
 
     private void SetComponentsActive(bool isActive)
     {
-        _score.gameObject.SetActive(isActive);
         _menu.gameObject.SetActive(isActive);
         _garage.gameObject.SetActive(isActive);
         _restart.gameObject.SetActive(isActive);
-        _frame.gameObject.SetActive(isActive);
     }
 }
