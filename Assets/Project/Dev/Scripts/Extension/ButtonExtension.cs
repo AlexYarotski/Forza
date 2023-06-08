@@ -22,8 +22,8 @@ public static class ButtonExtension
         Sequence sequence = DOTween.Sequence();
 
         sequence.Append(button.image.DOColor(Color.gray, Duration));
-        sequence.Append(button.transform.DOPunchScale(new Vector3(Size, Size, Size), Duration, Vibrato,
+        sequence.Join(button.transform.DOPunchScale(new Vector3(Size, Size, Size), Duration, Vibrato,
             Elasticity).SetEase(Ease.Linear));
-        sequence.Join(button.image.DOColor(Color.white, Duration));
+        sequence.Append(button.image.DOColor(Color.white, Duration));
     }
 }

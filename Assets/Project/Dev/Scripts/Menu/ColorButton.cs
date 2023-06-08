@@ -11,7 +11,7 @@ namespace Project.Dev.Scripts.Menu
         public ColorName ColorName
         {
             get;
-            internal set;
+            private set;
         }
 
         public override void OnPointerClick(PointerEventData eventData)

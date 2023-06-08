@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using Project.Dev.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,7 +9,6 @@ public class PodiumInputManager : MonoBehaviour
     private const string Game = "Game";
     private const string MainMenu = "Menu";
     
-    public static event Action<string> PickedScene = delegate {  }; 
     public static event Action NextCar = delegate { };
     public static event Action PreviousCar = delegate {  };
 
@@ -31,27 +29,27 @@ public class PodiumInputManager : MonoBehaviour
     private void Start()
     {
         _gameButton.AddListener(StartGame);
-        _mainMenuButton.AddListener(Menu);
-        _previousButton.AddListener(Previous);
-        _nextButton.AddListener(Next);
+        _mainMenuButton.AddListener(OpenMenu);
+        _previousButton.AddListener(SetPreviousCar);
+        _nextButton.AddListener(SetNextCar);
     }
 
-    private void Menu()
+    private void OpenMenu()
     {
-        PickedScene(MainMenu);
+        SceneLoader.Load(MainMenu);
     }
     
     private void StartGame()
     {
-        PickedScene(Game);
+        SceneLoader.Load(Game);
     }
 
-    private void Previous()
+    private void SetPreviousCar()
     {
         PreviousCar();
     }
 
-    private void Next()
+    private void SetNextCar()
     {
         NextCar();
     }

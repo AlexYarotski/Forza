@@ -1,5 +1,5 @@
-using System;
 using DG.Tweening;
+using Project.Dev.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +9,6 @@ public class MainMenuWindow : MonoBehaviour
     private const string Garage = "Garage";
     private const string KeyCar = "Car";
 
-    private const float SizeSettWindow = 1;
-    private const float Duration = 0.5f;
-    
-    public static event Action<string> PickedScene = delegate {  }; 
-    
     [SerializeField]
     private Button _garageButton = null;
     [SerializeField]
@@ -39,13 +34,13 @@ public class MainMenuWindow : MonoBehaviour
     private void PlayGame()
     {
         DOTween.PauseAll();
-        PickedScene(Game);
+        SceneLoader.Load(Game);
     }
 
     private void OpenGarage()
     {
         DOTween.PauseAll();
-        PickedScene(Garage);
+        SceneLoader.Load(Garage);
     }
 
     private void OpenSetting()
@@ -53,7 +48,8 @@ public class MainMenuWindow : MonoBehaviour
         if (!_uiSetting.gameObject.activeSelf)
         {
             _uiSetting.gameObject.SetActive(true);
-            _uiSetting.transform.DOScale(new Vector3(SizeSettWindow, SizeSettWindow), Duration);
+            _uiSetting.transform.DOScale(new Vector3(UISetting.SizeWindow, UISetting.SizeWindow),
+                UISetting.OpenDuration);
         }
     }
 }
