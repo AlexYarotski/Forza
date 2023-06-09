@@ -27,3 +27,4 @@ public static class ButtonExtension
         sequence.Append(button.image.DOColor(Color.white, Duration));
     }
 }
+

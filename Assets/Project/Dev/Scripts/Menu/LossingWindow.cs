@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Project.Dev.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +35,8 @@ public class LossingWindow : MonoBehaviour
 
     [SerializeField]
     private Image _frame = null;
+
+    private readonly SceneLoader _sceneLoader = new SceneLoader();
     
     private void Awake()
     {
@@ -93,6 +94,6 @@ public class LossingWindow : MonoBehaviour
     private void UploadScene(string scene)
     {
         DOTween.PauseAll();
-        SceneLoader.Load(scene);
+        _sceneLoader.Load(scene);
     }
 }

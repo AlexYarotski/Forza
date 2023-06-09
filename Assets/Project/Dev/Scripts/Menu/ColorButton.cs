@@ -27,11 +27,6 @@ namespace Project.Dev.Scripts.Menu
             _callback = callback;
         }
 
-        public void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
-        }
-
         public void Enable()
         {
             gameObject.SetActive(true);

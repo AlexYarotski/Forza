@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Project.Dev.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,9 @@ public class MainMenuWindow : MonoBehaviour
     private Button _settingButton = null;
     [SerializeField]
     private UISetting _uiSetting = null;
+    
+    [SerializeField]
+    private SceneLoader _sceneLoader = null;
 
     
     private void Awake()
@@ -34,13 +36,13 @@ public class MainMenuWindow : MonoBehaviour
     private void PlayGame()
     {
         DOTween.PauseAll();
-        SceneLoader.Load(Game);
+        _sceneLoader.Load(Game);
     }
 
     private void OpenGarage()
     {
         DOTween.PauseAll();
-        SceneLoader.Load(Garage);
+        _sceneLoader.Load(Garage);
     }
 
     private void OpenSetting()

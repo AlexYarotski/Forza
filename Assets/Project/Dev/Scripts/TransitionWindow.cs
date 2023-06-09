@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TransitionWindow : MonoBehaviour
 {
-    private readonly Vector3 StartPosition = new Vector3(0, 2000, 0);
+    private readonly Vector3 StartSize = new Vector3(1, 1);
     
     [SerializeField]
     private Slider _progressBar = null;
@@ -15,9 +15,7 @@ public class TransitionWindow : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = StartPosition;
-        
-        DontDestroyOnLoad(gameObject);
+        transform.localScale = Vector3.zero;
     }
 
     public void SetProgressBar(float progress)
@@ -28,12 +26,15 @@ public class TransitionWindow : MonoBehaviour
     public void Show(Action callback)
     {
         gameObject.SetActive(true);
-        transform.DOMove(Vector3.zero, _timeAppearance);
+        transform.DOScale(StartSize, _timeAppearance)
+            .OnComplete(callback.Invoke);
     }
 
     public void Hide()
     {
+        transform.DOScale(Vector3.zero, _timeAppearance);
+        DOTween.PauseAll();
+        
         gameObject.SetActive(false);
-        transform.position = StartPosition;
     }
 }
