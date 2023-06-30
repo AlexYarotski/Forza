@@ -412,10 +412,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e4c745f26161c40bd232b35d07b79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _game: {fileID: 961088611839669106}
-  _mainMenu: {fileID: 5353962557663509139}
-  _previous: {fileID: 3568830955258818361}
-  _next: {fileID: 7211631579033995375}
+  _gameButton: {fileID: 961088611839669106}
+  _mainMenuButton: {fileID: 5353962557663509139}
+  _previousButton: {fileID: 3568830955258818361}
+  _nextButton: {fileID: 7211631579033995375}
+  _sceneLoader: {fileID: 0}
 --- !u!1 &7454577048138738106
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,6 @@ public class MainMenuWindow : MonoBehaviour
     [SerializeField]
     private SceneLoader _sceneLoader = null;
 
-    
     private void Awake()
     {
         _playButton.AddListener(PlayGame);

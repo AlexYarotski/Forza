@@ -1,7 +1,5 @@
 using System;
-using Project.Dev.Scripts;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PodiumInputManager : MonoBehaviour
@@ -12,17 +10,13 @@ public class PodiumInputManager : MonoBehaviour
     public static event Action NextCar = delegate { };
     public static event Action PreviousCar = delegate {  };
 
-    [FormerlySerializedAs("_game")]
     [Header("Button")]
     [SerializeField]
     private Button _gameButton = null;
-    [FormerlySerializedAs("_mainMenu")]
     [SerializeField]
     private Button _mainMenuButton = null;
-    [FormerlySerializedAs("_previous")]
     [SerializeField]
     private Button _previousButton = null;
-    [FormerlySerializedAs("_next")]
     [SerializeField]
     private Button _nextButton = null;
     

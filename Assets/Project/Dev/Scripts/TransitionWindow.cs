@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TransitionWindow : MonoBehaviour
 {
-    private readonly Vector3 StartSize = new Vector3(1, 1);
+    private readonly Vector3 StartSize = new Vector3(1, 1, 1);
     
     [SerializeField]
     private Slider _progressBar = null;
@@ -15,6 +15,8 @@ public class TransitionWindow : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.SetActive(false);
+        
         transform.localScale = Vector3.zero;
     }
 
