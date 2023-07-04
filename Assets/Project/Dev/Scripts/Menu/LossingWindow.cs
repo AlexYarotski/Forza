@@ -36,17 +36,8 @@ public class LossingWindow : MonoBehaviour
     [SerializeField]
     private Image _frame = null;
 
-    private readonly SceneLoader _sceneLoader = new SceneLoader();
+    private SceneLoader _sceneLoader = null;
     
-    private void Awake()
-    {
-        _menu.AddListener(OpenMenu);
-        _garage.AddListener(OpenGarage);
-        _restart.AddListener(Restart);
-        
-        SetComponentsActive(false);
-    }
-
     private void OnEnable()
     {
         Car.Died += Car_Died;
@@ -55,6 +46,17 @@ public class LossingWindow : MonoBehaviour
     private void OnDisable()
     {
         Car.Died -= Car_Died;
+    }
+    
+    private void Start()
+    {
+        _menu.AddListener(OpenMenu);
+        _garage.AddListener(OpenGarage);
+        _restart.AddListener(Restart);
+        
+        _sceneLoader = SceneLoader.Instance;
+        
+        SetComponentsActive(false);
     }
     
     private void Car_Died(Vector3 position)

@@ -1,8 +1,5 @@
-﻿namespace Project.Dev.Scripts
+﻿public enum ChunkType
 {
-    public enum ChunkType
-    {
-        Chunk = 0,
-        Environment = 1
-    }
+    Chunk = 0,
+    Environment = 1
 }

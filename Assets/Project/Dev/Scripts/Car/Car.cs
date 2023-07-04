@@ -1,6 +1,4 @@
 ﻿using System;
-using Project.Dev.Scripts;
-using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
 public class Car : MonoBehaviour, IDamageable

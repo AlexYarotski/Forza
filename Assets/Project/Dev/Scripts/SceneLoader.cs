@@ -7,8 +7,23 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private TransitionWindow _transitionWindow = null;
 
+    public static SceneLoader Instance
+    {
+        get; 
+        private set;
+    }
+    
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance == this)
+        {
+            Destroy(gameObject);
+        }
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -28,6 +43,6 @@ public class SceneLoader : MonoBehaviour
             await Task.Yield();
         }
 
-        //_transitionWindow.Hide();
+        _transitionWindow.Hide();
     }
 }

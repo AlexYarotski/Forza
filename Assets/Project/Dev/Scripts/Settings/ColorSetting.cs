@@ -1,5 +1,3 @@
-using Project.Dev.Scripts;
-using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ColorSetting", menuName = "Settings/ColorSetting", order = 0)]

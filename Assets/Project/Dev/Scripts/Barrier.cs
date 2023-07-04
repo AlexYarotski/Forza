@@ -1,4 +1,3 @@
-using Project.Dev.Scripts.Interface;
 using UnityEngine;
 
 public class Barrier : MonoBehaviour

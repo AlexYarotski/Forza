@@ -17,14 +17,17 @@ public class MainMenuWindow : MonoBehaviour
     [SerializeField]
     private UISetting _uiSetting = null;
     
-    [SerializeField]
     private SceneLoader _sceneLoader = null;
 
-    private void Awake()
+    private void Start()
     {
+       // PlayerPrefs.DeleteAll();
+        
         _playButton.AddListener(PlayGame);
         _garageButton.AddListener(OpenGarage);
         _settingButton.AddListener(OpenSetting);
+        
+        _sceneLoader = SceneLoader.Instance;
 
         if (!PlayerPrefs.HasKey(KeyCar))
         {

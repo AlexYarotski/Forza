@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using Project.Dev.Scripts;
 
 [Serializable]
 public class ColorConfig

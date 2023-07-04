@@ -20,8 +20,7 @@ public class PodiumInputManager : MonoBehaviour
     [SerializeField]
     private Button _nextButton = null;
     
-    [SerializeField]
-    private  SceneLoader _sceneLoader = null;
+    private SceneLoader _sceneLoader = null;
 
     private void Start()
     {
@@ -29,6 +28,8 @@ public class PodiumInputManager : MonoBehaviour
         _mainMenuButton.AddListener(OpenMenu);
         _previousButton.AddListener(SetPreviousCar);
         _nextButton.AddListener(SetNextCar);
+
+        _sceneLoader = SceneLoader.Instance;
     }
 
     private void OpenMenu()

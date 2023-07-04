@@ -1,31 +1,37 @@
 using UnityEngine;
 
-namespace Project.Dev.Scripts
+public class SceneContexts : MonoBehaviour
 {
-    public class SceneContexts : MonoBehaviour
+    public static SceneContexts Instance
     {
-        [field: SerializeField]
-        public CarDataSettings CarDataSettings
-        {
-            get;
-            private set;
-        }
-        public static SceneContexts Instance
-        {
-            get; 
-            private set;
-        }
+        get;
+        private set;
+    }
     
+    [field: SerializeField] 
+    public CarDataSettings CarDataSettings 
+    {
+        get; 
+        private set; 
+    }
+
+    [field: SerializeField]
+    public LockCarSetting LockCarSetting
+    {
+        get;
+        private set;
+    }
+
         private void Awake()
+    {
+        if (Instance == null)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else if(Instance == this)
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
+        }
+        else if (Instance == this)
+        {
+            Destroy(gameObject);
         }
     }
 }
+

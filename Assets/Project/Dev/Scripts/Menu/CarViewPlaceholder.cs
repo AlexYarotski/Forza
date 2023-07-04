@@ -1,101 +1,95 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 
-namespace Project.Dev.Scripts.Menu
+public class CarViewPlaceholder : MonoBehaviour
 {
-    public class CarViewPlaceholder : MonoBehaviour
+    public static event Action<CarModelType> CarChanged = delegate { };
+
+    private const string KeyCar = "Car";
+
+    [SerializeField]
+    private CarView _carView = null;
+
+    private CarModelType _modelType = default;
+    private PaintElement _currentElement = null;
+
+    private void Awake()
     {
-        public static event Action<CarModelType> CarChanged = delegate {  };
-        
-        private const string KeyCar = "Car";
+        _modelType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
 
-        [SerializeField]
-        private CarView _carView = null;
-        
-        private CarModelType _modelType = default;
-        private PaintElement _currentElement = null;
+        ActiveElement();
+    }
 
-        private void Awake()
+    private void OnEnable()
+    {
+        PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
+        PodiumInputManager.NextCar += CarSpecifications_NextCar;
+        Paint.ClickedButton += Paint_ClickedButton;
+    }
+
+    private void OnDisable()
+    {
+        PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
+        PodiumInputManager.NextCar -= CarSpecifications_NextCar;
+        Paint.ClickedButton -= Paint_ClickedButton;
+    }
+
+    private void CarSpecifications_PreviousCar()
+    {
+        var newIndex = (int)_modelType - 1 < 0 ? Enum.GetValues(typeof(CarModelType)).Length - 1 : (int)_modelType - 1;
+
+        ChangeCar(newIndex);
+    }
+
+    private void CarSpecifications_NextCar()
+    {
+        var newIndex = (int)_modelType + 1 > Enum.GetValues(typeof(CarModelType)).Length - 1 ? 0 : (int)_modelType + 1;
+
+        ChangeCar(newIndex);
+    }
+
+    private void Paint_ClickedButton(ColorName colorName)
+    {
+        _carView.PaintElement(_modelType, colorName);
+
+        PlayerPrefs.SetInt(_modelType.ToString(), (int)colorName);
+    }
+
+    private void ChangeCar(int newIndex)
+    {
+        var newElements = _carView.GetPaintElements((CarModelType)newIndex);
+        _modelType = (CarModelType)newIndex;
+
+        if (_currentElement != null)
         {
-            _modelType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
-            
-            ActiveElement();
+            _currentElement.Disable();
         }
 
-        private void OnEnable()
-        {
-            PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
-            PodiumInputManager.NextCar += CarSpecifications_NextCar;
-            Paint.ClickedButton += Paint_ClickedButton;
-        }
+        newElements.Enable();
 
-        private void OnDisable()
-        {
-            PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
-            PodiumInputManager.NextCar -= CarSpecifications_NextCar;
-            Paint.ClickedButton -= Paint_ClickedButton;
-        }
+        _currentElement = newElements;
 
-        private void CarSpecifications_PreviousCar()
-        {
-            var newIndex = (int)_modelType - 1 < 0 ? Enum.GetValues(typeof(CarModelType)).Length - 1 : 
-                (int)_modelType - 1;
-            
-            ChangeCar(newIndex);
-        }
-        
-        private void CarSpecifications_NextCar()
-        {
-            var newIndex = (int)_modelType + 1 > Enum.GetValues(typeof(CarModelType)).Length - 1 ? 0 :
-                (int)_modelType + 1;
-            
-            ChangeCar(newIndex);
-        }
+        CarChanged(_modelType);
 
-        private void Paint_ClickedButton(ColorName colorName)
-        {
-            _carView.PaintElement(_modelType, colorName);
+        PlayerPrefs.SetInt(KeyCar, (int)_modelType);
+    }
 
-            PlayerPrefs.SetInt(_modelType.ToString(), (int)colorName);
-        }
-        
-        private void ChangeCar(int newIndex)
+    private void ActiveElement()
+    {
+        for (var i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
         {
-            var newElements = _carView.GetPaintElements((CarModelType)newIndex);
-            _modelType = (CarModelType)newIndex;
+            var currentType = (CarModelType)i;
 
-            if (_currentElement != null)
+            if (i == PlayerPrefs.GetInt(KeyCar))
             {
-                _currentElement.Disable(); 
+                _carView.GetPaintElements(currentType).Enable();
+                _currentElement = _carView.GetPaintElements(currentType);
+
+                PlayerPrefs.SetInt(KeyCar, i);
             }
-            
-            newElements.Enable();
-        
-            _currentElement = newElements;
-
-            CarChanged(_modelType);
-            
-            PlayerPrefs.SetInt(KeyCar, (int)_modelType);
-        }
-        
-        private void ActiveElement()
-        {
-            for (var i = 0; i < Enum.GetValues(typeof(CarModelType)).Length; i++)
+            else
             {
-                var currentType = (CarModelType)i;
-                
-                if (i == PlayerPrefs.GetInt(KeyCar))
-                {
-                    _carView.GetPaintElements(currentType).Enable();
-                    _currentElement = _carView.GetPaintElements(currentType);
-                    
-                    PlayerPrefs.SetInt(KeyCar, i);
-                }
-                else
-                {
-                    _carView.GetPaintElements(currentType).Disable();
-                }
+                _carView.GetPaintElements(currentType).Disable();
             }
         }
     }

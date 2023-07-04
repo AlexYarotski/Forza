@@ -1,8 +1,5 @@
-﻿namespace Project.Dev.Scripts.Interface
+﻿public interface IDamageable
 {
-    public interface IDamageable
-    {
-        public void GetDamage();
-        public void OnDie();
-    }
+    public void GetDamage();
+    public void OnDie();
 }

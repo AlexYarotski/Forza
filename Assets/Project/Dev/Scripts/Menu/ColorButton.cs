@@ -2,39 +2,32 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Project.Dev.Scripts.Menu
+public class ColorButton : Button
 {
-    public class ColorButton : Button
+    private Action<ColorName> _callback = null;
+
+    public ColorName ColorName { get; private set; }
+
+    public override void OnPointerClick(PointerEventData eventData)
     {
-        private Action<ColorName> _callback = null;
+        base.OnPointerClick(eventData);
 
-        public ColorName ColorName
-        {
-            get;
-            private set;
-        }
+        _callback.Invoke(ColorName);
+    }
 
-        public override void OnPointerClick(PointerEventData eventData)
-        {
-            base.OnPointerClick(eventData);
-            
-            _callback.Invoke(ColorName);
-        }
+    public void Setup(ColorName colorName, Action<ColorName> callback)
+    {
+        ColorName = colorName;
+        _callback = callback;
+    }
 
-        public void Setup(ColorName colorName, Action<ColorName> callback)
-        {
-            ColorName = colorName;
-            _callback = callback;
-        }
+    public void Enable()
+    {
+        gameObject.SetActive(true);
+    }
 
-        public void Enable()
-        {
-            gameObject.SetActive(true);
-        }
-        
-        public void Disable()
-        {
-            gameObject.SetActive(false);
-        }
+    public void Disable()
+    {
+        gameObject.SetActive(false);
     }
 }

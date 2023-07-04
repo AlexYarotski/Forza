@@ -29,15 +29,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField]
     private UISetting _uiSetting = null;
     
-    [SerializeField]
     private SceneLoader _sceneLoader = null;
-
-    private void Awake()
-    {
-        _settingButton.onClick.AddListener(OpenSetting);
-        _restartButton.AddListener(Restart);
-        _garageButton.AddListener(OpenGarage);
-    }
 
     private void OnEnable()
     {
@@ -51,6 +43,15 @@ public class GameWindow : MonoBehaviour
         Car.Drove -= Car_Drove;
         Score.Boost -= Score_Boost;
         Car.Died -= Car_Died;
+    }
+    
+    private void Start()
+    {
+        _settingButton.onClick.AddListener(OpenSetting);
+        _restartButton.AddListener(Restart);
+        _garageButton.AddListener(OpenGarage);
+        
+        _sceneLoader= SceneLoader.Instance;
     }
 
     private void Car_Drove(Vector3 drove)
