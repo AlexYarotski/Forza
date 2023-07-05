@@ -180,7 +180,15 @@ public class Car : MonoBehaviour, IDamageable
     private void SetColor(CarModelType model)
     {
         var colorIndex = PlayerPrefs.GetInt(model.ToString());
-        _carView.PaintElement(model, (ColorName)colorIndex);
+
+        if (_carData.ColorSetting.CheckColor((ColorName)colorIndex))
+        {
+            _carView.PaintElement(model, (ColorName)colorIndex);
+            
+            return;
+        }
+        
+        _carView.PaintElement(model, _carData.ColorSetting.ColorConfigs[0].ColorName);
     }
 
     private void PlaySmoke()

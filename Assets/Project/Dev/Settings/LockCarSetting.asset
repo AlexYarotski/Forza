@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lockCars:
   - <CarModelType>k__BackingField: 1
-    <UnlockScore>k__BackingField: 3000
+    <UnlockScore>k__BackingField: 20

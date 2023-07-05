@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LockCarSetting", menuName = "Settings/LockCarSetting", order = 0)]
 public class LockCarSetting : ScriptableObject
 {
+    private const string KeyScore = "Score";
+
     [Serializable]
     public class LockCar
     {
@@ -36,5 +38,25 @@ public class LockCarSetting : ScriptableObject
         }
 
         return null;
+    }
+    
+    public bool IsCarUnlock(CarModelType carModelType)
+    {
+        var score = PlayerPrefs.GetInt(KeyScore);
+
+        if (score == default)
+        {
+            return false;
+        }
+        
+        for (int i = 0; i < _lockCars.Length; i++)
+        {
+            if (_lockCars[i].CarModelType == carModelType)
+            {
+                return score < GetUnlockScore(carModelType);
+            }
+        }
+
+        return false;
     }
 }

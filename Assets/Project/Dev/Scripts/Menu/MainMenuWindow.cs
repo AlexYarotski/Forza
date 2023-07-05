@@ -21,8 +21,6 @@ public class MainMenuWindow : MonoBehaviour
 
     private void Start()
     {
-       // PlayerPrefs.DeleteAll();
-        
         _playButton.AddListener(PlayGame);
         _garageButton.AddListener(OpenGarage);
         _settingButton.AddListener(OpenSetting);

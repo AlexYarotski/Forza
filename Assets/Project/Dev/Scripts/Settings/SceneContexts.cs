@@ -22,7 +22,7 @@ public class SceneContexts : MonoBehaviour
         private set;
     }
 
-        private void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {

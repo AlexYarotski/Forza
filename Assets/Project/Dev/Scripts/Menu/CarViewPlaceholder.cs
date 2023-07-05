@@ -69,9 +69,9 @@ public class CarViewPlaceholder : MonoBehaviour
 
         _currentElement = newElements;
 
-        CarChanged(_modelType);
-
         PlayerPrefs.SetInt(KeyCar, (int)_modelType);
+        
+        CarChanged(_modelType);
     }
 
     private void ActiveElement()

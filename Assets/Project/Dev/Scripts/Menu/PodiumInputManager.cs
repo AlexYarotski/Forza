@@ -6,10 +6,14 @@ public class PodiumInputManager : MonoBehaviour
 {
     private const string Game = "Game";
     private const string MainMenu = "Menu";
-    
+    private const string KeyCar = "Car";
+
     public static event Action NextCar = delegate { };
     public static event Action PreviousCar = delegate {  };
 
+    [SerializeField]
+    private UILock _uiLock = null;
+    
     [Header("Button")]
     [SerializeField]
     private Button _gameButton = null;
@@ -39,6 +43,16 @@ public class PodiumInputManager : MonoBehaviour
     
     private void StartGame()
     {
+        var carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlock(carModel);
+
+        if (!isCarUnlock && carModel != default)
+        {
+            _uiLock.ActivateLock();
+            
+            return;
+        }
+        
         _sceneLoader.Load(Game);
     }
 

@@ -22,4 +22,17 @@ public class ColorSetting : ScriptableObject, IColorable
         
         return null;
     }
+
+    public bool CheckColor(ColorName colorName)
+    {
+        for (int i = 0; i < ColorConfigs.Length; i++)
+        {
+            if (ColorConfigs[i].ColorName == colorName)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
