@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,11 @@ public class MainMenuWindow : MonoBehaviour
     private UISetting _uiSetting = null;
     
     private SceneLoader _sceneLoader = null;
+
+    private void Awake()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 
     private void Start()
     {
