@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,12 +24,12 @@ public class SceneLoader : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Load(string scene)
     {
+        DOTween.KillAll();
+        
         _transitionWindow.Show(() => UploadSceneAsync(scene));
     }
 

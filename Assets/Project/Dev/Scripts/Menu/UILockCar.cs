@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UILock : MonoBehaviour
+public class UILockCar : MonoBehaviour
 {
     private const string Score = "Score {0} points to open";
     private const string KeyScore = "Score";

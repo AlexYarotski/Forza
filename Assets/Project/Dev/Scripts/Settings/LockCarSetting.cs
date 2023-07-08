@@ -40,7 +40,7 @@ public class LockCarSetting : ScriptableObject
         return null;
     }
     
-    public bool IsCarUnlock(CarModelType carModelType)
+    public bool IsCarUnlocked(CarModelType carModelType)
     {
         var score = PlayerPrefs.GetInt(KeyScore);
 

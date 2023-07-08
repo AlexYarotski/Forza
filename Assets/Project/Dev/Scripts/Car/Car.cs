@@ -176,7 +176,6 @@ public class Car : MonoBehaviour, IDamageable
 
     #endregion
 
-
     private void SetColor(CarModelType model)
     {
         var colorIndex = PlayerPrefs.GetInt(model.ToString());

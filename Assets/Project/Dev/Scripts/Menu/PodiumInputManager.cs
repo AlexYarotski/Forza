@@ -12,7 +12,7 @@ public class PodiumInputManager : MonoBehaviour
     public static event Action PreviousCar = delegate {  };
 
     [SerializeField]
-    private UILock _uiLock = null;
+    private UILockCar uiLockCar = null;
     
     [Header("Button")]
     [SerializeField]
@@ -44,11 +44,11 @@ public class PodiumInputManager : MonoBehaviour
     private void StartGame()
     {
         var carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
-        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlock(carModel);
+        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(carModel);
 
         if (!isCarUnlock && carModel != default)
         {
-            _uiLock.ActivateLock();
+            uiLockCar.ActivateLock();
             
             return;
         }

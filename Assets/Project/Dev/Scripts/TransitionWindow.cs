@@ -16,8 +16,6 @@ public class TransitionWindow : MonoBehaviour
     private void Awake()
     {
         gameObject.SetActive(false);
-        
-        transform.localScale = Vector3.zero;
     }
 
     public void SetProgressBar(float progress)

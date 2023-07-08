@@ -82,11 +82,15 @@ public class GameWindow : MonoBehaviour
 
     private void Restart()
     {
+        Time.timeScale = 1;
+        
         _sceneLoader.Load(Game);
     }
 
     private void OpenGarage()
     {
+        Time.timeScale = 1;
+        
         _sceneLoader.Load(Garage);
     }
     
