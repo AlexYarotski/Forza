@@ -22,6 +22,13 @@ public class SceneContexts : MonoBehaviour
         private set;
     }
 
+    [field: SerializeField]
+    public SceneWindowSetting SceneWindowSetting
+    {
+        get;
+        private set;
+    }
+
     private void Awake()
     {
         if (Instance == null)

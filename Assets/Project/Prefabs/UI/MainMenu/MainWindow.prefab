@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 8411177613567263845}
   - component: {fileID: 8411177613567263842}
   m_Layer: 5
-  m_Name: MainMenu
+  m_Name: MainWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,11 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98280cdf88727b94bbdf8d91b0a51677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneName: 2
   _garageButton: {fileID: 8411177613804348955}
   _playButton: {fileID: 8411177614876362639}
   _settingButton: {fileID: 8411177613466970353}
-  _background: {fileID: 8411177613804348952}
-  _setting: {fileID: 0}
+  settingWindow: {fileID: 0}
 --- !u!1 &8411177613804348957
 GameObject:
   m_ObjectHideFlags: 0

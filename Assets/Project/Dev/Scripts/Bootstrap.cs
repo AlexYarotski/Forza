@@ -7,15 +7,18 @@ public class Bootstrap : MonoBehaviour
     [SerializeField]
     private MonoBehaviour[] _dotnDestroyElements = null;
 
+    [SerializeField]
+    private GameManager _gameManager = null;
+
     private void Start()
     {
         for (int i = 0; i < _dotnDestroyElements.Length; i++)
         {
-            _dotnDestroyElements[i].transform.parent = null;
+            _dotnDestroyElements[i].transform.SetParent(null);
             
             DontDestroyOnLoad(_dotnDestroyElements[i]);
         }
         
-        SceneLoader.Instance.Load(Menu);
+        _gameManager.Load(Menu);
     }
 }

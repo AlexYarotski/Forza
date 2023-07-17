@@ -24,7 +24,7 @@ public class LockCarSetting : ScriptableObject
         } 
     }
 
-    [field: SerializeField]
+    [SerializeField]
     private LockCar[] _lockCars = null;
 
     public int? GetUnlockScore(CarModelType carModelType)

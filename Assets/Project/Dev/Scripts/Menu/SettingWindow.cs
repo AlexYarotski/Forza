@@ -2,11 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISetting : MonoBehaviour
+public class SettingWindow : Window
 {
     public const float SizeWindow = 1;
     public const float OpenDuration = 0.2f;
-    
     private const float CloseDuration = 0.2f;
 
     [SerializeField]
@@ -17,10 +16,19 @@ public class UISetting : MonoBehaviour
         gameObject.SetActive(false);
 
         transform.localScale = Vector3.zero;
-        _cancel.AddListener(CloseWindow);
+        _cancel.AddListener(Hide);
     }
 
-    private void CloseWindow()
+    public override void Show()
+    {
+        base.Show();
+
+        transform.DOScale(new Vector3(SizeWindow, SizeWindow), OpenDuration);
+
+        Time.timeScale = 0;
+    }
+
+    public override void Hide()
     {
         transform.DOScale(Vector3.zero, CloseDuration)
             .OnComplete(() => gameObject.SetActive(false));

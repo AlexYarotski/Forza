@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LossingWindow : MonoBehaviour
+public class LossingWindow : Window
 {
     private const string MainMenu = "Menu";
     private const string GarageScene = "Garage";
@@ -56,16 +56,13 @@ public class LossingWindow : MonoBehaviour
         
         _sceneLoader = SceneLoader.Instance;
         
-        SetComponentsActive(false);
+        Hide();
     }
     
     private void Car_Died(Vector3 position)
     {
-        SetComponentsActive(true);
+        Show();
 
-        _frame.rectTransform.DOAnchorPos(Vector3.zero, DurationScore).SetEase(Ease.Linear);
-        _lose.rectTransform.DOAnchorPos(LosePosition, DurationLose).SetEase(Ease.Linear);
-        
         _score.text = string.Format(ScoreText, (int)position.z);
         
         _music.Stop();
@@ -84,13 +81,6 @@ public class LossingWindow : MonoBehaviour
     private void Restart()
     {
         UploadScene(Game);
-    }
-
-    private void SetComponentsActive(bool isActive)
-    {
-        _menu.gameObject.SetActive(isActive);
-        _garage.gameObject.SetActive(isActive);
-        _restart.gameObject.SetActive(isActive);
     }
 
     private void UploadScene(string scene)

@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuWindow : Window
+public class MainWindow : Window
 {
     private const string Game = "Game";
     private const string Garage = "Garage";

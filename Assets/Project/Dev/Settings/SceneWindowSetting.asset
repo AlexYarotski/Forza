@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cdf145fec834be3b7680e367338aaf9, type: 3}
+  m_Name: SceneWindowSetting
+  m_EditorClassIdentifier: 
+  _windows:
+  - {fileID: 8411177613567263842, guid: aea06d05acb5cf04688dca7d6a0a4420, type: 3}
+  - {fileID: 5209012542689402020, guid: 344a66237b9b84649bad7251afe9fa71, type: 3}
+  - {fileID: 3643914820781942059, guid: d081518e74789d746938032f2d279eae, type: 3}
+  - {fileID: 4216299934860598401, guid: e2c7ae0699e189f42881add913b8a7ed, type: 3}

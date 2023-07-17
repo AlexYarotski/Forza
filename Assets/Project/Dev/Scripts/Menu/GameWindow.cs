@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class GameWindow : MonoBehaviour
+public class GameWindow : Window
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
@@ -26,8 +26,9 @@ public class GameWindow : MonoBehaviour
     [SerializeField]
     private Button _garageButton = null;
 
+    [FormerlySerializedAs("_uiSetting")]
     [SerializeField]
-    private UISetting _uiSetting = null;
+    private SettingWindow settingWindow = null;
     
     private SceneLoader _sceneLoader = null;
 
@@ -54,6 +55,11 @@ public class GameWindow : MonoBehaviour
         _sceneLoader= SceneLoader.Instance;
     }
 
+    private void OpenSetting()
+    {
+        
+    }
+
     private void Car_Drove(Vector3 drove)
     {
         _scoreTMPUGUI.text = $"{(int)drove.z}";
@@ -67,17 +73,6 @@ public class GameWindow : MonoBehaviour
     private void Car_Died(Vector3 obj)
     {
         gameObject.SetActive(false);
-    }
-    
-    private void OpenSetting()
-    {
-        if (!_uiSetting.gameObject.activeSelf)
-        {
-            _uiSetting.gameObject.SetActive(true);
-            _uiSetting.transform.DOScale(new Vector3(UISetting.SizeWindow, UISetting.SizeWindow),
-                    UISetting.OpenDuration)
-                .OnComplete(() => Time.timeScale = 0);
-        }
     }
 
     private void Restart()
