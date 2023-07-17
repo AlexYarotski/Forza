@@ -1,9 +1,8 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuWindow : MonoBehaviour
+public class MainMenuWindow : Window
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
@@ -15,15 +14,11 @@ public class MainMenuWindow : MonoBehaviour
     private Button _playButton = null;
     [SerializeField]
     private Button _settingButton = null;
+    
     [SerializeField]
-    private UISetting _uiSetting = null;
+    private SettingWindow settingWindow = null;
     
     private SceneLoader _sceneLoader = null;
-
-    private void Awake()
-    {
-        PlayerPrefs.DeleteAll();
-    }
 
     private void Start()
     {
@@ -53,11 +48,11 @@ public class MainMenuWindow : MonoBehaviour
 
     private void OpenSetting()
     {
-        if (!_uiSetting.gameObject.activeSelf)
+        if (!settingWindow.gameObject.activeSelf)
         {
-            _uiSetting.gameObject.SetActive(true);
-            _uiSetting.transform.DOScale(new Vector3(UISetting.SizeWindow, UISetting.SizeWindow),
-                UISetting.OpenDuration);
+            settingWindow.gameObject.SetActive(true);
+            settingWindow.transform.DOScale(new Vector3(SettingWindow.SizeWindow, SettingWindow.SizeWindow),
+                SettingWindow.OpenDuration);
         }
     }
 }
