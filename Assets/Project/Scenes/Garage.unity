@@ -462,6 +462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CarDataSettings>k__BackingField: {fileID: 11400000, guid: 30de4549ac354ae44a450ab1bb52c603, type: 2}
   <LockCarSetting>k__BackingField: {fileID: 11400000, guid: b04010f450a20ec4482becca6acb56c6, type: 2}
+  <SceneWindowSetting>k__BackingField: {fileID: 0}
+  <WindowSwitcher>k__BackingField: {fileID: 0}
 --- !u!224 &657699736 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6414021218947149213, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
@@ -1722,6 +1724,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7264152726970172607, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
       propertyPath: _uiLock
+      value: 
+      objectReference: {fileID: 1830185675}
+    - target: {fileID: 7264152726970172607, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}
+      propertyPath: uiLockCar
       value: 
       objectReference: {fileID: 1830185675}
     - target: {fileID: 7264152726970172607, guid: 0371ba3fb38167447aa9a292276b3736, type: 3}

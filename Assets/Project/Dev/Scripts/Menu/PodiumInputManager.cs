@@ -24,7 +24,7 @@ public class PodiumInputManager : MonoBehaviour
     [SerializeField]
     private Button _nextButton = null;
     
-    private SceneLoader _sceneLoader = null;
+    private WindowManager _windowManager = null;
 
     private void Start()
     {
@@ -33,12 +33,12 @@ public class PodiumInputManager : MonoBehaviour
         _previousButton.AddListener(SetPreviousCar);
         _nextButton.AddListener(SetNextCar);
 
-        _sceneLoader = SceneLoader.Instance;
+        _windowManager = WindowManager.Instance;
     }
 
     private void OpenMenu()
     {
-        _sceneLoader.Load(MainMenu);
+        _windowManager.Load(MainMenu);
     }
     
     private void StartGame()
@@ -53,7 +53,7 @@ public class PodiumInputManager : MonoBehaviour
             return;
         }
         
-        _sceneLoader.Load(Game);
+        _windowManager.Load(Game);
     }
 
     private void SetPreviousCar()

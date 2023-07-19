@@ -18,7 +18,7 @@ public class MainWindow : Window
     [SerializeField]
     private SettingWindow settingWindow = null;
     
-    private SceneLoader _sceneLoader = null;
+    private WindowManager _windowManager = null;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class MainWindow : Window
         _garageButton.AddListener(OpenGarage);
         _settingButton.AddListener(OpenSetting);
         
-        _sceneLoader = SceneLoader.Instance;
+        _windowManager = WindowManager.Instance;
 
         if (!PlayerPrefs.HasKey(KeyCar))
         {
@@ -37,13 +37,13 @@ public class MainWindow : Window
     private void PlayGame()
     {
         DOTween.PauseAll();
-        _sceneLoader.Load(Game);
+        _windowManager.Load(Game);
     }
 
     private void OpenGarage()
     {
         DOTween.PauseAll();
-        _sceneLoader.Load(Garage);
+        _windowManager.Load(Garage);
     }
 
     private void OpenSetting()

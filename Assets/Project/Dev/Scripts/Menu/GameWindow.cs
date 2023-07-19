@@ -26,11 +26,10 @@ public class GameWindow : Window
     [SerializeField]
     private Button _garageButton = null;
 
-    [FormerlySerializedAs("_uiSetting")]
     [SerializeField]
-    private SettingWindow settingWindow = null;
+    private SettingWindow _settingWindow = null;
     
-    private SceneLoader _sceneLoader = null;
+    private WindowManager _windowManager = null;
 
     private void OnEnable()
     {
@@ -52,7 +51,7 @@ public class GameWindow : Window
         _restartButton.AddListener(Restart);
         _garageButton.AddListener(OpenGarage);
         
-        _sceneLoader= SceneLoader.Instance;
+        _windowManager= WindowManager.Instance;
     }
 
     private void OpenSetting()
@@ -79,14 +78,14 @@ public class GameWindow : Window
     {
         Time.timeScale = 1;
         
-        _sceneLoader.Load(Game);
+        _windowManager.Load(Game);
     }
 
     private void OpenGarage()
     {
         Time.timeScale = 1;
         
-        _sceneLoader.Load(Garage);
+        _windowManager.Load(Garage);
     }
     
     private IEnumerator StyleScore()

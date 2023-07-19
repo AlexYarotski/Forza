@@ -5,15 +5,31 @@ public class WindowSwitcher : MonoBehaviour
 {
     private readonly List<Window> WindowList = new List<Window>();
 
+    public static WindowSwitcher Instance
+    {
+        get; 
+        private set;
+    }
+    
     private void Awake()
     {
-        var windowArray = SceneContexts.Instance.SceneWindowSetting.GetWindows();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance == this)
+        {
+            Destroy(gameObject);
+        }
         
+        var windowArray = SceneContexts.Instance.SceneWindowSetting.GetWindows();
+
         for (var i = 0; i < windowArray.Length; i++)
         {
             windowArray[i].transform.SetParent(null);
 
             var newWindow = Instantiate(windowArray[i], transform);
+            
             newWindow.gameObject.SetActive(false);
             
             WindowList.Add(newWindow);

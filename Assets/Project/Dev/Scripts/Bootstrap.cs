@@ -8,7 +8,7 @@ public class Bootstrap : MonoBehaviour
     private MonoBehaviour[] _dotnDestroyElements = null;
 
     [SerializeField]
-    private GameManager _gameManager = null;
+    private WindowManager _windowManager = null;
 
     private void Start()
     {
@@ -19,6 +19,6 @@ public class Bootstrap : MonoBehaviour
             DontDestroyOnLoad(_dotnDestroyElements[i]);
         }
         
-        _gameManager.Load(Menu);
+        _windowManager.Load(Menu);
     }
 }

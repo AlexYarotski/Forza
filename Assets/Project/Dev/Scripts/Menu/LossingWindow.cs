@@ -36,7 +36,7 @@ public class LossingWindow : Window
     [SerializeField]
     private Image _frame = null;
 
-    private SceneLoader _sceneLoader = null;
+    private WindowManager _windowManager = null;
     
     private void OnEnable()
     {
@@ -54,7 +54,7 @@ public class LossingWindow : Window
         _garage.AddListener(OpenGarage);
         _restart.AddListener(Restart);
         
-        _sceneLoader = SceneLoader.Instance;
+        _windowManager = WindowManager.Instance;
         
         Hide();
     }
@@ -86,6 +86,6 @@ public class LossingWindow : Window
     private void UploadScene(string scene)
     {
         DOTween.PauseAll();
-        _sceneLoader.Load(scene);
+        _windowManager.Load(scene);
     }
 }
