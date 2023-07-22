@@ -1,14 +1,9 @@
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LossingWindow : Window
 {
-    private const string MainMenu = "Menu";
-    private const string GarageScene = "Garage";
-    private const string Game = "Game";
-
     private const float DurationScore = 1f;
     private const float DurationLose = 1f;
     
@@ -36,8 +31,11 @@ public class LossingWindow : Window
     [SerializeField]
     private Image _frame = null;
 
-    private WindowManager _windowManager = null;
-    
+    public override bool IsPopUp
+    {
+        get => true;
+    }
+
     private void OnEnable()
     {
         Car.Died += Car_Died;
@@ -54,8 +52,6 @@ public class LossingWindow : Window
         _garage.AddListener(OpenGarage);
         _restart.AddListener(Restart);
         
-        _windowManager = WindowManager.Instance;
-        
         Hide();
     }
     
@@ -70,22 +66,16 @@ public class LossingWindow : Window
 
     private void OpenMenu()
     {
-        UploadScene(MainMenu);
+        SceneLoader.Instance.LoadMain();
     }
 
     private void OpenGarage()
     {
-        UploadScene(GarageScene);
+        SceneLoader.Instance.LoadGarage();
     }
     
     private void Restart()
     {
-        UploadScene(Game);
-    }
-
-    private void UploadScene(string scene)
-    {
-        DOTween.PauseAll();
-        _windowManager.Load(scene);
+        SceneLoader.Instance.LoadGame();
     }
 }

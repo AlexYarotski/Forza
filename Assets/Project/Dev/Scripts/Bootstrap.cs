@@ -2,13 +2,8 @@
 
 public class Bootstrap : MonoBehaviour
 {
-    private const string Menu = "Menu";
-
     [SerializeField]
     private MonoBehaviour[] _dotnDestroyElements = null;
-
-    [SerializeField]
-    private WindowManager _windowManager = null;
 
     private void Start()
     {
@@ -19,6 +14,6 @@ public class Bootstrap : MonoBehaviour
             DontDestroyOnLoad(_dotnDestroyElements[i]);
         }
         
-        _windowManager.Load(Menu);
+        SceneLoader.Instance.LoadMain();
     }
 }

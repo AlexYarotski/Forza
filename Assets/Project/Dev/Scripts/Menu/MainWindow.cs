@@ -1,11 +1,8 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainWindow : Window
 {
-    private const string Game = "Game";
-    private const string Garage = "Garage";
     private const string KeyCar = "Car";
 
     [SerializeField]
@@ -15,19 +12,17 @@ public class MainWindow : Window
     [SerializeField]
     private Button _settingButton = null;
     
-    [SerializeField]
-    private SettingWindow settingWindow = null;
-    
-    private WindowManager _windowManager = null;
+    public override bool IsPopUp
+    {
+        get => false;
+    }
 
     private void Start()
     {
         _playButton.AddListener(PlayGame);
         _garageButton.AddListener(OpenGarage);
         _settingButton.AddListener(OpenSetting);
-        
-        _windowManager = WindowManager.Instance;
-
+     
         if (!PlayerPrefs.HasKey(KeyCar))
         {
             PlayerPrefs.SetInt(KeyCar, 0);
@@ -36,23 +31,15 @@ public class MainWindow : Window
 
     private void PlayGame()
     {
-        DOTween.PauseAll();
-        _windowManager.Load(Game);
+        SceneLoader.Instance.LoadGame();
     }
 
     private void OpenGarage()
     {
-        DOTween.PauseAll();
-        _windowManager.Load(Garage);
+        SceneLoader.Instance.LoadGarage();
     }
 
     private void OpenSetting()
     {
-        if (!settingWindow.gameObject.activeSelf)
-        {
-            settingWindow.gameObject.SetActive(true);
-            settingWindow.transform.DOScale(new Vector3(SettingWindow.SizeWindow, SettingWindow.SizeWindow),
-                SettingWindow.OpenDuration);
-        }
     }
 }

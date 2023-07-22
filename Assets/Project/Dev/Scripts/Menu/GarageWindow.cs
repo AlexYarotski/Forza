@@ -2,10 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PodiumInputManager : MonoBehaviour
+public class GarageWindow : Window
 {
-    private const string Game = "Game";
-    private const string MainMenu = "Menu";
     private const string KeyCar = "Car";
 
     public static event Action NextCar = delegate { };
@@ -23,8 +21,11 @@ public class PodiumInputManager : MonoBehaviour
     private Button _previousButton = null;
     [SerializeField]
     private Button _nextButton = null;
-    
-    private WindowManager _windowManager = null;
+
+    public override bool IsPopUp
+    {
+        get => false;
+    }
 
     private void Start()
     {
@@ -32,13 +33,11 @@ public class PodiumInputManager : MonoBehaviour
         _mainMenuButton.AddListener(OpenMenu);
         _previousButton.AddListener(SetPreviousCar);
         _nextButton.AddListener(SetNextCar);
-
-        _windowManager = WindowManager.Instance;
     }
 
     private void OpenMenu()
     {
-        _windowManager.Load(MainMenu);
+        SceneLoader.Instance.LoadMain();
     }
     
     private void StartGame()
@@ -53,7 +52,7 @@ public class PodiumInputManager : MonoBehaviour
             return;
         }
         
-        _windowManager.Load(Game);
+        SceneLoader.Instance.LoadGame();
     }
 
     private void SetPreviousCar()

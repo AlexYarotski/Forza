@@ -22,15 +22,15 @@ public class CarViewPlaceholder : MonoBehaviour
 
     private void OnEnable()
     {
-        PodiumInputManager.PreviousCar += CarSpecifications_PreviousCar;
-        PodiumInputManager.NextCar += CarSpecifications_NextCar;
+        GarageWindow.PreviousCar += CarSpecifications_PreviousCar;
+        GarageWindow.NextCar += CarSpecifications_NextCar;
         Paint.ClickedButton += Paint_ClickedButton;
     }
 
     private void OnDisable()
     {
-        PodiumInputManager.PreviousCar -= CarSpecifications_PreviousCar;
-        PodiumInputManager.NextCar -= CarSpecifications_NextCar;
+        GarageWindow.PreviousCar -= CarSpecifications_PreviousCar;
+        GarageWindow.NextCar -= CarSpecifications_NextCar;
         Paint.ClickedButton -= Paint_ClickedButton;
     }
 

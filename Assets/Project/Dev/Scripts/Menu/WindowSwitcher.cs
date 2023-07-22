@@ -5,23 +5,10 @@ public class WindowSwitcher : MonoBehaviour
 {
     private readonly List<Window> WindowList = new List<Window>();
 
-    public static WindowSwitcher Instance
-    {
-        get; 
-        private set;
-    }
-    
+    private Window _currentWindow = null;
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if(Instance == this)
-        {
-            Destroy(gameObject);
-        }
-        
         var windowArray = SceneContexts.Instance.SceneWindowSetting.GetWindows();
 
         for (var i = 0; i < windowArray.Length; i++)
@@ -45,6 +32,10 @@ public class WindowSwitcher : MonoBehaviour
                 return window;
             }
         }
+
+#if UNITY_EDITOR
+       Debug.LogError($"Window type not found {typeof(T)}"); 
+#endif
         
         return null;
     }
@@ -52,6 +43,16 @@ public class WindowSwitcher : MonoBehaviour
     public void Show<T>() where T : Window
     {
         var windowToShow = GetWindow<T>();
+
+        if (_currentWindow != null && !windowToShow.IsPopUp)
+        {
+            _currentWindow.Hide();
+        }
+
+        if (!windowToShow.IsPopUp)
+        {
+            _currentWindow = windowToShow;
+        }
         
         windowToShow.Show();
     }

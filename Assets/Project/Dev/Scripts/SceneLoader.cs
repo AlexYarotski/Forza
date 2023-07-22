@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private const string Game = "Game";
+    private const string Garage = "Garage";
+    private const string MainMenu = "Menu";
+    
     [SerializeField]
     private TransitionWindow _transitionWindow = null;
 
+    [SerializeField]
+    private WindowSwitcher _windowSwitcher = null;
+    
     public static SceneLoader Instance
     {
         get; 
@@ -31,6 +38,33 @@ public class SceneLoader : MonoBehaviour
         DOTween.KillAll();
         
         _transitionWindow.Show(() => UploadSceneAsync(scene));
+    }
+
+    public void LoadMain()
+    {
+        DOTween.KillAll();
+        
+        _transitionWindow.Show(() => UploadSceneAsync(MainMenu));
+        
+        _windowSwitcher.Show<MainWindow>();
+    }
+
+    public void LoadGarage()
+    {
+        DOTween.KillAll();
+        
+        _transitionWindow.Show(() => UploadSceneAsync(Garage));
+        
+        _windowSwitcher.Show<GarageWindow>();
+    }
+
+    public void LoadGame()
+    {
+        DOTween.KillAll();
+        
+        _transitionWindow.Show(() => UploadSceneAsync(Game));
+        
+        _windowSwitcher.Show<GameWindow>();
     }
 
     private async void UploadSceneAsync(string sceneName)

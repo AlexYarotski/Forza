@@ -1,14 +1,10 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameWindow : Window
 {
-    private const string Game = "Game";
-    private const string Garage = "Garage";
-    
     [SerializeField]
     private TextMeshProUGUI _scoreTMPUGUI = null;
     [SerializeField]
@@ -21,15 +17,11 @@ public class GameWindow : Window
 
     [SerializeField]
     private Button _settingButton = null;
-    [SerializeField]
-    private Button _restartButton = null;
-    [SerializeField]
-    private Button _garageButton = null;
 
-    [SerializeField]
-    private SettingWindow _settingWindow = null;
-    
-    private WindowManager _windowManager = null;
+    public override bool IsPopUp
+    {
+        get => false;
+    }
 
     private void OnEnable()
     {
@@ -48,10 +40,6 @@ public class GameWindow : Window
     private void Start()
     {
         _settingButton.onClick.AddListener(OpenSetting);
-        _restartButton.AddListener(Restart);
-        _garageButton.AddListener(OpenGarage);
-        
-        _windowManager= WindowManager.Instance;
     }
 
     private void OpenSetting()
@@ -78,14 +66,14 @@ public class GameWindow : Window
     {
         Time.timeScale = 1;
         
-        _windowManager.Load(Game);
+        SceneLoader.Instance.LoadGame();
     }
 
     private void OpenGarage()
     {
         Time.timeScale = 1;
         
-        _windowManager.Load(Garage);
+        SceneLoader.Instance.LoadGarage();
     }
     
     private IEnumerator StyleScore()

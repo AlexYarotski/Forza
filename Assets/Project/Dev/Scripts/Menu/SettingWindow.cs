@@ -11,6 +11,11 @@ public class SettingWindow : Window
     [SerializeField]
     private Button _cancel = null;
 
+    public override bool IsPopUp
+    {
+        get => true;
+    }
+
     private void Awake()
     {
         gameObject.SetActive(false);
