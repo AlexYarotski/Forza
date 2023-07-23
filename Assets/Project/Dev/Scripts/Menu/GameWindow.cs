@@ -27,24 +27,17 @@ public class GameWindow : Window
     {
         Car.Drove += Car_Drove;
         Score.Boost += Score_Boost;
-        Car.Died += Car_Died;
     }
 
     private void OnDisable()
     {
         Car.Drove -= Car_Drove;
         Score.Boost -= Score_Boost;
-        Car.Died -= Car_Died;
     }
     
     private void Start()
     {
         _settingButton.onClick.AddListener(OpenSetting);
-    }
-
-    private void OpenSetting()
-    {
-        
     }
 
     private void Car_Drove(Vector3 drove)
@@ -55,25 +48,6 @@ public class GameWindow : Window
     private void Score_Boost(float obj)
     {
         StartCoroutine(StyleScore());
-    }
-
-    private void Car_Died(Vector3 obj)
-    {
-        gameObject.SetActive(false);
-    }
-
-    private void Restart()
-    {
-        Time.timeScale = 1;
-        
-        SceneLoader.Instance.LoadGame();
-    }
-
-    private void OpenGarage()
-    {
-        Time.timeScale = 1;
-        
-        SceneLoader.Instance.LoadGarage();
     }
     
     private IEnumerator StyleScore()

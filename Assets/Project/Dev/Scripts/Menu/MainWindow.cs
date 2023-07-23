@@ -38,8 +38,4 @@ public class MainWindow : Window
     {
         SceneLoader.Instance.LoadGarage();
     }
-
-    private void OpenSetting()
-    {
-    }
 }

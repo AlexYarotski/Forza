@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GarageWindow : Window
@@ -10,7 +11,7 @@ public class GarageWindow : Window
     public static event Action PreviousCar = delegate {  };
 
     [SerializeField]
-    private UILockCar uiLockCar = null;
+    private UILockCar _uiLockCar = null;
     
     [Header("Button")]
     [SerializeField]
@@ -47,7 +48,7 @@ public class GarageWindow : Window
 
         if (!isCarUnlock && carModel != default)
         {
-            uiLockCar.ActivateLock();
+            _uiLockCar.ActivateLock();
             
             return;
         }

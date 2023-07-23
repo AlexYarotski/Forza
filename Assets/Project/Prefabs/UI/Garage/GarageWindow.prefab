@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e4c745f26161c40bd232b35d07b79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiLockCar: {fileID: 2410818738421795330}
+  _uiLockCar: {fileID: 2410818738421795330}
   _gameButton: {fileID: 961088611839669106}
   _mainMenuButton: {fileID: 5353962557663509139}
   _previousButton: {fileID: 3568830955258818361}
@@ -697,6 +697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lock
       objectReference: {fileID: 0}
+    - target: {fileID: 2907499042972614305, guid: f723568bf4365074ca1caf324940e9ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f723568bf4365074ca1caf324940e9ee, type: 3}
 --- !u!224 &7260027671675929282 stripped
@@ -786,9 +790,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6978954664028411081, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7258507174005266159, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
       propertyPath: m_Name
       value: CarInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 7258507174005266159, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8061220214821951048, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
       propertyPath: m_AnchorMax.x
@@ -796,6 +808,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8061220214821951048, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246096140396335953, guid: 170fad1bded31a0468c602a08ada36ef, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

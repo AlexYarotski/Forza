@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class SettingWindow : Window
 {
-    public const float SizeWindow = 1;
-    public const float OpenDuration = 0.2f;
+    private const float SizeWindow = 1;
+    private const float OpenDuration = 0.2f;
     private const float CloseDuration = 0.2f;
 
     [SerializeField]
@@ -28,15 +28,14 @@ public class SettingWindow : Window
     {
         base.Show();
 
-        transform.DOScale(new Vector3(SizeWindow, SizeWindow), OpenDuration);
-
-        Time.timeScale = 0;
+        transform.DOScale(new Vector3(SizeWindow, SizeWindow), OpenDuration)
+            .OnComplete(() => Time.timeScale = 0);
     }
 
     public override void Hide()
     {
         transform.DOScale(Vector3.zero, CloseDuration)
-            .OnComplete(() => gameObject.SetActive(false));
+            .OnComplete(() => base.Hide());
 
         Time.timeScale = 1;
     }

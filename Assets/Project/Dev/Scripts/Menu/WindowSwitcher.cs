@@ -22,24 +22,27 @@ public class WindowSwitcher : MonoBehaviour
             WindowList.Add(newWindow);
         }
     }
-    
-    public Window GetWindow<T>() where T : Window
-    {
-        foreach(var window in WindowList)
-        {
-            if(window is T)
-            {
-                return window;
-            }
-        }
 
-#if UNITY_EDITOR
-       Debug.LogError($"Window type not found {typeof(T)}"); 
-#endif
+    private void OnEnable()
+    {
+        foreach (var window in WindowList)
+        {
+            window.ChoseSetting += Window_ChoseSetting;
+        }
         
-        return null;
+        Car.Died += Car_Died;
     }
-    
+
+    private void OnDisable()
+    {
+        foreach (var window in WindowList)
+        {
+            window.ChoseSetting -= Window_ChoseSetting;
+        }
+        
+        Car.Died -= Car_Died;
+    }
+
     public void Show<T>() where T : Window
     {
         var windowToShow = GetWindow<T>();
@@ -55,5 +58,32 @@ public class WindowSwitcher : MonoBehaviour
         }
         
         windowToShow.Show();
+    }
+    
+    private void Window_ChoseSetting()
+    {
+        Show<SettingWindow>();
+    }
+    
+    private void Car_Died(Vector3 obj)
+    {
+        Show<LoseWindow>();
+    }
+    
+    private Window GetWindow<T>() where T : Window
+    {
+        foreach(var window in WindowList)
+        {
+            if(window is T)
+            {
+                return window;
+            }
+        }
+
+#if UNITY_EDITOR
+       Debug.LogError($"Window type not found {typeof(T)}"); 
+#endif
+        
+        return null;
     }
 }
