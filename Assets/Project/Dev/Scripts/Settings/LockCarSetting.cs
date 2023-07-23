@@ -42,9 +42,9 @@ public class LockCarSetting : ScriptableObject
     
     public bool IsCarUnlocked(CarModelType carModelType)
     {
-        var score = PlayerPrefs.GetInt(KeyScore);
+        var currentScore = PlayerPrefs.GetInt(KeyScore);
 
-        if (score == default)
+        if (currentScore == default)
         {
             return false;
         }
@@ -53,7 +53,7 @@ public class LockCarSetting : ScriptableObject
         {
             if (_lockCars[i].CarModelType == carModelType)
             {
-                return score < GetUnlockScore(carModelType);
+                return currentScore >= GetUnlockScore(carModelType);
             }
         }
 

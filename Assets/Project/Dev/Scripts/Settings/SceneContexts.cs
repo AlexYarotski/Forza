@@ -28,6 +28,13 @@ public class SceneContexts : MonoBehaviour
         get;
         private set;
     }
+    
+    [field: SerializeField]
+    public AudioManagerSetting AudioManagerSetting
+    {
+        get;
+        private set;
+    }
 
     private void Awake()
     {

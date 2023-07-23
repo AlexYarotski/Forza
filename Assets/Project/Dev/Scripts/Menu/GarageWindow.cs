@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GarageWindow : Window
@@ -46,7 +45,7 @@ public class GarageWindow : Window
         var carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
         var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(carModel);
 
-        if (!isCarUnlock && carModel != default)
+        if (!isCarUnlock)
         {
             _uiLockCar.ActivateLock();
             
