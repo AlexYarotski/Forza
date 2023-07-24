@@ -4,10 +4,5 @@
 public class AudioManagerSetting : ScriptableObject
 {
     [SerializeField]
-    private AudioSource[] _audioSources = null;
-
-    public AudioSource[] GetAudioSources()
-    {
-        return _audioSources;
-    }
+    private AudioClip[] _audioClips = null;
 }

@@ -19,6 +19,8 @@ public class MainWindow : Window
 
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
+        
         _playButton.AddListener(PlayGame);
         _garageButton.AddListener(OpenGarage);
         _settingButton.AddListener(OpenSetting);
@@ -37,5 +39,10 @@ public class MainWindow : Window
     private void OpenGarage()
     {
         SceneLoader.Instance.LoadGarage();
+    }
+    
+    private void OpenSetting()
+    {
+        WindowSwitcher.Instance.Show<SettingWindow>();
     }
 }

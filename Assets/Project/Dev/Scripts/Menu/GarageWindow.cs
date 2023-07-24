@@ -11,6 +11,8 @@ public class GarageWindow : Window
 
     [SerializeField]
     private UILockCar _uiLockCar = null;
+    [SerializeField]
+    private Paint _paint = null;
     
     [Header("Button")]
     [SerializeField]
@@ -22,6 +24,8 @@ public class GarageWindow : Window
     [SerializeField]
     private Button _nextButton = null;
 
+    private CarModelType _carModel = default;
+    
     public override bool IsPopUp
     {
         get => false;
@@ -35,15 +39,33 @@ public class GarageWindow : Window
         _nextButton.AddListener(SetNextCar);
     }
 
+    public override void Show()
+    {
+        base.Show();
+        
+         _carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+        
+        _uiLockCar.CarViewPlaceholder_CarChanged(_carModel);
+        _paint.EnableButtons(_carModel);
+    }
+
     private void OpenMenu()
     {
+        _carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(_carModel);
+        
+        if (!isCarUnlock)
+        {
+            PlayerPrefs.SetInt(KeyCar, default);
+        }
+
         SceneLoader.Instance.LoadMain();
     }
     
     private void StartGame()
     {
-        var carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
-        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(carModel);
+        _carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(_carModel);
 
         if (!isCarUnlock)
         {

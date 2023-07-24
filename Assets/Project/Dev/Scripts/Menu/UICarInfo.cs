@@ -32,7 +32,7 @@ namespace Project.Dev.Scripts.Menu
         private Slider _sliderHealth = null;
 
         private CarModelType _modelCar = default;
-        private CarDataSettings _carDataSettings = null;
+        private CarDataSetting _carDataSetting = null;
         
         private void OnEnable()
         {
@@ -46,13 +46,13 @@ namespace Project.Dev.Scripts.Menu
 
         private void Start()
         {
-            _carDataSettings = SceneContexts.Instance.CarDataSettings;
+            _carDataSetting = SceneContexts.Instance.CarDataSetting;
             _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
             
-            SetValue(_carDataSettings.GetCarData(_modelCar));
+            SetValue(_carDataSetting.GetCarData(_modelCar));
         }
 
-        private void SetValue(CarDataSettings.CarData car)
+        private void SetValue(CarDataSetting.CarData car)
         {
             var startSpeed = (int)car.Speed + 50;
             var maxSpeed = (int)car.MaxSpeed + 50;
@@ -70,7 +70,7 @@ namespace Project.Dev.Scripts.Menu
     
         private void CarViewPlaceholder_CarChanged(CarModelType carModelType)
         {
-            var carData = _carDataSettings.GetCarData(carModelType);
+            var carData = _carDataSetting.GetCarData(carModelType);
             _modelCar = carData.CarModelType;
             
             SetValue(carData);

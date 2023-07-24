@@ -44,10 +44,10 @@ public class LoseWindow : Window
     {
         Car.Died += Car_Died;
     }
-
-    private void Car_Died(Vector3 position)
+    
+    private void OnDisable()
     {
-        _score = (int)position.z;
+        Car.Died -= Car_Died;
     }
 
     public override void Show()
@@ -60,6 +60,11 @@ public class LoseWindow : Window
         _frameLose.rectTransform.DOLocalMove(Vector3.zero, DurationMove);
     }
 
+    private void Car_Died(Vector3 position)
+    {
+        _score = (int)position.z;
+    }
+    
     private void OpenMenu()
     {
         SceneLoader.Instance.LoadMain();

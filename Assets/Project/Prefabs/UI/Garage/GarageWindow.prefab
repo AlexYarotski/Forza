@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiLockCar: {fileID: 2410818738421795330}
+  _paint: {fileID: 4001908848591758525}
   _gameButton: {fileID: 961088611839669106}
   _mainMenuButton: {fileID: 5353962557663509139}
   _previousButton: {fileID: 3568830955258818361}
@@ -625,11 +626,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 291167193826425780, guid: 2876de5c160983941a55f619119773e6, type: 3}
       propertyPath: m_Name
-      value: Color
-      objectReference: {fileID: 0}
-    - target: {fileID: 291167193826425780, guid: 2876de5c160983941a55f619119773e6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Paint
       objectReference: {fileID: 0}
     - target: {fileID: 8860637900656681474, guid: 2876de5c160983941a55f619119773e6, type: 3}
       propertyPath: m_RootOrder
@@ -662,6 +659,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8860637900656681474, guid: 2876de5c160983941a55f619119773e6, type: 3}
   m_PrefabInstance: {fileID: 311215126655537585}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4001908848591758525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3735747329723331852, guid: 2876de5c160983941a55f619119773e6, type: 3}
+  m_PrefabInstance: {fileID: 311215126655537585}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7133e22f7745da87b7ee0114f2dc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7217241109245981615
 PrefabInstance:
   m_ObjectHideFlags: 0

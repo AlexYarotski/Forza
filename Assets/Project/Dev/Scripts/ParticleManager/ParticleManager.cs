@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleManager : MonoBehaviour
+public class ParticleManager : Singleton<ParticleManager>
 {
     private readonly Vector3 DistanceToHood = new Vector3(0, 0.7f, 1f);
 
@@ -10,22 +10,9 @@ public class ParticleManager : MonoBehaviour
     [SerializeField]
     private ParticleSystem _onCarHitParticlePrefab = null;
     
-    public static ParticleManager Instance
-    {
-        get; 
-        private set;
-    }
-
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if(Instance == this)
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
         
         _onCarHitParticlePrefab = Instantiate(_onCarHitParticlePrefab, transform);
         

@@ -1,10 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Window : MonoBehaviour
 {
-    public event Action ChoseSetting = delegate {  };
-    
     public abstract bool IsPopUp
     {
         get;
@@ -18,10 +15,5 @@ public abstract class Window : MonoBehaviour
     public virtual void Hide()
     {
         gameObject.SetActive(false);
-    }
-    
-    protected void OpenSetting()
-    {
-        ChoseSetting();
     }
 }

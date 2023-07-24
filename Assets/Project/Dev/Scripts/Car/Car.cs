@@ -18,7 +18,7 @@ public class Car : MonoBehaviour, IDamageable
     private Vector3 _nextPosition = Vector3.zero;
     private Vector3 _dragPosition = Vector3.zero;
     
-    private CarDataSettings.CarData _carData = null;
+    private CarDataSetting.CarData _carData = null;
     
     private void OnEnable()
     {
@@ -35,7 +35,7 @@ public class Car : MonoBehaviour, IDamageable
     private void Start()
     {
         var carType = (CarModelType)PlayerPrefs.GetInt(KeyCar);
-        _carData = SceneContexts.Instance.CarDataSettings.GetCarData(carType);
+        _carData = SceneContexts.Instance.CarDataSetting.GetCarData(carType);
 
         _carView.EnableCarView(carType);
         SetColor(carType);

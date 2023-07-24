@@ -43,8 +43,6 @@ public class UILockCar : MonoBehaviour
         _text.gameObject.SetActive(false);
         _lock.gameObject.SetActive(false);
         _background.gameObject.SetActive(false);
-
-        CarViewPlaceholder_CarChanged((CarModelType)PlayerPrefs.GetInt(KeyCar));
     }
 
     public void ActivateLock()
@@ -58,7 +56,7 @@ public class UILockCar : MonoBehaviour
         _tweener = _lock.rectTransform.DOPunchPosition(_punchPosition, _duration, _vibrato);
     }
 
-    private void CarViewPlaceholder_CarChanged(CarModelType carModelType)
+    public void CarViewPlaceholder_CarChanged(CarModelType carModelType)
     {
         var score = PlayerPrefs.GetInt(KeyScore);
         var lockCar = SceneContexts.Instance.LockCarSetting;

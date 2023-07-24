@@ -30,7 +30,6 @@ public class Generator : MonoBehaviour
     [SerializeField]
     private PoolManager _poolManager = null;
 
-    [FormerlySerializedAs("_cars")]
     [SerializeField]
     private Car _car = null;
 

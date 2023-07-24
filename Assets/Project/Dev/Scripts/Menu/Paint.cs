@@ -18,8 +18,17 @@ public class Paint : MonoBehaviour
     private ColorButtonSetting _colorButtonSetting = null;
 
     private CarModelType _modelCar = default;
-    private CarDataSettings _carDataSettings = null;
+    private CarDataSetting _carDataSetting = null;
+    
+    private void Awake()
+    {
+        _carDataSetting = SceneContexts.Instance.CarDataSetting;
+        _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
 
+        InitColorButtons();
+        EnableButtons(_modelCar);
+    }
+    
     private void OnEnable()
     {
         CarViewPlaceholder.CarChanged += CarViewPlaceholder_CarChanged;
@@ -29,16 +38,26 @@ public class Paint : MonoBehaviour
     {
         CarViewPlaceholder.CarChanged -= CarViewPlaceholder_CarChanged;
     }
-
-    private void Start()
+    
+    public void EnableButtons(CarModelType carModelType)
     {
-        _carDataSettings = SceneContexts.Instance.CarDataSettings;
-        _modelCar = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+        var colorConfigs = _carDataSetting.GetCarData(carModelType).ColorSetting.ColorConfigs;
 
-        InitColorButtons();
-        EnableButtons(_modelCar);
+        for (int i = 0; i < ButtonList.Count; i++)
+        {
+            if (colorConfigs.Any(сс => сс.ColorName == ButtonList[i].ColorName))
+            {
+                ButtonList[i].Enable();
+            }
+            else
+            {
+                ButtonList[i].Disable();
+            }
+        }
+
+        _modelCar = carModelType;
     }
-
+    
     private void CarViewPlaceholder_CarChanged(CarModelType carModelType)
     {
         EnableButtons(carModelType);
@@ -56,25 +75,6 @@ public class Paint : MonoBehaviour
 
             ButtonList.Add(colorButton);
         }
-    }
-
-    private void EnableButtons(CarModelType carModelType)
-    {
-        var colorConfigs = _carDataSettings.GetCarData(carModelType).ColorSetting.ColorConfigs;
-
-        for (int i = 0; i < ButtonList.Count; i++)
-        {
-            if (colorConfigs.Any(сс => сс.ColorName == ButtonList[i].ColorName))
-            {
-                ButtonList[i].Enable();
-            }
-            else
-            {
-                ButtonList[i].Disable();
-            }
-        }
-
-        _modelCar = carModelType;
     }
 
     private void SetColor(ColorName colorName)

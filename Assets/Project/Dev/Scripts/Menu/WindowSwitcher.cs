@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class WindowSwitcher : MonoBehaviour
+public class WindowSwitcher : Singleton<WindowSwitcher>
 {
     private readonly List<Window> WindowList = new List<Window>();
 
@@ -9,6 +9,8 @@ public class WindowSwitcher : MonoBehaviour
 
     private void Awake()
     {
+        base.Awake();
+        
         var windowArray = SceneContexts.Instance.SceneWindowSetting.GetWindows();
 
         for (var i = 0; i < windowArray.Length; i++)
@@ -25,21 +27,11 @@ public class WindowSwitcher : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var window in WindowList)
-        {
-            window.ChoseSetting += Window_ChoseSetting;
-        }
-        
         Car.Died += Car_Died;
     }
-
+    
     private void OnDisable()
     {
-        foreach (var window in WindowList)
-        {
-            window.ChoseSetting -= Window_ChoseSetting;
-        }
-        
         Car.Died -= Car_Died;
     }
 
@@ -59,12 +51,7 @@ public class WindowSwitcher : MonoBehaviour
         
         windowToShow.Show();
     }
-    
-    private void Window_ChoseSetting()
-    {
-        Show<SettingWindow>();
-    }
-    
+
     private void Car_Died(Vector3 obj)
     {
         Show<LoseWindow>();
@@ -86,4 +73,5 @@ public class WindowSwitcher : MonoBehaviour
         
         return null;
     }
+    
 }

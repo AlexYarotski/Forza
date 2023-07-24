@@ -1,15 +1,9 @@
 using UnityEngine;
 
-public class SceneContexts : MonoBehaviour
+public class SceneContexts : Singleton<SceneContexts>
 {
-    public static SceneContexts Instance
-    {
-        get;
-        private set;
-    }
-    
     [field: SerializeField] 
-    public CarDataSettings CarDataSettings 
+    public CarDataSetting CarDataSetting 
     {
         get; 
         private set; 
@@ -27,25 +21,6 @@ public class SceneContexts : MonoBehaviour
     {
         get;
         private set;
-    }
-    
-    [field: SerializeField]
-    public AudioManagerSetting AudioManagerSetting
-    {
-        get;
-        private set;
-    }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance == this)
-        {
-            Destroy(gameObject);
-        }
     }
 }
 

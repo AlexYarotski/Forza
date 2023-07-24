@@ -59,7 +59,7 @@ public class CarView : MonoBehaviour
     public void PaintElement(CarModelType carModelType, ColorName colorName)
     {
         var paintElements = GetPaintElements(carModelType).Elements;
-        var carData = SceneContexts.Instance.CarDataSettings.GetCarData(carModelType);
+        var carData = SceneContexts.Instance.CarDataSetting.GetCarData(carModelType);
         
         for (int i = 0; i < paintElements.Length; i++)
         {

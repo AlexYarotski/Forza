@@ -43,11 +43,6 @@ public class LockCarSetting : ScriptableObject
     public bool IsCarUnlocked(CarModelType carModelType)
     {
         var currentScore = PlayerPrefs.GetInt(KeyScore);
-
-        if (currentScore == default)
-        {
-            return false;
-        }
         
         for (int i = 0; i < _lockCars.Length; i++)
         {

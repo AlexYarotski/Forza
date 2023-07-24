@@ -40,6 +40,11 @@ public class GameWindow : Window
         _settingButton.onClick.AddListener(OpenSetting);
     }
 
+    private void OpenSetting()
+    {
+        WindowSwitcher.Instance.Show<SettingWindow>();
+    }
+
     private void Car_Drove(Vector3 drove)
     {
         _scoreTMPUGUI.text = $"{(int)drove.z}";

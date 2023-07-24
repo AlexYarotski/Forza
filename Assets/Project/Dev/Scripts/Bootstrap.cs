@@ -3,7 +3,7 @@
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField]
-    private MonoBehaviour[] _dotnDestroyElements = null;
+    private DontDestroyElement[] _dotnDestroyElements = null;
 
     private void Start()
     {

@@ -2,8 +2,8 @@
 using UnityEngine;
 using System.Linq;
 
-[CreateAssetMenu(fileName = "CarDataSettings", menuName = "Settings/CarDataSettings", order = 0)]
-public class CarDataSettings : ScriptableObject
+[CreateAssetMenu(fileName = "CarDataSetting", menuName = "Settings/CarDataSetting", order = 0)]
+public class CarDataSetting : ScriptableObject
 {
     [Serializable]
     public class CarData

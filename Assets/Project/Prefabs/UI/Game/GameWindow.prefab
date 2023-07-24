@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4977f5e0ed47aeae03a08bd1a88069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _windowSwitcher: {fileID: 7684243689306076545, guid: 24634d161ba27c6449b3f6e081afa7ee, type: 3}
   _scoreTMPUGUI: {fileID: 9222609477429034684}
   _color: {r: 0.8679245, g: 0.6341072, b: 0.24154504, a: 1}
   _sizeOfIncreaseScore: 40
