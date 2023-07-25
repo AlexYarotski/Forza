@@ -10,7 +10,7 @@ public class ParticleManager : Singleton<ParticleManager>
     [SerializeField]
     private ParticleSystem _onCarHitParticlePrefab = null;
     
-    private void Awake()
+    private new void Awake()
     {
         base.Awake();
         

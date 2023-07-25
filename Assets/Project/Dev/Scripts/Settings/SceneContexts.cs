@@ -22,5 +22,12 @@ public class SceneContexts : Singleton<SceneContexts>
         get;
         private set;
     }
+    
+    [field: SerializeField]
+    public AudioManagerSetting AudioManagerSetting
+    {
+        get;
+        private set;
+    }
 }
 

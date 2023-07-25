@@ -7,13 +7,16 @@ public class SceneLoader : Singleton<SceneLoader>
 {
     private const string Game = "Game";
     private const string Garage = "Garage";
-    private const string MainMenu = "Menu";
+    private const string Main = "Main";
     
     [SerializeField]
     private TransitionWindow _transitionWindow = null;
 
     [SerializeField]
     private WindowSwitcher _windowSwitcher = null;
+
+    [SerializeField]
+    private AudioManager _audioManager = null;
 
     public void Load(string scene)
     {
@@ -26,9 +29,11 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         DOTween.KillAll();
         
-        _transitionWindow.Show(() => UploadSceneAsync(MainMenu));
+        _transitionWindow.Show(() => UploadSceneAsync(Main));
         
         _windowSwitcher.Show<MainWindow>();
+
+        _audioManager.SetClip(Main, true);
     }
 
     public void LoadGarage()
@@ -47,6 +52,8 @@ public class SceneLoader : Singleton<SceneLoader>
         _transitionWindow.Show(() => UploadSceneAsync(Game));
         
         _windowSwitcher.Show<GameWindow>();
+        
+        _audioManager.SetClip(Game, true);
     }
 
     private async void UploadSceneAsync(string sceneName)

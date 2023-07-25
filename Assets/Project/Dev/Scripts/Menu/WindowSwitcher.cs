@@ -7,7 +7,7 @@ public class WindowSwitcher : Singleton<WindowSwitcher>
 
     private Window _currentWindow = null;
 
-    private void Awake()
+    private new void Awake()
     {
         base.Awake();
         
