@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Car : MonoBehaviour, IDamageable
 {
-    private const string KeyCar = "Car";
-    
+    private const string KeyCar = "Car";   
+    private const string KeyCurrentScore = "CurrentScore";
+
     [SerializeField]
     private CarView _carView = null;
 
@@ -86,6 +87,8 @@ public class Car : MonoBehaviour, IDamageable
         gameObject.SetActive(false);
 
         StopAllCoroutines();
+        
+        PlayerPrefs.SetInt(KeyCurrentScore, (int)transform.position.z);
 
         Died(transform.position);
     }

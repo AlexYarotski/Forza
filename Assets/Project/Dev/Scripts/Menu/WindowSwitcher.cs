@@ -52,7 +52,7 @@ public class WindowSwitcher : Singleton<WindowSwitcher>
         windowToShow.Show();
     }
 
-    private void Car_Died(Vector3 obj)
+    private void Car_Died(Vector3 position)
     {
         Show<LoseWindow>();
     }

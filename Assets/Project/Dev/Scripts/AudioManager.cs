@@ -46,6 +46,11 @@ public class AudioManager : MonoBehaviour
          Play();
       }
    }
+
+   public void SetVolume(float volume)
+   {
+      _audioSource.volume = volume;
+   }
    
    public void Play()
    {

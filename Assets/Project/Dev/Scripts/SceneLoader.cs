@@ -18,6 +18,11 @@ public class SceneLoader : Singleton<SceneLoader>
     [SerializeField]
     private AudioManager _audioManager = null;
 
+    public AudioManager AudioManager
+    {
+        get => _audioManager;
+    }
+    
     public void Load(string scene)
     {
         DOTween.KillAll();
@@ -43,6 +48,8 @@ public class SceneLoader : Singleton<SceneLoader>
         _transitionWindow.Show(() => UploadSceneAsync(Garage));
         
         _windowSwitcher.Show<GarageWindow>();
+        
+        _audioManager.Stop();
     }
 
     public void LoadGame()

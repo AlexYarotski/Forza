@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -7,6 +6,7 @@ using UnityEngine.UI;
 public class LoseWindow : Window
 {
     private const float DurationMove = 1f;
+    private const string KeyCurrentScore = "CurrentScore";
     
     private readonly Vector3 LosePosition = new Vector3(0, 400, 0);
     private readonly string ScoreText = "Your Score \r\n {0}";
@@ -39,32 +39,17 @@ public class LoseWindow : Window
         _garage.AddListener(OpenGarage);
         _restart.AddListener(Restart);
     }
-
-    private void OnEnable()
-    {
-        Car.Died += Car_Died;
-    }
     
-    private void OnDisable()
-    {
-        Car.Died -= Car_Died;
-    }
-
     public override void Show()
     {
         base.Show();
 
         _loseTMP.rectTransform.DOLocalMove(LosePosition, DurationMove);
                     
-        _scoreTMP.text = string.Format(ScoreText, _score);
+        _scoreTMP.text = string.Format(ScoreText, PlayerPrefs.GetInt(KeyCurrentScore));
         _frameLose.rectTransform.DOLocalMove(Vector3.zero, DurationMove);
     }
 
-    private void Car_Died(Vector3 position)
-    {
-        _score = (int)position.z;
-    }
-    
     private void OpenMenu()
     {
         SceneLoader.Instance.LoadMain();
