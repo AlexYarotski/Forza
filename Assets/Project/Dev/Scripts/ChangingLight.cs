@@ -18,6 +18,8 @@ public class ChangingLight : MonoBehaviour
     [SerializeField]
     private Light _sun = null;
 
+    private bool _isNight = false;
+
     private void FixedUpdate()
     {
         _timeOfDay += Time.deltaTime / _dayDuration;
@@ -30,15 +32,19 @@ public class ChangingLight : MonoBehaviour
 
     private void CheckOfDay()
     {
-        if (_timeOfDay >= 1)
+        if (_timeOfDay >= 1 && _isNight)
         {
             _timeOfDay -= 1;
 
-            NightCome(false);
+            _isNight = false;
+            
+            NightCome(_isNight);
         }
-        else if (_timeOfDay >= 0.5f)
+        else if (_timeOfDay >= 0.5f && _isNight == false)
         {
-            NightCome(true);
+            _isNight = true;
+            
+            NightCome(_isNight);
         }
     }
 }

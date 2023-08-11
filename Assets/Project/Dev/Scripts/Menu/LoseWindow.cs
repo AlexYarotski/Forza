@@ -12,9 +12,9 @@ public class LoseWindow : Window
     private readonly string ScoreText = "Your Score \r\n {0}";
 
     [SerializeField]
-    private TextMeshProUGUI _scoreTMP = null;
+    private TextMeshProUGUI _scoreLabel = null;
     [SerializeField]
-    private TextMeshProUGUI _loseTMP = null;
+    private TextMeshProUGUI _loseLabel = null;
 
     [SerializeField]
     private Button _menu = null;
@@ -26,8 +26,6 @@ public class LoseWindow : Window
     [SerializeField]
     private Image _frameLose = null;
 
-    private int _score = 0;
-    
     public override bool IsPopUp
     {
         get => true;
@@ -44,9 +42,11 @@ public class LoseWindow : Window
     {
         base.Show();
 
-        _loseTMP.rectTransform.DOLocalMove(LosePosition, DurationMove);
+        AudioManager.Instance.Stop();
+        
+        _loseLabel.rectTransform.DOLocalMove(LosePosition, DurationMove);
                     
-        _scoreTMP.text = string.Format(ScoreText, PlayerPrefs.GetInt(KeyCurrentScore));
+        _scoreLabel.text = string.Format(ScoreText, PlayerPrefs.GetInt(KeyCurrentScore));
         _frameLose.rectTransform.DOLocalMove(Vector3.zero, DurationMove);
     }
 

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88227d89f923437fb6072b025154ecfe, type: 3}
   m_Name: AudioManagerSetting
   m_EditorClassIdentifier: 
-  _audioClips:
-  - {fileID: 8300000, guid: ae5592900334d464395489cf8c2a492b, type: 3}
-  - {fileID: 8300000, guid: 3487c34385a71584db92ea722e254f5c, type: 3}
+  _audioConfigs:
+  - <AudioName>k__BackingField: 0
+    <AudioClips>k__BackingField: {fileID: 8300000, guid: 3487c34385a71584db92ea722e254f5c, type: 3}
+  - <AudioName>k__BackingField: 2
+    <AudioClips>k__BackingField: {fileID: 8300000, guid: ae5592900334d464395489cf8c2a492b, type: 3}

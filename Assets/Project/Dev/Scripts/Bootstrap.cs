@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Bootstrap : MonoBehaviour
+public class Bootstrap : DontDestroyElement
 {
     [SerializeField]
     private DontDestroyElement[] _dotnDestroyElements = null;

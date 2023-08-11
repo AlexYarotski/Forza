@@ -11,45 +11,113 @@ public class CarDataSetting : ScriptableObject
         #region Property
 
         [field: SerializeField]
-        public CarModelType CarModelType { get; private set; }
+        public CarModelType CarModelType
+        {
+            get; 
+            private set;
+        }
 
         [field: Header("Health")]
         [field: SerializeField]
-        public int Health { get; private set; }
+        public int Health
+        {
+            get; 
+            private set;
+        }
 
         [field: SerializeField]
-        public float TimeOfImmortality { get; private set; }
+        public float TimeOfImmortality
+        {
+            get;
+            private set;
+        }
 
         [field: Header("Speed")]
         [field: SerializeField]
-        public float Speed { get; private set; }
+        public float Speed
+        {
+            get; 
+            private set;
+        }
 
         [field: SerializeField]
-        public float MaxSpeed { get; private set; }
+        public float MaxSpeed
+        {
+            get; 
+            private set;
+        }
+
         [field: SerializeField]
-        public float SpeedTurn { get; private set; }
+        public float SpeedTurn
+        {
+            get;
+            private set;
+        }
+
         [field: SerializeField]
-        public float Brake { get; private set; }
+        public float Brake
+        {
+            get; 
+            private set;
+        }
+
         [field: SerializeField]
-        public float Boost { get; private set; }
+        public float Boost
+        {
+            get;
+            private set;
+        }
 
         [field: Header("Rotation")]
         [field: SerializeField]
-        public float SpeedRotation { get; private set; }
+        public float SpeedRotation
+        {
+            get;
+            private set;
+        }
 
+        [field: SerializeField]
+        public float SpeedReturnRotation
+        {
+            get; 
+            private set;
+        }
         [field: SerializeField] 
-        public float SpeedReturnRotation { get; private set; }
-        [field: SerializeField] 
-        public float RotationAngel { get; private set; }
+        public float RotationAngel
+        {
+            get;
+            private set;
+        }
 
         [field: Header("Paint")]
         [field: SerializeField]
-        public ColorSetting ColorSetting { get; private set; }
+        public ColorSetting ColorSetting
+        {
+            get;
+            private set;
+        }
 
         [field: Header("Other")]
         [field: SerializeField]
-        public RoadBounds RoadBounds { get; private set; }
-
+        public RoadBounds RoadBounds
+        {
+            get; 
+            private set;
+        }
+        [field: SerializeField]
+        public float AngularFrequency
+        {
+            get; 
+            private set;
+        }
+        [field: SerializeField]
+        public float DampingRatio
+        {
+            get; 
+            private set;
+        }
+        
+        
         #endregion
     }
 

@@ -1,14 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameWindow : Window
 {
+    private const string SpeedLabel = "{0}\r\nkm/h";
+    
     [SerializeField]
-    private TextMeshProUGUI _scoreTMPUGUI = null;
+    private TextMeshProUGUI _scoreLabel = null;
     [SerializeField]
     private Color _color = Color.white;
+    [SerializeField]
+    private TextMeshProUGUI _speedLabel = null;
 
     [SerializeField]
     private float _sizeOfIncreaseScore = 0;
@@ -47,7 +52,9 @@ public class GameWindow : Window
 
     private void Car_Drove(Vector3 drove)
     {
-        _scoreTMPUGUI.text = $"{(int)drove.z}";
+        _scoreLabel.text = $"{(int)drove.z}";
+
+        _speedLabel.text = string.Format(SpeedLabel, Math.Round(Car.Speed, 1) + 50);
     }
 
     private void Score_Boost(float obj)
@@ -59,12 +66,12 @@ public class GameWindow : Window
     {
         var delay = new WaitForSeconds(_timeDelayScore);
 
-        _scoreTMPUGUI.color = _color;
-        _scoreTMPUGUI.fontSize += _sizeOfIncreaseScore;
+        _scoreLabel.color = _color;
+        _scoreLabel.fontSize += _sizeOfIncreaseScore;
 
         yield return delay;
 
-        _scoreTMPUGUI.color = Color.white;
-        _scoreTMPUGUI.fontSize -= _sizeOfIncreaseScore;
+        _scoreLabel.color = Color.white;
+        _scoreLabel.fontSize -= _sizeOfIncreaseScore;
     }
 }

@@ -2,37 +2,34 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Dev.Scripts.Menu
+public class UIMusic : MonoBehaviour
 {
-    public class UIMusic : MonoBehaviour
+    private readonly string MusicProcent = "{0}%";
+
+    [SerializeField]
+    private Slider _musicSlider = null;
+
+    [SerializeField]
+    private TextMeshProUGUI _musicProcent = null;
+
+    [SerializeField]
+    private float _startValue = 0;
+
+    private AudioManager _audioManager = null;
+
+    private void Start()
     {
-        private readonly string MusicProcent = "{0}%";
+        _audioManager = AudioManager.Instance;
 
-        [SerializeField]
-        private Slider _musicSlider = null;
+        _musicSlider.value = _startValue;
 
-        [SerializeField]
-        private TextMeshProUGUI _musicProcent = null;
+        _audioManager.SetVolume(_musicSlider.value);
+    }
 
-        [SerializeField]
-        private float _startValue = 0;
-        
-        private AudioManager _audioManager = null;
-        
-        private void Start()
-        {
-            _audioManager = SceneLoader.Instance.AudioManager;
+    private void Update()
+    {
+        _audioManager.SetVolume(_musicSlider.value);
 
-            _musicSlider.value = _startValue;
-            
-            _audioManager.SetVolume(_musicSlider.value);
-        }
-
-        private void Update()
-        {
-            _audioManager.SetVolume(_musicSlider.value);
-
-            _musicProcent.text = string.Format(MusicProcent, (int)(_musicSlider.value * 100));
-        }
+        _musicProcent.text = string.Format(MusicProcent, (int)(_musicSlider.value * 100));
     }
 }

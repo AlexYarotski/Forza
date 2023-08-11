@@ -6,18 +6,28 @@ public class Car : MonoBehaviour, IDamageable
     private const string KeyCar = "Car";   
     private const string KeyCurrentScore = "CurrentScore";
 
+    public static event Action<Vector3> Died = delegate { };
+    public static event Action<Vector3> Drove = delegate { };
+    
     [SerializeField]
     private CarView _carView = null;
 
-    public static event Action<Vector3> Died = delegate { };
-    public static event Action<Vector3> Drove = delegate { };
+    public static float Speed => _speed;
+
+    private static float _speed = 0;
+    
+    private float _angularFreguency = 10f;
+    private float _dampingRatio = 0.55f;
 
     private int _health = 0;
-    private float _speed = 0;
-    private float _startSpeed = 0;
+    private float _maxSpeed = 0;
 
     private Vector3 _nextPosition = Vector3.zero;
     private Vector3 _dragPosition = Vector3.zero;
+    
+    private Vector3 _currentVelocity = Vector3.zero;
+    private Vector3 _currentPosition = Vector3.zero;
+
     
     private CarDataSetting.CarData _carData = null;
     
@@ -44,15 +54,19 @@ public class Car : MonoBehaviour, IDamageable
         _health = _carData.Health;
         _speed = _carData.Speed;
 
-        _startSpeed = _speed;
+        _maxSpeed = _speed;
         _dragPosition = transform.position;
+        
+        _currentVelocity = Vector3.zero;
+        _currentPosition = transform.position;
     }
     
     private void Update()
     {
         MoveForward();
         SetTurn();
-
+        SetSpringMotion();
+        
         Drove(transform.position);
     }
 
@@ -114,7 +128,7 @@ public class Car : MonoBehaviour, IDamageable
 
             _nextPosition = new Vector3(_nextPosition.x, transform.position.y, transform.position.z);
 
-            SetStartSpeed();
+            SetSpeed();
         }
         else
         {
@@ -140,14 +154,24 @@ public class Car : MonoBehaviour, IDamageable
         _nextPosition.x = _dragPosition.x + dragPositionVector3.x * (_carData.SpeedTurn * Time.deltaTime);
     }
 
-    private void SetStartSpeed()
+    private void SetSpeed()
     {
-        if (_speed < _startSpeed && _speed <= _carData.MaxSpeed)
+        if (_speed < _maxSpeed && _speed <= _carData.MaxSpeed)
         {
             _speed += _carData.Brake * Time.deltaTime;
         }
     }
 
+    private void SetSpringMotion()
+    {
+        SpringMotion.CalcDampedSimpleHarmonicMotion(ref _currentPosition, ref _currentVelocity,
+            _nextPosition, Time.deltaTime, _carData.AngularFrequency, _carData.DampingRatio);
+
+        var newPosition = new Vector3(_currentPosition.x, transform.position.y, transform.position.z);
+        
+        transform.position = newPosition;
+    }
+    
     private void SetRotation()
     {
         var nextRotation = Quaternion.identity;
@@ -173,7 +197,7 @@ public class Car : MonoBehaviour, IDamageable
     {
         if (_speed <= _carData.MaxSpeed)
         {
-            _startSpeed += _carData.Boost;
+            _maxSpeed += _carData.Boost;
         }
     }
 

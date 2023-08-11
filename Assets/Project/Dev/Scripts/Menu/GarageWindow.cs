@@ -64,17 +64,10 @@ public class GarageWindow : Window
     
     private void StartGame()
     {
-        _carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
-        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(_carModel);
-
-        if (!isCarUnlock)
+        if (CheckLockCar())
         {
-            _uiLockCar.ActivateLock();
-            
-            return;
+            SceneLoader.Instance.LoadGame();
         }
-        
-        SceneLoader.Instance.LoadGame();
     }
 
     private void SetPreviousCar()
@@ -85,5 +78,20 @@ public class GarageWindow : Window
     private void SetNextCar()
     {
         NextCar();
+    }
+
+    private bool CheckLockCar()
+    {
+        _carModel = (CarModelType)PlayerPrefs.GetInt(KeyCar);
+        var isCarUnlock = SceneContexts.Instance.LockCarSetting.IsCarUnlocked(_carModel);
+        
+        if (!isCarUnlock)
+        {
+            _uiLockCar.ActivateLock();
+
+            return false;
+        }
+
+        return true;
     }
 }

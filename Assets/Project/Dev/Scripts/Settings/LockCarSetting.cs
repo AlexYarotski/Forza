@@ -5,6 +5,7 @@ using UnityEngine;
 public class LockCarSetting : ScriptableObject
 {
     private const string KeyScore = "Score";
+    private const string KeyCar = "Car";
 
     [Serializable]
     public class LockCar

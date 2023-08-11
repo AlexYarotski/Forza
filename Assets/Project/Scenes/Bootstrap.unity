@@ -162,7 +162,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150974835}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -287,7 +287,6 @@ GameObject:
   m_Component:
   - component: {fileID: 216124196}
   - component: {fileID: 216124195}
-  - component: {fileID: 216124194}
   - component: {fileID: 216124193}
   m_Layer: 0
   m_Name: MainCamera
@@ -330,14 +329,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &216124194
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216124192}
-  m_Enabled: 1
 --- !u!20 &216124195
 Camera:
   m_ObjectHideFlags: 0
@@ -516,7 +507,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitionWindow: {fileID: 2064256107}
   _windowSwitcher: {fileID: 1392060570}
-  _audioManager: {fileID: 150974836}
 --- !u!4 &715752500
 Transform:
   m_ObjectHideFlags: 0
@@ -672,6 +662,7 @@ GameObject:
   - component: {fileID: 1051315513}
   - component: {fileID: 1051315512}
   - component: {fileID: 1051315514}
+  - component: {fileID: 1051315515}
   m_Layer: 5
   m_Name: UICamera
   m_TagString: Untagged
@@ -782,6 +773,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCamera: {fileID: 1051315513}
+--- !u!81 &1051315515
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051315510}
+  m_Enabled: 1
 --- !u!1 &1078195062
 GameObject:
   m_ObjectHideFlags: 0

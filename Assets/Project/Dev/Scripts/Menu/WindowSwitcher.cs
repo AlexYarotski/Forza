@@ -7,10 +7,8 @@ public class WindowSwitcher : Singleton<WindowSwitcher>
 
     private Window _currentWindow = null;
 
-    private new void Awake()
+    private void Awake()
     {
-        base.Awake();
-        
         var windowArray = SceneContexts.Instance.SceneWindowSetting.GetWindows();
 
         for (var i = 0; i < windowArray.Length; i++)

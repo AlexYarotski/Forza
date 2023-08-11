@@ -1,45 +1,15 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-   private readonly List<AudioClip> AudioClipList = new List<AudioClip>();
-
    [SerializeField]
    private AudioSource _audioSource = null;
 
-   private void Start()
+   public void SetClip(AudioName audioName, bool isPlay = false)
    {
-      var audioClips = SceneContexts.Instance.AudioManagerSetting.GetAudioClips();
-      
-      for (var i = 0; i < audioClips.Length; i++)
-      {
-         AudioClipList.Add(audioClips[i]);
-      }
-   }
-   
-   public void SetClip(string clipName, bool isPlay = false)
-   {
-      var audioClip = AudioClipList.FirstOrDefault(ac => ac.name == clipName);
+      var audioClips = SceneContexts.Instance.AudioManagerSetting.GetAudioClips(audioName);
 
-      switch (clipName)
-      {
-         case "Main" : 
-            _audioSource.clip = audioClip;
-            break;
-         
-         case "Game" :
-            _audioSource.clip = audioClip;
-            break;
-         
-         default:
-#if UNITY_EDITOR
-            Debug.LogError($"Window type not found {clipName}");
-#endif
-            _audioSource.clip = null;
-            break;
-      }
+      _audioSource.clip = audioClips;
 
       if ( _audioSource.clip != null && isPlay)
       {

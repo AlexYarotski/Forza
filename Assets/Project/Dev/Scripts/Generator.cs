@@ -15,7 +15,8 @@ public class Generator : MonoBehaviour
                 {
                     PooledType.Chunk, PooledType.Chunk1, PooledType.Chunk2, PooledType.Chunk3, PooledType.Chunk4,
                     PooledType.Chunk5, PooledType.Chunk6, PooledType.Chunk7, PooledType.Chunk8, PooledType.Chunk9,
-                    PooledType.Chunk10
+                    PooledType.Chunk10,PooledType.Chunk11,PooledType.Chunk12,PooledType.Chunk13,PooledType.Chunk14,
+                    PooledType.Chunk15,
                 }
             },
             {

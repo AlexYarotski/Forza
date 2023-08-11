@@ -11,6 +11,8 @@ public class SettingWindow : Window
     [SerializeField]
     private Button _cancel = null;
 
+    private Tweener _tweener = null;
+
     public override bool IsPopUp
     {
         get => true;
@@ -28,15 +30,28 @@ public class SettingWindow : Window
     {
         base.Show();
 
-        transform.DOScale(new Vector3(SizeWindow, SizeWindow), OpenDuration)
+        CheckTweener();
+        
+        _tweener = transform.DOScale(new Vector3(SizeWindow, SizeWindow), OpenDuration)
             .OnComplete(() => Time.timeScale = 0);
     }
 
     public override void Hide()
     {
-        transform.DOScale(Vector3.zero, CloseDuration)
+        CheckTweener();
+        
+        _tweener = transform.DOScale(Vector3.zero, CloseDuration)
             .OnComplete(() => base.Hide());
 
         Time.timeScale = 1;
+    }
+
+    private void CheckTweener()
+    {
+        if (_tweener != null)
+        {
+            _tweener.Complete();
+            _tweener.Rewind();
+        }
     }
 }

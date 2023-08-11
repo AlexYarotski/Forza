@@ -2,19 +2,29 @@
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    private static T _instance = null;
+    
     public static T Instance
-    { 
-        get;
-        protected set; 
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<T>();
+                
+                if (_instance == null)
+                {
+                    _instance = new GameObject().GetComponent<T>();
+                }
+            }
+
+            return _instance;
+        } 
     }
 
     protected void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this as T;
-        }
-        else if(Instance == this)
+        if(_instance == this)
         {
             Destroy(gameObject);
         }

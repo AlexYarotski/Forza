@@ -110,7 +110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -450, y: 160}
+  m_AnchoredPosition: {x: -400, y: 160}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7360053829687787724
@@ -427,7 +427,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 445, y: 160}
+  m_AnchoredPosition: {x: 400, y: 160}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4621486818386333547
@@ -953,8 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8932f544785d411468e21303682ecf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreTMP: {fileID: 6032223585064266123}
-  _loseTMP: {fileID: 7420840222060526834}
+  _scoreLabel: {fileID: 6032223585064266123}
+  _loseLabel: {fileID: 7420840222060526834}
   _menu: {fileID: 7858392832546438888}
   _garage: {fileID: 7110608622357522641}
   _restart: {fileID: 7710172738739009885}

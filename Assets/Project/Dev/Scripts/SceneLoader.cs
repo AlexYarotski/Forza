@@ -15,14 +15,6 @@ public class SceneLoader : Singleton<SceneLoader>
     [SerializeField]
     private WindowSwitcher _windowSwitcher = null;
 
-    [SerializeField]
-    private AudioManager _audioManager = null;
-
-    public AudioManager AudioManager
-    {
-        get => _audioManager;
-    }
-    
     public void Load(string scene)
     {
         DOTween.KillAll();
@@ -38,7 +30,7 @@ public class SceneLoader : Singleton<SceneLoader>
         
         _windowSwitcher.Show<MainWindow>();
 
-        _audioManager.SetClip(Main, true);
+        AudioManager.Instance.SetClip(AudioName.Main, true);
     }
 
     public void LoadGarage()
@@ -49,7 +41,7 @@ public class SceneLoader : Singleton<SceneLoader>
         
         _windowSwitcher.Show<GarageWindow>();
         
-        _audioManager.Stop();
+        AudioManager.Instance.Stop();
     }
 
     public void LoadGame()
@@ -60,7 +52,7 @@ public class SceneLoader : Singleton<SceneLoader>
         
         _windowSwitcher.Show<GameWindow>();
         
-        _audioManager.SetClip(Game, true);
+        AudioManager.Instance.SetClip(AudioName.Game, true);
     }
 
     private async void UploadSceneAsync(string sceneName)
