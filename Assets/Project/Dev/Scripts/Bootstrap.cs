@@ -7,6 +7,8 @@ public class Bootstrap : DontDestroyElement
 
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
+        
         for (int i = 0; i < _dotnDestroyElements.Length; i++)
         {
             _dotnDestroyElements[i].transform.SetParent(null);

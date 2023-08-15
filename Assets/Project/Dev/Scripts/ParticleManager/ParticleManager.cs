@@ -34,7 +34,7 @@ public class ParticleManager : Singleton<ParticleManager>
         particle.Play();
     }
     
-    private void Car_Drove(Vector3 position)
+    private void Car_Drove(Vector3 position, float speed)
     {
         _onCarHitParticlePrefab.transform.position = position + DistanceToHood;
     }

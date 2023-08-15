@@ -7,20 +7,17 @@ public class Car : MonoBehaviour, IDamageable
     private const string KeyCurrentScore = "CurrentScore";
 
     public static event Action<Vector3> Died = delegate { };
-    public static event Action<Vector3> Drove = delegate { };
+    public static event Action<Vector3, float> Drove = delegate { };
     
     [SerializeField]
     private CarView _carView = null;
 
-    public static float Speed => _speed;
-
-    private static float _speed = 0;
-    
     private float _angularFreguency = 10f;
     private float _dampingRatio = 0.55f;
 
     private int _health = 0;
     private float _maxSpeed = 0;
+    private float _speed = 0;
 
     private Vector3 _nextPosition = Vector3.zero;
     private Vector3 _dragPosition = Vector3.zero;
@@ -67,7 +64,7 @@ public class Car : MonoBehaviour, IDamageable
         SetTurn();
         SetSpringMotion();
         
-        Drove(transform.position);
+        Drove(transform.position, _speed);
     }
 
     #region Health

@@ -32,16 +32,9 @@ public class Score : MonoBehaviour
         }
     }
 
-    private void Car_Drove(Vector3 drove)
+    private void Car_Drove(Vector3 drove, float speed)
     {
         _score = drove.z;
-    }
-
-    private void SpeedUp()
-    {
-        _speedBoostScore *= 2;
-
-        Boost(_score);
     }
 
     private void Car_Died(Vector3 position)
@@ -52,5 +45,12 @@ public class Score : MonoBehaviour
         {
             PlayerPrefs.SetInt(KeyScore, (int)_score);
         }
+    }
+    
+    private void SpeedUp()
+    {
+        _speedBoostScore *= 2;
+
+        Boost(_score);
     }
 }

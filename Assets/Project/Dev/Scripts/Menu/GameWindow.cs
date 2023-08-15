@@ -47,14 +47,14 @@ public class GameWindow : Window
 
     private void OpenSetting()
     {
-        WindowSwitcher.Instance.Show<SettingWindow>();
+        WindowSwitcher.Instance.Show<GameSettingWindow>();
     }
 
-    private void Car_Drove(Vector3 drove)
+    private void Car_Drove(Vector3 drove, float speed)
     {
         _scoreLabel.text = $"{(int)drove.z}";
 
-        _speedLabel.text = string.Format(SpeedLabel, Math.Round(Car.Speed, 1) + 50);
+        _speedLabel.text = string.Format(SpeedLabel, Math.Round(speed, 1) + 50);
     }
 
     private void Score_Boost(float obj)
